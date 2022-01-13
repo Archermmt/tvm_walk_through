@@ -1,0 +1,7966 @@
+name : "relay_ir"
+layer {
+  name:"input0"
+  type:"input"
+  top:"input0"
+  layer_param {
+    idx:0
+    out_0 {name:"input0:0",dtype:float32,shape:[1, 3, 224, 224]}
+  }
+}
+layer {
+  name:"p0"
+  type:"input"
+  top:"p0"
+  layer_param {
+    idx:1
+    out_0 {name:"p0:0",dtype:float32,shape:[1, 512]}
+  }
+}
+layer {
+  name:"p1"
+  type:"input"
+  top:"p1"
+  layer_param {
+    idx:2
+    out_0 {name:"p1:0",dtype:float32,shape:[100, 512, 10]}
+  }
+}
+layer {
+  name:"p2"
+  type:"input"
+  top:"p2"
+  layer_param {
+    idx:3
+    out_0 {name:"p2:0",dtype:float32,shape:[1000]}
+  }
+}
+layer {
+  name:"Node_8"
+  type:"nn_contrib_dense_pack"
+  top:"Node_8"
+  bottom:"p0"
+  bottom:"p1"
+  layer_param {
+    idx:8
+    in_0 {name:"p0:0",dtype:float32,shape:[1, 512]}
+    in_1 {name:"p1:0",dtype:float32,shape:[100, 512, 10]}
+    out_0 {name:"Node_8:0",dtype:float32,shape:[1, 1000]}
+    attrs {'units': None, 'out_dtype': 'float32'}
+  }
+}
+layer {
+  name:"Node_10"
+  type:"add"
+  top:"Node_10"
+  bottom:"Node_8"
+  bottom:"p2"
+  layer_param {
+    idx:10
+    in_0 {name:"Node_8:0",dtype:float32,shape:[1, 1000]}
+    in_1 {name:"p2:0",dtype:float32,shape:[1000]}
+    out_0 {name:"Node_10:0",dtype:float32,shape:[1, 1000]}
+  }
+}
+layer {
+  name:"Node_11"
+  type:"function"
+  top:"Node_11"
+  bottom:"p0"
+  bottom:"p1"
+  bottom:"p2"
+  bottom:"Node_10"
+  layer_param {
+    idx:11
+    in_0 {name:"p0:0",dtype:float32,shape:[1, 512]}
+    in_1 {name:"p1:0",dtype:float32,shape:[100, 512, 10]}
+    in_2 {name:"p2:0",dtype:float32,shape:[1000]}
+    in_3 {name:"Node_10:0",dtype:float32,shape:[1, 1000]}
+    out_0 {name:"Node_11:0",dtype:float32,shape:[1, 1000]}
+  }
+}
+layer {
+  name:"p0_1"
+  type:"input"
+  top:"p0_1"
+  layer_param {
+    idx:12
+    out_0 {name:"p0:0",dtype:float32,shape:[1, 64, 1, 1, 8]}
+  }
+}
+layer {
+  name:"Node_17"
+  type:"layout_transform"
+  top:"Node_17"
+  bottom:"p0_1"
+  layer_param {
+    idx:17
+    in_0 {name:"p0:0",dtype:float32,shape:[1, 64, 1, 1, 8]}
+    out_0 {name:"Node_17:0",dtype:float32,shape:[1, 512, 1, 1]}
+    attrs {'src_layout': 'NCHW8c', 'dst_layout': 'NCHW'}
+  }
+}
+layer {
+  name:"Node_18"
+  type:"reshape"
+  top:"Node_18"
+  bottom:"Node_17"
+  layer_param {
+    idx:18
+    in_0 {name:"Node_17:0",dtype:float32,shape:[1, 512, 1, 1]}
+    out_0 {name:"Node_18:0",dtype:float32,shape:[1, 512, 1, 1]}
+    attrs {'newshape': [0, -1, 1, 1]}
+  }
+}
+layer {
+  name:"Node_19"
+  type:"squeeze"
+  top:"Node_19"
+  bottom:"Node_18"
+  layer_param {
+    idx:19
+    in_0 {name:"Node_18:0",dtype:float32,shape:[1, 512, 1, 1]}
+    out_0 {name:"Node_19:0",dtype:float32,shape:[1, 512]}
+    attrs {'axis': [2, 3]}
+  }
+}
+layer {
+  name:"Node_20"
+  type:"function"
+  top:"Node_20"
+  bottom:"p0_1"
+  bottom:"Node_19"
+  layer_param {
+    idx:20
+    in_0 {name:"p0:0",dtype:float32,shape:[1, 64, 1, 1, 8]}
+    in_1 {name:"Node_19:0",dtype:float32,shape:[1, 512]}
+    out_0 {name:"Node_20:0",dtype:float32,shape:[1, 512]}
+  }
+}
+layer {
+  name:"p0_2"
+  type:"input"
+  top:"p0_2"
+  layer_param {
+    idx:21
+    out_0 {name:"p0:0",dtype:float32,shape:[1, 64, 7, 7, 8]}
+  }
+}
+layer {
+  name:"Node_24"
+  type:"nn_adaptive_avg_pool2d"
+  top:"Node_24"
+  bottom:"p0_2"
+  layer_param {
+    idx:24
+    in_0 {name:"p0:0",dtype:float32,shape:[1, 64, 7, 7, 8]}
+    out_0 {name:"Node_24:0",dtype:float32,shape:[1, 64, 1, 1, 8]}
+    attrs {'output_size': [1, 1], 'layout': 'NCHW8c'}
+  }
+}
+layer {
+  name:"Node_25"
+  type:"function"
+  top:"Node_25"
+  bottom:"p0_2"
+  bottom:"Node_24"
+  layer_param {
+    idx:25
+    in_0 {name:"p0:0",dtype:float32,shape:[1, 64, 7, 7, 8]}
+    in_1 {name:"Node_24:0",dtype:float32,shape:[1, 64, 1, 1, 8]}
+    out_0 {name:"Node_25:0",dtype:float32,shape:[1, 64, 1, 1, 8]}
+  }
+}
+layer {
+  name:"p0_3"
+  type:"input"
+  top:"p0_3"
+  layer_param {
+    idx:26
+    out_0 {name:"p0:0",dtype:int8,shape:[1, 64, 7, 7, 8]}
+  }
+}
+layer {
+  name:"Node_30"
+  type:"cast"
+  top:"Node_30"
+  bottom:"p0_3"
+  layer_param {
+    idx:30
+    in_0 {name:"p0:0",dtype:int8,shape:[1, 64, 7, 7, 8]}
+    out_0 {name:"Node_30:0",dtype:float32,shape:[1, 64, 7, 7, 8]}
+    attrs {'dtype': 'float32'}
+  }
+}
+layer {
+  name:"Node_31"
+  type:"const"
+  top:"Node_31"
+  layer_param {
+    idx:31
+    out_0 {name:"Node_31:0",dtype:float32,shape:[]}
+  }
+}
+layer {
+  name:"Node_32"
+  type:"multiply"
+  top:"Node_32"
+  bottom:"Node_30"
+  bottom:"Node_31"
+  layer_param {
+    idx:32
+    in_0 {name:"Node_30:0",dtype:float32,shape:[1, 64, 7, 7, 8]}
+    in_1 {name:"Node_31:0",dtype:float32,shape:[]}
+    out_0 {name:"Node_32:0",dtype:float32,shape:[1, 64, 7, 7, 8]}
+  }
+}
+layer {
+  name:"Node_33"
+  type:"function"
+  top:"Node_33"
+  bottom:"p0_3"
+  bottom:"Node_32"
+  layer_param {
+    idx:33
+    in_0 {name:"p0:0",dtype:int8,shape:[1, 64, 7, 7, 8]}
+    in_1 {name:"Node_32:0",dtype:float32,shape:[1, 64, 7, 7, 8]}
+    out_0 {name:"Node_33:0",dtype:float32,shape:[1, 64, 7, 7, 8]}
+  }
+}
+layer {
+  name:"p0_4"
+  type:"input"
+  top:"p0_4"
+  layer_param {
+    idx:34
+    out_0 {name:"p0:0",dtype:int8,shape:[1, 64, 7, 7, 8]}
+  }
+}
+layer {
+  name:"p1_1"
+  type:"input"
+  top:"p1_1"
+  layer_param {
+    idx:35
+    out_0 {name:"p1:0",dtype:int8,shape:[1, 64, 7, 7, 8]}
+  }
+}
+layer {
+  name:"Node_42"
+  type:"cast"
+  top:"Node_42"
+  bottom:"p0_4"
+  layer_param {
+    idx:42
+    in_0 {name:"p0:0",dtype:int8,shape:[1, 64, 7, 7, 8]}
+    out_0 {name:"Node_42:0",dtype:int32,shape:[1, 64, 7, 7, 8]}
+    attrs {'dtype': 'int32'}
+  }
+}
+layer {
+  name:"Node_43"
+  type:"fixed_point_multiply"
+  top:"Node_43"
+  bottom:"Node_42"
+  layer_param {
+    idx:43
+    in_0 {name:"Node_42:0",dtype:int32,shape:[1, 64, 7, 7, 8]}
+    out_0 {name:"Node_43:0",dtype:int32,shape:[1, 64, 7, 7, 8]}
+  }
+}
+layer {
+  name:"Node_46"
+  type:"cast"
+  top:"Node_46"
+  bottom:"p1_1"
+  layer_param {
+    idx:46
+    in_0 {name:"p1:0",dtype:int8,shape:[1, 64, 7, 7, 8]}
+    out_0 {name:"Node_46:0",dtype:int32,shape:[1, 64, 7, 7, 8]}
+    attrs {'dtype': 'int32'}
+  }
+}
+layer {
+  name:"Node_47"
+  type:"add"
+  top:"Node_47"
+  bottom:"Node_43"
+  bottom:"Node_46"
+  layer_param {
+    idx:47
+    in_0 {name:"Node_43:0",dtype:int32,shape:[1, 64, 7, 7, 8]}
+    in_1 {name:"Node_46:0",dtype:int32,shape:[1, 64, 7, 7, 8]}
+    out_0 {name:"Node_47:0",dtype:int32,shape:[1, 64, 7, 7, 8]}
+  }
+}
+layer {
+  name:"Node_48"
+  type:"nn_relu"
+  top:"Node_48"
+  bottom:"Node_47"
+  layer_param {
+    idx:48
+    in_0 {name:"Node_47:0",dtype:int32,shape:[1, 64, 7, 7, 8]}
+    out_0 {name:"Node_48:0",dtype:int32,shape:[1, 64, 7, 7, 8]}
+  }
+}
+layer {
+  name:"Node_49"
+  type:"cast"
+  top:"Node_49"
+  bottom:"Node_48"
+  layer_param {
+    idx:49
+    in_0 {name:"Node_48:0",dtype:int32,shape:[1, 64, 7, 7, 8]}
+    out_0 {name:"Node_49:0",dtype:int8,shape:[1, 64, 7, 7, 8]}
+    attrs {'dtype': 'int8'}
+  }
+}
+layer {
+  name:"Node_50"
+  type:"function"
+  top:"Node_50"
+  bottom:"p0_4"
+  bottom:"p1_1"
+  bottom:"Node_49"
+  layer_param {
+    idx:50
+    in_0 {name:"p0:0",dtype:int8,shape:[1, 64, 7, 7, 8]}
+    in_1 {name:"p1:0",dtype:int8,shape:[1, 64, 7, 7, 8]}
+    in_2 {name:"Node_49:0",dtype:int8,shape:[1, 64, 7, 7, 8]}
+    out_0 {name:"Node_50:0",dtype:int8,shape:[1, 64, 7, 7, 8]}
+  }
+}
+layer {
+  name:"p0_5"
+  type:"input"
+  top:"p0_5"
+  layer_param {
+    idx:51
+    out_0 {name:"p0:0",dtype:int8,shape:[1, 64, 7, 7, 8]}
+  }
+}
+layer {
+  name:"p1_2"
+  type:"input"
+  top:"p1_2"
+  layer_param {
+    idx:52
+    out_0 {name:"p1:0",dtype:int32,shape:[1, 64, 1, 1, 8]}
+  }
+}
+layer {
+  name:"p2_1"
+  type:"input"
+  top:"p2_1"
+  layer_param {
+    idx:53
+    out_0 {name:"p2:0",dtype:int32,shape:[1, 64, 1, 1, 8]}
+  }
+}
+layer {
+  name:"Node_63"
+  type:"cast"
+  top:"Node_63"
+  bottom:"p0_5"
+  layer_param {
+    idx:63
+    in_0 {name:"p0:0",dtype:int8,shape:[1, 64, 7, 7, 8]}
+    out_0 {name:"Node_63:0",dtype:int32,shape:[1, 64, 7, 7, 8]}
+    attrs {'dtype': 'int32'}
+  }
+}
+layer {
+  name:"Node_65"
+  type:"multiply"
+  top:"Node_65"
+  bottom:"Node_63"
+  bottom:"p1_2"
+  layer_param {
+    idx:65
+    in_0 {name:"Node_63:0",dtype:int32,shape:[1, 64, 7, 7, 8]}
+    in_1 {name:"p1:0",dtype:int32,shape:[1, 64, 1, 1, 8]}
+    out_0 {name:"Node_65:0",dtype:int32,shape:[1, 64, 7, 7, 8]}
+  }
+}
+layer {
+  name:"Node_67"
+  type:"add"
+  top:"Node_67"
+  bottom:"Node_65"
+  bottom:"p2_1"
+  layer_param {
+    idx:67
+    in_0 {name:"Node_65:0",dtype:int32,shape:[1, 64, 7, 7, 8]}
+    in_1 {name:"p2:0",dtype:int32,shape:[1, 64, 1, 1, 8]}
+    out_0 {name:"Node_67:0",dtype:int32,shape:[1, 64, 7, 7, 8]}
+  }
+}
+layer {
+  name:"Node_68"
+  type:"cast"
+  top:"Node_68"
+  bottom:"Node_67"
+  layer_param {
+    idx:68
+    in_0 {name:"Node_67:0",dtype:int32,shape:[1, 64, 7, 7, 8]}
+    out_0 {name:"Node_68:0",dtype:int64,shape:[1, 64, 7, 7, 8]}
+    attrs {'dtype': 'int64'}
+  }
+}
+layer {
+  name:"Node_69"
+  type:"fixed_point_multiply"
+  top:"Node_69"
+  bottom:"Node_68"
+  layer_param {
+    idx:69
+    in_0 {name:"Node_68:0",dtype:int64,shape:[1, 64, 7, 7, 8]}
+    out_0 {name:"Node_69:0",dtype:int64,shape:[1, 64, 7, 7, 8]}
+  }
+}
+layer {
+  name:"Node_70"
+  type:"clip"
+  top:"Node_70"
+  bottom:"Node_69"
+  layer_param {
+    idx:70
+    in_0 {name:"Node_69:0",dtype:int64,shape:[1, 64, 7, 7, 8]}
+    out_0 {name:"Node_70:0",dtype:int64,shape:[1, 64, 7, 7, 8]}
+    attrs {'a_min': -127.0, 'a_max': 127.0}
+  }
+}
+layer {
+  name:"Node_71"
+  type:"cast"
+  top:"Node_71"
+  bottom:"Node_70"
+  layer_param {
+    idx:71
+    in_0 {name:"Node_70:0",dtype:int64,shape:[1, 64, 7, 7, 8]}
+    out_0 {name:"Node_71:0",dtype:int32,shape:[1, 64, 7, 7, 8]}
+    attrs {'dtype': 'int32'}
+  }
+}
+layer {
+  name:"Node_72"
+  type:"cast"
+  top:"Node_72"
+  bottom:"Node_71"
+  layer_param {
+    idx:72
+    in_0 {name:"Node_71:0",dtype:int32,shape:[1, 64, 7, 7, 8]}
+    out_0 {name:"Node_72:0",dtype:int8,shape:[1, 64, 7, 7, 8]}
+    attrs {'dtype': 'int8'}
+  }
+}
+layer {
+  name:"Node_73"
+  type:"function"
+  top:"Node_73"
+  bottom:"p0_5"
+  bottom:"p1_2"
+  bottom:"p2_1"
+  bottom:"Node_72"
+  layer_param {
+    idx:73
+    in_0 {name:"p0:0",dtype:int8,shape:[1, 64, 7, 7, 8]}
+    in_1 {name:"p1:0",dtype:int32,shape:[1, 64, 1, 1, 8]}
+    in_2 {name:"p2:0",dtype:int32,shape:[1, 64, 1, 1, 8]}
+    in_3 {name:"Node_72:0",dtype:int8,shape:[1, 64, 7, 7, 8]}
+    out_0 {name:"Node_73:0",dtype:int8,shape:[1, 64, 7, 7, 8]}
+  }
+}
+layer {
+  name:"p0_6"
+  type:"input"
+  top:"p0_6"
+  layer_param {
+    idx:74
+    out_0 {name:"p0:0",dtype:int8,shape:[1, 64, 7, 7, 8]}
+  }
+}
+layer {
+  name:"p1_3"
+  type:"input"
+  top:"p1_3"
+  layer_param {
+    idx:75
+    out_0 {name:"p1:0",dtype:int8,shape:[64, 64, 3, 3, 8, 8]}
+  }
+}
+layer {
+  name:"Node_84"
+  type:"nn_contrib_conv2d_NCHWc"
+  top:"Node_84"
+  bottom:"p0_6"
+  bottom:"p1_3"
+  layer_param {
+    idx:84
+    in_0 {name:"p0:0",dtype:int8,shape:[1, 64, 7, 7, 8]}
+    in_1 {name:"p1:0",dtype:int8,shape:[64, 64, 3, 3, 8, 8]}
+    out_0 {name:"Node_84:0",dtype:int32,shape:[1, 64, 7, 7, 8]}
+    attrs {'strides': [1, 1], 'padding': [1, 1, 1, 1], 'dilation': [1, 1], 'groups': 1, 'channels': 512, 'kernel_size': [3, 3], 'data_layout': 'NCHW8c', 'kernel_layout': 'OIHW8i8o', 'out_layout': 'NCHW8c', 'out_dtype': 'int32'}
+  }
+}
+layer {
+  name:"Node_85"
+  type:"cast"
+  top:"Node_85"
+  bottom:"Node_84"
+  layer_param {
+    idx:85
+    in_0 {name:"Node_84:0",dtype:int32,shape:[1, 64, 7, 7, 8]}
+    out_0 {name:"Node_85:0",dtype:int64,shape:[1, 64, 7, 7, 8]}
+    attrs {'dtype': 'int64'}
+  }
+}
+layer {
+  name:"Node_86"
+  type:"fixed_point_multiply"
+  top:"Node_86"
+  bottom:"Node_85"
+  layer_param {
+    idx:86
+    in_0 {name:"Node_85:0",dtype:int64,shape:[1, 64, 7, 7, 8]}
+    out_0 {name:"Node_86:0",dtype:int64,shape:[1, 64, 7, 7, 8]}
+  }
+}
+layer {
+  name:"Node_87"
+  type:"clip"
+  top:"Node_87"
+  bottom:"Node_86"
+  layer_param {
+    idx:87
+    in_0 {name:"Node_86:0",dtype:int64,shape:[1, 64, 7, 7, 8]}
+    out_0 {name:"Node_87:0",dtype:int64,shape:[1, 64, 7, 7, 8]}
+    attrs {'a_min': -127.0, 'a_max': 127.0}
+  }
+}
+layer {
+  name:"Node_88"
+  type:"cast"
+  top:"Node_88"
+  bottom:"Node_87"
+  layer_param {
+    idx:88
+    in_0 {name:"Node_87:0",dtype:int64,shape:[1, 64, 7, 7, 8]}
+    out_0 {name:"Node_88:0",dtype:int32,shape:[1, 64, 7, 7, 8]}
+    attrs {'dtype': 'int32'}
+  }
+}
+layer {
+  name:"Node_89"
+  type:"cast"
+  top:"Node_89"
+  bottom:"Node_88"
+  layer_param {
+    idx:89
+    in_0 {name:"Node_88:0",dtype:int32,shape:[1, 64, 7, 7, 8]}
+    out_0 {name:"Node_89:0",dtype:int8,shape:[1, 64, 7, 7, 8]}
+    attrs {'dtype': 'int8'}
+  }
+}
+layer {
+  name:"Node_90"
+  type:"function"
+  top:"Node_90"
+  bottom:"p0_6"
+  bottom:"p1_3"
+  bottom:"Node_89"
+  layer_param {
+    idx:90
+    in_0 {name:"p0:0",dtype:int8,shape:[1, 64, 7, 7, 8]}
+    in_1 {name:"p1:0",dtype:int8,shape:[64, 64, 3, 3, 8, 8]}
+    in_2 {name:"Node_89:0",dtype:int8,shape:[1, 64, 7, 7, 8]}
+    out_0 {name:"Node_90:0",dtype:int8,shape:[1, 64, 7, 7, 8]}
+  }
+}
+layer {
+  name:"p0_7"
+  type:"input"
+  top:"p0_7"
+  layer_param {
+    idx:91
+    out_0 {name:"p0:0",dtype:int8,shape:[1, 64, 7, 7, 8]}
+  }
+}
+layer {
+  name:"p1_4"
+  type:"input"
+  top:"p1_4"
+  layer_param {
+    idx:92
+    out_0 {name:"p1:0",dtype:int32,shape:[1, 64, 1, 1, 8]}
+  }
+}
+layer {
+  name:"p2_2"
+  type:"input"
+  top:"p2_2"
+  layer_param {
+    idx:93
+    out_0 {name:"p2:0",dtype:int32,shape:[1, 64, 1, 1, 8]}
+  }
+}
+layer {
+  name:"Node_104"
+  type:"cast"
+  top:"Node_104"
+  bottom:"p0_7"
+  layer_param {
+    idx:104
+    in_0 {name:"p0:0",dtype:int8,shape:[1, 64, 7, 7, 8]}
+    out_0 {name:"Node_104:0",dtype:int32,shape:[1, 64, 7, 7, 8]}
+    attrs {'dtype': 'int32'}
+  }
+}
+layer {
+  name:"Node_106"
+  type:"multiply"
+  top:"Node_106"
+  bottom:"Node_104"
+  bottom:"p1_4"
+  layer_param {
+    idx:106
+    in_0 {name:"Node_104:0",dtype:int32,shape:[1, 64, 7, 7, 8]}
+    in_1 {name:"p1:0",dtype:int32,shape:[1, 64, 1, 1, 8]}
+    out_0 {name:"Node_106:0",dtype:int32,shape:[1, 64, 7, 7, 8]}
+  }
+}
+layer {
+  name:"Node_108"
+  type:"add"
+  top:"Node_108"
+  bottom:"Node_106"
+  bottom:"p2_2"
+  layer_param {
+    idx:108
+    in_0 {name:"Node_106:0",dtype:int32,shape:[1, 64, 7, 7, 8]}
+    in_1 {name:"p2:0",dtype:int32,shape:[1, 64, 1, 1, 8]}
+    out_0 {name:"Node_108:0",dtype:int32,shape:[1, 64, 7, 7, 8]}
+  }
+}
+layer {
+  name:"Node_109"
+  type:"nn_relu"
+  top:"Node_109"
+  bottom:"Node_108"
+  layer_param {
+    idx:109
+    in_0 {name:"Node_108:0",dtype:int32,shape:[1, 64, 7, 7, 8]}
+    out_0 {name:"Node_109:0",dtype:int32,shape:[1, 64, 7, 7, 8]}
+  }
+}
+layer {
+  name:"Node_110"
+  type:"cast"
+  top:"Node_110"
+  bottom:"Node_109"
+  layer_param {
+    idx:110
+    in_0 {name:"Node_109:0",dtype:int32,shape:[1, 64, 7, 7, 8]}
+    out_0 {name:"Node_110:0",dtype:int64,shape:[1, 64, 7, 7, 8]}
+    attrs {'dtype': 'int64'}
+  }
+}
+layer {
+  name:"Node_111"
+  type:"fixed_point_multiply"
+  top:"Node_111"
+  bottom:"Node_110"
+  layer_param {
+    idx:111
+    in_0 {name:"Node_110:0",dtype:int64,shape:[1, 64, 7, 7, 8]}
+    out_0 {name:"Node_111:0",dtype:int64,shape:[1, 64, 7, 7, 8]}
+  }
+}
+layer {
+  name:"Node_112"
+  type:"clip"
+  top:"Node_112"
+  bottom:"Node_111"
+  layer_param {
+    idx:112
+    in_0 {name:"Node_111:0",dtype:int64,shape:[1, 64, 7, 7, 8]}
+    out_0 {name:"Node_112:0",dtype:int64,shape:[1, 64, 7, 7, 8]}
+    attrs {'a_min': -127.0, 'a_max': 127.0}
+  }
+}
+layer {
+  name:"Node_113"
+  type:"cast"
+  top:"Node_113"
+  bottom:"Node_112"
+  layer_param {
+    idx:113
+    in_0 {name:"Node_112:0",dtype:int64,shape:[1, 64, 7, 7, 8]}
+    out_0 {name:"Node_113:0",dtype:int32,shape:[1, 64, 7, 7, 8]}
+    attrs {'dtype': 'int32'}
+  }
+}
+layer {
+  name:"Node_114"
+  type:"cast"
+  top:"Node_114"
+  bottom:"Node_113"
+  layer_param {
+    idx:114
+    in_0 {name:"Node_113:0",dtype:int32,shape:[1, 64, 7, 7, 8]}
+    out_0 {name:"Node_114:0",dtype:int8,shape:[1, 64, 7, 7, 8]}
+    attrs {'dtype': 'int8'}
+  }
+}
+layer {
+  name:"Node_115"
+  type:"function"
+  top:"Node_115"
+  bottom:"p0_7"
+  bottom:"p1_4"
+  bottom:"p2_2"
+  bottom:"Node_114"
+  layer_param {
+    idx:115
+    in_0 {name:"p0:0",dtype:int8,shape:[1, 64, 7, 7, 8]}
+    in_1 {name:"p1:0",dtype:int32,shape:[1, 64, 1, 1, 8]}
+    in_2 {name:"p2:0",dtype:int32,shape:[1, 64, 1, 1, 8]}
+    in_3 {name:"Node_114:0",dtype:int8,shape:[1, 64, 7, 7, 8]}
+    out_0 {name:"Node_115:0",dtype:int8,shape:[1, 64, 7, 7, 8]}
+  }
+}
+layer {
+  name:"p0_8"
+  type:"input"
+  top:"p0_8"
+  layer_param {
+    idx:116
+    out_0 {name:"p0:0",dtype:int8,shape:[1, 64, 7, 7, 8]}
+  }
+}
+layer {
+  name:"p1_5"
+  type:"input"
+  top:"p1_5"
+  layer_param {
+    idx:117
+    out_0 {name:"p1:0",dtype:int8,shape:[64, 64, 3, 3, 8, 8]}
+  }
+}
+layer {
+  name:"Node_126"
+  type:"nn_contrib_conv2d_NCHWc"
+  top:"Node_126"
+  bottom:"p0_8"
+  bottom:"p1_5"
+  layer_param {
+    idx:126
+    in_0 {name:"p0:0",dtype:int8,shape:[1, 64, 7, 7, 8]}
+    in_1 {name:"p1:0",dtype:int8,shape:[64, 64, 3, 3, 8, 8]}
+    out_0 {name:"Node_126:0",dtype:int32,shape:[1, 64, 7, 7, 8]}
+    attrs {'strides': [1, 1], 'padding': [1, 1, 1, 1], 'dilation': [1, 1], 'groups': 1, 'channels': 512, 'kernel_size': [3, 3], 'data_layout': 'NCHW8c', 'kernel_layout': 'OIHW8i8o', 'out_layout': 'NCHW8c', 'out_dtype': 'int32'}
+  }
+}
+layer {
+  name:"Node_127"
+  type:"cast"
+  top:"Node_127"
+  bottom:"Node_126"
+  layer_param {
+    idx:127
+    in_0 {name:"Node_126:0",dtype:int32,shape:[1, 64, 7, 7, 8]}
+    out_0 {name:"Node_127:0",dtype:int64,shape:[1, 64, 7, 7, 8]}
+    attrs {'dtype': 'int64'}
+  }
+}
+layer {
+  name:"Node_128"
+  type:"fixed_point_multiply"
+  top:"Node_128"
+  bottom:"Node_127"
+  layer_param {
+    idx:128
+    in_0 {name:"Node_127:0",dtype:int64,shape:[1, 64, 7, 7, 8]}
+    out_0 {name:"Node_128:0",dtype:int64,shape:[1, 64, 7, 7, 8]}
+  }
+}
+layer {
+  name:"Node_129"
+  type:"clip"
+  top:"Node_129"
+  bottom:"Node_128"
+  layer_param {
+    idx:129
+    in_0 {name:"Node_128:0",dtype:int64,shape:[1, 64, 7, 7, 8]}
+    out_0 {name:"Node_129:0",dtype:int64,shape:[1, 64, 7, 7, 8]}
+    attrs {'a_min': -127.0, 'a_max': 127.0}
+  }
+}
+layer {
+  name:"Node_130"
+  type:"cast"
+  top:"Node_130"
+  bottom:"Node_129"
+  layer_param {
+    idx:130
+    in_0 {name:"Node_129:0",dtype:int64,shape:[1, 64, 7, 7, 8]}
+    out_0 {name:"Node_130:0",dtype:int32,shape:[1, 64, 7, 7, 8]}
+    attrs {'dtype': 'int32'}
+  }
+}
+layer {
+  name:"Node_131"
+  type:"cast"
+  top:"Node_131"
+  bottom:"Node_130"
+  layer_param {
+    idx:131
+    in_0 {name:"Node_130:0",dtype:int32,shape:[1, 64, 7, 7, 8]}
+    out_0 {name:"Node_131:0",dtype:int8,shape:[1, 64, 7, 7, 8]}
+    attrs {'dtype': 'int8'}
+  }
+}
+layer {
+  name:"Node_132"
+  type:"function"
+  top:"Node_132"
+  bottom:"p0_8"
+  bottom:"p1_5"
+  bottom:"Node_131"
+  layer_param {
+    idx:132
+    in_0 {name:"p0:0",dtype:int8,shape:[1, 64, 7, 7, 8]}
+    in_1 {name:"p1:0",dtype:int8,shape:[64, 64, 3, 3, 8, 8]}
+    in_2 {name:"Node_131:0",dtype:int8,shape:[1, 64, 7, 7, 8]}
+    out_0 {name:"Node_132:0",dtype:int8,shape:[1, 64, 7, 7, 8]}
+  }
+}
+layer {
+  name:"p0_9"
+  type:"input"
+  top:"p0_9"
+  layer_param {
+    idx:133
+    out_0 {name:"p0:0",dtype:int8,shape:[1, 64, 7, 7, 8]}
+  }
+}
+layer {
+  name:"p1_6"
+  type:"input"
+  top:"p1_6"
+  layer_param {
+    idx:134
+    out_0 {name:"p1:0",dtype:int8,shape:[1, 64, 7, 7, 8]}
+  }
+}
+layer {
+  name:"Node_145"
+  type:"cast"
+  top:"Node_145"
+  bottom:"p0_9"
+  layer_param {
+    idx:145
+    in_0 {name:"p0:0",dtype:int8,shape:[1, 64, 7, 7, 8]}
+    out_0 {name:"Node_145:0",dtype:int32,shape:[1, 64, 7, 7, 8]}
+    attrs {'dtype': 'int32'}
+  }
+}
+layer {
+  name:"Node_146"
+  type:"fixed_point_multiply"
+  top:"Node_146"
+  bottom:"Node_145"
+  layer_param {
+    idx:146
+    in_0 {name:"Node_145:0",dtype:int32,shape:[1, 64, 7, 7, 8]}
+    out_0 {name:"Node_146:0",dtype:int32,shape:[1, 64, 7, 7, 8]}
+  }
+}
+layer {
+  name:"Node_149"
+  type:"cast"
+  top:"Node_149"
+  bottom:"p1_6"
+  layer_param {
+    idx:149
+    in_0 {name:"p1:0",dtype:int8,shape:[1, 64, 7, 7, 8]}
+    out_0 {name:"Node_149:0",dtype:int32,shape:[1, 64, 7, 7, 8]}
+    attrs {'dtype': 'int32'}
+  }
+}
+layer {
+  name:"Node_150"
+  type:"add"
+  top:"Node_150"
+  bottom:"Node_146"
+  bottom:"Node_149"
+  layer_param {
+    idx:150
+    in_0 {name:"Node_146:0",dtype:int32,shape:[1, 64, 7, 7, 8]}
+    in_1 {name:"Node_149:0",dtype:int32,shape:[1, 64, 7, 7, 8]}
+    out_0 {name:"Node_150:0",dtype:int32,shape:[1, 64, 7, 7, 8]}
+  }
+}
+layer {
+  name:"Node_151"
+  type:"nn_relu"
+  top:"Node_151"
+  bottom:"Node_150"
+  layer_param {
+    idx:151
+    in_0 {name:"Node_150:0",dtype:int32,shape:[1, 64, 7, 7, 8]}
+    out_0 {name:"Node_151:0",dtype:int32,shape:[1, 64, 7, 7, 8]}
+  }
+}
+layer {
+  name:"Node_152"
+  type:"cast"
+  top:"Node_152"
+  bottom:"Node_151"
+  layer_param {
+    idx:152
+    in_0 {name:"Node_151:0",dtype:int32,shape:[1, 64, 7, 7, 8]}
+    out_0 {name:"Node_152:0",dtype:int64,shape:[1, 64, 7, 7, 8]}
+    attrs {'dtype': 'int64'}
+  }
+}
+layer {
+  name:"Node_153"
+  type:"fixed_point_multiply"
+  top:"Node_153"
+  bottom:"Node_152"
+  layer_param {
+    idx:153
+    in_0 {name:"Node_152:0",dtype:int64,shape:[1, 64, 7, 7, 8]}
+    out_0 {name:"Node_153:0",dtype:int64,shape:[1, 64, 7, 7, 8]}
+  }
+}
+layer {
+  name:"Node_154"
+  type:"clip"
+  top:"Node_154"
+  bottom:"Node_153"
+  layer_param {
+    idx:154
+    in_0 {name:"Node_153:0",dtype:int64,shape:[1, 64, 7, 7, 8]}
+    out_0 {name:"Node_154:0",dtype:int64,shape:[1, 64, 7, 7, 8]}
+    attrs {'a_min': -127.0, 'a_max': 127.0}
+  }
+}
+layer {
+  name:"Node_155"
+  type:"cast"
+  top:"Node_155"
+  bottom:"Node_154"
+  layer_param {
+    idx:155
+    in_0 {name:"Node_154:0",dtype:int64,shape:[1, 64, 7, 7, 8]}
+    out_0 {name:"Node_155:0",dtype:int32,shape:[1, 64, 7, 7, 8]}
+    attrs {'dtype': 'int32'}
+  }
+}
+layer {
+  name:"Node_156"
+  type:"cast"
+  top:"Node_156"
+  bottom:"Node_155"
+  layer_param {
+    idx:156
+    in_0 {name:"Node_155:0",dtype:int32,shape:[1, 64, 7, 7, 8]}
+    out_0 {name:"Node_156:0",dtype:int8,shape:[1, 64, 7, 7, 8]}
+    attrs {'dtype': 'int8'}
+  }
+}
+layer {
+  name:"Node_157"
+  type:"function"
+  top:"Node_157"
+  bottom:"p0_9"
+  bottom:"p1_6"
+  bottom:"Node_156"
+  layer_param {
+    idx:157
+    in_0 {name:"p0:0",dtype:int8,shape:[1, 64, 7, 7, 8]}
+    in_1 {name:"p1:0",dtype:int8,shape:[1, 64, 7, 7, 8]}
+    in_2 {name:"Node_156:0",dtype:int8,shape:[1, 64, 7, 7, 8]}
+    out_0 {name:"Node_157:0",dtype:int8,shape:[1, 64, 7, 7, 8]}
+  }
+}
+layer {
+  name:"p0_10"
+  type:"input"
+  top:"p0_10"
+  layer_param {
+    idx:158
+    out_0 {name:"p0:0",dtype:int8,shape:[1, 64, 7, 7, 8]}
+  }
+}
+layer {
+  name:"p1_7"
+  type:"input"
+  top:"p1_7"
+  layer_param {
+    idx:159
+    out_0 {name:"p1:0",dtype:int32,shape:[1, 64, 1, 1, 8]}
+  }
+}
+layer {
+  name:"p2_3"
+  type:"input"
+  top:"p2_3"
+  layer_param {
+    idx:160
+    out_0 {name:"p2:0",dtype:int32,shape:[1, 64, 1, 1, 8]}
+  }
+}
+layer {
+  name:"Node_170"
+  type:"cast"
+  top:"Node_170"
+  bottom:"p0_10"
+  layer_param {
+    idx:170
+    in_0 {name:"p0:0",dtype:int8,shape:[1, 64, 7, 7, 8]}
+    out_0 {name:"Node_170:0",dtype:int32,shape:[1, 64, 7, 7, 8]}
+    attrs {'dtype': 'int32'}
+  }
+}
+layer {
+  name:"Node_172"
+  type:"multiply"
+  top:"Node_172"
+  bottom:"Node_170"
+  bottom:"p1_7"
+  layer_param {
+    idx:172
+    in_0 {name:"Node_170:0",dtype:int32,shape:[1, 64, 7, 7, 8]}
+    in_1 {name:"p1:0",dtype:int32,shape:[1, 64, 1, 1, 8]}
+    out_0 {name:"Node_172:0",dtype:int32,shape:[1, 64, 7, 7, 8]}
+  }
+}
+layer {
+  name:"Node_174"
+  type:"add"
+  top:"Node_174"
+  bottom:"Node_172"
+  bottom:"p2_3"
+  layer_param {
+    idx:174
+    in_0 {name:"Node_172:0",dtype:int32,shape:[1, 64, 7, 7, 8]}
+    in_1 {name:"p2:0",dtype:int32,shape:[1, 64, 1, 1, 8]}
+    out_0 {name:"Node_174:0",dtype:int32,shape:[1, 64, 7, 7, 8]}
+  }
+}
+layer {
+  name:"Node_175"
+  type:"cast"
+  top:"Node_175"
+  bottom:"Node_174"
+  layer_param {
+    idx:175
+    in_0 {name:"Node_174:0",dtype:int32,shape:[1, 64, 7, 7, 8]}
+    out_0 {name:"Node_175:0",dtype:int64,shape:[1, 64, 7, 7, 8]}
+    attrs {'dtype': 'int64'}
+  }
+}
+layer {
+  name:"Node_176"
+  type:"fixed_point_multiply"
+  top:"Node_176"
+  bottom:"Node_175"
+  layer_param {
+    idx:176
+    in_0 {name:"Node_175:0",dtype:int64,shape:[1, 64, 7, 7, 8]}
+    out_0 {name:"Node_176:0",dtype:int64,shape:[1, 64, 7, 7, 8]}
+  }
+}
+layer {
+  name:"Node_177"
+  type:"clip"
+  top:"Node_177"
+  bottom:"Node_176"
+  layer_param {
+    idx:177
+    in_0 {name:"Node_176:0",dtype:int64,shape:[1, 64, 7, 7, 8]}
+    out_0 {name:"Node_177:0",dtype:int64,shape:[1, 64, 7, 7, 8]}
+    attrs {'a_min': -127.0, 'a_max': 127.0}
+  }
+}
+layer {
+  name:"Node_178"
+  type:"cast"
+  top:"Node_178"
+  bottom:"Node_177"
+  layer_param {
+    idx:178
+    in_0 {name:"Node_177:0",dtype:int64,shape:[1, 64, 7, 7, 8]}
+    out_0 {name:"Node_178:0",dtype:int32,shape:[1, 64, 7, 7, 8]}
+    attrs {'dtype': 'int32'}
+  }
+}
+layer {
+  name:"Node_179"
+  type:"cast"
+  top:"Node_179"
+  bottom:"Node_178"
+  layer_param {
+    idx:179
+    in_0 {name:"Node_178:0",dtype:int32,shape:[1, 64, 7, 7, 8]}
+    out_0 {name:"Node_179:0",dtype:int8,shape:[1, 64, 7, 7, 8]}
+    attrs {'dtype': 'int8'}
+  }
+}
+layer {
+  name:"Node_180"
+  type:"function"
+  top:"Node_180"
+  bottom:"p0_10"
+  bottom:"p1_7"
+  bottom:"p2_3"
+  bottom:"Node_179"
+  layer_param {
+    idx:180
+    in_0 {name:"p0:0",dtype:int8,shape:[1, 64, 7, 7, 8]}
+    in_1 {name:"p1:0",dtype:int32,shape:[1, 64, 1, 1, 8]}
+    in_2 {name:"p2:0",dtype:int32,shape:[1, 64, 1, 1, 8]}
+    in_3 {name:"Node_179:0",dtype:int8,shape:[1, 64, 7, 7, 8]}
+    out_0 {name:"Node_180:0",dtype:int8,shape:[1, 64, 7, 7, 8]}
+  }
+}
+layer {
+  name:"p0_11"
+  type:"input"
+  top:"p0_11"
+  layer_param {
+    idx:181
+    out_0 {name:"p0:0",dtype:int8,shape:[1, 64, 7, 7, 8]}
+  }
+}
+layer {
+  name:"p1_8"
+  type:"input"
+  top:"p1_8"
+  layer_param {
+    idx:182
+    out_0 {name:"p1:0",dtype:int8,shape:[64, 64, 3, 3, 8, 8]}
+  }
+}
+layer {
+  name:"Node_191"
+  type:"nn_contrib_conv2d_NCHWc"
+  top:"Node_191"
+  bottom:"p0_11"
+  bottom:"p1_8"
+  layer_param {
+    idx:191
+    in_0 {name:"p0:0",dtype:int8,shape:[1, 64, 7, 7, 8]}
+    in_1 {name:"p1:0",dtype:int8,shape:[64, 64, 3, 3, 8, 8]}
+    out_0 {name:"Node_191:0",dtype:int32,shape:[1, 64, 7, 7, 8]}
+    attrs {'strides': [1, 1], 'padding': [1, 1, 1, 1], 'dilation': [1, 1], 'groups': 1, 'channels': 512, 'kernel_size': [3, 3], 'data_layout': 'NCHW8c', 'kernel_layout': 'OIHW8i8o', 'out_layout': 'NCHW8c', 'out_dtype': 'int32'}
+  }
+}
+layer {
+  name:"Node_192"
+  type:"cast"
+  top:"Node_192"
+  bottom:"Node_191"
+  layer_param {
+    idx:192
+    in_0 {name:"Node_191:0",dtype:int32,shape:[1, 64, 7, 7, 8]}
+    out_0 {name:"Node_192:0",dtype:int64,shape:[1, 64, 7, 7, 8]}
+    attrs {'dtype': 'int64'}
+  }
+}
+layer {
+  name:"Node_193"
+  type:"fixed_point_multiply"
+  top:"Node_193"
+  bottom:"Node_192"
+  layer_param {
+    idx:193
+    in_0 {name:"Node_192:0",dtype:int64,shape:[1, 64, 7, 7, 8]}
+    out_0 {name:"Node_193:0",dtype:int64,shape:[1, 64, 7, 7, 8]}
+  }
+}
+layer {
+  name:"Node_194"
+  type:"clip"
+  top:"Node_194"
+  bottom:"Node_193"
+  layer_param {
+    idx:194
+    in_0 {name:"Node_193:0",dtype:int64,shape:[1, 64, 7, 7, 8]}
+    out_0 {name:"Node_194:0",dtype:int64,shape:[1, 64, 7, 7, 8]}
+    attrs {'a_min': -127.0, 'a_max': 127.0}
+  }
+}
+layer {
+  name:"Node_195"
+  type:"cast"
+  top:"Node_195"
+  bottom:"Node_194"
+  layer_param {
+    idx:195
+    in_0 {name:"Node_194:0",dtype:int64,shape:[1, 64, 7, 7, 8]}
+    out_0 {name:"Node_195:0",dtype:int32,shape:[1, 64, 7, 7, 8]}
+    attrs {'dtype': 'int32'}
+  }
+}
+layer {
+  name:"Node_196"
+  type:"cast"
+  top:"Node_196"
+  bottom:"Node_195"
+  layer_param {
+    idx:196
+    in_0 {name:"Node_195:0",dtype:int32,shape:[1, 64, 7, 7, 8]}
+    out_0 {name:"Node_196:0",dtype:int8,shape:[1, 64, 7, 7, 8]}
+    attrs {'dtype': 'int8'}
+  }
+}
+layer {
+  name:"Node_197"
+  type:"function"
+  top:"Node_197"
+  bottom:"p0_11"
+  bottom:"p1_8"
+  bottom:"Node_196"
+  layer_param {
+    idx:197
+    in_0 {name:"p0:0",dtype:int8,shape:[1, 64, 7, 7, 8]}
+    in_1 {name:"p1:0",dtype:int8,shape:[64, 64, 3, 3, 8, 8]}
+    in_2 {name:"Node_196:0",dtype:int8,shape:[1, 64, 7, 7, 8]}
+    out_0 {name:"Node_197:0",dtype:int8,shape:[1, 64, 7, 7, 8]}
+  }
+}
+layer {
+  name:"p0_12"
+  type:"input"
+  top:"p0_12"
+  layer_param {
+    idx:198
+    out_0 {name:"p0:0",dtype:int8,shape:[1, 64, 7, 7, 8]}
+  }
+}
+layer {
+  name:"p1_9"
+  type:"input"
+  top:"p1_9"
+  layer_param {
+    idx:199
+    out_0 {name:"p1:0",dtype:int32,shape:[1, 64, 1, 1, 8]}
+  }
+}
+layer {
+  name:"p2_4"
+  type:"input"
+  top:"p2_4"
+  layer_param {
+    idx:200
+    out_0 {name:"p2:0",dtype:int32,shape:[1, 64, 1, 1, 8]}
+  }
+}
+layer {
+  name:"Node_211"
+  type:"cast"
+  top:"Node_211"
+  bottom:"p0_12"
+  layer_param {
+    idx:211
+    in_0 {name:"p0:0",dtype:int8,shape:[1, 64, 7, 7, 8]}
+    out_0 {name:"Node_211:0",dtype:int32,shape:[1, 64, 7, 7, 8]}
+    attrs {'dtype': 'int32'}
+  }
+}
+layer {
+  name:"Node_213"
+  type:"multiply"
+  top:"Node_213"
+  bottom:"Node_211"
+  bottom:"p1_9"
+  layer_param {
+    idx:213
+    in_0 {name:"Node_211:0",dtype:int32,shape:[1, 64, 7, 7, 8]}
+    in_1 {name:"p1:0",dtype:int32,shape:[1, 64, 1, 1, 8]}
+    out_0 {name:"Node_213:0",dtype:int32,shape:[1, 64, 7, 7, 8]}
+  }
+}
+layer {
+  name:"Node_215"
+  type:"add"
+  top:"Node_215"
+  bottom:"Node_213"
+  bottom:"p2_4"
+  layer_param {
+    idx:215
+    in_0 {name:"Node_213:0",dtype:int32,shape:[1, 64, 7, 7, 8]}
+    in_1 {name:"p2:0",dtype:int32,shape:[1, 64, 1, 1, 8]}
+    out_0 {name:"Node_215:0",dtype:int32,shape:[1, 64, 7, 7, 8]}
+  }
+}
+layer {
+  name:"Node_216"
+  type:"nn_relu"
+  top:"Node_216"
+  bottom:"Node_215"
+  layer_param {
+    idx:216
+    in_0 {name:"Node_215:0",dtype:int32,shape:[1, 64, 7, 7, 8]}
+    out_0 {name:"Node_216:0",dtype:int32,shape:[1, 64, 7, 7, 8]}
+  }
+}
+layer {
+  name:"Node_217"
+  type:"cast"
+  top:"Node_217"
+  bottom:"Node_216"
+  layer_param {
+    idx:217
+    in_0 {name:"Node_216:0",dtype:int32,shape:[1, 64, 7, 7, 8]}
+    out_0 {name:"Node_217:0",dtype:int64,shape:[1, 64, 7, 7, 8]}
+    attrs {'dtype': 'int64'}
+  }
+}
+layer {
+  name:"Node_218"
+  type:"fixed_point_multiply"
+  top:"Node_218"
+  bottom:"Node_217"
+  layer_param {
+    idx:218
+    in_0 {name:"Node_217:0",dtype:int64,shape:[1, 64, 7, 7, 8]}
+    out_0 {name:"Node_218:0",dtype:int64,shape:[1, 64, 7, 7, 8]}
+  }
+}
+layer {
+  name:"Node_219"
+  type:"clip"
+  top:"Node_219"
+  bottom:"Node_218"
+  layer_param {
+    idx:219
+    in_0 {name:"Node_218:0",dtype:int64,shape:[1, 64, 7, 7, 8]}
+    out_0 {name:"Node_219:0",dtype:int64,shape:[1, 64, 7, 7, 8]}
+    attrs {'a_min': -127.0, 'a_max': 127.0}
+  }
+}
+layer {
+  name:"Node_220"
+  type:"cast"
+  top:"Node_220"
+  bottom:"Node_219"
+  layer_param {
+    idx:220
+    in_0 {name:"Node_219:0",dtype:int64,shape:[1, 64, 7, 7, 8]}
+    out_0 {name:"Node_220:0",dtype:int32,shape:[1, 64, 7, 7, 8]}
+    attrs {'dtype': 'int32'}
+  }
+}
+layer {
+  name:"Node_221"
+  type:"cast"
+  top:"Node_221"
+  bottom:"Node_220"
+  layer_param {
+    idx:221
+    in_0 {name:"Node_220:0",dtype:int32,shape:[1, 64, 7, 7, 8]}
+    out_0 {name:"Node_221:0",dtype:int8,shape:[1, 64, 7, 7, 8]}
+    attrs {'dtype': 'int8'}
+  }
+}
+layer {
+  name:"Node_222"
+  type:"function"
+  top:"Node_222"
+  bottom:"p0_12"
+  bottom:"p1_9"
+  bottom:"p2_4"
+  bottom:"Node_221"
+  layer_param {
+    idx:222
+    in_0 {name:"p0:0",dtype:int8,shape:[1, 64, 7, 7, 8]}
+    in_1 {name:"p1:0",dtype:int32,shape:[1, 64, 1, 1, 8]}
+    in_2 {name:"p2:0",dtype:int32,shape:[1, 64, 1, 1, 8]}
+    in_3 {name:"Node_221:0",dtype:int8,shape:[1, 64, 7, 7, 8]}
+    out_0 {name:"Node_222:0",dtype:int8,shape:[1, 64, 7, 7, 8]}
+  }
+}
+layer {
+  name:"p0_13"
+  type:"input"
+  top:"p0_13"
+  layer_param {
+    idx:223
+    out_0 {name:"p0:0",dtype:int8,shape:[1, 32, 14, 14, 8]}
+  }
+}
+layer {
+  name:"p1_10"
+  type:"input"
+  top:"p1_10"
+  layer_param {
+    idx:224
+    out_0 {name:"p1:0",dtype:int8,shape:[64, 32, 3, 3, 8, 8]}
+  }
+}
+layer {
+  name:"Node_233"
+  type:"nn_contrib_conv2d_NCHWc"
+  top:"Node_233"
+  bottom:"p0_13"
+  bottom:"p1_10"
+  layer_param {
+    idx:233
+    in_0 {name:"p0:0",dtype:int8,shape:[1, 32, 14, 14, 8]}
+    in_1 {name:"p1:0",dtype:int8,shape:[64, 32, 3, 3, 8, 8]}
+    out_0 {name:"Node_233:0",dtype:int32,shape:[1, 64, 7, 7, 8]}
+    attrs {'strides': [2, 2], 'padding': [1, 1, 1, 1], 'dilation': [1, 1], 'groups': 1, 'channels': 512, 'kernel_size': [3, 3], 'data_layout': 'NCHW8c', 'kernel_layout': 'OIHW8i8o', 'out_layout': 'NCHW8c', 'out_dtype': 'int32'}
+  }
+}
+layer {
+  name:"Node_234"
+  type:"cast"
+  top:"Node_234"
+  bottom:"Node_233"
+  layer_param {
+    idx:234
+    in_0 {name:"Node_233:0",dtype:int32,shape:[1, 64, 7, 7, 8]}
+    out_0 {name:"Node_234:0",dtype:int64,shape:[1, 64, 7, 7, 8]}
+    attrs {'dtype': 'int64'}
+  }
+}
+layer {
+  name:"Node_235"
+  type:"fixed_point_multiply"
+  top:"Node_235"
+  bottom:"Node_234"
+  layer_param {
+    idx:235
+    in_0 {name:"Node_234:0",dtype:int64,shape:[1, 64, 7, 7, 8]}
+    out_0 {name:"Node_235:0",dtype:int64,shape:[1, 64, 7, 7, 8]}
+  }
+}
+layer {
+  name:"Node_236"
+  type:"clip"
+  top:"Node_236"
+  bottom:"Node_235"
+  layer_param {
+    idx:236
+    in_0 {name:"Node_235:0",dtype:int64,shape:[1, 64, 7, 7, 8]}
+    out_0 {name:"Node_236:0",dtype:int64,shape:[1, 64, 7, 7, 8]}
+    attrs {'a_min': -127.0, 'a_max': 127.0}
+  }
+}
+layer {
+  name:"Node_237"
+  type:"cast"
+  top:"Node_237"
+  bottom:"Node_236"
+  layer_param {
+    idx:237
+    in_0 {name:"Node_236:0",dtype:int64,shape:[1, 64, 7, 7, 8]}
+    out_0 {name:"Node_237:0",dtype:int32,shape:[1, 64, 7, 7, 8]}
+    attrs {'dtype': 'int32'}
+  }
+}
+layer {
+  name:"Node_238"
+  type:"cast"
+  top:"Node_238"
+  bottom:"Node_237"
+  layer_param {
+    idx:238
+    in_0 {name:"Node_237:0",dtype:int32,shape:[1, 64, 7, 7, 8]}
+    out_0 {name:"Node_238:0",dtype:int8,shape:[1, 64, 7, 7, 8]}
+    attrs {'dtype': 'int8'}
+  }
+}
+layer {
+  name:"Node_239"
+  type:"function"
+  top:"Node_239"
+  bottom:"p0_13"
+  bottom:"p1_10"
+  bottom:"Node_238"
+  layer_param {
+    idx:239
+    in_0 {name:"p0:0",dtype:int8,shape:[1, 32, 14, 14, 8]}
+    in_1 {name:"p1:0",dtype:int8,shape:[64, 32, 3, 3, 8, 8]}
+    in_2 {name:"Node_238:0",dtype:int8,shape:[1, 64, 7, 7, 8]}
+    out_0 {name:"Node_239:0",dtype:int8,shape:[1, 64, 7, 7, 8]}
+  }
+}
+layer {
+  name:"p0_14"
+  type:"input"
+  top:"p0_14"
+  layer_param {
+    idx:240
+    out_0 {name:"p0:0",dtype:int8,shape:[1, 32, 14, 14, 8]}
+  }
+}
+layer {
+  name:"p1_11"
+  type:"input"
+  top:"p1_11"
+  layer_param {
+    idx:241
+    out_0 {name:"p1:0",dtype:int8,shape:[1, 32, 14, 14, 8]}
+  }
+}
+layer {
+  name:"Node_251"
+  type:"cast"
+  top:"Node_251"
+  bottom:"p0_14"
+  layer_param {
+    idx:251
+    in_0 {name:"p0:0",dtype:int8,shape:[1, 32, 14, 14, 8]}
+    out_0 {name:"Node_251:0",dtype:int32,shape:[1, 32, 14, 14, 8]}
+    attrs {'dtype': 'int32'}
+  }
+}
+layer {
+  name:"Node_255"
+  type:"cast"
+  top:"Node_255"
+  bottom:"p1_11"
+  layer_param {
+    idx:255
+    in_0 {name:"p1:0",dtype:int8,shape:[1, 32, 14, 14, 8]}
+    out_0 {name:"Node_255:0",dtype:int32,shape:[1, 32, 14, 14, 8]}
+    attrs {'dtype': 'int32'}
+  }
+}
+layer {
+  name:"Node_256"
+  type:"fixed_point_multiply"
+  top:"Node_256"
+  bottom:"Node_255"
+  layer_param {
+    idx:256
+    in_0 {name:"Node_255:0",dtype:int32,shape:[1, 32, 14, 14, 8]}
+    out_0 {name:"Node_256:0",dtype:int32,shape:[1, 32, 14, 14, 8]}
+  }
+}
+layer {
+  name:"Node_257"
+  type:"add"
+  top:"Node_257"
+  bottom:"Node_251"
+  bottom:"Node_256"
+  layer_param {
+    idx:257
+    in_0 {name:"Node_251:0",dtype:int32,shape:[1, 32, 14, 14, 8]}
+    in_1 {name:"Node_256:0",dtype:int32,shape:[1, 32, 14, 14, 8]}
+    out_0 {name:"Node_257:0",dtype:int32,shape:[1, 32, 14, 14, 8]}
+  }
+}
+layer {
+  name:"Node_258"
+  type:"nn_relu"
+  top:"Node_258"
+  bottom:"Node_257"
+  layer_param {
+    idx:258
+    in_0 {name:"Node_257:0",dtype:int32,shape:[1, 32, 14, 14, 8]}
+    out_0 {name:"Node_258:0",dtype:int32,shape:[1, 32, 14, 14, 8]}
+  }
+}
+layer {
+  name:"Node_259"
+  type:"cast"
+  top:"Node_259"
+  bottom:"Node_258"
+  layer_param {
+    idx:259
+    in_0 {name:"Node_258:0",dtype:int32,shape:[1, 32, 14, 14, 8]}
+    out_0 {name:"Node_259:0",dtype:int64,shape:[1, 32, 14, 14, 8]}
+    attrs {'dtype': 'int64'}
+  }
+}
+layer {
+  name:"Node_260"
+  type:"fixed_point_multiply"
+  top:"Node_260"
+  bottom:"Node_259"
+  layer_param {
+    idx:260
+    in_0 {name:"Node_259:0",dtype:int64,shape:[1, 32, 14, 14, 8]}
+    out_0 {name:"Node_260:0",dtype:int64,shape:[1, 32, 14, 14, 8]}
+  }
+}
+layer {
+  name:"Node_261"
+  type:"clip"
+  top:"Node_261"
+  bottom:"Node_260"
+  layer_param {
+    idx:261
+    in_0 {name:"Node_260:0",dtype:int64,shape:[1, 32, 14, 14, 8]}
+    out_0 {name:"Node_261:0",dtype:int64,shape:[1, 32, 14, 14, 8]}
+    attrs {'a_min': -127.0, 'a_max': 127.0}
+  }
+}
+layer {
+  name:"Node_262"
+  type:"cast"
+  top:"Node_262"
+  bottom:"Node_261"
+  layer_param {
+    idx:262
+    in_0 {name:"Node_261:0",dtype:int64,shape:[1, 32, 14, 14, 8]}
+    out_0 {name:"Node_262:0",dtype:int32,shape:[1, 32, 14, 14, 8]}
+    attrs {'dtype': 'int32'}
+  }
+}
+layer {
+  name:"Node_263"
+  type:"cast"
+  top:"Node_263"
+  bottom:"Node_262"
+  layer_param {
+    idx:263
+    in_0 {name:"Node_262:0",dtype:int32,shape:[1, 32, 14, 14, 8]}
+    out_0 {name:"Node_263:0",dtype:int8,shape:[1, 32, 14, 14, 8]}
+    attrs {'dtype': 'int8'}
+  }
+}
+layer {
+  name:"Node_264"
+  type:"function"
+  top:"Node_264"
+  bottom:"p0_14"
+  bottom:"p1_11"
+  bottom:"Node_263"
+  layer_param {
+    idx:264
+    in_0 {name:"p0:0",dtype:int8,shape:[1, 32, 14, 14, 8]}
+    in_1 {name:"p1:0",dtype:int8,shape:[1, 32, 14, 14, 8]}
+    in_2 {name:"Node_263:0",dtype:int8,shape:[1, 32, 14, 14, 8]}
+    out_0 {name:"Node_264:0",dtype:int8,shape:[1, 32, 14, 14, 8]}
+  }
+}
+layer {
+  name:"p0_15"
+  type:"input"
+  top:"p0_15"
+  layer_param {
+    idx:265
+    out_0 {name:"p0:0",dtype:int8,shape:[1, 32, 14, 14, 8]}
+  }
+}
+layer {
+  name:"p1_12"
+  type:"input"
+  top:"p1_12"
+  layer_param {
+    idx:266
+    out_0 {name:"p1:0",dtype:int32,shape:[1, 32, 1, 1, 8]}
+  }
+}
+layer {
+  name:"p2_5"
+  type:"input"
+  top:"p2_5"
+  layer_param {
+    idx:267
+    out_0 {name:"p2:0",dtype:int32,shape:[1, 32, 1, 1, 8]}
+  }
+}
+layer {
+  name:"Node_277"
+  type:"cast"
+  top:"Node_277"
+  bottom:"p0_15"
+  layer_param {
+    idx:277
+    in_0 {name:"p0:0",dtype:int8,shape:[1, 32, 14, 14, 8]}
+    out_0 {name:"Node_277:0",dtype:int32,shape:[1, 32, 14, 14, 8]}
+    attrs {'dtype': 'int32'}
+  }
+}
+layer {
+  name:"Node_279"
+  type:"multiply"
+  top:"Node_279"
+  bottom:"Node_277"
+  bottom:"p1_12"
+  layer_param {
+    idx:279
+    in_0 {name:"Node_277:0",dtype:int32,shape:[1, 32, 14, 14, 8]}
+    in_1 {name:"p1:0",dtype:int32,shape:[1, 32, 1, 1, 8]}
+    out_0 {name:"Node_279:0",dtype:int32,shape:[1, 32, 14, 14, 8]}
+  }
+}
+layer {
+  name:"Node_281"
+  type:"add"
+  top:"Node_281"
+  bottom:"Node_279"
+  bottom:"p2_5"
+  layer_param {
+    idx:281
+    in_0 {name:"Node_279:0",dtype:int32,shape:[1, 32, 14, 14, 8]}
+    in_1 {name:"p2:0",dtype:int32,shape:[1, 32, 1, 1, 8]}
+    out_0 {name:"Node_281:0",dtype:int32,shape:[1, 32, 14, 14, 8]}
+  }
+}
+layer {
+  name:"Node_282"
+  type:"cast"
+  top:"Node_282"
+  bottom:"Node_281"
+  layer_param {
+    idx:282
+    in_0 {name:"Node_281:0",dtype:int32,shape:[1, 32, 14, 14, 8]}
+    out_0 {name:"Node_282:0",dtype:int64,shape:[1, 32, 14, 14, 8]}
+    attrs {'dtype': 'int64'}
+  }
+}
+layer {
+  name:"Node_283"
+  type:"fixed_point_multiply"
+  top:"Node_283"
+  bottom:"Node_282"
+  layer_param {
+    idx:283
+    in_0 {name:"Node_282:0",dtype:int64,shape:[1, 32, 14, 14, 8]}
+    out_0 {name:"Node_283:0",dtype:int64,shape:[1, 32, 14, 14, 8]}
+  }
+}
+layer {
+  name:"Node_284"
+  type:"clip"
+  top:"Node_284"
+  bottom:"Node_283"
+  layer_param {
+    idx:284
+    in_0 {name:"Node_283:0",dtype:int64,shape:[1, 32, 14, 14, 8]}
+    out_0 {name:"Node_284:0",dtype:int64,shape:[1, 32, 14, 14, 8]}
+    attrs {'a_min': -127.0, 'a_max': 127.0}
+  }
+}
+layer {
+  name:"Node_285"
+  type:"cast"
+  top:"Node_285"
+  bottom:"Node_284"
+  layer_param {
+    idx:285
+    in_0 {name:"Node_284:0",dtype:int64,shape:[1, 32, 14, 14, 8]}
+    out_0 {name:"Node_285:0",dtype:int32,shape:[1, 32, 14, 14, 8]}
+    attrs {'dtype': 'int32'}
+  }
+}
+layer {
+  name:"Node_286"
+  type:"cast"
+  top:"Node_286"
+  bottom:"Node_285"
+  layer_param {
+    idx:286
+    in_0 {name:"Node_285:0",dtype:int32,shape:[1, 32, 14, 14, 8]}
+    out_0 {name:"Node_286:0",dtype:int8,shape:[1, 32, 14, 14, 8]}
+    attrs {'dtype': 'int8'}
+  }
+}
+layer {
+  name:"Node_287"
+  type:"function"
+  top:"Node_287"
+  bottom:"p0_15"
+  bottom:"p1_12"
+  bottom:"p2_5"
+  bottom:"Node_286"
+  layer_param {
+    idx:287
+    in_0 {name:"p0:0",dtype:int8,shape:[1, 32, 14, 14, 8]}
+    in_1 {name:"p1:0",dtype:int32,shape:[1, 32, 1, 1, 8]}
+    in_2 {name:"p2:0",dtype:int32,shape:[1, 32, 1, 1, 8]}
+    in_3 {name:"Node_286:0",dtype:int8,shape:[1, 32, 14, 14, 8]}
+    out_0 {name:"Node_287:0",dtype:int8,shape:[1, 32, 14, 14, 8]}
+  }
+}
+layer {
+  name:"p0_16"
+  type:"input"
+  top:"p0_16"
+  layer_param {
+    idx:288
+    out_0 {name:"p0:0",dtype:int8,shape:[1, 32, 14, 14, 8]}
+  }
+}
+layer {
+  name:"p1_13"
+  type:"input"
+  top:"p1_13"
+  layer_param {
+    idx:289
+    out_0 {name:"p1:0",dtype:int8,shape:[32, 32, 3, 3, 8, 8]}
+  }
+}
+layer {
+  name:"Node_298"
+  type:"nn_contrib_conv2d_NCHWc"
+  top:"Node_298"
+  bottom:"p0_16"
+  bottom:"p1_13"
+  layer_param {
+    idx:298
+    in_0 {name:"p0:0",dtype:int8,shape:[1, 32, 14, 14, 8]}
+    in_1 {name:"p1:0",dtype:int8,shape:[32, 32, 3, 3, 8, 8]}
+    out_0 {name:"Node_298:0",dtype:int32,shape:[1, 32, 14, 14, 8]}
+    attrs {'strides': [1, 1], 'padding': [1, 1, 1, 1], 'dilation': [1, 1], 'groups': 1, 'channels': 256, 'kernel_size': [3, 3], 'data_layout': 'NCHW8c', 'kernel_layout': 'OIHW8i8o', 'out_layout': 'NCHW8c', 'out_dtype': 'int32'}
+  }
+}
+layer {
+  name:"Node_299"
+  type:"cast"
+  top:"Node_299"
+  bottom:"Node_298"
+  layer_param {
+    idx:299
+    in_0 {name:"Node_298:0",dtype:int32,shape:[1, 32, 14, 14, 8]}
+    out_0 {name:"Node_299:0",dtype:int64,shape:[1, 32, 14, 14, 8]}
+    attrs {'dtype': 'int64'}
+  }
+}
+layer {
+  name:"Node_300"
+  type:"fixed_point_multiply"
+  top:"Node_300"
+  bottom:"Node_299"
+  layer_param {
+    idx:300
+    in_0 {name:"Node_299:0",dtype:int64,shape:[1, 32, 14, 14, 8]}
+    out_0 {name:"Node_300:0",dtype:int64,shape:[1, 32, 14, 14, 8]}
+  }
+}
+layer {
+  name:"Node_301"
+  type:"clip"
+  top:"Node_301"
+  bottom:"Node_300"
+  layer_param {
+    idx:301
+    in_0 {name:"Node_300:0",dtype:int64,shape:[1, 32, 14, 14, 8]}
+    out_0 {name:"Node_301:0",dtype:int64,shape:[1, 32, 14, 14, 8]}
+    attrs {'a_min': -127.0, 'a_max': 127.0}
+  }
+}
+layer {
+  name:"Node_302"
+  type:"cast"
+  top:"Node_302"
+  bottom:"Node_301"
+  layer_param {
+    idx:302
+    in_0 {name:"Node_301:0",dtype:int64,shape:[1, 32, 14, 14, 8]}
+    out_0 {name:"Node_302:0",dtype:int32,shape:[1, 32, 14, 14, 8]}
+    attrs {'dtype': 'int32'}
+  }
+}
+layer {
+  name:"Node_303"
+  type:"cast"
+  top:"Node_303"
+  bottom:"Node_302"
+  layer_param {
+    idx:303
+    in_0 {name:"Node_302:0",dtype:int32,shape:[1, 32, 14, 14, 8]}
+    out_0 {name:"Node_303:0",dtype:int8,shape:[1, 32, 14, 14, 8]}
+    attrs {'dtype': 'int8'}
+  }
+}
+layer {
+  name:"Node_304"
+  type:"function"
+  top:"Node_304"
+  bottom:"p0_16"
+  bottom:"p1_13"
+  bottom:"Node_303"
+  layer_param {
+    idx:304
+    in_0 {name:"p0:0",dtype:int8,shape:[1, 32, 14, 14, 8]}
+    in_1 {name:"p1:0",dtype:int8,shape:[32, 32, 3, 3, 8, 8]}
+    in_2 {name:"Node_303:0",dtype:int8,shape:[1, 32, 14, 14, 8]}
+    out_0 {name:"Node_304:0",dtype:int8,shape:[1, 32, 14, 14, 8]}
+  }
+}
+layer {
+  name:"p0_17"
+  type:"input"
+  top:"p0_17"
+  layer_param {
+    idx:305
+    out_0 {name:"p0:0",dtype:int8,shape:[1, 32, 14, 14, 8]}
+  }
+}
+layer {
+  name:"p1_14"
+  type:"input"
+  top:"p1_14"
+  layer_param {
+    idx:306
+    out_0 {name:"p1:0",dtype:int32,shape:[1, 32, 1, 1, 8]}
+  }
+}
+layer {
+  name:"p2_6"
+  type:"input"
+  top:"p2_6"
+  layer_param {
+    idx:307
+    out_0 {name:"p2:0",dtype:int32,shape:[1, 32, 1, 1, 8]}
+  }
+}
+layer {
+  name:"Node_318"
+  type:"cast"
+  top:"Node_318"
+  bottom:"p0_17"
+  layer_param {
+    idx:318
+    in_0 {name:"p0:0",dtype:int8,shape:[1, 32, 14, 14, 8]}
+    out_0 {name:"Node_318:0",dtype:int32,shape:[1, 32, 14, 14, 8]}
+    attrs {'dtype': 'int32'}
+  }
+}
+layer {
+  name:"Node_320"
+  type:"multiply"
+  top:"Node_320"
+  bottom:"Node_318"
+  bottom:"p1_14"
+  layer_param {
+    idx:320
+    in_0 {name:"Node_318:0",dtype:int32,shape:[1, 32, 14, 14, 8]}
+    in_1 {name:"p1:0",dtype:int32,shape:[1, 32, 1, 1, 8]}
+    out_0 {name:"Node_320:0",dtype:int32,shape:[1, 32, 14, 14, 8]}
+  }
+}
+layer {
+  name:"Node_322"
+  type:"add"
+  top:"Node_322"
+  bottom:"Node_320"
+  bottom:"p2_6"
+  layer_param {
+    idx:322
+    in_0 {name:"Node_320:0",dtype:int32,shape:[1, 32, 14, 14, 8]}
+    in_1 {name:"p2:0",dtype:int32,shape:[1, 32, 1, 1, 8]}
+    out_0 {name:"Node_322:0",dtype:int32,shape:[1, 32, 14, 14, 8]}
+  }
+}
+layer {
+  name:"Node_323"
+  type:"nn_relu"
+  top:"Node_323"
+  bottom:"Node_322"
+  layer_param {
+    idx:323
+    in_0 {name:"Node_322:0",dtype:int32,shape:[1, 32, 14, 14, 8]}
+    out_0 {name:"Node_323:0",dtype:int32,shape:[1, 32, 14, 14, 8]}
+  }
+}
+layer {
+  name:"Node_324"
+  type:"cast"
+  top:"Node_324"
+  bottom:"Node_323"
+  layer_param {
+    idx:324
+    in_0 {name:"Node_323:0",dtype:int32,shape:[1, 32, 14, 14, 8]}
+    out_0 {name:"Node_324:0",dtype:int64,shape:[1, 32, 14, 14, 8]}
+    attrs {'dtype': 'int64'}
+  }
+}
+layer {
+  name:"Node_325"
+  type:"fixed_point_multiply"
+  top:"Node_325"
+  bottom:"Node_324"
+  layer_param {
+    idx:325
+    in_0 {name:"Node_324:0",dtype:int64,shape:[1, 32, 14, 14, 8]}
+    out_0 {name:"Node_325:0",dtype:int64,shape:[1, 32, 14, 14, 8]}
+  }
+}
+layer {
+  name:"Node_326"
+  type:"clip"
+  top:"Node_326"
+  bottom:"Node_325"
+  layer_param {
+    idx:326
+    in_0 {name:"Node_325:0",dtype:int64,shape:[1, 32, 14, 14, 8]}
+    out_0 {name:"Node_326:0",dtype:int64,shape:[1, 32, 14, 14, 8]}
+    attrs {'a_min': -127.0, 'a_max': 127.0}
+  }
+}
+layer {
+  name:"Node_327"
+  type:"cast"
+  top:"Node_327"
+  bottom:"Node_326"
+  layer_param {
+    idx:327
+    in_0 {name:"Node_326:0",dtype:int64,shape:[1, 32, 14, 14, 8]}
+    out_0 {name:"Node_327:0",dtype:int32,shape:[1, 32, 14, 14, 8]}
+    attrs {'dtype': 'int32'}
+  }
+}
+layer {
+  name:"Node_328"
+  type:"cast"
+  top:"Node_328"
+  bottom:"Node_327"
+  layer_param {
+    idx:328
+    in_0 {name:"Node_327:0",dtype:int32,shape:[1, 32, 14, 14, 8]}
+    out_0 {name:"Node_328:0",dtype:int8,shape:[1, 32, 14, 14, 8]}
+    attrs {'dtype': 'int8'}
+  }
+}
+layer {
+  name:"Node_329"
+  type:"function"
+  top:"Node_329"
+  bottom:"p0_17"
+  bottom:"p1_14"
+  bottom:"p2_6"
+  bottom:"Node_328"
+  layer_param {
+    idx:329
+    in_0 {name:"p0:0",dtype:int8,shape:[1, 32, 14, 14, 8]}
+    in_1 {name:"p1:0",dtype:int32,shape:[1, 32, 1, 1, 8]}
+    in_2 {name:"p2:0",dtype:int32,shape:[1, 32, 1, 1, 8]}
+    in_3 {name:"Node_328:0",dtype:int8,shape:[1, 32, 14, 14, 8]}
+    out_0 {name:"Node_329:0",dtype:int8,shape:[1, 32, 14, 14, 8]}
+  }
+}
+layer {
+  name:"p0_18"
+  type:"input"
+  top:"p0_18"
+  layer_param {
+    idx:330
+    out_0 {name:"p0:0",dtype:int8,shape:[1, 32, 14, 14, 8]}
+  }
+}
+layer {
+  name:"p1_15"
+  type:"input"
+  top:"p1_15"
+  layer_param {
+    idx:331
+    out_0 {name:"p1:0",dtype:int8,shape:[32, 32, 3, 3, 8, 8]}
+  }
+}
+layer {
+  name:"Node_340"
+  type:"nn_contrib_conv2d_NCHWc"
+  top:"Node_340"
+  bottom:"p0_18"
+  bottom:"p1_15"
+  layer_param {
+    idx:340
+    in_0 {name:"p0:0",dtype:int8,shape:[1, 32, 14, 14, 8]}
+    in_1 {name:"p1:0",dtype:int8,shape:[32, 32, 3, 3, 8, 8]}
+    out_0 {name:"Node_340:0",dtype:int32,shape:[1, 32, 14, 14, 8]}
+    attrs {'strides': [1, 1], 'padding': [1, 1, 1, 1], 'dilation': [1, 1], 'groups': 1, 'channels': 256, 'kernel_size': [3, 3], 'data_layout': 'NCHW8c', 'kernel_layout': 'OIHW8i8o', 'out_layout': 'NCHW8c', 'out_dtype': 'int32'}
+  }
+}
+layer {
+  name:"Node_341"
+  type:"cast"
+  top:"Node_341"
+  bottom:"Node_340"
+  layer_param {
+    idx:341
+    in_0 {name:"Node_340:0",dtype:int32,shape:[1, 32, 14, 14, 8]}
+    out_0 {name:"Node_341:0",dtype:int64,shape:[1, 32, 14, 14, 8]}
+    attrs {'dtype': 'int64'}
+  }
+}
+layer {
+  name:"Node_342"
+  type:"fixed_point_multiply"
+  top:"Node_342"
+  bottom:"Node_341"
+  layer_param {
+    idx:342
+    in_0 {name:"Node_341:0",dtype:int64,shape:[1, 32, 14, 14, 8]}
+    out_0 {name:"Node_342:0",dtype:int64,shape:[1, 32, 14, 14, 8]}
+  }
+}
+layer {
+  name:"Node_343"
+  type:"clip"
+  top:"Node_343"
+  bottom:"Node_342"
+  layer_param {
+    idx:343
+    in_0 {name:"Node_342:0",dtype:int64,shape:[1, 32, 14, 14, 8]}
+    out_0 {name:"Node_343:0",dtype:int64,shape:[1, 32, 14, 14, 8]}
+    attrs {'a_min': -127.0, 'a_max': 127.0}
+  }
+}
+layer {
+  name:"Node_344"
+  type:"cast"
+  top:"Node_344"
+  bottom:"Node_343"
+  layer_param {
+    idx:344
+    in_0 {name:"Node_343:0",dtype:int64,shape:[1, 32, 14, 14, 8]}
+    out_0 {name:"Node_344:0",dtype:int32,shape:[1, 32, 14, 14, 8]}
+    attrs {'dtype': 'int32'}
+  }
+}
+layer {
+  name:"Node_345"
+  type:"cast"
+  top:"Node_345"
+  bottom:"Node_344"
+  layer_param {
+    idx:345
+    in_0 {name:"Node_344:0",dtype:int32,shape:[1, 32, 14, 14, 8]}
+    out_0 {name:"Node_345:0",dtype:int8,shape:[1, 32, 14, 14, 8]}
+    attrs {'dtype': 'int8'}
+  }
+}
+layer {
+  name:"Node_346"
+  type:"function"
+  top:"Node_346"
+  bottom:"p0_18"
+  bottom:"p1_15"
+  bottom:"Node_345"
+  layer_param {
+    idx:346
+    in_0 {name:"p0:0",dtype:int8,shape:[1, 32, 14, 14, 8]}
+    in_1 {name:"p1:0",dtype:int8,shape:[32, 32, 3, 3, 8, 8]}
+    in_2 {name:"Node_345:0",dtype:int8,shape:[1, 32, 14, 14, 8]}
+    out_0 {name:"Node_346:0",dtype:int8,shape:[1, 32, 14, 14, 8]}
+  }
+}
+layer {
+  name:"p0_19"
+  type:"input"
+  top:"p0_19"
+  layer_param {
+    idx:347
+    out_0 {name:"p0:0",dtype:int8,shape:[1, 32, 14, 14, 8]}
+  }
+}
+layer {
+  name:"p1_16"
+  type:"input"
+  top:"p1_16"
+  layer_param {
+    idx:348
+    out_0 {name:"p1:0",dtype:int8,shape:[1, 32, 14, 14, 8]}
+  }
+}
+layer {
+  name:"Node_359"
+  type:"cast"
+  top:"Node_359"
+  bottom:"p0_19"
+  layer_param {
+    idx:359
+    in_0 {name:"p0:0",dtype:int8,shape:[1, 32, 14, 14, 8]}
+    out_0 {name:"Node_359:0",dtype:int32,shape:[1, 32, 14, 14, 8]}
+    attrs {'dtype': 'int32'}
+  }
+}
+layer {
+  name:"Node_360"
+  type:"fixed_point_multiply"
+  top:"Node_360"
+  bottom:"Node_359"
+  layer_param {
+    idx:360
+    in_0 {name:"Node_359:0",dtype:int32,shape:[1, 32, 14, 14, 8]}
+    out_0 {name:"Node_360:0",dtype:int32,shape:[1, 32, 14, 14, 8]}
+  }
+}
+layer {
+  name:"Node_363"
+  type:"cast"
+  top:"Node_363"
+  bottom:"p1_16"
+  layer_param {
+    idx:363
+    in_0 {name:"p1:0",dtype:int8,shape:[1, 32, 14, 14, 8]}
+    out_0 {name:"Node_363:0",dtype:int32,shape:[1, 32, 14, 14, 8]}
+    attrs {'dtype': 'int32'}
+  }
+}
+layer {
+  name:"Node_364"
+  type:"add"
+  top:"Node_364"
+  bottom:"Node_360"
+  bottom:"Node_363"
+  layer_param {
+    idx:364
+    in_0 {name:"Node_360:0",dtype:int32,shape:[1, 32, 14, 14, 8]}
+    in_1 {name:"Node_363:0",dtype:int32,shape:[1, 32, 14, 14, 8]}
+    out_0 {name:"Node_364:0",dtype:int32,shape:[1, 32, 14, 14, 8]}
+  }
+}
+layer {
+  name:"Node_365"
+  type:"nn_relu"
+  top:"Node_365"
+  bottom:"Node_364"
+  layer_param {
+    idx:365
+    in_0 {name:"Node_364:0",dtype:int32,shape:[1, 32, 14, 14, 8]}
+    out_0 {name:"Node_365:0",dtype:int32,shape:[1, 32, 14, 14, 8]}
+  }
+}
+layer {
+  name:"Node_366"
+  type:"cast"
+  top:"Node_366"
+  bottom:"Node_365"
+  layer_param {
+    idx:366
+    in_0 {name:"Node_365:0",dtype:int32,shape:[1, 32, 14, 14, 8]}
+    out_0 {name:"Node_366:0",dtype:int64,shape:[1, 32, 14, 14, 8]}
+    attrs {'dtype': 'int64'}
+  }
+}
+layer {
+  name:"Node_367"
+  type:"fixed_point_multiply"
+  top:"Node_367"
+  bottom:"Node_366"
+  layer_param {
+    idx:367
+    in_0 {name:"Node_366:0",dtype:int64,shape:[1, 32, 14, 14, 8]}
+    out_0 {name:"Node_367:0",dtype:int64,shape:[1, 32, 14, 14, 8]}
+  }
+}
+layer {
+  name:"Node_368"
+  type:"clip"
+  top:"Node_368"
+  bottom:"Node_367"
+  layer_param {
+    idx:368
+    in_0 {name:"Node_367:0",dtype:int64,shape:[1, 32, 14, 14, 8]}
+    out_0 {name:"Node_368:0",dtype:int64,shape:[1, 32, 14, 14, 8]}
+    attrs {'a_min': -127.0, 'a_max': 127.0}
+  }
+}
+layer {
+  name:"Node_369"
+  type:"cast"
+  top:"Node_369"
+  bottom:"Node_368"
+  layer_param {
+    idx:369
+    in_0 {name:"Node_368:0",dtype:int64,shape:[1, 32, 14, 14, 8]}
+    out_0 {name:"Node_369:0",dtype:int32,shape:[1, 32, 14, 14, 8]}
+    attrs {'dtype': 'int32'}
+  }
+}
+layer {
+  name:"Node_370"
+  type:"cast"
+  top:"Node_370"
+  bottom:"Node_369"
+  layer_param {
+    idx:370
+    in_0 {name:"Node_369:0",dtype:int32,shape:[1, 32, 14, 14, 8]}
+    out_0 {name:"Node_370:0",dtype:int8,shape:[1, 32, 14, 14, 8]}
+    attrs {'dtype': 'int8'}
+  }
+}
+layer {
+  name:"Node_371"
+  type:"function"
+  top:"Node_371"
+  bottom:"p0_19"
+  bottom:"p1_16"
+  bottom:"Node_370"
+  layer_param {
+    idx:371
+    in_0 {name:"p0:0",dtype:int8,shape:[1, 32, 14, 14, 8]}
+    in_1 {name:"p1:0",dtype:int8,shape:[1, 32, 14, 14, 8]}
+    in_2 {name:"Node_370:0",dtype:int8,shape:[1, 32, 14, 14, 8]}
+    out_0 {name:"Node_371:0",dtype:int8,shape:[1, 32, 14, 14, 8]}
+  }
+}
+layer {
+  name:"p0_20"
+  type:"input"
+  top:"p0_20"
+  layer_param {
+    idx:372
+    out_0 {name:"p0:0",dtype:int8,shape:[1, 32, 14, 14, 8]}
+  }
+}
+layer {
+  name:"p1_17"
+  type:"input"
+  top:"p1_17"
+  layer_param {
+    idx:373
+    out_0 {name:"p1:0",dtype:int32,shape:[1, 32, 1, 1, 8]}
+  }
+}
+layer {
+  name:"p2_7"
+  type:"input"
+  top:"p2_7"
+  layer_param {
+    idx:374
+    out_0 {name:"p2:0",dtype:int32,shape:[1, 32, 1, 1, 8]}
+  }
+}
+layer {
+  name:"Node_384"
+  type:"cast"
+  top:"Node_384"
+  bottom:"p0_20"
+  layer_param {
+    idx:384
+    in_0 {name:"p0:0",dtype:int8,shape:[1, 32, 14, 14, 8]}
+    out_0 {name:"Node_384:0",dtype:int32,shape:[1, 32, 14, 14, 8]}
+    attrs {'dtype': 'int32'}
+  }
+}
+layer {
+  name:"Node_386"
+  type:"multiply"
+  top:"Node_386"
+  bottom:"Node_384"
+  bottom:"p1_17"
+  layer_param {
+    idx:386
+    in_0 {name:"Node_384:0",dtype:int32,shape:[1, 32, 14, 14, 8]}
+    in_1 {name:"p1:0",dtype:int32,shape:[1, 32, 1, 1, 8]}
+    out_0 {name:"Node_386:0",dtype:int32,shape:[1, 32, 14, 14, 8]}
+  }
+}
+layer {
+  name:"Node_388"
+  type:"add"
+  top:"Node_388"
+  bottom:"Node_386"
+  bottom:"p2_7"
+  layer_param {
+    idx:388
+    in_0 {name:"Node_386:0",dtype:int32,shape:[1, 32, 14, 14, 8]}
+    in_1 {name:"p2:0",dtype:int32,shape:[1, 32, 1, 1, 8]}
+    out_0 {name:"Node_388:0",dtype:int32,shape:[1, 32, 14, 14, 8]}
+  }
+}
+layer {
+  name:"Node_389"
+  type:"cast"
+  top:"Node_389"
+  bottom:"Node_388"
+  layer_param {
+    idx:389
+    in_0 {name:"Node_388:0",dtype:int32,shape:[1, 32, 14, 14, 8]}
+    out_0 {name:"Node_389:0",dtype:int64,shape:[1, 32, 14, 14, 8]}
+    attrs {'dtype': 'int64'}
+  }
+}
+layer {
+  name:"Node_390"
+  type:"fixed_point_multiply"
+  top:"Node_390"
+  bottom:"Node_389"
+  layer_param {
+    idx:390
+    in_0 {name:"Node_389:0",dtype:int64,shape:[1, 32, 14, 14, 8]}
+    out_0 {name:"Node_390:0",dtype:int64,shape:[1, 32, 14, 14, 8]}
+  }
+}
+layer {
+  name:"Node_391"
+  type:"clip"
+  top:"Node_391"
+  bottom:"Node_390"
+  layer_param {
+    idx:391
+    in_0 {name:"Node_390:0",dtype:int64,shape:[1, 32, 14, 14, 8]}
+    out_0 {name:"Node_391:0",dtype:int64,shape:[1, 32, 14, 14, 8]}
+    attrs {'a_min': -127.0, 'a_max': 127.0}
+  }
+}
+layer {
+  name:"Node_392"
+  type:"cast"
+  top:"Node_392"
+  bottom:"Node_391"
+  layer_param {
+    idx:392
+    in_0 {name:"Node_391:0",dtype:int64,shape:[1, 32, 14, 14, 8]}
+    out_0 {name:"Node_392:0",dtype:int32,shape:[1, 32, 14, 14, 8]}
+    attrs {'dtype': 'int32'}
+  }
+}
+layer {
+  name:"Node_393"
+  type:"cast"
+  top:"Node_393"
+  bottom:"Node_392"
+  layer_param {
+    idx:393
+    in_0 {name:"Node_392:0",dtype:int32,shape:[1, 32, 14, 14, 8]}
+    out_0 {name:"Node_393:0",dtype:int8,shape:[1, 32, 14, 14, 8]}
+    attrs {'dtype': 'int8'}
+  }
+}
+layer {
+  name:"Node_394"
+  type:"function"
+  top:"Node_394"
+  bottom:"p0_20"
+  bottom:"p1_17"
+  bottom:"p2_7"
+  bottom:"Node_393"
+  layer_param {
+    idx:394
+    in_0 {name:"p0:0",dtype:int8,shape:[1, 32, 14, 14, 8]}
+    in_1 {name:"p1:0",dtype:int32,shape:[1, 32, 1, 1, 8]}
+    in_2 {name:"p2:0",dtype:int32,shape:[1, 32, 1, 1, 8]}
+    in_3 {name:"Node_393:0",dtype:int8,shape:[1, 32, 14, 14, 8]}
+    out_0 {name:"Node_394:0",dtype:int8,shape:[1, 32, 14, 14, 8]}
+  }
+}
+layer {
+  name:"p0_21"
+  type:"input"
+  top:"p0_21"
+  layer_param {
+    idx:395
+    out_0 {name:"p0:0",dtype:int8,shape:[1, 32, 14, 14, 8]}
+  }
+}
+layer {
+  name:"p1_18"
+  type:"input"
+  top:"p1_18"
+  layer_param {
+    idx:396
+    out_0 {name:"p1:0",dtype:int8,shape:[32, 32, 3, 3, 8, 8]}
+  }
+}
+layer {
+  name:"Node_405"
+  type:"nn_contrib_conv2d_NCHWc"
+  top:"Node_405"
+  bottom:"p0_21"
+  bottom:"p1_18"
+  layer_param {
+    idx:405
+    in_0 {name:"p0:0",dtype:int8,shape:[1, 32, 14, 14, 8]}
+    in_1 {name:"p1:0",dtype:int8,shape:[32, 32, 3, 3, 8, 8]}
+    out_0 {name:"Node_405:0",dtype:int32,shape:[1, 32, 14, 14, 8]}
+    attrs {'strides': [1, 1], 'padding': [1, 1, 1, 1], 'dilation': [1, 1], 'groups': 1, 'channels': 256, 'kernel_size': [3, 3], 'data_layout': 'NCHW8c', 'kernel_layout': 'OIHW8i8o', 'out_layout': 'NCHW8c', 'out_dtype': 'int32'}
+  }
+}
+layer {
+  name:"Node_406"
+  type:"cast"
+  top:"Node_406"
+  bottom:"Node_405"
+  layer_param {
+    idx:406
+    in_0 {name:"Node_405:0",dtype:int32,shape:[1, 32, 14, 14, 8]}
+    out_0 {name:"Node_406:0",dtype:int64,shape:[1, 32, 14, 14, 8]}
+    attrs {'dtype': 'int64'}
+  }
+}
+layer {
+  name:"Node_407"
+  type:"fixed_point_multiply"
+  top:"Node_407"
+  bottom:"Node_406"
+  layer_param {
+    idx:407
+    in_0 {name:"Node_406:0",dtype:int64,shape:[1, 32, 14, 14, 8]}
+    out_0 {name:"Node_407:0",dtype:int64,shape:[1, 32, 14, 14, 8]}
+  }
+}
+layer {
+  name:"Node_408"
+  type:"clip"
+  top:"Node_408"
+  bottom:"Node_407"
+  layer_param {
+    idx:408
+    in_0 {name:"Node_407:0",dtype:int64,shape:[1, 32, 14, 14, 8]}
+    out_0 {name:"Node_408:0",dtype:int64,shape:[1, 32, 14, 14, 8]}
+    attrs {'a_min': -127.0, 'a_max': 127.0}
+  }
+}
+layer {
+  name:"Node_409"
+  type:"cast"
+  top:"Node_409"
+  bottom:"Node_408"
+  layer_param {
+    idx:409
+    in_0 {name:"Node_408:0",dtype:int64,shape:[1, 32, 14, 14, 8]}
+    out_0 {name:"Node_409:0",dtype:int32,shape:[1, 32, 14, 14, 8]}
+    attrs {'dtype': 'int32'}
+  }
+}
+layer {
+  name:"Node_410"
+  type:"cast"
+  top:"Node_410"
+  bottom:"Node_409"
+  layer_param {
+    idx:410
+    in_0 {name:"Node_409:0",dtype:int32,shape:[1, 32, 14, 14, 8]}
+    out_0 {name:"Node_410:0",dtype:int8,shape:[1, 32, 14, 14, 8]}
+    attrs {'dtype': 'int8'}
+  }
+}
+layer {
+  name:"Node_411"
+  type:"function"
+  top:"Node_411"
+  bottom:"p0_21"
+  bottom:"p1_18"
+  bottom:"Node_410"
+  layer_param {
+    idx:411
+    in_0 {name:"p0:0",dtype:int8,shape:[1, 32, 14, 14, 8]}
+    in_1 {name:"p1:0",dtype:int8,shape:[32, 32, 3, 3, 8, 8]}
+    in_2 {name:"Node_410:0",dtype:int8,shape:[1, 32, 14, 14, 8]}
+    out_0 {name:"Node_411:0",dtype:int8,shape:[1, 32, 14, 14, 8]}
+  }
+}
+layer {
+  name:"p0_22"
+  type:"input"
+  top:"p0_22"
+  layer_param {
+    idx:412
+    out_0 {name:"p0:0",dtype:int8,shape:[1, 32, 14, 14, 8]}
+  }
+}
+layer {
+  name:"p1_19"
+  type:"input"
+  top:"p1_19"
+  layer_param {
+    idx:413
+    out_0 {name:"p1:0",dtype:int32,shape:[1, 32, 1, 1, 8]}
+  }
+}
+layer {
+  name:"p2_8"
+  type:"input"
+  top:"p2_8"
+  layer_param {
+    idx:414
+    out_0 {name:"p2:0",dtype:int32,shape:[1, 32, 1, 1, 8]}
+  }
+}
+layer {
+  name:"Node_425"
+  type:"cast"
+  top:"Node_425"
+  bottom:"p0_22"
+  layer_param {
+    idx:425
+    in_0 {name:"p0:0",dtype:int8,shape:[1, 32, 14, 14, 8]}
+    out_0 {name:"Node_425:0",dtype:int32,shape:[1, 32, 14, 14, 8]}
+    attrs {'dtype': 'int32'}
+  }
+}
+layer {
+  name:"Node_427"
+  type:"multiply"
+  top:"Node_427"
+  bottom:"Node_425"
+  bottom:"p1_19"
+  layer_param {
+    idx:427
+    in_0 {name:"Node_425:0",dtype:int32,shape:[1, 32, 14, 14, 8]}
+    in_1 {name:"p1:0",dtype:int32,shape:[1, 32, 1, 1, 8]}
+    out_0 {name:"Node_427:0",dtype:int32,shape:[1, 32, 14, 14, 8]}
+  }
+}
+layer {
+  name:"Node_429"
+  type:"add"
+  top:"Node_429"
+  bottom:"Node_427"
+  bottom:"p2_8"
+  layer_param {
+    idx:429
+    in_0 {name:"Node_427:0",dtype:int32,shape:[1, 32, 14, 14, 8]}
+    in_1 {name:"p2:0",dtype:int32,shape:[1, 32, 1, 1, 8]}
+    out_0 {name:"Node_429:0",dtype:int32,shape:[1, 32, 14, 14, 8]}
+  }
+}
+layer {
+  name:"Node_430"
+  type:"nn_relu"
+  top:"Node_430"
+  bottom:"Node_429"
+  layer_param {
+    idx:430
+    in_0 {name:"Node_429:0",dtype:int32,shape:[1, 32, 14, 14, 8]}
+    out_0 {name:"Node_430:0",dtype:int32,shape:[1, 32, 14, 14, 8]}
+  }
+}
+layer {
+  name:"Node_431"
+  type:"cast"
+  top:"Node_431"
+  bottom:"Node_430"
+  layer_param {
+    idx:431
+    in_0 {name:"Node_430:0",dtype:int32,shape:[1, 32, 14, 14, 8]}
+    out_0 {name:"Node_431:0",dtype:int64,shape:[1, 32, 14, 14, 8]}
+    attrs {'dtype': 'int64'}
+  }
+}
+layer {
+  name:"Node_432"
+  type:"fixed_point_multiply"
+  top:"Node_432"
+  bottom:"Node_431"
+  layer_param {
+    idx:432
+    in_0 {name:"Node_431:0",dtype:int64,shape:[1, 32, 14, 14, 8]}
+    out_0 {name:"Node_432:0",dtype:int64,shape:[1, 32, 14, 14, 8]}
+  }
+}
+layer {
+  name:"Node_433"
+  type:"clip"
+  top:"Node_433"
+  bottom:"Node_432"
+  layer_param {
+    idx:433
+    in_0 {name:"Node_432:0",dtype:int64,shape:[1, 32, 14, 14, 8]}
+    out_0 {name:"Node_433:0",dtype:int64,shape:[1, 32, 14, 14, 8]}
+    attrs {'a_min': -127.0, 'a_max': 127.0}
+  }
+}
+layer {
+  name:"Node_434"
+  type:"cast"
+  top:"Node_434"
+  bottom:"Node_433"
+  layer_param {
+    idx:434
+    in_0 {name:"Node_433:0",dtype:int64,shape:[1, 32, 14, 14, 8]}
+    out_0 {name:"Node_434:0",dtype:int32,shape:[1, 32, 14, 14, 8]}
+    attrs {'dtype': 'int32'}
+  }
+}
+layer {
+  name:"Node_435"
+  type:"cast"
+  top:"Node_435"
+  bottom:"Node_434"
+  layer_param {
+    idx:435
+    in_0 {name:"Node_434:0",dtype:int32,shape:[1, 32, 14, 14, 8]}
+    out_0 {name:"Node_435:0",dtype:int8,shape:[1, 32, 14, 14, 8]}
+    attrs {'dtype': 'int8'}
+  }
+}
+layer {
+  name:"Node_436"
+  type:"function"
+  top:"Node_436"
+  bottom:"p0_22"
+  bottom:"p1_19"
+  bottom:"p2_8"
+  bottom:"Node_435"
+  layer_param {
+    idx:436
+    in_0 {name:"p0:0",dtype:int8,shape:[1, 32, 14, 14, 8]}
+    in_1 {name:"p1:0",dtype:int32,shape:[1, 32, 1, 1, 8]}
+    in_2 {name:"p2:0",dtype:int32,shape:[1, 32, 1, 1, 8]}
+    in_3 {name:"Node_435:0",dtype:int8,shape:[1, 32, 14, 14, 8]}
+    out_0 {name:"Node_436:0",dtype:int8,shape:[1, 32, 14, 14, 8]}
+  }
+}
+layer {
+  name:"p0_23"
+  type:"input"
+  top:"p0_23"
+  layer_param {
+    idx:437
+    out_0 {name:"p0:0",dtype:int8,shape:[1, 16, 28, 28, 8]}
+  }
+}
+layer {
+  name:"p1_20"
+  type:"input"
+  top:"p1_20"
+  layer_param {
+    idx:438
+    out_0 {name:"p1:0",dtype:int8,shape:[32, 16, 3, 3, 8, 8]}
+  }
+}
+layer {
+  name:"Node_447"
+  type:"nn_contrib_conv2d_NCHWc"
+  top:"Node_447"
+  bottom:"p0_23"
+  bottom:"p1_20"
+  layer_param {
+    idx:447
+    in_0 {name:"p0:0",dtype:int8,shape:[1, 16, 28, 28, 8]}
+    in_1 {name:"p1:0",dtype:int8,shape:[32, 16, 3, 3, 8, 8]}
+    out_0 {name:"Node_447:0",dtype:int32,shape:[1, 32, 14, 14, 8]}
+    attrs {'strides': [2, 2], 'padding': [1, 1, 1, 1], 'dilation': [1, 1], 'groups': 1, 'channels': 256, 'kernel_size': [3, 3], 'data_layout': 'NCHW8c', 'kernel_layout': 'OIHW8i8o', 'out_layout': 'NCHW8c', 'out_dtype': 'int32'}
+  }
+}
+layer {
+  name:"Node_448"
+  type:"cast"
+  top:"Node_448"
+  bottom:"Node_447"
+  layer_param {
+    idx:448
+    in_0 {name:"Node_447:0",dtype:int32,shape:[1, 32, 14, 14, 8]}
+    out_0 {name:"Node_448:0",dtype:int64,shape:[1, 32, 14, 14, 8]}
+    attrs {'dtype': 'int64'}
+  }
+}
+layer {
+  name:"Node_449"
+  type:"fixed_point_multiply"
+  top:"Node_449"
+  bottom:"Node_448"
+  layer_param {
+    idx:449
+    in_0 {name:"Node_448:0",dtype:int64,shape:[1, 32, 14, 14, 8]}
+    out_0 {name:"Node_449:0",dtype:int64,shape:[1, 32, 14, 14, 8]}
+  }
+}
+layer {
+  name:"Node_450"
+  type:"clip"
+  top:"Node_450"
+  bottom:"Node_449"
+  layer_param {
+    idx:450
+    in_0 {name:"Node_449:0",dtype:int64,shape:[1, 32, 14, 14, 8]}
+    out_0 {name:"Node_450:0",dtype:int64,shape:[1, 32, 14, 14, 8]}
+    attrs {'a_min': -127.0, 'a_max': 127.0}
+  }
+}
+layer {
+  name:"Node_451"
+  type:"cast"
+  top:"Node_451"
+  bottom:"Node_450"
+  layer_param {
+    idx:451
+    in_0 {name:"Node_450:0",dtype:int64,shape:[1, 32, 14, 14, 8]}
+    out_0 {name:"Node_451:0",dtype:int32,shape:[1, 32, 14, 14, 8]}
+    attrs {'dtype': 'int32'}
+  }
+}
+layer {
+  name:"Node_452"
+  type:"cast"
+  top:"Node_452"
+  bottom:"Node_451"
+  layer_param {
+    idx:452
+    in_0 {name:"Node_451:0",dtype:int32,shape:[1, 32, 14, 14, 8]}
+    out_0 {name:"Node_452:0",dtype:int8,shape:[1, 32, 14, 14, 8]}
+    attrs {'dtype': 'int8'}
+  }
+}
+layer {
+  name:"Node_453"
+  type:"function"
+  top:"Node_453"
+  bottom:"p0_23"
+  bottom:"p1_20"
+  bottom:"Node_452"
+  layer_param {
+    idx:453
+    in_0 {name:"p0:0",dtype:int8,shape:[1, 16, 28, 28, 8]}
+    in_1 {name:"p1:0",dtype:int8,shape:[32, 16, 3, 3, 8, 8]}
+    in_2 {name:"Node_452:0",dtype:int8,shape:[1, 32, 14, 14, 8]}
+    out_0 {name:"Node_453:0",dtype:int8,shape:[1, 32, 14, 14, 8]}
+  }
+}
+layer {
+  name:"p0_24"
+  type:"input"
+  top:"p0_24"
+  layer_param {
+    idx:454
+    out_0 {name:"p0:0",dtype:int8,shape:[1, 16, 28, 28, 8]}
+  }
+}
+layer {
+  name:"p1_21"
+  type:"input"
+  top:"p1_21"
+  layer_param {
+    idx:455
+    out_0 {name:"p1:0",dtype:int8,shape:[1, 16, 28, 28, 8]}
+  }
+}
+layer {
+  name:"Node_465"
+  type:"cast"
+  top:"Node_465"
+  bottom:"p0_24"
+  layer_param {
+    idx:465
+    in_0 {name:"p0:0",dtype:int8,shape:[1, 16, 28, 28, 8]}
+    out_0 {name:"Node_465:0",dtype:int32,shape:[1, 16, 28, 28, 8]}
+    attrs {'dtype': 'int32'}
+  }
+}
+layer {
+  name:"Node_469"
+  type:"cast"
+  top:"Node_469"
+  bottom:"p1_21"
+  layer_param {
+    idx:469
+    in_0 {name:"p1:0",dtype:int8,shape:[1, 16, 28, 28, 8]}
+    out_0 {name:"Node_469:0",dtype:int32,shape:[1, 16, 28, 28, 8]}
+    attrs {'dtype': 'int32'}
+  }
+}
+layer {
+  name:"Node_470"
+  type:"fixed_point_multiply"
+  top:"Node_470"
+  bottom:"Node_469"
+  layer_param {
+    idx:470
+    in_0 {name:"Node_469:0",dtype:int32,shape:[1, 16, 28, 28, 8]}
+    out_0 {name:"Node_470:0",dtype:int32,shape:[1, 16, 28, 28, 8]}
+  }
+}
+layer {
+  name:"Node_471"
+  type:"add"
+  top:"Node_471"
+  bottom:"Node_465"
+  bottom:"Node_470"
+  layer_param {
+    idx:471
+    in_0 {name:"Node_465:0",dtype:int32,shape:[1, 16, 28, 28, 8]}
+    in_1 {name:"Node_470:0",dtype:int32,shape:[1, 16, 28, 28, 8]}
+    out_0 {name:"Node_471:0",dtype:int32,shape:[1, 16, 28, 28, 8]}
+  }
+}
+layer {
+  name:"Node_472"
+  type:"nn_relu"
+  top:"Node_472"
+  bottom:"Node_471"
+  layer_param {
+    idx:472
+    in_0 {name:"Node_471:0",dtype:int32,shape:[1, 16, 28, 28, 8]}
+    out_0 {name:"Node_472:0",dtype:int32,shape:[1, 16, 28, 28, 8]}
+  }
+}
+layer {
+  name:"Node_473"
+  type:"cast"
+  top:"Node_473"
+  bottom:"Node_472"
+  layer_param {
+    idx:473
+    in_0 {name:"Node_472:0",dtype:int32,shape:[1, 16, 28, 28, 8]}
+    out_0 {name:"Node_473:0",dtype:int64,shape:[1, 16, 28, 28, 8]}
+    attrs {'dtype': 'int64'}
+  }
+}
+layer {
+  name:"Node_474"
+  type:"fixed_point_multiply"
+  top:"Node_474"
+  bottom:"Node_473"
+  layer_param {
+    idx:474
+    in_0 {name:"Node_473:0",dtype:int64,shape:[1, 16, 28, 28, 8]}
+    out_0 {name:"Node_474:0",dtype:int64,shape:[1, 16, 28, 28, 8]}
+  }
+}
+layer {
+  name:"Node_475"
+  type:"clip"
+  top:"Node_475"
+  bottom:"Node_474"
+  layer_param {
+    idx:475
+    in_0 {name:"Node_474:0",dtype:int64,shape:[1, 16, 28, 28, 8]}
+    out_0 {name:"Node_475:0",dtype:int64,shape:[1, 16, 28, 28, 8]}
+    attrs {'a_min': -127.0, 'a_max': 127.0}
+  }
+}
+layer {
+  name:"Node_476"
+  type:"cast"
+  top:"Node_476"
+  bottom:"Node_475"
+  layer_param {
+    idx:476
+    in_0 {name:"Node_475:0",dtype:int64,shape:[1, 16, 28, 28, 8]}
+    out_0 {name:"Node_476:0",dtype:int32,shape:[1, 16, 28, 28, 8]}
+    attrs {'dtype': 'int32'}
+  }
+}
+layer {
+  name:"Node_477"
+  type:"cast"
+  top:"Node_477"
+  bottom:"Node_476"
+  layer_param {
+    idx:477
+    in_0 {name:"Node_476:0",dtype:int32,shape:[1, 16, 28, 28, 8]}
+    out_0 {name:"Node_477:0",dtype:int8,shape:[1, 16, 28, 28, 8]}
+    attrs {'dtype': 'int8'}
+  }
+}
+layer {
+  name:"Node_478"
+  type:"function"
+  top:"Node_478"
+  bottom:"p0_24"
+  bottom:"p1_21"
+  bottom:"Node_477"
+  layer_param {
+    idx:478
+    in_0 {name:"p0:0",dtype:int8,shape:[1, 16, 28, 28, 8]}
+    in_1 {name:"p1:0",dtype:int8,shape:[1, 16, 28, 28, 8]}
+    in_2 {name:"Node_477:0",dtype:int8,shape:[1, 16, 28, 28, 8]}
+    out_0 {name:"Node_478:0",dtype:int8,shape:[1, 16, 28, 28, 8]}
+  }
+}
+layer {
+  name:"p0_25"
+  type:"input"
+  top:"p0_25"
+  layer_param {
+    idx:479
+    out_0 {name:"p0:0",dtype:int8,shape:[1, 16, 28, 28, 8]}
+  }
+}
+layer {
+  name:"p1_22"
+  type:"input"
+  top:"p1_22"
+  layer_param {
+    idx:480
+    out_0 {name:"p1:0",dtype:int32,shape:[1, 16, 1, 1, 8]}
+  }
+}
+layer {
+  name:"p2_9"
+  type:"input"
+  top:"p2_9"
+  layer_param {
+    idx:481
+    out_0 {name:"p2:0",dtype:int32,shape:[1, 16, 1, 1, 8]}
+  }
+}
+layer {
+  name:"Node_491"
+  type:"cast"
+  top:"Node_491"
+  bottom:"p0_25"
+  layer_param {
+    idx:491
+    in_0 {name:"p0:0",dtype:int8,shape:[1, 16, 28, 28, 8]}
+    out_0 {name:"Node_491:0",dtype:int32,shape:[1, 16, 28, 28, 8]}
+    attrs {'dtype': 'int32'}
+  }
+}
+layer {
+  name:"Node_493"
+  type:"multiply"
+  top:"Node_493"
+  bottom:"Node_491"
+  bottom:"p1_22"
+  layer_param {
+    idx:493
+    in_0 {name:"Node_491:0",dtype:int32,shape:[1, 16, 28, 28, 8]}
+    in_1 {name:"p1:0",dtype:int32,shape:[1, 16, 1, 1, 8]}
+    out_0 {name:"Node_493:0",dtype:int32,shape:[1, 16, 28, 28, 8]}
+  }
+}
+layer {
+  name:"Node_495"
+  type:"add"
+  top:"Node_495"
+  bottom:"Node_493"
+  bottom:"p2_9"
+  layer_param {
+    idx:495
+    in_0 {name:"Node_493:0",dtype:int32,shape:[1, 16, 28, 28, 8]}
+    in_1 {name:"p2:0",dtype:int32,shape:[1, 16, 1, 1, 8]}
+    out_0 {name:"Node_495:0",dtype:int32,shape:[1, 16, 28, 28, 8]}
+  }
+}
+layer {
+  name:"Node_496"
+  type:"cast"
+  top:"Node_496"
+  bottom:"Node_495"
+  layer_param {
+    idx:496
+    in_0 {name:"Node_495:0",dtype:int32,shape:[1, 16, 28, 28, 8]}
+    out_0 {name:"Node_496:0",dtype:int64,shape:[1, 16, 28, 28, 8]}
+    attrs {'dtype': 'int64'}
+  }
+}
+layer {
+  name:"Node_497"
+  type:"fixed_point_multiply"
+  top:"Node_497"
+  bottom:"Node_496"
+  layer_param {
+    idx:497
+    in_0 {name:"Node_496:0",dtype:int64,shape:[1, 16, 28, 28, 8]}
+    out_0 {name:"Node_497:0",dtype:int64,shape:[1, 16, 28, 28, 8]}
+  }
+}
+layer {
+  name:"Node_498"
+  type:"clip"
+  top:"Node_498"
+  bottom:"Node_497"
+  layer_param {
+    idx:498
+    in_0 {name:"Node_497:0",dtype:int64,shape:[1, 16, 28, 28, 8]}
+    out_0 {name:"Node_498:0",dtype:int64,shape:[1, 16, 28, 28, 8]}
+    attrs {'a_min': -127.0, 'a_max': 127.0}
+  }
+}
+layer {
+  name:"Node_499"
+  type:"cast"
+  top:"Node_499"
+  bottom:"Node_498"
+  layer_param {
+    idx:499
+    in_0 {name:"Node_498:0",dtype:int64,shape:[1, 16, 28, 28, 8]}
+    out_0 {name:"Node_499:0",dtype:int32,shape:[1, 16, 28, 28, 8]}
+    attrs {'dtype': 'int32'}
+  }
+}
+layer {
+  name:"Node_500"
+  type:"cast"
+  top:"Node_500"
+  bottom:"Node_499"
+  layer_param {
+    idx:500
+    in_0 {name:"Node_499:0",dtype:int32,shape:[1, 16, 28, 28, 8]}
+    out_0 {name:"Node_500:0",dtype:int8,shape:[1, 16, 28, 28, 8]}
+    attrs {'dtype': 'int8'}
+  }
+}
+layer {
+  name:"Node_501"
+  type:"function"
+  top:"Node_501"
+  bottom:"p0_25"
+  bottom:"p1_22"
+  bottom:"p2_9"
+  bottom:"Node_500"
+  layer_param {
+    idx:501
+    in_0 {name:"p0:0",dtype:int8,shape:[1, 16, 28, 28, 8]}
+    in_1 {name:"p1:0",dtype:int32,shape:[1, 16, 1, 1, 8]}
+    in_2 {name:"p2:0",dtype:int32,shape:[1, 16, 1, 1, 8]}
+    in_3 {name:"Node_500:0",dtype:int8,shape:[1, 16, 28, 28, 8]}
+    out_0 {name:"Node_501:0",dtype:int8,shape:[1, 16, 28, 28, 8]}
+  }
+}
+layer {
+  name:"p0_26"
+  type:"input"
+  top:"p0_26"
+  layer_param {
+    idx:502
+    out_0 {name:"p0:0",dtype:int8,shape:[1, 16, 28, 28, 8]}
+  }
+}
+layer {
+  name:"p1_23"
+  type:"input"
+  top:"p1_23"
+  layer_param {
+    idx:503
+    out_0 {name:"p1:0",dtype:int8,shape:[16, 16, 3, 3, 8, 8]}
+  }
+}
+layer {
+  name:"Node_512"
+  type:"nn_contrib_conv2d_NCHWc"
+  top:"Node_512"
+  bottom:"p0_26"
+  bottom:"p1_23"
+  layer_param {
+    idx:512
+    in_0 {name:"p0:0",dtype:int8,shape:[1, 16, 28, 28, 8]}
+    in_1 {name:"p1:0",dtype:int8,shape:[16, 16, 3, 3, 8, 8]}
+    out_0 {name:"Node_512:0",dtype:int32,shape:[1, 16, 28, 28, 8]}
+    attrs {'strides': [1, 1], 'padding': [1, 1, 1, 1], 'dilation': [1, 1], 'groups': 1, 'channels': 128, 'kernel_size': [3, 3], 'data_layout': 'NCHW8c', 'kernel_layout': 'OIHW8i8o', 'out_layout': 'NCHW8c', 'out_dtype': 'int32'}
+  }
+}
+layer {
+  name:"Node_513"
+  type:"cast"
+  top:"Node_513"
+  bottom:"Node_512"
+  layer_param {
+    idx:513
+    in_0 {name:"Node_512:0",dtype:int32,shape:[1, 16, 28, 28, 8]}
+    out_0 {name:"Node_513:0",dtype:int64,shape:[1, 16, 28, 28, 8]}
+    attrs {'dtype': 'int64'}
+  }
+}
+layer {
+  name:"Node_514"
+  type:"fixed_point_multiply"
+  top:"Node_514"
+  bottom:"Node_513"
+  layer_param {
+    idx:514
+    in_0 {name:"Node_513:0",dtype:int64,shape:[1, 16, 28, 28, 8]}
+    out_0 {name:"Node_514:0",dtype:int64,shape:[1, 16, 28, 28, 8]}
+  }
+}
+layer {
+  name:"Node_515"
+  type:"clip"
+  top:"Node_515"
+  bottom:"Node_514"
+  layer_param {
+    idx:515
+    in_0 {name:"Node_514:0",dtype:int64,shape:[1, 16, 28, 28, 8]}
+    out_0 {name:"Node_515:0",dtype:int64,shape:[1, 16, 28, 28, 8]}
+    attrs {'a_min': -127.0, 'a_max': 127.0}
+  }
+}
+layer {
+  name:"Node_516"
+  type:"cast"
+  top:"Node_516"
+  bottom:"Node_515"
+  layer_param {
+    idx:516
+    in_0 {name:"Node_515:0",dtype:int64,shape:[1, 16, 28, 28, 8]}
+    out_0 {name:"Node_516:0",dtype:int32,shape:[1, 16, 28, 28, 8]}
+    attrs {'dtype': 'int32'}
+  }
+}
+layer {
+  name:"Node_517"
+  type:"cast"
+  top:"Node_517"
+  bottom:"Node_516"
+  layer_param {
+    idx:517
+    in_0 {name:"Node_516:0",dtype:int32,shape:[1, 16, 28, 28, 8]}
+    out_0 {name:"Node_517:0",dtype:int8,shape:[1, 16, 28, 28, 8]}
+    attrs {'dtype': 'int8'}
+  }
+}
+layer {
+  name:"Node_518"
+  type:"function"
+  top:"Node_518"
+  bottom:"p0_26"
+  bottom:"p1_23"
+  bottom:"Node_517"
+  layer_param {
+    idx:518
+    in_0 {name:"p0:0",dtype:int8,shape:[1, 16, 28, 28, 8]}
+    in_1 {name:"p1:0",dtype:int8,shape:[16, 16, 3, 3, 8, 8]}
+    in_2 {name:"Node_517:0",dtype:int8,shape:[1, 16, 28, 28, 8]}
+    out_0 {name:"Node_518:0",dtype:int8,shape:[1, 16, 28, 28, 8]}
+  }
+}
+layer {
+  name:"p0_27"
+  type:"input"
+  top:"p0_27"
+  layer_param {
+    idx:519
+    out_0 {name:"p0:0",dtype:int8,shape:[1, 16, 28, 28, 8]}
+  }
+}
+layer {
+  name:"p1_24"
+  type:"input"
+  top:"p1_24"
+  layer_param {
+    idx:520
+    out_0 {name:"p1:0",dtype:int32,shape:[1, 16, 1, 1, 8]}
+  }
+}
+layer {
+  name:"p2_10"
+  type:"input"
+  top:"p2_10"
+  layer_param {
+    idx:521
+    out_0 {name:"p2:0",dtype:int32,shape:[1, 16, 1, 1, 8]}
+  }
+}
+layer {
+  name:"Node_532"
+  type:"cast"
+  top:"Node_532"
+  bottom:"p0_27"
+  layer_param {
+    idx:532
+    in_0 {name:"p0:0",dtype:int8,shape:[1, 16, 28, 28, 8]}
+    out_0 {name:"Node_532:0",dtype:int32,shape:[1, 16, 28, 28, 8]}
+    attrs {'dtype': 'int32'}
+  }
+}
+layer {
+  name:"Node_534"
+  type:"multiply"
+  top:"Node_534"
+  bottom:"Node_532"
+  bottom:"p1_24"
+  layer_param {
+    idx:534
+    in_0 {name:"Node_532:0",dtype:int32,shape:[1, 16, 28, 28, 8]}
+    in_1 {name:"p1:0",dtype:int32,shape:[1, 16, 1, 1, 8]}
+    out_0 {name:"Node_534:0",dtype:int32,shape:[1, 16, 28, 28, 8]}
+  }
+}
+layer {
+  name:"Node_536"
+  type:"add"
+  top:"Node_536"
+  bottom:"Node_534"
+  bottom:"p2_10"
+  layer_param {
+    idx:536
+    in_0 {name:"Node_534:0",dtype:int32,shape:[1, 16, 28, 28, 8]}
+    in_1 {name:"p2:0",dtype:int32,shape:[1, 16, 1, 1, 8]}
+    out_0 {name:"Node_536:0",dtype:int32,shape:[1, 16, 28, 28, 8]}
+  }
+}
+layer {
+  name:"Node_537"
+  type:"nn_relu"
+  top:"Node_537"
+  bottom:"Node_536"
+  layer_param {
+    idx:537
+    in_0 {name:"Node_536:0",dtype:int32,shape:[1, 16, 28, 28, 8]}
+    out_0 {name:"Node_537:0",dtype:int32,shape:[1, 16, 28, 28, 8]}
+  }
+}
+layer {
+  name:"Node_538"
+  type:"cast"
+  top:"Node_538"
+  bottom:"Node_537"
+  layer_param {
+    idx:538
+    in_0 {name:"Node_537:0",dtype:int32,shape:[1, 16, 28, 28, 8]}
+    out_0 {name:"Node_538:0",dtype:int64,shape:[1, 16, 28, 28, 8]}
+    attrs {'dtype': 'int64'}
+  }
+}
+layer {
+  name:"Node_539"
+  type:"fixed_point_multiply"
+  top:"Node_539"
+  bottom:"Node_538"
+  layer_param {
+    idx:539
+    in_0 {name:"Node_538:0",dtype:int64,shape:[1, 16, 28, 28, 8]}
+    out_0 {name:"Node_539:0",dtype:int64,shape:[1, 16, 28, 28, 8]}
+  }
+}
+layer {
+  name:"Node_540"
+  type:"clip"
+  top:"Node_540"
+  bottom:"Node_539"
+  layer_param {
+    idx:540
+    in_0 {name:"Node_539:0",dtype:int64,shape:[1, 16, 28, 28, 8]}
+    out_0 {name:"Node_540:0",dtype:int64,shape:[1, 16, 28, 28, 8]}
+    attrs {'a_min': -127.0, 'a_max': 127.0}
+  }
+}
+layer {
+  name:"Node_541"
+  type:"cast"
+  top:"Node_541"
+  bottom:"Node_540"
+  layer_param {
+    idx:541
+    in_0 {name:"Node_540:0",dtype:int64,shape:[1, 16, 28, 28, 8]}
+    out_0 {name:"Node_541:0",dtype:int32,shape:[1, 16, 28, 28, 8]}
+    attrs {'dtype': 'int32'}
+  }
+}
+layer {
+  name:"Node_542"
+  type:"cast"
+  top:"Node_542"
+  bottom:"Node_541"
+  layer_param {
+    idx:542
+    in_0 {name:"Node_541:0",dtype:int32,shape:[1, 16, 28, 28, 8]}
+    out_0 {name:"Node_542:0",dtype:int8,shape:[1, 16, 28, 28, 8]}
+    attrs {'dtype': 'int8'}
+  }
+}
+layer {
+  name:"Node_543"
+  type:"function"
+  top:"Node_543"
+  bottom:"p0_27"
+  bottom:"p1_24"
+  bottom:"p2_10"
+  bottom:"Node_542"
+  layer_param {
+    idx:543
+    in_0 {name:"p0:0",dtype:int8,shape:[1, 16, 28, 28, 8]}
+    in_1 {name:"p1:0",dtype:int32,shape:[1, 16, 1, 1, 8]}
+    in_2 {name:"p2:0",dtype:int32,shape:[1, 16, 1, 1, 8]}
+    in_3 {name:"Node_542:0",dtype:int8,shape:[1, 16, 28, 28, 8]}
+    out_0 {name:"Node_543:0",dtype:int8,shape:[1, 16, 28, 28, 8]}
+  }
+}
+layer {
+  name:"p0_28"
+  type:"input"
+  top:"p0_28"
+  layer_param {
+    idx:544
+    out_0 {name:"p0:0",dtype:int8,shape:[1, 16, 28, 28, 8]}
+  }
+}
+layer {
+  name:"p1_25"
+  type:"input"
+  top:"p1_25"
+  layer_param {
+    idx:545
+    out_0 {name:"p1:0",dtype:int8,shape:[16, 16, 3, 3, 8, 8]}
+  }
+}
+layer {
+  name:"Node_554"
+  type:"nn_contrib_conv2d_NCHWc"
+  top:"Node_554"
+  bottom:"p0_28"
+  bottom:"p1_25"
+  layer_param {
+    idx:554
+    in_0 {name:"p0:0",dtype:int8,shape:[1, 16, 28, 28, 8]}
+    in_1 {name:"p1:0",dtype:int8,shape:[16, 16, 3, 3, 8, 8]}
+    out_0 {name:"Node_554:0",dtype:int32,shape:[1, 16, 28, 28, 8]}
+    attrs {'strides': [1, 1], 'padding': [1, 1, 1, 1], 'dilation': [1, 1], 'groups': 1, 'channels': 128, 'kernel_size': [3, 3], 'data_layout': 'NCHW8c', 'kernel_layout': 'OIHW8i8o', 'out_layout': 'NCHW8c', 'out_dtype': 'int32'}
+  }
+}
+layer {
+  name:"Node_555"
+  type:"cast"
+  top:"Node_555"
+  bottom:"Node_554"
+  layer_param {
+    idx:555
+    in_0 {name:"Node_554:0",dtype:int32,shape:[1, 16, 28, 28, 8]}
+    out_0 {name:"Node_555:0",dtype:int64,shape:[1, 16, 28, 28, 8]}
+    attrs {'dtype': 'int64'}
+  }
+}
+layer {
+  name:"Node_556"
+  type:"fixed_point_multiply"
+  top:"Node_556"
+  bottom:"Node_555"
+  layer_param {
+    idx:556
+    in_0 {name:"Node_555:0",dtype:int64,shape:[1, 16, 28, 28, 8]}
+    out_0 {name:"Node_556:0",dtype:int64,shape:[1, 16, 28, 28, 8]}
+  }
+}
+layer {
+  name:"Node_557"
+  type:"clip"
+  top:"Node_557"
+  bottom:"Node_556"
+  layer_param {
+    idx:557
+    in_0 {name:"Node_556:0",dtype:int64,shape:[1, 16, 28, 28, 8]}
+    out_0 {name:"Node_557:0",dtype:int64,shape:[1, 16, 28, 28, 8]}
+    attrs {'a_min': -127.0, 'a_max': 127.0}
+  }
+}
+layer {
+  name:"Node_558"
+  type:"cast"
+  top:"Node_558"
+  bottom:"Node_557"
+  layer_param {
+    idx:558
+    in_0 {name:"Node_557:0",dtype:int64,shape:[1, 16, 28, 28, 8]}
+    out_0 {name:"Node_558:0",dtype:int32,shape:[1, 16, 28, 28, 8]}
+    attrs {'dtype': 'int32'}
+  }
+}
+layer {
+  name:"Node_559"
+  type:"cast"
+  top:"Node_559"
+  bottom:"Node_558"
+  layer_param {
+    idx:559
+    in_0 {name:"Node_558:0",dtype:int32,shape:[1, 16, 28, 28, 8]}
+    out_0 {name:"Node_559:0",dtype:int8,shape:[1, 16, 28, 28, 8]}
+    attrs {'dtype': 'int8'}
+  }
+}
+layer {
+  name:"Node_560"
+  type:"function"
+  top:"Node_560"
+  bottom:"p0_28"
+  bottom:"p1_25"
+  bottom:"Node_559"
+  layer_param {
+    idx:560
+    in_0 {name:"p0:0",dtype:int8,shape:[1, 16, 28, 28, 8]}
+    in_1 {name:"p1:0",dtype:int8,shape:[16, 16, 3, 3, 8, 8]}
+    in_2 {name:"Node_559:0",dtype:int8,shape:[1, 16, 28, 28, 8]}
+    out_0 {name:"Node_560:0",dtype:int8,shape:[1, 16, 28, 28, 8]}
+  }
+}
+layer {
+  name:"p0_29"
+  type:"input"
+  top:"p0_29"
+  layer_param {
+    idx:561
+    out_0 {name:"p0:0",dtype:int8,shape:[1, 16, 28, 28, 8]}
+  }
+}
+layer {
+  name:"p1_26"
+  type:"input"
+  top:"p1_26"
+  layer_param {
+    idx:562
+    out_0 {name:"p1:0",dtype:int8,shape:[1, 16, 28, 28, 8]}
+  }
+}
+layer {
+  name:"Node_573"
+  type:"cast"
+  top:"Node_573"
+  bottom:"p0_29"
+  layer_param {
+    idx:573
+    in_0 {name:"p0:0",dtype:int8,shape:[1, 16, 28, 28, 8]}
+    out_0 {name:"Node_573:0",dtype:int32,shape:[1, 16, 28, 28, 8]}
+    attrs {'dtype': 'int32'}
+  }
+}
+layer {
+  name:"Node_574"
+  type:"fixed_point_multiply"
+  top:"Node_574"
+  bottom:"Node_573"
+  layer_param {
+    idx:574
+    in_0 {name:"Node_573:0",dtype:int32,shape:[1, 16, 28, 28, 8]}
+    out_0 {name:"Node_574:0",dtype:int32,shape:[1, 16, 28, 28, 8]}
+  }
+}
+layer {
+  name:"Node_577"
+  type:"cast"
+  top:"Node_577"
+  bottom:"p1_26"
+  layer_param {
+    idx:577
+    in_0 {name:"p1:0",dtype:int8,shape:[1, 16, 28, 28, 8]}
+    out_0 {name:"Node_577:0",dtype:int32,shape:[1, 16, 28, 28, 8]}
+    attrs {'dtype': 'int32'}
+  }
+}
+layer {
+  name:"Node_578"
+  type:"add"
+  top:"Node_578"
+  bottom:"Node_574"
+  bottom:"Node_577"
+  layer_param {
+    idx:578
+    in_0 {name:"Node_574:0",dtype:int32,shape:[1, 16, 28, 28, 8]}
+    in_1 {name:"Node_577:0",dtype:int32,shape:[1, 16, 28, 28, 8]}
+    out_0 {name:"Node_578:0",dtype:int32,shape:[1, 16, 28, 28, 8]}
+  }
+}
+layer {
+  name:"Node_579"
+  type:"nn_relu"
+  top:"Node_579"
+  bottom:"Node_578"
+  layer_param {
+    idx:579
+    in_0 {name:"Node_578:0",dtype:int32,shape:[1, 16, 28, 28, 8]}
+    out_0 {name:"Node_579:0",dtype:int32,shape:[1, 16, 28, 28, 8]}
+  }
+}
+layer {
+  name:"Node_580"
+  type:"cast"
+  top:"Node_580"
+  bottom:"Node_579"
+  layer_param {
+    idx:580
+    in_0 {name:"Node_579:0",dtype:int32,shape:[1, 16, 28, 28, 8]}
+    out_0 {name:"Node_580:0",dtype:int64,shape:[1, 16, 28, 28, 8]}
+    attrs {'dtype': 'int64'}
+  }
+}
+layer {
+  name:"Node_581"
+  type:"fixed_point_multiply"
+  top:"Node_581"
+  bottom:"Node_580"
+  layer_param {
+    idx:581
+    in_0 {name:"Node_580:0",dtype:int64,shape:[1, 16, 28, 28, 8]}
+    out_0 {name:"Node_581:0",dtype:int64,shape:[1, 16, 28, 28, 8]}
+  }
+}
+layer {
+  name:"Node_582"
+  type:"clip"
+  top:"Node_582"
+  bottom:"Node_581"
+  layer_param {
+    idx:582
+    in_0 {name:"Node_581:0",dtype:int64,shape:[1, 16, 28, 28, 8]}
+    out_0 {name:"Node_582:0",dtype:int64,shape:[1, 16, 28, 28, 8]}
+    attrs {'a_min': -127.0, 'a_max': 127.0}
+  }
+}
+layer {
+  name:"Node_583"
+  type:"cast"
+  top:"Node_583"
+  bottom:"Node_582"
+  layer_param {
+    idx:583
+    in_0 {name:"Node_582:0",dtype:int64,shape:[1, 16, 28, 28, 8]}
+    out_0 {name:"Node_583:0",dtype:int32,shape:[1, 16, 28, 28, 8]}
+    attrs {'dtype': 'int32'}
+  }
+}
+layer {
+  name:"Node_584"
+  type:"cast"
+  top:"Node_584"
+  bottom:"Node_583"
+  layer_param {
+    idx:584
+    in_0 {name:"Node_583:0",dtype:int32,shape:[1, 16, 28, 28, 8]}
+    out_0 {name:"Node_584:0",dtype:int8,shape:[1, 16, 28, 28, 8]}
+    attrs {'dtype': 'int8'}
+  }
+}
+layer {
+  name:"Node_585"
+  type:"function"
+  top:"Node_585"
+  bottom:"p0_29"
+  bottom:"p1_26"
+  bottom:"Node_584"
+  layer_param {
+    idx:585
+    in_0 {name:"p0:0",dtype:int8,shape:[1, 16, 28, 28, 8]}
+    in_1 {name:"p1:0",dtype:int8,shape:[1, 16, 28, 28, 8]}
+    in_2 {name:"Node_584:0",dtype:int8,shape:[1, 16, 28, 28, 8]}
+    out_0 {name:"Node_585:0",dtype:int8,shape:[1, 16, 28, 28, 8]}
+  }
+}
+layer {
+  name:"p0_30"
+  type:"input"
+  top:"p0_30"
+  layer_param {
+    idx:586
+    out_0 {name:"p0:0",dtype:int8,shape:[1, 16, 28, 28, 8]}
+  }
+}
+layer {
+  name:"p1_27"
+  type:"input"
+  top:"p1_27"
+  layer_param {
+    idx:587
+    out_0 {name:"p1:0",dtype:int32,shape:[1, 16, 1, 1, 8]}
+  }
+}
+layer {
+  name:"p2_11"
+  type:"input"
+  top:"p2_11"
+  layer_param {
+    idx:588
+    out_0 {name:"p2:0",dtype:int32,shape:[1, 16, 1, 1, 8]}
+  }
+}
+layer {
+  name:"Node_598"
+  type:"cast"
+  top:"Node_598"
+  bottom:"p0_30"
+  layer_param {
+    idx:598
+    in_0 {name:"p0:0",dtype:int8,shape:[1, 16, 28, 28, 8]}
+    out_0 {name:"Node_598:0",dtype:int32,shape:[1, 16, 28, 28, 8]}
+    attrs {'dtype': 'int32'}
+  }
+}
+layer {
+  name:"Node_600"
+  type:"multiply"
+  top:"Node_600"
+  bottom:"Node_598"
+  bottom:"p1_27"
+  layer_param {
+    idx:600
+    in_0 {name:"Node_598:0",dtype:int32,shape:[1, 16, 28, 28, 8]}
+    in_1 {name:"p1:0",dtype:int32,shape:[1, 16, 1, 1, 8]}
+    out_0 {name:"Node_600:0",dtype:int32,shape:[1, 16, 28, 28, 8]}
+  }
+}
+layer {
+  name:"Node_602"
+  type:"add"
+  top:"Node_602"
+  bottom:"Node_600"
+  bottom:"p2_11"
+  layer_param {
+    idx:602
+    in_0 {name:"Node_600:0",dtype:int32,shape:[1, 16, 28, 28, 8]}
+    in_1 {name:"p2:0",dtype:int32,shape:[1, 16, 1, 1, 8]}
+    out_0 {name:"Node_602:0",dtype:int32,shape:[1, 16, 28, 28, 8]}
+  }
+}
+layer {
+  name:"Node_603"
+  type:"cast"
+  top:"Node_603"
+  bottom:"Node_602"
+  layer_param {
+    idx:603
+    in_0 {name:"Node_602:0",dtype:int32,shape:[1, 16, 28, 28, 8]}
+    out_0 {name:"Node_603:0",dtype:int64,shape:[1, 16, 28, 28, 8]}
+    attrs {'dtype': 'int64'}
+  }
+}
+layer {
+  name:"Node_604"
+  type:"fixed_point_multiply"
+  top:"Node_604"
+  bottom:"Node_603"
+  layer_param {
+    idx:604
+    in_0 {name:"Node_603:0",dtype:int64,shape:[1, 16, 28, 28, 8]}
+    out_0 {name:"Node_604:0",dtype:int64,shape:[1, 16, 28, 28, 8]}
+  }
+}
+layer {
+  name:"Node_605"
+  type:"clip"
+  top:"Node_605"
+  bottom:"Node_604"
+  layer_param {
+    idx:605
+    in_0 {name:"Node_604:0",dtype:int64,shape:[1, 16, 28, 28, 8]}
+    out_0 {name:"Node_605:0",dtype:int64,shape:[1, 16, 28, 28, 8]}
+    attrs {'a_min': -127.0, 'a_max': 127.0}
+  }
+}
+layer {
+  name:"Node_606"
+  type:"cast"
+  top:"Node_606"
+  bottom:"Node_605"
+  layer_param {
+    idx:606
+    in_0 {name:"Node_605:0",dtype:int64,shape:[1, 16, 28, 28, 8]}
+    out_0 {name:"Node_606:0",dtype:int32,shape:[1, 16, 28, 28, 8]}
+    attrs {'dtype': 'int32'}
+  }
+}
+layer {
+  name:"Node_607"
+  type:"cast"
+  top:"Node_607"
+  bottom:"Node_606"
+  layer_param {
+    idx:607
+    in_0 {name:"Node_606:0",dtype:int32,shape:[1, 16, 28, 28, 8]}
+    out_0 {name:"Node_607:0",dtype:int8,shape:[1, 16, 28, 28, 8]}
+    attrs {'dtype': 'int8'}
+  }
+}
+layer {
+  name:"Node_608"
+  type:"function"
+  top:"Node_608"
+  bottom:"p0_30"
+  bottom:"p1_27"
+  bottom:"p2_11"
+  bottom:"Node_607"
+  layer_param {
+    idx:608
+    in_0 {name:"p0:0",dtype:int8,shape:[1, 16, 28, 28, 8]}
+    in_1 {name:"p1:0",dtype:int32,shape:[1, 16, 1, 1, 8]}
+    in_2 {name:"p2:0",dtype:int32,shape:[1, 16, 1, 1, 8]}
+    in_3 {name:"Node_607:0",dtype:int8,shape:[1, 16, 28, 28, 8]}
+    out_0 {name:"Node_608:0",dtype:int8,shape:[1, 16, 28, 28, 8]}
+  }
+}
+layer {
+  name:"p0_31"
+  type:"input"
+  top:"p0_31"
+  layer_param {
+    idx:609
+    out_0 {name:"p0:0",dtype:int8,shape:[1, 16, 28, 28, 8]}
+  }
+}
+layer {
+  name:"p1_28"
+  type:"input"
+  top:"p1_28"
+  layer_param {
+    idx:610
+    out_0 {name:"p1:0",dtype:int8,shape:[16, 16, 3, 3, 8, 8]}
+  }
+}
+layer {
+  name:"Node_619"
+  type:"nn_contrib_conv2d_NCHWc"
+  top:"Node_619"
+  bottom:"p0_31"
+  bottom:"p1_28"
+  layer_param {
+    idx:619
+    in_0 {name:"p0:0",dtype:int8,shape:[1, 16, 28, 28, 8]}
+    in_1 {name:"p1:0",dtype:int8,shape:[16, 16, 3, 3, 8, 8]}
+    out_0 {name:"Node_619:0",dtype:int32,shape:[1, 16, 28, 28, 8]}
+    attrs {'strides': [1, 1], 'padding': [1, 1, 1, 1], 'dilation': [1, 1], 'groups': 1, 'channels': 128, 'kernel_size': [3, 3], 'data_layout': 'NCHW8c', 'kernel_layout': 'OIHW8i8o', 'out_layout': 'NCHW8c', 'out_dtype': 'int32'}
+  }
+}
+layer {
+  name:"Node_620"
+  type:"cast"
+  top:"Node_620"
+  bottom:"Node_619"
+  layer_param {
+    idx:620
+    in_0 {name:"Node_619:0",dtype:int32,shape:[1, 16, 28, 28, 8]}
+    out_0 {name:"Node_620:0",dtype:int64,shape:[1, 16, 28, 28, 8]}
+    attrs {'dtype': 'int64'}
+  }
+}
+layer {
+  name:"Node_621"
+  type:"fixed_point_multiply"
+  top:"Node_621"
+  bottom:"Node_620"
+  layer_param {
+    idx:621
+    in_0 {name:"Node_620:0",dtype:int64,shape:[1, 16, 28, 28, 8]}
+    out_0 {name:"Node_621:0",dtype:int64,shape:[1, 16, 28, 28, 8]}
+  }
+}
+layer {
+  name:"Node_622"
+  type:"clip"
+  top:"Node_622"
+  bottom:"Node_621"
+  layer_param {
+    idx:622
+    in_0 {name:"Node_621:0",dtype:int64,shape:[1, 16, 28, 28, 8]}
+    out_0 {name:"Node_622:0",dtype:int64,shape:[1, 16, 28, 28, 8]}
+    attrs {'a_min': -127.0, 'a_max': 127.0}
+  }
+}
+layer {
+  name:"Node_623"
+  type:"cast"
+  top:"Node_623"
+  bottom:"Node_622"
+  layer_param {
+    idx:623
+    in_0 {name:"Node_622:0",dtype:int64,shape:[1, 16, 28, 28, 8]}
+    out_0 {name:"Node_623:0",dtype:int32,shape:[1, 16, 28, 28, 8]}
+    attrs {'dtype': 'int32'}
+  }
+}
+layer {
+  name:"Node_624"
+  type:"cast"
+  top:"Node_624"
+  bottom:"Node_623"
+  layer_param {
+    idx:624
+    in_0 {name:"Node_623:0",dtype:int32,shape:[1, 16, 28, 28, 8]}
+    out_0 {name:"Node_624:0",dtype:int8,shape:[1, 16, 28, 28, 8]}
+    attrs {'dtype': 'int8'}
+  }
+}
+layer {
+  name:"Node_625"
+  type:"function"
+  top:"Node_625"
+  bottom:"p0_31"
+  bottom:"p1_28"
+  bottom:"Node_624"
+  layer_param {
+    idx:625
+    in_0 {name:"p0:0",dtype:int8,shape:[1, 16, 28, 28, 8]}
+    in_1 {name:"p1:0",dtype:int8,shape:[16, 16, 3, 3, 8, 8]}
+    in_2 {name:"Node_624:0",dtype:int8,shape:[1, 16, 28, 28, 8]}
+    out_0 {name:"Node_625:0",dtype:int8,shape:[1, 16, 28, 28, 8]}
+  }
+}
+layer {
+  name:"p0_32"
+  type:"input"
+  top:"p0_32"
+  layer_param {
+    idx:626
+    out_0 {name:"p0:0",dtype:int8,shape:[1, 16, 28, 28, 8]}
+  }
+}
+layer {
+  name:"p1_29"
+  type:"input"
+  top:"p1_29"
+  layer_param {
+    idx:627
+    out_0 {name:"p1:0",dtype:int32,shape:[1, 16, 1, 1, 8]}
+  }
+}
+layer {
+  name:"p2_12"
+  type:"input"
+  top:"p2_12"
+  layer_param {
+    idx:628
+    out_0 {name:"p2:0",dtype:int32,shape:[1, 16, 1, 1, 8]}
+  }
+}
+layer {
+  name:"Node_639"
+  type:"cast"
+  top:"Node_639"
+  bottom:"p0_32"
+  layer_param {
+    idx:639
+    in_0 {name:"p0:0",dtype:int8,shape:[1, 16, 28, 28, 8]}
+    out_0 {name:"Node_639:0",dtype:int32,shape:[1, 16, 28, 28, 8]}
+    attrs {'dtype': 'int32'}
+  }
+}
+layer {
+  name:"Node_641"
+  type:"multiply"
+  top:"Node_641"
+  bottom:"Node_639"
+  bottom:"p1_29"
+  layer_param {
+    idx:641
+    in_0 {name:"Node_639:0",dtype:int32,shape:[1, 16, 28, 28, 8]}
+    in_1 {name:"p1:0",dtype:int32,shape:[1, 16, 1, 1, 8]}
+    out_0 {name:"Node_641:0",dtype:int32,shape:[1, 16, 28, 28, 8]}
+  }
+}
+layer {
+  name:"Node_643"
+  type:"add"
+  top:"Node_643"
+  bottom:"Node_641"
+  bottom:"p2_12"
+  layer_param {
+    idx:643
+    in_0 {name:"Node_641:0",dtype:int32,shape:[1, 16, 28, 28, 8]}
+    in_1 {name:"p2:0",dtype:int32,shape:[1, 16, 1, 1, 8]}
+    out_0 {name:"Node_643:0",dtype:int32,shape:[1, 16, 28, 28, 8]}
+  }
+}
+layer {
+  name:"Node_644"
+  type:"nn_relu"
+  top:"Node_644"
+  bottom:"Node_643"
+  layer_param {
+    idx:644
+    in_0 {name:"Node_643:0",dtype:int32,shape:[1, 16, 28, 28, 8]}
+    out_0 {name:"Node_644:0",dtype:int32,shape:[1, 16, 28, 28, 8]}
+  }
+}
+layer {
+  name:"Node_645"
+  type:"cast"
+  top:"Node_645"
+  bottom:"Node_644"
+  layer_param {
+    idx:645
+    in_0 {name:"Node_644:0",dtype:int32,shape:[1, 16, 28, 28, 8]}
+    out_0 {name:"Node_645:0",dtype:int64,shape:[1, 16, 28, 28, 8]}
+    attrs {'dtype': 'int64'}
+  }
+}
+layer {
+  name:"Node_646"
+  type:"fixed_point_multiply"
+  top:"Node_646"
+  bottom:"Node_645"
+  layer_param {
+    idx:646
+    in_0 {name:"Node_645:0",dtype:int64,shape:[1, 16, 28, 28, 8]}
+    out_0 {name:"Node_646:0",dtype:int64,shape:[1, 16, 28, 28, 8]}
+  }
+}
+layer {
+  name:"Node_647"
+  type:"clip"
+  top:"Node_647"
+  bottom:"Node_646"
+  layer_param {
+    idx:647
+    in_0 {name:"Node_646:0",dtype:int64,shape:[1, 16, 28, 28, 8]}
+    out_0 {name:"Node_647:0",dtype:int64,shape:[1, 16, 28, 28, 8]}
+    attrs {'a_min': -127.0, 'a_max': 127.0}
+  }
+}
+layer {
+  name:"Node_648"
+  type:"cast"
+  top:"Node_648"
+  bottom:"Node_647"
+  layer_param {
+    idx:648
+    in_0 {name:"Node_647:0",dtype:int64,shape:[1, 16, 28, 28, 8]}
+    out_0 {name:"Node_648:0",dtype:int32,shape:[1, 16, 28, 28, 8]}
+    attrs {'dtype': 'int32'}
+  }
+}
+layer {
+  name:"Node_649"
+  type:"cast"
+  top:"Node_649"
+  bottom:"Node_648"
+  layer_param {
+    idx:649
+    in_0 {name:"Node_648:0",dtype:int32,shape:[1, 16, 28, 28, 8]}
+    out_0 {name:"Node_649:0",dtype:int8,shape:[1, 16, 28, 28, 8]}
+    attrs {'dtype': 'int8'}
+  }
+}
+layer {
+  name:"Node_650"
+  type:"function"
+  top:"Node_650"
+  bottom:"p0_32"
+  bottom:"p1_29"
+  bottom:"p2_12"
+  bottom:"Node_649"
+  layer_param {
+    idx:650
+    in_0 {name:"p0:0",dtype:int8,shape:[1, 16, 28, 28, 8]}
+    in_1 {name:"p1:0",dtype:int32,shape:[1, 16, 1, 1, 8]}
+    in_2 {name:"p2:0",dtype:int32,shape:[1, 16, 1, 1, 8]}
+    in_3 {name:"Node_649:0",dtype:int8,shape:[1, 16, 28, 28, 8]}
+    out_0 {name:"Node_650:0",dtype:int8,shape:[1, 16, 28, 28, 8]}
+  }
+}
+layer {
+  name:"p0_33"
+  type:"input"
+  top:"p0_33"
+  layer_param {
+    idx:651
+    out_0 {name:"p0:0",dtype:int8,shape:[1, 8, 56, 56, 8]}
+  }
+}
+layer {
+  name:"p1_30"
+  type:"input"
+  top:"p1_30"
+  layer_param {
+    idx:652
+    out_0 {name:"p1:0",dtype:int8,shape:[16, 8, 3, 3, 8, 8]}
+  }
+}
+layer {
+  name:"Node_661"
+  type:"nn_contrib_conv2d_NCHWc"
+  top:"Node_661"
+  bottom:"p0_33"
+  bottom:"p1_30"
+  layer_param {
+    idx:661
+    in_0 {name:"p0:0",dtype:int8,shape:[1, 8, 56, 56, 8]}
+    in_1 {name:"p1:0",dtype:int8,shape:[16, 8, 3, 3, 8, 8]}
+    out_0 {name:"Node_661:0",dtype:int32,shape:[1, 16, 28, 28, 8]}
+    attrs {'strides': [2, 2], 'padding': [1, 1, 1, 1], 'dilation': [1, 1], 'groups': 1, 'channels': 128, 'kernel_size': [3, 3], 'data_layout': 'NCHW8c', 'kernel_layout': 'OIHW8i8o', 'out_layout': 'NCHW8c', 'out_dtype': 'int32'}
+  }
+}
+layer {
+  name:"Node_662"
+  type:"cast"
+  top:"Node_662"
+  bottom:"Node_661"
+  layer_param {
+    idx:662
+    in_0 {name:"Node_661:0",dtype:int32,shape:[1, 16, 28, 28, 8]}
+    out_0 {name:"Node_662:0",dtype:int64,shape:[1, 16, 28, 28, 8]}
+    attrs {'dtype': 'int64'}
+  }
+}
+layer {
+  name:"Node_663"
+  type:"fixed_point_multiply"
+  top:"Node_663"
+  bottom:"Node_662"
+  layer_param {
+    idx:663
+    in_0 {name:"Node_662:0",dtype:int64,shape:[1, 16, 28, 28, 8]}
+    out_0 {name:"Node_663:0",dtype:int64,shape:[1, 16, 28, 28, 8]}
+  }
+}
+layer {
+  name:"Node_664"
+  type:"clip"
+  top:"Node_664"
+  bottom:"Node_663"
+  layer_param {
+    idx:664
+    in_0 {name:"Node_663:0",dtype:int64,shape:[1, 16, 28, 28, 8]}
+    out_0 {name:"Node_664:0",dtype:int64,shape:[1, 16, 28, 28, 8]}
+    attrs {'a_min': -127.0, 'a_max': 127.0}
+  }
+}
+layer {
+  name:"Node_665"
+  type:"cast"
+  top:"Node_665"
+  bottom:"Node_664"
+  layer_param {
+    idx:665
+    in_0 {name:"Node_664:0",dtype:int64,shape:[1, 16, 28, 28, 8]}
+    out_0 {name:"Node_665:0",dtype:int32,shape:[1, 16, 28, 28, 8]}
+    attrs {'dtype': 'int32'}
+  }
+}
+layer {
+  name:"Node_666"
+  type:"cast"
+  top:"Node_666"
+  bottom:"Node_665"
+  layer_param {
+    idx:666
+    in_0 {name:"Node_665:0",dtype:int32,shape:[1, 16, 28, 28, 8]}
+    out_0 {name:"Node_666:0",dtype:int8,shape:[1, 16, 28, 28, 8]}
+    attrs {'dtype': 'int8'}
+  }
+}
+layer {
+  name:"Node_667"
+  type:"function"
+  top:"Node_667"
+  bottom:"p0_33"
+  bottom:"p1_30"
+  bottom:"Node_666"
+  layer_param {
+    idx:667
+    in_0 {name:"p0:0",dtype:int8,shape:[1, 8, 56, 56, 8]}
+    in_1 {name:"p1:0",dtype:int8,shape:[16, 8, 3, 3, 8, 8]}
+    in_2 {name:"Node_666:0",dtype:int8,shape:[1, 16, 28, 28, 8]}
+    out_0 {name:"Node_667:0",dtype:int8,shape:[1, 16, 28, 28, 8]}
+  }
+}
+layer {
+  name:"p0_34"
+  type:"input"
+  top:"p0_34"
+  layer_param {
+    idx:668
+    out_0 {name:"p0:0",dtype:int8,shape:[1, 8, 56, 56, 8]}
+  }
+}
+layer {
+  name:"p1_31"
+  type:"input"
+  top:"p1_31"
+  layer_param {
+    idx:669
+    out_0 {name:"p1:0",dtype:int8,shape:[1, 8, 56, 56, 8]}
+  }
+}
+layer {
+  name:"Node_679"
+  type:"cast"
+  top:"Node_679"
+  bottom:"p0_34"
+  layer_param {
+    idx:679
+    in_0 {name:"p0:0",dtype:int8,shape:[1, 8, 56, 56, 8]}
+    out_0 {name:"Node_679:0",dtype:int32,shape:[1, 8, 56, 56, 8]}
+    attrs {'dtype': 'int32'}
+  }
+}
+layer {
+  name:"Node_683"
+  type:"cast"
+  top:"Node_683"
+  bottom:"p1_31"
+  layer_param {
+    idx:683
+    in_0 {name:"p1:0",dtype:int8,shape:[1, 8, 56, 56, 8]}
+    out_0 {name:"Node_683:0",dtype:int32,shape:[1, 8, 56, 56, 8]}
+    attrs {'dtype': 'int32'}
+  }
+}
+layer {
+  name:"Node_684"
+  type:"fixed_point_multiply"
+  top:"Node_684"
+  bottom:"Node_683"
+  layer_param {
+    idx:684
+    in_0 {name:"Node_683:0",dtype:int32,shape:[1, 8, 56, 56, 8]}
+    out_0 {name:"Node_684:0",dtype:int32,shape:[1, 8, 56, 56, 8]}
+  }
+}
+layer {
+  name:"Node_685"
+  type:"add"
+  top:"Node_685"
+  bottom:"Node_679"
+  bottom:"Node_684"
+  layer_param {
+    idx:685
+    in_0 {name:"Node_679:0",dtype:int32,shape:[1, 8, 56, 56, 8]}
+    in_1 {name:"Node_684:0",dtype:int32,shape:[1, 8, 56, 56, 8]}
+    out_0 {name:"Node_685:0",dtype:int32,shape:[1, 8, 56, 56, 8]}
+  }
+}
+layer {
+  name:"Node_686"
+  type:"nn_relu"
+  top:"Node_686"
+  bottom:"Node_685"
+  layer_param {
+    idx:686
+    in_0 {name:"Node_685:0",dtype:int32,shape:[1, 8, 56, 56, 8]}
+    out_0 {name:"Node_686:0",dtype:int32,shape:[1, 8, 56, 56, 8]}
+  }
+}
+layer {
+  name:"Node_687"
+  type:"cast"
+  top:"Node_687"
+  bottom:"Node_686"
+  layer_param {
+    idx:687
+    in_0 {name:"Node_686:0",dtype:int32,shape:[1, 8, 56, 56, 8]}
+    out_0 {name:"Node_687:0",dtype:int64,shape:[1, 8, 56, 56, 8]}
+    attrs {'dtype': 'int64'}
+  }
+}
+layer {
+  name:"Node_688"
+  type:"fixed_point_multiply"
+  top:"Node_688"
+  bottom:"Node_687"
+  layer_param {
+    idx:688
+    in_0 {name:"Node_687:0",dtype:int64,shape:[1, 8, 56, 56, 8]}
+    out_0 {name:"Node_688:0",dtype:int64,shape:[1, 8, 56, 56, 8]}
+  }
+}
+layer {
+  name:"Node_689"
+  type:"clip"
+  top:"Node_689"
+  bottom:"Node_688"
+  layer_param {
+    idx:689
+    in_0 {name:"Node_688:0",dtype:int64,shape:[1, 8, 56, 56, 8]}
+    out_0 {name:"Node_689:0",dtype:int64,shape:[1, 8, 56, 56, 8]}
+    attrs {'a_min': -127.0, 'a_max': 127.0}
+  }
+}
+layer {
+  name:"Node_690"
+  type:"cast"
+  top:"Node_690"
+  bottom:"Node_689"
+  layer_param {
+    idx:690
+    in_0 {name:"Node_689:0",dtype:int64,shape:[1, 8, 56, 56, 8]}
+    out_0 {name:"Node_690:0",dtype:int32,shape:[1, 8, 56, 56, 8]}
+    attrs {'dtype': 'int32'}
+  }
+}
+layer {
+  name:"Node_691"
+  type:"cast"
+  top:"Node_691"
+  bottom:"Node_690"
+  layer_param {
+    idx:691
+    in_0 {name:"Node_690:0",dtype:int32,shape:[1, 8, 56, 56, 8]}
+    out_0 {name:"Node_691:0",dtype:int8,shape:[1, 8, 56, 56, 8]}
+    attrs {'dtype': 'int8'}
+  }
+}
+layer {
+  name:"Node_692"
+  type:"function"
+  top:"Node_692"
+  bottom:"p0_34"
+  bottom:"p1_31"
+  bottom:"Node_691"
+  layer_param {
+    idx:692
+    in_0 {name:"p0:0",dtype:int8,shape:[1, 8, 56, 56, 8]}
+    in_1 {name:"p1:0",dtype:int8,shape:[1, 8, 56, 56, 8]}
+    in_2 {name:"Node_691:0",dtype:int8,shape:[1, 8, 56, 56, 8]}
+    out_0 {name:"Node_692:0",dtype:int8,shape:[1, 8, 56, 56, 8]}
+  }
+}
+layer {
+  name:"p0_35"
+  type:"input"
+  top:"p0_35"
+  layer_param {
+    idx:693
+    out_0 {name:"p0:0",dtype:int8,shape:[1, 8, 56, 56, 8]}
+  }
+}
+layer {
+  name:"p1_32"
+  type:"input"
+  top:"p1_32"
+  layer_param {
+    idx:694
+    out_0 {name:"p1:0",dtype:int32,shape:[1, 8, 1, 1, 8]}
+  }
+}
+layer {
+  name:"p2_13"
+  type:"input"
+  top:"p2_13"
+  layer_param {
+    idx:695
+    out_0 {name:"p2:0",dtype:int32,shape:[1, 8, 1, 1, 8]}
+  }
+}
+layer {
+  name:"Node_705"
+  type:"cast"
+  top:"Node_705"
+  bottom:"p0_35"
+  layer_param {
+    idx:705
+    in_0 {name:"p0:0",dtype:int8,shape:[1, 8, 56, 56, 8]}
+    out_0 {name:"Node_705:0",dtype:int32,shape:[1, 8, 56, 56, 8]}
+    attrs {'dtype': 'int32'}
+  }
+}
+layer {
+  name:"Node_707"
+  type:"multiply"
+  top:"Node_707"
+  bottom:"Node_705"
+  bottom:"p1_32"
+  layer_param {
+    idx:707
+    in_0 {name:"Node_705:0",dtype:int32,shape:[1, 8, 56, 56, 8]}
+    in_1 {name:"p1:0",dtype:int32,shape:[1, 8, 1, 1, 8]}
+    out_0 {name:"Node_707:0",dtype:int32,shape:[1, 8, 56, 56, 8]}
+  }
+}
+layer {
+  name:"Node_709"
+  type:"add"
+  top:"Node_709"
+  bottom:"Node_707"
+  bottom:"p2_13"
+  layer_param {
+    idx:709
+    in_0 {name:"Node_707:0",dtype:int32,shape:[1, 8, 56, 56, 8]}
+    in_1 {name:"p2:0",dtype:int32,shape:[1, 8, 1, 1, 8]}
+    out_0 {name:"Node_709:0",dtype:int32,shape:[1, 8, 56, 56, 8]}
+  }
+}
+layer {
+  name:"Node_710"
+  type:"cast"
+  top:"Node_710"
+  bottom:"Node_709"
+  layer_param {
+    idx:710
+    in_0 {name:"Node_709:0",dtype:int32,shape:[1, 8, 56, 56, 8]}
+    out_0 {name:"Node_710:0",dtype:int64,shape:[1, 8, 56, 56, 8]}
+    attrs {'dtype': 'int64'}
+  }
+}
+layer {
+  name:"Node_711"
+  type:"fixed_point_multiply"
+  top:"Node_711"
+  bottom:"Node_710"
+  layer_param {
+    idx:711
+    in_0 {name:"Node_710:0",dtype:int64,shape:[1, 8, 56, 56, 8]}
+    out_0 {name:"Node_711:0",dtype:int64,shape:[1, 8, 56, 56, 8]}
+  }
+}
+layer {
+  name:"Node_712"
+  type:"clip"
+  top:"Node_712"
+  bottom:"Node_711"
+  layer_param {
+    idx:712
+    in_0 {name:"Node_711:0",dtype:int64,shape:[1, 8, 56, 56, 8]}
+    out_0 {name:"Node_712:0",dtype:int64,shape:[1, 8, 56, 56, 8]}
+    attrs {'a_min': -127.0, 'a_max': 127.0}
+  }
+}
+layer {
+  name:"Node_713"
+  type:"cast"
+  top:"Node_713"
+  bottom:"Node_712"
+  layer_param {
+    idx:713
+    in_0 {name:"Node_712:0",dtype:int64,shape:[1, 8, 56, 56, 8]}
+    out_0 {name:"Node_713:0",dtype:int32,shape:[1, 8, 56, 56, 8]}
+    attrs {'dtype': 'int32'}
+  }
+}
+layer {
+  name:"Node_714"
+  type:"cast"
+  top:"Node_714"
+  bottom:"Node_713"
+  layer_param {
+    idx:714
+    in_0 {name:"Node_713:0",dtype:int32,shape:[1, 8, 56, 56, 8]}
+    out_0 {name:"Node_714:0",dtype:int8,shape:[1, 8, 56, 56, 8]}
+    attrs {'dtype': 'int8'}
+  }
+}
+layer {
+  name:"Node_715"
+  type:"function"
+  top:"Node_715"
+  bottom:"p0_35"
+  bottom:"p1_32"
+  bottom:"p2_13"
+  bottom:"Node_714"
+  layer_param {
+    idx:715
+    in_0 {name:"p0:0",dtype:int8,shape:[1, 8, 56, 56, 8]}
+    in_1 {name:"p1:0",dtype:int32,shape:[1, 8, 1, 1, 8]}
+    in_2 {name:"p2:0",dtype:int32,shape:[1, 8, 1, 1, 8]}
+    in_3 {name:"Node_714:0",dtype:int8,shape:[1, 8, 56, 56, 8]}
+    out_0 {name:"Node_715:0",dtype:int8,shape:[1, 8, 56, 56, 8]}
+  }
+}
+layer {
+  name:"p0_36"
+  type:"input"
+  top:"p0_36"
+  layer_param {
+    idx:716
+    out_0 {name:"p0:0",dtype:int8,shape:[1, 8, 56, 56, 8]}
+  }
+}
+layer {
+  name:"p1_33"
+  type:"input"
+  top:"p1_33"
+  layer_param {
+    idx:717
+    out_0 {name:"p1:0",dtype:int8,shape:[8, 8, 3, 3, 8, 8]}
+  }
+}
+layer {
+  name:"Node_726"
+  type:"nn_contrib_conv2d_NCHWc"
+  top:"Node_726"
+  bottom:"p0_36"
+  bottom:"p1_33"
+  layer_param {
+    idx:726
+    in_0 {name:"p0:0",dtype:int8,shape:[1, 8, 56, 56, 8]}
+    in_1 {name:"p1:0",dtype:int8,shape:[8, 8, 3, 3, 8, 8]}
+    out_0 {name:"Node_726:0",dtype:int32,shape:[1, 8, 56, 56, 8]}
+    attrs {'strides': [1, 1], 'padding': [1, 1, 1, 1], 'dilation': [1, 1], 'groups': 1, 'channels': 64, 'kernel_size': [3, 3], 'data_layout': 'NCHW8c', 'kernel_layout': 'OIHW8i8o', 'out_layout': 'NCHW8c', 'out_dtype': 'int32'}
+  }
+}
+layer {
+  name:"Node_727"
+  type:"cast"
+  top:"Node_727"
+  bottom:"Node_726"
+  layer_param {
+    idx:727
+    in_0 {name:"Node_726:0",dtype:int32,shape:[1, 8, 56, 56, 8]}
+    out_0 {name:"Node_727:0",dtype:int64,shape:[1, 8, 56, 56, 8]}
+    attrs {'dtype': 'int64'}
+  }
+}
+layer {
+  name:"Node_728"
+  type:"fixed_point_multiply"
+  top:"Node_728"
+  bottom:"Node_727"
+  layer_param {
+    idx:728
+    in_0 {name:"Node_727:0",dtype:int64,shape:[1, 8, 56, 56, 8]}
+    out_0 {name:"Node_728:0",dtype:int64,shape:[1, 8, 56, 56, 8]}
+  }
+}
+layer {
+  name:"Node_729"
+  type:"clip"
+  top:"Node_729"
+  bottom:"Node_728"
+  layer_param {
+    idx:729
+    in_0 {name:"Node_728:0",dtype:int64,shape:[1, 8, 56, 56, 8]}
+    out_0 {name:"Node_729:0",dtype:int64,shape:[1, 8, 56, 56, 8]}
+    attrs {'a_min': -127.0, 'a_max': 127.0}
+  }
+}
+layer {
+  name:"Node_730"
+  type:"cast"
+  top:"Node_730"
+  bottom:"Node_729"
+  layer_param {
+    idx:730
+    in_0 {name:"Node_729:0",dtype:int64,shape:[1, 8, 56, 56, 8]}
+    out_0 {name:"Node_730:0",dtype:int32,shape:[1, 8, 56, 56, 8]}
+    attrs {'dtype': 'int32'}
+  }
+}
+layer {
+  name:"Node_731"
+  type:"cast"
+  top:"Node_731"
+  bottom:"Node_730"
+  layer_param {
+    idx:731
+    in_0 {name:"Node_730:0",dtype:int32,shape:[1, 8, 56, 56, 8]}
+    out_0 {name:"Node_731:0",dtype:int8,shape:[1, 8, 56, 56, 8]}
+    attrs {'dtype': 'int8'}
+  }
+}
+layer {
+  name:"Node_732"
+  type:"function"
+  top:"Node_732"
+  bottom:"p0_36"
+  bottom:"p1_33"
+  bottom:"Node_731"
+  layer_param {
+    idx:732
+    in_0 {name:"p0:0",dtype:int8,shape:[1, 8, 56, 56, 8]}
+    in_1 {name:"p1:0",dtype:int8,shape:[8, 8, 3, 3, 8, 8]}
+    in_2 {name:"Node_731:0",dtype:int8,shape:[1, 8, 56, 56, 8]}
+    out_0 {name:"Node_732:0",dtype:int8,shape:[1, 8, 56, 56, 8]}
+  }
+}
+layer {
+  name:"p0_37"
+  type:"input"
+  top:"p0_37"
+  layer_param {
+    idx:733
+    out_0 {name:"p0:0",dtype:int8,shape:[1, 8, 56, 56, 8]}
+  }
+}
+layer {
+  name:"p1_34"
+  type:"input"
+  top:"p1_34"
+  layer_param {
+    idx:734
+    out_0 {name:"p1:0",dtype:int32,shape:[1, 8, 1, 1, 8]}
+  }
+}
+layer {
+  name:"p2_14"
+  type:"input"
+  top:"p2_14"
+  layer_param {
+    idx:735
+    out_0 {name:"p2:0",dtype:int32,shape:[1, 8, 1, 1, 8]}
+  }
+}
+layer {
+  name:"Node_746"
+  type:"cast"
+  top:"Node_746"
+  bottom:"p0_37"
+  layer_param {
+    idx:746
+    in_0 {name:"p0:0",dtype:int8,shape:[1, 8, 56, 56, 8]}
+    out_0 {name:"Node_746:0",dtype:int32,shape:[1, 8, 56, 56, 8]}
+    attrs {'dtype': 'int32'}
+  }
+}
+layer {
+  name:"Node_748"
+  type:"multiply"
+  top:"Node_748"
+  bottom:"Node_746"
+  bottom:"p1_34"
+  layer_param {
+    idx:748
+    in_0 {name:"Node_746:0",dtype:int32,shape:[1, 8, 56, 56, 8]}
+    in_1 {name:"p1:0",dtype:int32,shape:[1, 8, 1, 1, 8]}
+    out_0 {name:"Node_748:0",dtype:int32,shape:[1, 8, 56, 56, 8]}
+  }
+}
+layer {
+  name:"Node_750"
+  type:"add"
+  top:"Node_750"
+  bottom:"Node_748"
+  bottom:"p2_14"
+  layer_param {
+    idx:750
+    in_0 {name:"Node_748:0",dtype:int32,shape:[1, 8, 56, 56, 8]}
+    in_1 {name:"p2:0",dtype:int32,shape:[1, 8, 1, 1, 8]}
+    out_0 {name:"Node_750:0",dtype:int32,shape:[1, 8, 56, 56, 8]}
+  }
+}
+layer {
+  name:"Node_751"
+  type:"nn_relu"
+  top:"Node_751"
+  bottom:"Node_750"
+  layer_param {
+    idx:751
+    in_0 {name:"Node_750:0",dtype:int32,shape:[1, 8, 56, 56, 8]}
+    out_0 {name:"Node_751:0",dtype:int32,shape:[1, 8, 56, 56, 8]}
+  }
+}
+layer {
+  name:"Node_752"
+  type:"cast"
+  top:"Node_752"
+  bottom:"Node_751"
+  layer_param {
+    idx:752
+    in_0 {name:"Node_751:0",dtype:int32,shape:[1, 8, 56, 56, 8]}
+    out_0 {name:"Node_752:0",dtype:int64,shape:[1, 8, 56, 56, 8]}
+    attrs {'dtype': 'int64'}
+  }
+}
+layer {
+  name:"Node_753"
+  type:"fixed_point_multiply"
+  top:"Node_753"
+  bottom:"Node_752"
+  layer_param {
+    idx:753
+    in_0 {name:"Node_752:0",dtype:int64,shape:[1, 8, 56, 56, 8]}
+    out_0 {name:"Node_753:0",dtype:int64,shape:[1, 8, 56, 56, 8]}
+  }
+}
+layer {
+  name:"Node_754"
+  type:"clip"
+  top:"Node_754"
+  bottom:"Node_753"
+  layer_param {
+    idx:754
+    in_0 {name:"Node_753:0",dtype:int64,shape:[1, 8, 56, 56, 8]}
+    out_0 {name:"Node_754:0",dtype:int64,shape:[1, 8, 56, 56, 8]}
+    attrs {'a_min': -127.0, 'a_max': 127.0}
+  }
+}
+layer {
+  name:"Node_755"
+  type:"cast"
+  top:"Node_755"
+  bottom:"Node_754"
+  layer_param {
+    idx:755
+    in_0 {name:"Node_754:0",dtype:int64,shape:[1, 8, 56, 56, 8]}
+    out_0 {name:"Node_755:0",dtype:int32,shape:[1, 8, 56, 56, 8]}
+    attrs {'dtype': 'int32'}
+  }
+}
+layer {
+  name:"Node_756"
+  type:"cast"
+  top:"Node_756"
+  bottom:"Node_755"
+  layer_param {
+    idx:756
+    in_0 {name:"Node_755:0",dtype:int32,shape:[1, 8, 56, 56, 8]}
+    out_0 {name:"Node_756:0",dtype:int8,shape:[1, 8, 56, 56, 8]}
+    attrs {'dtype': 'int8'}
+  }
+}
+layer {
+  name:"Node_757"
+  type:"function"
+  top:"Node_757"
+  bottom:"p0_37"
+  bottom:"p1_34"
+  bottom:"p2_14"
+  bottom:"Node_756"
+  layer_param {
+    idx:757
+    in_0 {name:"p0:0",dtype:int8,shape:[1, 8, 56, 56, 8]}
+    in_1 {name:"p1:0",dtype:int32,shape:[1, 8, 1, 1, 8]}
+    in_2 {name:"p2:0",dtype:int32,shape:[1, 8, 1, 1, 8]}
+    in_3 {name:"Node_756:0",dtype:int8,shape:[1, 8, 56, 56, 8]}
+    out_0 {name:"Node_757:0",dtype:int8,shape:[1, 8, 56, 56, 8]}
+  }
+}
+layer {
+  name:"p0_38"
+  type:"input"
+  top:"p0_38"
+  layer_param {
+    idx:758
+    out_0 {name:"p0:0",dtype:int8,shape:[1, 8, 56, 56, 8]}
+  }
+}
+layer {
+  name:"p1_35"
+  type:"input"
+  top:"p1_35"
+  layer_param {
+    idx:759
+    out_0 {name:"p1:0",dtype:int8,shape:[8, 8, 3, 3, 8, 8]}
+  }
+}
+layer {
+  name:"Node_768"
+  type:"nn_contrib_conv2d_NCHWc"
+  top:"Node_768"
+  bottom:"p0_38"
+  bottom:"p1_35"
+  layer_param {
+    idx:768
+    in_0 {name:"p0:0",dtype:int8,shape:[1, 8, 56, 56, 8]}
+    in_1 {name:"p1:0",dtype:int8,shape:[8, 8, 3, 3, 8, 8]}
+    out_0 {name:"Node_768:0",dtype:int32,shape:[1, 8, 56, 56, 8]}
+    attrs {'strides': [1, 1], 'padding': [1, 1, 1, 1], 'dilation': [1, 1], 'groups': 1, 'channels': 64, 'kernel_size': [3, 3], 'data_layout': 'NCHW8c', 'kernel_layout': 'OIHW8i8o', 'out_layout': 'NCHW8c', 'out_dtype': 'int32'}
+  }
+}
+layer {
+  name:"Node_769"
+  type:"cast"
+  top:"Node_769"
+  bottom:"Node_768"
+  layer_param {
+    idx:769
+    in_0 {name:"Node_768:0",dtype:int32,shape:[1, 8, 56, 56, 8]}
+    out_0 {name:"Node_769:0",dtype:int64,shape:[1, 8, 56, 56, 8]}
+    attrs {'dtype': 'int64'}
+  }
+}
+layer {
+  name:"Node_770"
+  type:"fixed_point_multiply"
+  top:"Node_770"
+  bottom:"Node_769"
+  layer_param {
+    idx:770
+    in_0 {name:"Node_769:0",dtype:int64,shape:[1, 8, 56, 56, 8]}
+    out_0 {name:"Node_770:0",dtype:int64,shape:[1, 8, 56, 56, 8]}
+  }
+}
+layer {
+  name:"Node_771"
+  type:"clip"
+  top:"Node_771"
+  bottom:"Node_770"
+  layer_param {
+    idx:771
+    in_0 {name:"Node_770:0",dtype:int64,shape:[1, 8, 56, 56, 8]}
+    out_0 {name:"Node_771:0",dtype:int64,shape:[1, 8, 56, 56, 8]}
+    attrs {'a_min': -127.0, 'a_max': 127.0}
+  }
+}
+layer {
+  name:"Node_772"
+  type:"cast"
+  top:"Node_772"
+  bottom:"Node_771"
+  layer_param {
+    idx:772
+    in_0 {name:"Node_771:0",dtype:int64,shape:[1, 8, 56, 56, 8]}
+    out_0 {name:"Node_772:0",dtype:int32,shape:[1, 8, 56, 56, 8]}
+    attrs {'dtype': 'int32'}
+  }
+}
+layer {
+  name:"Node_773"
+  type:"cast"
+  top:"Node_773"
+  bottom:"Node_772"
+  layer_param {
+    idx:773
+    in_0 {name:"Node_772:0",dtype:int32,shape:[1, 8, 56, 56, 8]}
+    out_0 {name:"Node_773:0",dtype:int8,shape:[1, 8, 56, 56, 8]}
+    attrs {'dtype': 'int8'}
+  }
+}
+layer {
+  name:"Node_774"
+  type:"function"
+  top:"Node_774"
+  bottom:"p0_38"
+  bottom:"p1_35"
+  bottom:"Node_773"
+  layer_param {
+    idx:774
+    in_0 {name:"p0:0",dtype:int8,shape:[1, 8, 56, 56, 8]}
+    in_1 {name:"p1:0",dtype:int8,shape:[8, 8, 3, 3, 8, 8]}
+    in_2 {name:"Node_773:0",dtype:int8,shape:[1, 8, 56, 56, 8]}
+    out_0 {name:"Node_774:0",dtype:int8,shape:[1, 8, 56, 56, 8]}
+  }
+}
+layer {
+  name:"p0_39"
+  type:"input"
+  top:"p0_39"
+  layer_param {
+    idx:775
+    out_0 {name:"p0:0",dtype:int8,shape:[1, 8, 56, 56, 8]}
+  }
+}
+layer {
+  name:"p1_36"
+  type:"input"
+  top:"p1_36"
+  layer_param {
+    idx:776
+    out_0 {name:"p1:0",dtype:int32,shape:[1, 2, 56, 56, 32]}
+  }
+}
+layer {
+  name:"Node_787"
+  type:"cast"
+  top:"Node_787"
+  bottom:"p0_39"
+  layer_param {
+    idx:787
+    in_0 {name:"p0:0",dtype:int8,shape:[1, 8, 56, 56, 8]}
+    out_0 {name:"Node_787:0",dtype:int32,shape:[1, 8, 56, 56, 8]}
+    attrs {'dtype': 'int32'}
+  }
+}
+layer {
+  name:"Node_788"
+  type:"fixed_point_multiply"
+  top:"Node_788"
+  bottom:"Node_787"
+  layer_param {
+    idx:788
+    in_0 {name:"Node_787:0",dtype:int32,shape:[1, 8, 56, 56, 8]}
+    out_0 {name:"Node_788:0",dtype:int32,shape:[1, 8, 56, 56, 8]}
+  }
+}
+layer {
+  name:"Node_791"
+  type:"layout_transform"
+  top:"Node_791"
+  bottom:"p1_36"
+  layer_param {
+    idx:791
+    in_0 {name:"p1:0",dtype:int32,shape:[1, 2, 56, 56, 32]}
+    out_0 {name:"Node_791:0",dtype:int32,shape:[1, 8, 56, 56, 8]}
+    attrs {'src_layout': 'NCHW32c', 'dst_layout': 'NCHW8c'}
+  }
+}
+layer {
+  name:"Node_792"
+  type:"add"
+  top:"Node_792"
+  bottom:"Node_788"
+  bottom:"Node_791"
+  layer_param {
+    idx:792
+    in_0 {name:"Node_788:0",dtype:int32,shape:[1, 8, 56, 56, 8]}
+    in_1 {name:"Node_791:0",dtype:int32,shape:[1, 8, 56, 56, 8]}
+    out_0 {name:"Node_792:0",dtype:int32,shape:[1, 8, 56, 56, 8]}
+  }
+}
+layer {
+  name:"Node_793"
+  type:"nn_relu"
+  top:"Node_793"
+  bottom:"Node_792"
+  layer_param {
+    idx:793
+    in_0 {name:"Node_792:0",dtype:int32,shape:[1, 8, 56, 56, 8]}
+    out_0 {name:"Node_793:0",dtype:int32,shape:[1, 8, 56, 56, 8]}
+  }
+}
+layer {
+  name:"Node_794"
+  type:"cast"
+  top:"Node_794"
+  bottom:"Node_793"
+  layer_param {
+    idx:794
+    in_0 {name:"Node_793:0",dtype:int32,shape:[1, 8, 56, 56, 8]}
+    out_0 {name:"Node_794:0",dtype:int64,shape:[1, 8, 56, 56, 8]}
+    attrs {'dtype': 'int64'}
+  }
+}
+layer {
+  name:"Node_795"
+  type:"fixed_point_multiply"
+  top:"Node_795"
+  bottom:"Node_794"
+  layer_param {
+    idx:795
+    in_0 {name:"Node_794:0",dtype:int64,shape:[1, 8, 56, 56, 8]}
+    out_0 {name:"Node_795:0",dtype:int64,shape:[1, 8, 56, 56, 8]}
+  }
+}
+layer {
+  name:"Node_796"
+  type:"clip"
+  top:"Node_796"
+  bottom:"Node_795"
+  layer_param {
+    idx:796
+    in_0 {name:"Node_795:0",dtype:int64,shape:[1, 8, 56, 56, 8]}
+    out_0 {name:"Node_796:0",dtype:int64,shape:[1, 8, 56, 56, 8]}
+    attrs {'a_min': -127.0, 'a_max': 127.0}
+  }
+}
+layer {
+  name:"Node_797"
+  type:"cast"
+  top:"Node_797"
+  bottom:"Node_796"
+  layer_param {
+    idx:797
+    in_0 {name:"Node_796:0",dtype:int64,shape:[1, 8, 56, 56, 8]}
+    out_0 {name:"Node_797:0",dtype:int32,shape:[1, 8, 56, 56, 8]}
+    attrs {'dtype': 'int32'}
+  }
+}
+layer {
+  name:"Node_798"
+  type:"cast"
+  top:"Node_798"
+  bottom:"Node_797"
+  layer_param {
+    idx:798
+    in_0 {name:"Node_797:0",dtype:int32,shape:[1, 8, 56, 56, 8]}
+    out_0 {name:"Node_798:0",dtype:int8,shape:[1, 8, 56, 56, 8]}
+    attrs {'dtype': 'int8'}
+  }
+}
+layer {
+  name:"Node_799"
+  type:"function"
+  top:"Node_799"
+  bottom:"p0_39"
+  bottom:"p1_36"
+  bottom:"Node_798"
+  layer_param {
+    idx:799
+    in_0 {name:"p0:0",dtype:int8,shape:[1, 8, 56, 56, 8]}
+    in_1 {name:"p1:0",dtype:int32,shape:[1, 2, 56, 56, 32]}
+    in_2 {name:"Node_798:0",dtype:int8,shape:[1, 8, 56, 56, 8]}
+    out_0 {name:"Node_799:0",dtype:int8,shape:[1, 8, 56, 56, 8]}
+  }
+}
+layer {
+  name:"p0_40"
+  type:"input"
+  top:"p0_40"
+  layer_param {
+    idx:800
+    out_0 {name:"p0:0",dtype:int8,shape:[1, 8, 56, 56, 8]}
+  }
+}
+layer {
+  name:"p1_37"
+  type:"input"
+  top:"p1_37"
+  layer_param {
+    idx:801
+    out_0 {name:"p1:0",dtype:int32,shape:[1, 8, 1, 1, 8]}
+  }
+}
+layer {
+  name:"p2_15"
+  type:"input"
+  top:"p2_15"
+  layer_param {
+    idx:802
+    out_0 {name:"p2:0",dtype:int32,shape:[1, 8, 1, 1, 8]}
+  }
+}
+layer {
+  name:"Node_812"
+  type:"cast"
+  top:"Node_812"
+  bottom:"p0_40"
+  layer_param {
+    idx:812
+    in_0 {name:"p0:0",dtype:int8,shape:[1, 8, 56, 56, 8]}
+    out_0 {name:"Node_812:0",dtype:int32,shape:[1, 8, 56, 56, 8]}
+    attrs {'dtype': 'int32'}
+  }
+}
+layer {
+  name:"Node_814"
+  type:"multiply"
+  top:"Node_814"
+  bottom:"Node_812"
+  bottom:"p1_37"
+  layer_param {
+    idx:814
+    in_0 {name:"Node_812:0",dtype:int32,shape:[1, 8, 56, 56, 8]}
+    in_1 {name:"p1:0",dtype:int32,shape:[1, 8, 1, 1, 8]}
+    out_0 {name:"Node_814:0",dtype:int32,shape:[1, 8, 56, 56, 8]}
+  }
+}
+layer {
+  name:"Node_816"
+  type:"add"
+  top:"Node_816"
+  bottom:"Node_814"
+  bottom:"p2_15"
+  layer_param {
+    idx:816
+    in_0 {name:"Node_814:0",dtype:int32,shape:[1, 8, 56, 56, 8]}
+    in_1 {name:"p2:0",dtype:int32,shape:[1, 8, 1, 1, 8]}
+    out_0 {name:"Node_816:0",dtype:int32,shape:[1, 8, 56, 56, 8]}
+  }
+}
+layer {
+  name:"Node_817"
+  type:"cast"
+  top:"Node_817"
+  bottom:"Node_816"
+  layer_param {
+    idx:817
+    in_0 {name:"Node_816:0",dtype:int32,shape:[1, 8, 56, 56, 8]}
+    out_0 {name:"Node_817:0",dtype:int64,shape:[1, 8, 56, 56, 8]}
+    attrs {'dtype': 'int64'}
+  }
+}
+layer {
+  name:"Node_818"
+  type:"fixed_point_multiply"
+  top:"Node_818"
+  bottom:"Node_817"
+  layer_param {
+    idx:818
+    in_0 {name:"Node_817:0",dtype:int64,shape:[1, 8, 56, 56, 8]}
+    out_0 {name:"Node_818:0",dtype:int64,shape:[1, 8, 56, 56, 8]}
+  }
+}
+layer {
+  name:"Node_819"
+  type:"clip"
+  top:"Node_819"
+  bottom:"Node_818"
+  layer_param {
+    idx:819
+    in_0 {name:"Node_818:0",dtype:int64,shape:[1, 8, 56, 56, 8]}
+    out_0 {name:"Node_819:0",dtype:int64,shape:[1, 8, 56, 56, 8]}
+    attrs {'a_min': -127.0, 'a_max': 127.0}
+  }
+}
+layer {
+  name:"Node_820"
+  type:"cast"
+  top:"Node_820"
+  bottom:"Node_819"
+  layer_param {
+    idx:820
+    in_0 {name:"Node_819:0",dtype:int64,shape:[1, 8, 56, 56, 8]}
+    out_0 {name:"Node_820:0",dtype:int32,shape:[1, 8, 56, 56, 8]}
+    attrs {'dtype': 'int32'}
+  }
+}
+layer {
+  name:"Node_821"
+  type:"cast"
+  top:"Node_821"
+  bottom:"Node_820"
+  layer_param {
+    idx:821
+    in_0 {name:"Node_820:0",dtype:int32,shape:[1, 8, 56, 56, 8]}
+    out_0 {name:"Node_821:0",dtype:int8,shape:[1, 8, 56, 56, 8]}
+    attrs {'dtype': 'int8'}
+  }
+}
+layer {
+  name:"Node_822"
+  type:"function"
+  top:"Node_822"
+  bottom:"p0_40"
+  bottom:"p1_37"
+  bottom:"p2_15"
+  bottom:"Node_821"
+  layer_param {
+    idx:822
+    in_0 {name:"p0:0",dtype:int8,shape:[1, 8, 56, 56, 8]}
+    in_1 {name:"p1:0",dtype:int32,shape:[1, 8, 1, 1, 8]}
+    in_2 {name:"p2:0",dtype:int32,shape:[1, 8, 1, 1, 8]}
+    in_3 {name:"Node_821:0",dtype:int8,shape:[1, 8, 56, 56, 8]}
+    out_0 {name:"Node_822:0",dtype:int8,shape:[1, 8, 56, 56, 8]}
+  }
+}
+layer {
+  name:"p0_41"
+  type:"input"
+  top:"p0_41"
+  layer_param {
+    idx:823
+    out_0 {name:"p0:0",dtype:int8,shape:[1, 8, 56, 56, 8]}
+  }
+}
+layer {
+  name:"p1_38"
+  type:"input"
+  top:"p1_38"
+  layer_param {
+    idx:824
+    out_0 {name:"p1:0",dtype:int8,shape:[8, 8, 3, 3, 8, 8]}
+  }
+}
+layer {
+  name:"Node_833"
+  type:"nn_contrib_conv2d_NCHWc"
+  top:"Node_833"
+  bottom:"p0_41"
+  bottom:"p1_38"
+  layer_param {
+    idx:833
+    in_0 {name:"p0:0",dtype:int8,shape:[1, 8, 56, 56, 8]}
+    in_1 {name:"p1:0",dtype:int8,shape:[8, 8, 3, 3, 8, 8]}
+    out_0 {name:"Node_833:0",dtype:int32,shape:[1, 8, 56, 56, 8]}
+    attrs {'strides': [1, 1], 'padding': [1, 1, 1, 1], 'dilation': [1, 1], 'groups': 1, 'channels': 64, 'kernel_size': [3, 3], 'data_layout': 'NCHW8c', 'kernel_layout': 'OIHW8i8o', 'out_layout': 'NCHW8c', 'out_dtype': 'int32'}
+  }
+}
+layer {
+  name:"Node_834"
+  type:"cast"
+  top:"Node_834"
+  bottom:"Node_833"
+  layer_param {
+    idx:834
+    in_0 {name:"Node_833:0",dtype:int32,shape:[1, 8, 56, 56, 8]}
+    out_0 {name:"Node_834:0",dtype:int64,shape:[1, 8, 56, 56, 8]}
+    attrs {'dtype': 'int64'}
+  }
+}
+layer {
+  name:"Node_835"
+  type:"fixed_point_multiply"
+  top:"Node_835"
+  bottom:"Node_834"
+  layer_param {
+    idx:835
+    in_0 {name:"Node_834:0",dtype:int64,shape:[1, 8, 56, 56, 8]}
+    out_0 {name:"Node_835:0",dtype:int64,shape:[1, 8, 56, 56, 8]}
+  }
+}
+layer {
+  name:"Node_836"
+  type:"clip"
+  top:"Node_836"
+  bottom:"Node_835"
+  layer_param {
+    idx:836
+    in_0 {name:"Node_835:0",dtype:int64,shape:[1, 8, 56, 56, 8]}
+    out_0 {name:"Node_836:0",dtype:int64,shape:[1, 8, 56, 56, 8]}
+    attrs {'a_min': -127.0, 'a_max': 127.0}
+  }
+}
+layer {
+  name:"Node_837"
+  type:"cast"
+  top:"Node_837"
+  bottom:"Node_836"
+  layer_param {
+    idx:837
+    in_0 {name:"Node_836:0",dtype:int64,shape:[1, 8, 56, 56, 8]}
+    out_0 {name:"Node_837:0",dtype:int32,shape:[1, 8, 56, 56, 8]}
+    attrs {'dtype': 'int32'}
+  }
+}
+layer {
+  name:"Node_838"
+  type:"cast"
+  top:"Node_838"
+  bottom:"Node_837"
+  layer_param {
+    idx:838
+    in_0 {name:"Node_837:0",dtype:int32,shape:[1, 8, 56, 56, 8]}
+    out_0 {name:"Node_838:0",dtype:int8,shape:[1, 8, 56, 56, 8]}
+    attrs {'dtype': 'int8'}
+  }
+}
+layer {
+  name:"Node_839"
+  type:"function"
+  top:"Node_839"
+  bottom:"p0_41"
+  bottom:"p1_38"
+  bottom:"Node_838"
+  layer_param {
+    idx:839
+    in_0 {name:"p0:0",dtype:int8,shape:[1, 8, 56, 56, 8]}
+    in_1 {name:"p1:0",dtype:int8,shape:[8, 8, 3, 3, 8, 8]}
+    in_2 {name:"Node_838:0",dtype:int8,shape:[1, 8, 56, 56, 8]}
+    out_0 {name:"Node_839:0",dtype:int8,shape:[1, 8, 56, 56, 8]}
+  }
+}
+layer {
+  name:"p0_42"
+  type:"input"
+  top:"p0_42"
+  layer_param {
+    idx:840
+    out_0 {name:"p0:0",dtype:int8,shape:[1, 8, 56, 56, 8]}
+  }
+}
+layer {
+  name:"p1_39"
+  type:"input"
+  top:"p1_39"
+  layer_param {
+    idx:841
+    out_0 {name:"p1:0",dtype:int32,shape:[1, 8, 1, 1, 8]}
+  }
+}
+layer {
+  name:"p2_16"
+  type:"input"
+  top:"p2_16"
+  layer_param {
+    idx:842
+    out_0 {name:"p2:0",dtype:int32,shape:[1, 8, 1, 1, 8]}
+  }
+}
+layer {
+  name:"Node_853"
+  type:"cast"
+  top:"Node_853"
+  bottom:"p0_42"
+  layer_param {
+    idx:853
+    in_0 {name:"p0:0",dtype:int8,shape:[1, 8, 56, 56, 8]}
+    out_0 {name:"Node_853:0",dtype:int32,shape:[1, 8, 56, 56, 8]}
+    attrs {'dtype': 'int32'}
+  }
+}
+layer {
+  name:"Node_855"
+  type:"multiply"
+  top:"Node_855"
+  bottom:"Node_853"
+  bottom:"p1_39"
+  layer_param {
+    idx:855
+    in_0 {name:"Node_853:0",dtype:int32,shape:[1, 8, 56, 56, 8]}
+    in_1 {name:"p1:0",dtype:int32,shape:[1, 8, 1, 1, 8]}
+    out_0 {name:"Node_855:0",dtype:int32,shape:[1, 8, 56, 56, 8]}
+  }
+}
+layer {
+  name:"Node_857"
+  type:"add"
+  top:"Node_857"
+  bottom:"Node_855"
+  bottom:"p2_16"
+  layer_param {
+    idx:857
+    in_0 {name:"Node_855:0",dtype:int32,shape:[1, 8, 56, 56, 8]}
+    in_1 {name:"p2:0",dtype:int32,shape:[1, 8, 1, 1, 8]}
+    out_0 {name:"Node_857:0",dtype:int32,shape:[1, 8, 56, 56, 8]}
+  }
+}
+layer {
+  name:"Node_858"
+  type:"nn_relu"
+  top:"Node_858"
+  bottom:"Node_857"
+  layer_param {
+    idx:858
+    in_0 {name:"Node_857:0",dtype:int32,shape:[1, 8, 56, 56, 8]}
+    out_0 {name:"Node_858:0",dtype:int32,shape:[1, 8, 56, 56, 8]}
+  }
+}
+layer {
+  name:"Node_859"
+  type:"cast"
+  top:"Node_859"
+  bottom:"Node_858"
+  layer_param {
+    idx:859
+    in_0 {name:"Node_858:0",dtype:int32,shape:[1, 8, 56, 56, 8]}
+    out_0 {name:"Node_859:0",dtype:int64,shape:[1, 8, 56, 56, 8]}
+    attrs {'dtype': 'int64'}
+  }
+}
+layer {
+  name:"Node_860"
+  type:"fixed_point_multiply"
+  top:"Node_860"
+  bottom:"Node_859"
+  layer_param {
+    idx:860
+    in_0 {name:"Node_859:0",dtype:int64,shape:[1, 8, 56, 56, 8]}
+    out_0 {name:"Node_860:0",dtype:int64,shape:[1, 8, 56, 56, 8]}
+  }
+}
+layer {
+  name:"Node_861"
+  type:"clip"
+  top:"Node_861"
+  bottom:"Node_860"
+  layer_param {
+    idx:861
+    in_0 {name:"Node_860:0",dtype:int64,shape:[1, 8, 56, 56, 8]}
+    out_0 {name:"Node_861:0",dtype:int64,shape:[1, 8, 56, 56, 8]}
+    attrs {'a_min': -127.0, 'a_max': 127.0}
+  }
+}
+layer {
+  name:"Node_862"
+  type:"cast"
+  top:"Node_862"
+  bottom:"Node_861"
+  layer_param {
+    idx:862
+    in_0 {name:"Node_861:0",dtype:int64,shape:[1, 8, 56, 56, 8]}
+    out_0 {name:"Node_862:0",dtype:int32,shape:[1, 8, 56, 56, 8]}
+    attrs {'dtype': 'int32'}
+  }
+}
+layer {
+  name:"Node_863"
+  type:"cast"
+  top:"Node_863"
+  bottom:"Node_862"
+  layer_param {
+    idx:863
+    in_0 {name:"Node_862:0",dtype:int32,shape:[1, 8, 56, 56, 8]}
+    out_0 {name:"Node_863:0",dtype:int8,shape:[1, 8, 56, 56, 8]}
+    attrs {'dtype': 'int8'}
+  }
+}
+layer {
+  name:"Node_864"
+  type:"function"
+  top:"Node_864"
+  bottom:"p0_42"
+  bottom:"p1_39"
+  bottom:"p2_16"
+  bottom:"Node_863"
+  layer_param {
+    idx:864
+    in_0 {name:"p0:0",dtype:int8,shape:[1, 8, 56, 56, 8]}
+    in_1 {name:"p1:0",dtype:int32,shape:[1, 8, 1, 1, 8]}
+    in_2 {name:"p2:0",dtype:int32,shape:[1, 8, 1, 1, 8]}
+    in_3 {name:"Node_863:0",dtype:int8,shape:[1, 8, 56, 56, 8]}
+    out_0 {name:"Node_864:0",dtype:int8,shape:[1, 8, 56, 56, 8]}
+  }
+}
+layer {
+  name:"p0_43"
+  type:"input"
+  top:"p0_43"
+  layer_param {
+    idx:865
+    out_0 {name:"p0:0",dtype:int8,shape:[1, 8, 56, 56, 8]}
+  }
+}
+layer {
+  name:"p1_40"
+  type:"input"
+  top:"p1_40"
+  layer_param {
+    idx:866
+    out_0 {name:"p1:0",dtype:int8,shape:[8, 8, 3, 3, 8, 8]}
+  }
+}
+layer {
+  name:"Node_875"
+  type:"nn_contrib_conv2d_NCHWc"
+  top:"Node_875"
+  bottom:"p0_43"
+  bottom:"p1_40"
+  layer_param {
+    idx:875
+    in_0 {name:"p0:0",dtype:int8,shape:[1, 8, 56, 56, 8]}
+    in_1 {name:"p1:0",dtype:int8,shape:[8, 8, 3, 3, 8, 8]}
+    out_0 {name:"Node_875:0",dtype:int32,shape:[1, 8, 56, 56, 8]}
+    attrs {'strides': [1, 1], 'padding': [1, 1, 1, 1], 'dilation': [1, 1], 'groups': 1, 'channels': 64, 'kernel_size': [3, 3], 'data_layout': 'NCHW8c', 'kernel_layout': 'OIHW8i8o', 'out_layout': 'NCHW8c', 'out_dtype': 'int32'}
+  }
+}
+layer {
+  name:"Node_876"
+  type:"cast"
+  top:"Node_876"
+  bottom:"Node_875"
+  layer_param {
+    idx:876
+    in_0 {name:"Node_875:0",dtype:int32,shape:[1, 8, 56, 56, 8]}
+    out_0 {name:"Node_876:0",dtype:int64,shape:[1, 8, 56, 56, 8]}
+    attrs {'dtype': 'int64'}
+  }
+}
+layer {
+  name:"Node_877"
+  type:"fixed_point_multiply"
+  top:"Node_877"
+  bottom:"Node_876"
+  layer_param {
+    idx:877
+    in_0 {name:"Node_876:0",dtype:int64,shape:[1, 8, 56, 56, 8]}
+    out_0 {name:"Node_877:0",dtype:int64,shape:[1, 8, 56, 56, 8]}
+  }
+}
+layer {
+  name:"Node_878"
+  type:"clip"
+  top:"Node_878"
+  bottom:"Node_877"
+  layer_param {
+    idx:878
+    in_0 {name:"Node_877:0",dtype:int64,shape:[1, 8, 56, 56, 8]}
+    out_0 {name:"Node_878:0",dtype:int64,shape:[1, 8, 56, 56, 8]}
+    attrs {'a_min': -127.0, 'a_max': 127.0}
+  }
+}
+layer {
+  name:"Node_879"
+  type:"cast"
+  top:"Node_879"
+  bottom:"Node_878"
+  layer_param {
+    idx:879
+    in_0 {name:"Node_878:0",dtype:int64,shape:[1, 8, 56, 56, 8]}
+    out_0 {name:"Node_879:0",dtype:int32,shape:[1, 8, 56, 56, 8]}
+    attrs {'dtype': 'int32'}
+  }
+}
+layer {
+  name:"Node_880"
+  type:"cast"
+  top:"Node_880"
+  bottom:"Node_879"
+  layer_param {
+    idx:880
+    in_0 {name:"Node_879:0",dtype:int32,shape:[1, 8, 56, 56, 8]}
+    out_0 {name:"Node_880:0",dtype:int8,shape:[1, 8, 56, 56, 8]}
+    attrs {'dtype': 'int8'}
+  }
+}
+layer {
+  name:"Node_881"
+  type:"function"
+  top:"Node_881"
+  bottom:"p0_43"
+  bottom:"p1_40"
+  bottom:"Node_880"
+  layer_param {
+    idx:881
+    in_0 {name:"p0:0",dtype:int8,shape:[1, 8, 56, 56, 8]}
+    in_1 {name:"p1:0",dtype:int8,shape:[8, 8, 3, 3, 8, 8]}
+    in_2 {name:"Node_880:0",dtype:int8,shape:[1, 8, 56, 56, 8]}
+    out_0 {name:"Node_881:0",dtype:int8,shape:[1, 8, 56, 56, 8]}
+  }
+}
+layer {
+  name:"p0_44"
+  type:"input"
+  top:"p0_44"
+  layer_param {
+    idx:882
+    out_0 {name:"p0:0",dtype:float32,shape:[1, 2, 56, 56, 32]}
+  }
+}
+layer {
+  name:"Node_886"
+  type:"cast"
+  top:"Node_886"
+  bottom:"p0_44"
+  layer_param {
+    idx:886
+    in_0 {name:"p0:0",dtype:float32,shape:[1, 2, 56, 56, 32]}
+    out_0 {name:"Node_886:0",dtype:int8,shape:[1, 2, 56, 56, 32]}
+    attrs {'dtype': 'int8'}
+  }
+}
+layer {
+  name:"Node_887"
+  type:"layout_transform"
+  top:"Node_887"
+  bottom:"Node_886"
+  layer_param {
+    idx:887
+    in_0 {name:"Node_886:0",dtype:int8,shape:[1, 2, 56, 56, 32]}
+    out_0 {name:"Node_887:0",dtype:int8,shape:[1, 8, 56, 56, 8]}
+    attrs {'src_layout': 'NCHW32c', 'dst_layout': 'NCHW8c'}
+  }
+}
+layer {
+  name:"Node_888"
+  type:"function"
+  top:"Node_888"
+  bottom:"p0_44"
+  bottom:"Node_887"
+  layer_param {
+    idx:888
+    in_0 {name:"p0:0",dtype:float32,shape:[1, 2, 56, 56, 32]}
+    in_1 {name:"Node_887:0",dtype:int8,shape:[1, 8, 56, 56, 8]}
+    out_0 {name:"Node_888:0",dtype:int8,shape:[1, 8, 56, 56, 8]}
+  }
+}
+layer {
+  name:"p0_45"
+  type:"input"
+  top:"p0_45"
+  layer_param {
+    idx:889
+    out_0 {name:"p0:0",dtype:float32,shape:[1, 2, 56, 56, 32]}
+  }
+}
+layer {
+  name:"Node_894"
+  type:"const"
+  top:"Node_894"
+  layer_param {
+    idx:894
+    out_0 {name:"Node_894:0",dtype:float32,shape:[]}
+  }
+}
+layer {
+  name:"Node_895"
+  type:"multiply"
+  top:"Node_895"
+  bottom:"p0_45"
+  bottom:"Node_894"
+  layer_param {
+    idx:895
+    in_0 {name:"p0:0",dtype:float32,shape:[1, 2, 56, 56, 32]}
+    in_1 {name:"Node_894:0",dtype:float32,shape:[]}
+    out_0 {name:"Node_895:0",dtype:float32,shape:[1, 2, 56, 56, 32]}
+  }
+}
+layer {
+  name:"Node_896"
+  type:"round"
+  top:"Node_896"
+  bottom:"Node_895"
+  layer_param {
+    idx:896
+    in_0 {name:"Node_895:0",dtype:float32,shape:[1, 2, 56, 56, 32]}
+    out_0 {name:"Node_896:0",dtype:float32,shape:[1, 2, 56, 56, 32]}
+  }
+}
+layer {
+  name:"Node_897"
+  type:"clip"
+  top:"Node_897"
+  bottom:"Node_896"
+  layer_param {
+    idx:897
+    in_0 {name:"Node_896:0",dtype:float32,shape:[1, 2, 56, 56, 32]}
+    out_0 {name:"Node_897:0",dtype:float32,shape:[1, 2, 56, 56, 32]}
+    attrs {'a_min': -127.0, 'a_max': 127.0}
+  }
+}
+layer {
+  name:"Node_898"
+  type:"function"
+  top:"Node_898"
+  bottom:"p0_45"
+  bottom:"Node_897"
+  layer_param {
+    idx:898
+    in_0 {name:"p0:0",dtype:float32,shape:[1, 2, 56, 56, 32]}
+    in_1 {name:"Node_897:0",dtype:float32,shape:[1, 2, 56, 56, 32]}
+    out_0 {name:"Node_898:0",dtype:float32,shape:[1, 2, 56, 56, 32]}
+  }
+}
+layer {
+  name:"p0_46"
+  type:"input"
+  top:"p0_46"
+  layer_param {
+    idx:899
+    out_0 {name:"p0:0",dtype:float32,shape:[1, 2, 112, 112, 32]}
+  }
+}
+layer {
+  name:"Node_902"
+  type:"nn_max_pool2d"
+  top:"Node_902"
+  bottom:"p0_46"
+  layer_param {
+    idx:902
+    in_0 {name:"p0:0",dtype:float32,shape:[1, 2, 112, 112, 32]}
+    out_0 {name:"Node_902:0",dtype:float32,shape:[1, 2, 56, 56, 32]}
+    attrs {'pool_size': [3, 3], 'strides': [2, 2], 'padding': [1, 1, 1, 1], 'layout': 'NCHW32c', 'ceil_mode': 0}
+  }
+}
+layer {
+  name:"Node_903"
+  type:"function"
+  top:"Node_903"
+  bottom:"p0_46"
+  bottom:"Node_902"
+  layer_param {
+    idx:903
+    in_0 {name:"p0:0",dtype:float32,shape:[1, 2, 112, 112, 32]}
+    in_1 {name:"Node_902:0",dtype:float32,shape:[1, 2, 56, 56, 32]}
+    out_0 {name:"Node_903:0",dtype:float32,shape:[1, 2, 56, 56, 32]}
+  }
+}
+layer {
+  name:"p0_47"
+  type:"input"
+  top:"p0_47"
+  layer_param {
+    idx:904
+    out_0 {name:"p0:0",dtype:float32,shape:[1, 2, 112, 112, 32]}
+  }
+}
+layer {
+  name:"p1_41"
+  type:"input"
+  top:"p1_41"
+  layer_param {
+    idx:905
+    out_0 {name:"p1:0",dtype:float32,shape:[1, 2, 1, 1, 32]}
+  }
+}
+layer {
+  name:"p2_17"
+  type:"input"
+  top:"p2_17"
+  layer_param {
+    idx:906
+    out_0 {name:"p2:0",dtype:float32,shape:[1, 2, 1, 1, 32]}
+  }
+}
+layer {
+  name:"Node_912"
+  type:"multiply"
+  top:"Node_912"
+  bottom:"p0_47"
+  bottom:"p1_41"
+  layer_param {
+    idx:912
+    in_0 {name:"p0:0",dtype:float32,shape:[1, 2, 112, 112, 32]}
+    in_1 {name:"p1:0",dtype:float32,shape:[1, 2, 1, 1, 32]}
+    out_0 {name:"Node_912:0",dtype:float32,shape:[1, 2, 112, 112, 32]}
+  }
+}
+layer {
+  name:"Node_914"
+  type:"add"
+  top:"Node_914"
+  bottom:"Node_912"
+  bottom:"p2_17"
+  layer_param {
+    idx:914
+    in_0 {name:"Node_912:0",dtype:float32,shape:[1, 2, 112, 112, 32]}
+    in_1 {name:"p2:0",dtype:float32,shape:[1, 2, 1, 1, 32]}
+    out_0 {name:"Node_914:0",dtype:float32,shape:[1, 2, 112, 112, 32]}
+  }
+}
+layer {
+  name:"Node_915"
+  type:"nn_relu"
+  top:"Node_915"
+  bottom:"Node_914"
+  layer_param {
+    idx:915
+    in_0 {name:"Node_914:0",dtype:float32,shape:[1, 2, 112, 112, 32]}
+    out_0 {name:"Node_915:0",dtype:float32,shape:[1, 2, 112, 112, 32]}
+  }
+}
+layer {
+  name:"Node_916"
+  type:"function"
+  top:"Node_916"
+  bottom:"p0_47"
+  bottom:"p1_41"
+  bottom:"p2_17"
+  bottom:"Node_915"
+  layer_param {
+    idx:916
+    in_0 {name:"p0:0",dtype:float32,shape:[1, 2, 112, 112, 32]}
+    in_1 {name:"p1:0",dtype:float32,shape:[1, 2, 1, 1, 32]}
+    in_2 {name:"p2:0",dtype:float32,shape:[1, 2, 1, 1, 32]}
+    in_3 {name:"Node_915:0",dtype:float32,shape:[1, 2, 112, 112, 32]}
+    out_0 {name:"Node_916:0",dtype:float32,shape:[1, 2, 112, 112, 32]}
+  }
+}
+layer {
+  name:"p0_48"
+  type:"input"
+  top:"p0_48"
+  layer_param {
+    idx:917
+    out_0 {name:"p0:0",dtype:float32,shape:[1, 1, 224, 224, 3]}
+  }
+}
+layer {
+  name:"p1_42"
+  type:"input"
+  top:"p1_42"
+  layer_param {
+    idx:918
+    out_0 {name:"p1:0",dtype:float32,shape:[2, 1, 7, 7, 3, 32]}
+  }
+}
+layer {
+  name:"Node_922"
+  type:"nn_contrib_conv2d_NCHWc"
+  top:"Node_922"
+  bottom:"p0_48"
+  bottom:"p1_42"
+  layer_param {
+    idx:922
+    in_0 {name:"p0:0",dtype:float32,shape:[1, 1, 224, 224, 3]}
+    in_1 {name:"p1:0",dtype:float32,shape:[2, 1, 7, 7, 3, 32]}
+    out_0 {name:"Node_922:0",dtype:float32,shape:[1, 2, 112, 112, 32]}
+    attrs {'strides': [2, 2], 'padding': [3, 3, 3, 3], 'dilation': [1, 1], 'groups': 1, 'channels': 64, 'kernel_size': [7, 7], 'data_layout': 'NCHW3c', 'kernel_layout': 'OIHW3i32o', 'out_layout': 'NCHW32c', 'out_dtype': ''}
+  }
+}
+layer {
+  name:"Node_923"
+  type:"function"
+  top:"Node_923"
+  bottom:"p0_48"
+  bottom:"p1_42"
+  bottom:"Node_922"
+  layer_param {
+    idx:923
+    in_0 {name:"p0:0",dtype:float32,shape:[1, 1, 224, 224, 3]}
+    in_1 {name:"p1:0",dtype:float32,shape:[2, 1, 7, 7, 3, 32]}
+    in_2 {name:"Node_922:0",dtype:float32,shape:[1, 2, 112, 112, 32]}
+    out_0 {name:"Node_923:0",dtype:float32,shape:[1, 2, 112, 112, 32]}
+  }
+}
+layer {
+  name:"p0_49"
+  type:"input"
+  top:"p0_49"
+  layer_param {
+    idx:924
+    out_0 {name:"p0:0",dtype:float32,shape:[1, 3, 224, 224]}
+  }
+}
+layer {
+  name:"Node_927"
+  type:"layout_transform"
+  top:"Node_927"
+  bottom:"p0_49"
+  layer_param {
+    idx:927
+    in_0 {name:"p0:0",dtype:float32,shape:[1, 3, 224, 224]}
+    out_0 {name:"Node_927:0",dtype:float32,shape:[1, 1, 224, 224, 3]}
+    attrs {'src_layout': 'NCHW', 'dst_layout': 'NCHW3c'}
+  }
+}
+layer {
+  name:"Node_928"
+  type:"function"
+  top:"Node_928"
+  bottom:"p0_49"
+  bottom:"Node_927"
+  layer_param {
+    idx:928
+    in_0 {name:"p0:0",dtype:float32,shape:[1, 3, 224, 224]}
+    in_1 {name:"Node_927:0",dtype:float32,shape:[1, 1, 224, 224, 3]}
+    out_0 {name:"Node_928:0",dtype:float32,shape:[1, 1, 224, 224, 3]}
+  }
+}
+layer {
+  name:"Node_930"
+  type:"func_call"
+  top:"Node_930"
+  bottom:"input0"
+  bottom:"Node_928"
+  layer_param {
+    idx:930
+    in_0 {name:"input0:0",dtype:float32,shape:[1, 3, 224, 224]}
+    in_1 {name:"Node_928:0",dtype:float32,shape:[1, 1, 224, 224, 3]}
+    out_0 {name:"Node_930:0",dtype:float32,shape:[1, 1, 224, 224, 3]}
+  }
+}
+layer {
+  name:"Node_931"
+  type:"const"
+  top:"Node_931"
+  layer_param {
+    idx:931
+    out_0 {name:"Node_931:0",dtype:float32,shape:[2, 1, 7, 7, 3, 32]}
+  }
+}
+layer {
+  name:"Node_932"
+  type:"func_call"
+  top:"Node_932"
+  bottom:"Node_930"
+  bottom:"Node_931"
+  bottom:"Node_923"
+  layer_param {
+    idx:932
+    in_0 {name:"Node_930:0",dtype:float32,shape:[1, 1, 224, 224, 3]}
+    in_1 {name:"Node_931:0",dtype:float32,shape:[2, 1, 7, 7, 3, 32]}
+    in_2 {name:"Node_923:0",dtype:float32,shape:[1, 2, 112, 112, 32]}
+    out_0 {name:"Node_932:0",dtype:float32,shape:[1, 2, 112, 112, 32]}
+  }
+}
+layer {
+  name:"Node_933"
+  type:"const"
+  top:"Node_933"
+  layer_param {
+    idx:933
+    out_0 {name:"Node_933:0",dtype:float32,shape:[1, 2, 1, 1, 32]}
+  }
+}
+layer {
+  name:"Node_934"
+  type:"const"
+  top:"Node_934"
+  layer_param {
+    idx:934
+    out_0 {name:"Node_934:0",dtype:float32,shape:[1, 2, 1, 1, 32]}
+  }
+}
+layer {
+  name:"Node_935"
+  type:"func_call"
+  top:"Node_935"
+  bottom:"Node_932"
+  bottom:"Node_933"
+  bottom:"Node_934"
+  bottom:"Node_916"
+  layer_param {
+    idx:935
+    in_0 {name:"Node_932:0",dtype:float32,shape:[1, 2, 112, 112, 32]}
+    in_1 {name:"Node_933:0",dtype:float32,shape:[1, 2, 1, 1, 32]}
+    in_2 {name:"Node_934:0",dtype:float32,shape:[1, 2, 1, 1, 32]}
+    in_3 {name:"Node_916:0",dtype:float32,shape:[1, 2, 112, 112, 32]}
+    out_0 {name:"Node_935:0",dtype:float32,shape:[1, 2, 112, 112, 32]}
+  }
+}
+layer {
+  name:"Node_936"
+  type:"func_call"
+  top:"Node_936"
+  bottom:"Node_935"
+  bottom:"Node_903"
+  layer_param {
+    idx:936
+    in_0 {name:"Node_935:0",dtype:float32,shape:[1, 2, 112, 112, 32]}
+    in_1 {name:"Node_903:0",dtype:float32,shape:[1, 2, 56, 56, 32]}
+    out_0 {name:"Node_936:0",dtype:float32,shape:[1, 2, 56, 56, 32]}
+  }
+}
+layer {
+  name:"Node_937"
+  type:"func_call"
+  top:"Node_937"
+  bottom:"Node_936"
+  bottom:"Node_898"
+  layer_param {
+    idx:937
+    in_0 {name:"Node_936:0",dtype:float32,shape:[1, 2, 56, 56, 32]}
+    in_1 {name:"Node_898:0",dtype:float32,shape:[1, 2, 56, 56, 32]}
+    out_0 {name:"Node_937:0",dtype:float32,shape:[1, 2, 56, 56, 32]}
+  }
+}
+layer {
+  name:"Node_938"
+  type:"func_call"
+  top:"Node_938"
+  bottom:"Node_937"
+  bottom:"Node_888"
+  layer_param {
+    idx:938
+    in_0 {name:"Node_937:0",dtype:float32,shape:[1, 2, 56, 56, 32]}
+    in_1 {name:"Node_888:0",dtype:int8,shape:[1, 8, 56, 56, 8]}
+    out_0 {name:"Node_938:0",dtype:int8,shape:[1, 8, 56, 56, 8]}
+  }
+}
+layer {
+  name:"Node_939"
+  type:"const"
+  top:"Node_939"
+  layer_param {
+    idx:939
+    out_0 {name:"Node_939:0",dtype:int8,shape:[8, 8, 3, 3, 8, 8]}
+  }
+}
+layer {
+  name:"Node_940"
+  type:"func_call"
+  top:"Node_940"
+  bottom:"Node_938"
+  bottom:"Node_939"
+  bottom:"Node_881"
+  layer_param {
+    idx:940
+    in_0 {name:"Node_938:0",dtype:int8,shape:[1, 8, 56, 56, 8]}
+    in_1 {name:"Node_939:0",dtype:int8,shape:[8, 8, 3, 3, 8, 8]}
+    in_2 {name:"Node_881:0",dtype:int8,shape:[1, 8, 56, 56, 8]}
+    out_0 {name:"Node_940:0",dtype:int8,shape:[1, 8, 56, 56, 8]}
+  }
+}
+layer {
+  name:"Node_941"
+  type:"const"
+  top:"Node_941"
+  layer_param {
+    idx:941
+    out_0 {name:"Node_941:0",dtype:int32,shape:[1, 8, 1, 1, 8]}
+  }
+}
+layer {
+  name:"Node_942"
+  type:"const"
+  top:"Node_942"
+  layer_param {
+    idx:942
+    out_0 {name:"Node_942:0",dtype:int32,shape:[1, 8, 1, 1, 8]}
+  }
+}
+layer {
+  name:"Node_943"
+  type:"func_call"
+  top:"Node_943"
+  bottom:"Node_940"
+  bottom:"Node_941"
+  bottom:"Node_942"
+  bottom:"Node_864"
+  layer_param {
+    idx:943
+    in_0 {name:"Node_940:0",dtype:int8,shape:[1, 8, 56, 56, 8]}
+    in_1 {name:"Node_941:0",dtype:int32,shape:[1, 8, 1, 1, 8]}
+    in_2 {name:"Node_942:0",dtype:int32,shape:[1, 8, 1, 1, 8]}
+    in_3 {name:"Node_864:0",dtype:int8,shape:[1, 8, 56, 56, 8]}
+    out_0 {name:"Node_943:0",dtype:int8,shape:[1, 8, 56, 56, 8]}
+  }
+}
+layer {
+  name:"Node_944"
+  type:"const"
+  top:"Node_944"
+  layer_param {
+    idx:944
+    out_0 {name:"Node_944:0",dtype:int8,shape:[8, 8, 3, 3, 8, 8]}
+  }
+}
+layer {
+  name:"Node_945"
+  type:"func_call"
+  top:"Node_945"
+  bottom:"Node_943"
+  bottom:"Node_944"
+  bottom:"Node_839"
+  layer_param {
+    idx:945
+    in_0 {name:"Node_943:0",dtype:int8,shape:[1, 8, 56, 56, 8]}
+    in_1 {name:"Node_944:0",dtype:int8,shape:[8, 8, 3, 3, 8, 8]}
+    in_2 {name:"Node_839:0",dtype:int8,shape:[1, 8, 56, 56, 8]}
+    out_0 {name:"Node_945:0",dtype:int8,shape:[1, 8, 56, 56, 8]}
+  }
+}
+layer {
+  name:"Node_946"
+  type:"const"
+  top:"Node_946"
+  layer_param {
+    idx:946
+    out_0 {name:"Node_946:0",dtype:int32,shape:[1, 8, 1, 1, 8]}
+  }
+}
+layer {
+  name:"Node_947"
+  type:"const"
+  top:"Node_947"
+  layer_param {
+    idx:947
+    out_0 {name:"Node_947:0",dtype:int32,shape:[1, 8, 1, 1, 8]}
+  }
+}
+layer {
+  name:"Node_948"
+  type:"func_call"
+  top:"Node_948"
+  bottom:"Node_945"
+  bottom:"Node_946"
+  bottom:"Node_947"
+  bottom:"Node_822"
+  layer_param {
+    idx:948
+    in_0 {name:"Node_945:0",dtype:int8,shape:[1, 8, 56, 56, 8]}
+    in_1 {name:"Node_946:0",dtype:int32,shape:[1, 8, 1, 1, 8]}
+    in_2 {name:"Node_947:0",dtype:int32,shape:[1, 8, 1, 1, 8]}
+    in_3 {name:"Node_822:0",dtype:int8,shape:[1, 8, 56, 56, 8]}
+    out_0 {name:"Node_948:0",dtype:int8,shape:[1, 8, 56, 56, 8]}
+  }
+}
+layer {
+  name:"p0_50"
+  type:"input"
+  top:"p0_50"
+  layer_param {
+    idx:949
+    out_0 {name:"p0:0",dtype:float32,shape:[1, 2, 56, 56, 32]}
+  }
+}
+layer {
+  name:"Node_952"
+  type:"cast"
+  top:"Node_952"
+  bottom:"p0_50"
+  layer_param {
+    idx:952
+    in_0 {name:"p0:0",dtype:float32,shape:[1, 2, 56, 56, 32]}
+    out_0 {name:"Node_952:0",dtype:int32,shape:[1, 2, 56, 56, 32]}
+    attrs {'dtype': 'int32'}
+  }
+}
+layer {
+  name:"Node_953"
+  type:"function"
+  top:"Node_953"
+  bottom:"p0_50"
+  bottom:"Node_952"
+  layer_param {
+    idx:953
+    in_0 {name:"p0:0",dtype:float32,shape:[1, 2, 56, 56, 32]}
+    in_1 {name:"Node_952:0",dtype:int32,shape:[1, 2, 56, 56, 32]}
+    out_0 {name:"Node_953:0",dtype:int32,shape:[1, 2, 56, 56, 32]}
+  }
+}
+layer {
+  name:"Node_955"
+  type:"func_call"
+  top:"Node_955"
+  bottom:"Node_937"
+  bottom:"Node_953"
+  layer_param {
+    idx:955
+    in_0 {name:"Node_937:0",dtype:float32,shape:[1, 2, 56, 56, 32]}
+    in_1 {name:"Node_953:0",dtype:int32,shape:[1, 2, 56, 56, 32]}
+    out_0 {name:"Node_955:0",dtype:int32,shape:[1, 2, 56, 56, 32]}
+  }
+}
+layer {
+  name:"Node_956"
+  type:"func_call"
+  top:"Node_956"
+  bottom:"Node_948"
+  bottom:"Node_955"
+  bottom:"Node_799"
+  layer_param {
+    idx:956
+    in_0 {name:"Node_948:0",dtype:int8,shape:[1, 8, 56, 56, 8]}
+    in_1 {name:"Node_955:0",dtype:int32,shape:[1, 2, 56, 56, 32]}
+    in_2 {name:"Node_799:0",dtype:int8,shape:[1, 8, 56, 56, 8]}
+    out_0 {name:"Node_956:0",dtype:int8,shape:[1, 8, 56, 56, 8]}
+  }
+}
+layer {
+  name:"Node_957"
+  type:"const"
+  top:"Node_957"
+  layer_param {
+    idx:957
+    out_0 {name:"Node_957:0",dtype:int8,shape:[8, 8, 3, 3, 8, 8]}
+  }
+}
+layer {
+  name:"Node_958"
+  type:"func_call"
+  top:"Node_958"
+  bottom:"Node_956"
+  bottom:"Node_957"
+  bottom:"Node_774"
+  layer_param {
+    idx:958
+    in_0 {name:"Node_956:0",dtype:int8,shape:[1, 8, 56, 56, 8]}
+    in_1 {name:"Node_957:0",dtype:int8,shape:[8, 8, 3, 3, 8, 8]}
+    in_2 {name:"Node_774:0",dtype:int8,shape:[1, 8, 56, 56, 8]}
+    out_0 {name:"Node_958:0",dtype:int8,shape:[1, 8, 56, 56, 8]}
+  }
+}
+layer {
+  name:"Node_959"
+  type:"const"
+  top:"Node_959"
+  layer_param {
+    idx:959
+    out_0 {name:"Node_959:0",dtype:int32,shape:[1, 8, 1, 1, 8]}
+  }
+}
+layer {
+  name:"Node_960"
+  type:"const"
+  top:"Node_960"
+  layer_param {
+    idx:960
+    out_0 {name:"Node_960:0",dtype:int32,shape:[1, 8, 1, 1, 8]}
+  }
+}
+layer {
+  name:"Node_961"
+  type:"func_call"
+  top:"Node_961"
+  bottom:"Node_958"
+  bottom:"Node_959"
+  bottom:"Node_960"
+  bottom:"Node_757"
+  layer_param {
+    idx:961
+    in_0 {name:"Node_958:0",dtype:int8,shape:[1, 8, 56, 56, 8]}
+    in_1 {name:"Node_959:0",dtype:int32,shape:[1, 8, 1, 1, 8]}
+    in_2 {name:"Node_960:0",dtype:int32,shape:[1, 8, 1, 1, 8]}
+    in_3 {name:"Node_757:0",dtype:int8,shape:[1, 8, 56, 56, 8]}
+    out_0 {name:"Node_961:0",dtype:int8,shape:[1, 8, 56, 56, 8]}
+  }
+}
+layer {
+  name:"Node_962"
+  type:"const"
+  top:"Node_962"
+  layer_param {
+    idx:962
+    out_0 {name:"Node_962:0",dtype:int8,shape:[8, 8, 3, 3, 8, 8]}
+  }
+}
+layer {
+  name:"Node_963"
+  type:"func_call"
+  top:"Node_963"
+  bottom:"Node_961"
+  bottom:"Node_962"
+  bottom:"Node_732"
+  layer_param {
+    idx:963
+    in_0 {name:"Node_961:0",dtype:int8,shape:[1, 8, 56, 56, 8]}
+    in_1 {name:"Node_962:0",dtype:int8,shape:[8, 8, 3, 3, 8, 8]}
+    in_2 {name:"Node_732:0",dtype:int8,shape:[1, 8, 56, 56, 8]}
+    out_0 {name:"Node_963:0",dtype:int8,shape:[1, 8, 56, 56, 8]}
+  }
+}
+layer {
+  name:"Node_964"
+  type:"const"
+  top:"Node_964"
+  layer_param {
+    idx:964
+    out_0 {name:"Node_964:0",dtype:int32,shape:[1, 8, 1, 1, 8]}
+  }
+}
+layer {
+  name:"Node_965"
+  type:"const"
+  top:"Node_965"
+  layer_param {
+    idx:965
+    out_0 {name:"Node_965:0",dtype:int32,shape:[1, 8, 1, 1, 8]}
+  }
+}
+layer {
+  name:"Node_966"
+  type:"func_call"
+  top:"Node_966"
+  bottom:"Node_963"
+  bottom:"Node_964"
+  bottom:"Node_965"
+  bottom:"Node_715"
+  layer_param {
+    idx:966
+    in_0 {name:"Node_963:0",dtype:int8,shape:[1, 8, 56, 56, 8]}
+    in_1 {name:"Node_964:0",dtype:int32,shape:[1, 8, 1, 1, 8]}
+    in_2 {name:"Node_965:0",dtype:int32,shape:[1, 8, 1, 1, 8]}
+    in_3 {name:"Node_715:0",dtype:int8,shape:[1, 8, 56, 56, 8]}
+    out_0 {name:"Node_966:0",dtype:int8,shape:[1, 8, 56, 56, 8]}
+  }
+}
+layer {
+  name:"Node_968"
+  type:"func_call"
+  top:"Node_968"
+  bottom:"Node_966"
+  bottom:"Node_956"
+  bottom:"Node_692"
+  layer_param {
+    idx:968
+    in_0 {name:"Node_966:0",dtype:int8,shape:[1, 8, 56, 56, 8]}
+    in_1 {name:"Node_956:0",dtype:int8,shape:[1, 8, 56, 56, 8]}
+    in_2 {name:"Node_692:0",dtype:int8,shape:[1, 8, 56, 56, 8]}
+    out_0 {name:"Node_968:0",dtype:int8,shape:[1, 8, 56, 56, 8]}
+  }
+}
+layer {
+  name:"Node_969"
+  type:"const"
+  top:"Node_969"
+  layer_param {
+    idx:969
+    out_0 {name:"Node_969:0",dtype:int8,shape:[16, 8, 3, 3, 8, 8]}
+  }
+}
+layer {
+  name:"Node_970"
+  type:"func_call"
+  top:"Node_970"
+  bottom:"Node_968"
+  bottom:"Node_969"
+  bottom:"Node_667"
+  layer_param {
+    idx:970
+    in_0 {name:"Node_968:0",dtype:int8,shape:[1, 8, 56, 56, 8]}
+    in_1 {name:"Node_969:0",dtype:int8,shape:[16, 8, 3, 3, 8, 8]}
+    in_2 {name:"Node_667:0",dtype:int8,shape:[1, 16, 28, 28, 8]}
+    out_0 {name:"Node_970:0",dtype:int8,shape:[1, 16, 28, 28, 8]}
+  }
+}
+layer {
+  name:"Node_971"
+  type:"const"
+  top:"Node_971"
+  layer_param {
+    idx:971
+    out_0 {name:"Node_971:0",dtype:int32,shape:[1, 16, 1, 1, 8]}
+  }
+}
+layer {
+  name:"Node_972"
+  type:"const"
+  top:"Node_972"
+  layer_param {
+    idx:972
+    out_0 {name:"Node_972:0",dtype:int32,shape:[1, 16, 1, 1, 8]}
+  }
+}
+layer {
+  name:"Node_973"
+  type:"func_call"
+  top:"Node_973"
+  bottom:"Node_970"
+  bottom:"Node_971"
+  bottom:"Node_972"
+  bottom:"Node_650"
+  layer_param {
+    idx:973
+    in_0 {name:"Node_970:0",dtype:int8,shape:[1, 16, 28, 28, 8]}
+    in_1 {name:"Node_971:0",dtype:int32,shape:[1, 16, 1, 1, 8]}
+    in_2 {name:"Node_972:0",dtype:int32,shape:[1, 16, 1, 1, 8]}
+    in_3 {name:"Node_650:0",dtype:int8,shape:[1, 16, 28, 28, 8]}
+    out_0 {name:"Node_973:0",dtype:int8,shape:[1, 16, 28, 28, 8]}
+  }
+}
+layer {
+  name:"Node_974"
+  type:"const"
+  top:"Node_974"
+  layer_param {
+    idx:974
+    out_0 {name:"Node_974:0",dtype:int8,shape:[16, 16, 3, 3, 8, 8]}
+  }
+}
+layer {
+  name:"Node_975"
+  type:"func_call"
+  top:"Node_975"
+  bottom:"Node_973"
+  bottom:"Node_974"
+  bottom:"Node_625"
+  layer_param {
+    idx:975
+    in_0 {name:"Node_973:0",dtype:int8,shape:[1, 16, 28, 28, 8]}
+    in_1 {name:"Node_974:0",dtype:int8,shape:[16, 16, 3, 3, 8, 8]}
+    in_2 {name:"Node_625:0",dtype:int8,shape:[1, 16, 28, 28, 8]}
+    out_0 {name:"Node_975:0",dtype:int8,shape:[1, 16, 28, 28, 8]}
+  }
+}
+layer {
+  name:"Node_976"
+  type:"const"
+  top:"Node_976"
+  layer_param {
+    idx:976
+    out_0 {name:"Node_976:0",dtype:int32,shape:[1, 16, 1, 1, 8]}
+  }
+}
+layer {
+  name:"Node_977"
+  type:"const"
+  top:"Node_977"
+  layer_param {
+    idx:977
+    out_0 {name:"Node_977:0",dtype:int32,shape:[1, 16, 1, 1, 8]}
+  }
+}
+layer {
+  name:"Node_978"
+  type:"func_call"
+  top:"Node_978"
+  bottom:"Node_975"
+  bottom:"Node_976"
+  bottom:"Node_977"
+  bottom:"Node_608"
+  layer_param {
+    idx:978
+    in_0 {name:"Node_975:0",dtype:int8,shape:[1, 16, 28, 28, 8]}
+    in_1 {name:"Node_976:0",dtype:int32,shape:[1, 16, 1, 1, 8]}
+    in_2 {name:"Node_977:0",dtype:int32,shape:[1, 16, 1, 1, 8]}
+    in_3 {name:"Node_608:0",dtype:int8,shape:[1, 16, 28, 28, 8]}
+    out_0 {name:"Node_978:0",dtype:int8,shape:[1, 16, 28, 28, 8]}
+  }
+}
+layer {
+  name:"p0_51"
+  type:"input"
+  top:"p0_51"
+  layer_param {
+    idx:979
+    out_0 {name:"p0:0",dtype:int8,shape:[1, 16, 28, 28, 8]}
+  }
+}
+layer {
+  name:"p1_43"
+  type:"input"
+  top:"p1_43"
+  layer_param {
+    idx:980
+    out_0 {name:"p1:0",dtype:int32,shape:[1, 16, 1, 1, 8]}
+  }
+}
+layer {
+  name:"p2_18"
+  type:"input"
+  top:"p2_18"
+  layer_param {
+    idx:981
+    out_0 {name:"p2:0",dtype:int32,shape:[1, 16, 1, 1, 8]}
+  }
+}
+layer {
+  name:"Node_991"
+  type:"cast"
+  top:"Node_991"
+  bottom:"p0_51"
+  layer_param {
+    idx:991
+    in_0 {name:"p0:0",dtype:int8,shape:[1, 16, 28, 28, 8]}
+    out_0 {name:"Node_991:0",dtype:int32,shape:[1, 16, 28, 28, 8]}
+    attrs {'dtype': 'int32'}
+  }
+}
+layer {
+  name:"Node_993"
+  type:"multiply"
+  top:"Node_993"
+  bottom:"Node_991"
+  bottom:"p1_43"
+  layer_param {
+    idx:993
+    in_0 {name:"Node_991:0",dtype:int32,shape:[1, 16, 28, 28, 8]}
+    in_1 {name:"p1:0",dtype:int32,shape:[1, 16, 1, 1, 8]}
+    out_0 {name:"Node_993:0",dtype:int32,shape:[1, 16, 28, 28, 8]}
+  }
+}
+layer {
+  name:"Node_995"
+  type:"add"
+  top:"Node_995"
+  bottom:"Node_993"
+  bottom:"p2_18"
+  layer_param {
+    idx:995
+    in_0 {name:"Node_993:0",dtype:int32,shape:[1, 16, 28, 28, 8]}
+    in_1 {name:"p2:0",dtype:int32,shape:[1, 16, 1, 1, 8]}
+    out_0 {name:"Node_995:0",dtype:int32,shape:[1, 16, 28, 28, 8]}
+  }
+}
+layer {
+  name:"Node_996"
+  type:"cast"
+  top:"Node_996"
+  bottom:"Node_995"
+  layer_param {
+    idx:996
+    in_0 {name:"Node_995:0",dtype:int32,shape:[1, 16, 28, 28, 8]}
+    out_0 {name:"Node_996:0",dtype:int64,shape:[1, 16, 28, 28, 8]}
+    attrs {'dtype': 'int64'}
+  }
+}
+layer {
+  name:"Node_997"
+  type:"fixed_point_multiply"
+  top:"Node_997"
+  bottom:"Node_996"
+  layer_param {
+    idx:997
+    in_0 {name:"Node_996:0",dtype:int64,shape:[1, 16, 28, 28, 8]}
+    out_0 {name:"Node_997:0",dtype:int64,shape:[1, 16, 28, 28, 8]}
+  }
+}
+layer {
+  name:"Node_998"
+  type:"clip"
+  top:"Node_998"
+  bottom:"Node_997"
+  layer_param {
+    idx:998
+    in_0 {name:"Node_997:0",dtype:int64,shape:[1, 16, 28, 28, 8]}
+    out_0 {name:"Node_998:0",dtype:int64,shape:[1, 16, 28, 28, 8]}
+    attrs {'a_min': -127.0, 'a_max': 127.0}
+  }
+}
+layer {
+  name:"Node_999"
+  type:"cast"
+  top:"Node_999"
+  bottom:"Node_998"
+  layer_param {
+    idx:999
+    in_0 {name:"Node_998:0",dtype:int64,shape:[1, 16, 28, 28, 8]}
+    out_0 {name:"Node_999:0",dtype:int32,shape:[1, 16, 28, 28, 8]}
+    attrs {'dtype': 'int32'}
+  }
+}
+layer {
+  name:"Node_1000"
+  type:"cast"
+  top:"Node_1000"
+  bottom:"Node_999"
+  layer_param {
+    idx:1000
+    in_0 {name:"Node_999:0",dtype:int32,shape:[1, 16, 28, 28, 8]}
+    out_0 {name:"Node_1000:0",dtype:int8,shape:[1, 16, 28, 28, 8]}
+    attrs {'dtype': 'int8'}
+  }
+}
+layer {
+  name:"Node_1001"
+  type:"function"
+  top:"Node_1001"
+  bottom:"p0_51"
+  bottom:"p1_43"
+  bottom:"p2_18"
+  bottom:"Node_1000"
+  layer_param {
+    idx:1001
+    in_0 {name:"p0:0",dtype:int8,shape:[1, 16, 28, 28, 8]}
+    in_1 {name:"p1:0",dtype:int32,shape:[1, 16, 1, 1, 8]}
+    in_2 {name:"p2:0",dtype:int32,shape:[1, 16, 1, 1, 8]}
+    in_3 {name:"Node_1000:0",dtype:int8,shape:[1, 16, 28, 28, 8]}
+    out_0 {name:"Node_1001:0",dtype:int8,shape:[1, 16, 28, 28, 8]}
+  }
+}
+layer {
+  name:"p0_52"
+  type:"input"
+  top:"p0_52"
+  layer_param {
+    idx:1002
+    out_0 {name:"p0:0",dtype:int8,shape:[1, 8, 56, 56, 8]}
+  }
+}
+layer {
+  name:"p1_44"
+  type:"input"
+  top:"p1_44"
+  layer_param {
+    idx:1003
+    out_0 {name:"p1:0",dtype:int8,shape:[16, 8, 1, 1, 8, 8]}
+  }
+}
+layer {
+  name:"Node_1012"
+  type:"nn_contrib_conv2d_NCHWc"
+  top:"Node_1012"
+  bottom:"p0_52"
+  bottom:"p1_44"
+  layer_param {
+    idx:1012
+    in_0 {name:"p0:0",dtype:int8,shape:[1, 8, 56, 56, 8]}
+    in_1 {name:"p1:0",dtype:int8,shape:[16, 8, 1, 1, 8, 8]}
+    out_0 {name:"Node_1012:0",dtype:int32,shape:[1, 16, 28, 28, 8]}
+    attrs {'strides': [2, 2], 'padding': [0, 0, 0, 0], 'dilation': [1, 1], 'groups': 1, 'channels': 128, 'kernel_size': [1, 1], 'data_layout': 'NCHW8c', 'kernel_layout': 'OIHW8i8o', 'out_layout': 'NCHW8c', 'out_dtype': 'int32'}
+  }
+}
+layer {
+  name:"Node_1013"
+  type:"cast"
+  top:"Node_1013"
+  bottom:"Node_1012"
+  layer_param {
+    idx:1013
+    in_0 {name:"Node_1012:0",dtype:int32,shape:[1, 16, 28, 28, 8]}
+    out_0 {name:"Node_1013:0",dtype:int64,shape:[1, 16, 28, 28, 8]}
+    attrs {'dtype': 'int64'}
+  }
+}
+layer {
+  name:"Node_1014"
+  type:"fixed_point_multiply"
+  top:"Node_1014"
+  bottom:"Node_1013"
+  layer_param {
+    idx:1014
+    in_0 {name:"Node_1013:0",dtype:int64,shape:[1, 16, 28, 28, 8]}
+    out_0 {name:"Node_1014:0",dtype:int64,shape:[1, 16, 28, 28, 8]}
+  }
+}
+layer {
+  name:"Node_1015"
+  type:"clip"
+  top:"Node_1015"
+  bottom:"Node_1014"
+  layer_param {
+    idx:1015
+    in_0 {name:"Node_1014:0",dtype:int64,shape:[1, 16, 28, 28, 8]}
+    out_0 {name:"Node_1015:0",dtype:int64,shape:[1, 16, 28, 28, 8]}
+    attrs {'a_min': -127.0, 'a_max': 127.0}
+  }
+}
+layer {
+  name:"Node_1016"
+  type:"cast"
+  top:"Node_1016"
+  bottom:"Node_1015"
+  layer_param {
+    idx:1016
+    in_0 {name:"Node_1015:0",dtype:int64,shape:[1, 16, 28, 28, 8]}
+    out_0 {name:"Node_1016:0",dtype:int32,shape:[1, 16, 28, 28, 8]}
+    attrs {'dtype': 'int32'}
+  }
+}
+layer {
+  name:"Node_1017"
+  type:"cast"
+  top:"Node_1017"
+  bottom:"Node_1016"
+  layer_param {
+    idx:1017
+    in_0 {name:"Node_1016:0",dtype:int32,shape:[1, 16, 28, 28, 8]}
+    out_0 {name:"Node_1017:0",dtype:int8,shape:[1, 16, 28, 28, 8]}
+    attrs {'dtype': 'int8'}
+  }
+}
+layer {
+  name:"Node_1018"
+  type:"function"
+  top:"Node_1018"
+  bottom:"p0_52"
+  bottom:"p1_44"
+  bottom:"Node_1017"
+  layer_param {
+    idx:1018
+    in_0 {name:"p0:0",dtype:int8,shape:[1, 8, 56, 56, 8]}
+    in_1 {name:"p1:0",dtype:int8,shape:[16, 8, 1, 1, 8, 8]}
+    in_2 {name:"Node_1017:0",dtype:int8,shape:[1, 16, 28, 28, 8]}
+    out_0 {name:"Node_1018:0",dtype:int8,shape:[1, 16, 28, 28, 8]}
+  }
+}
+layer {
+  name:"Node_1020"
+  type:"const"
+  top:"Node_1020"
+  layer_param {
+    idx:1020
+    out_0 {name:"Node_1020:0",dtype:int8,shape:[16, 8, 1, 1, 8, 8]}
+  }
+}
+layer {
+  name:"Node_1021"
+  type:"func_call"
+  top:"Node_1021"
+  bottom:"Node_968"
+  bottom:"Node_1020"
+  bottom:"Node_1018"
+  layer_param {
+    idx:1021
+    in_0 {name:"Node_968:0",dtype:int8,shape:[1, 8, 56, 56, 8]}
+    in_1 {name:"Node_1020:0",dtype:int8,shape:[16, 8, 1, 1, 8, 8]}
+    in_2 {name:"Node_1018:0",dtype:int8,shape:[1, 16, 28, 28, 8]}
+    out_0 {name:"Node_1021:0",dtype:int8,shape:[1, 16, 28, 28, 8]}
+  }
+}
+layer {
+  name:"Node_1022"
+  type:"const"
+  top:"Node_1022"
+  layer_param {
+    idx:1022
+    out_0 {name:"Node_1022:0",dtype:int32,shape:[1, 16, 1, 1, 8]}
+  }
+}
+layer {
+  name:"Node_1023"
+  type:"const"
+  top:"Node_1023"
+  layer_param {
+    idx:1023
+    out_0 {name:"Node_1023:0",dtype:int32,shape:[1, 16, 1, 1, 8]}
+  }
+}
+layer {
+  name:"Node_1024"
+  type:"func_call"
+  top:"Node_1024"
+  bottom:"Node_1021"
+  bottom:"Node_1022"
+  bottom:"Node_1023"
+  bottom:"Node_1001"
+  layer_param {
+    idx:1024
+    in_0 {name:"Node_1021:0",dtype:int8,shape:[1, 16, 28, 28, 8]}
+    in_1 {name:"Node_1022:0",dtype:int32,shape:[1, 16, 1, 1, 8]}
+    in_2 {name:"Node_1023:0",dtype:int32,shape:[1, 16, 1, 1, 8]}
+    in_3 {name:"Node_1001:0",dtype:int8,shape:[1, 16, 28, 28, 8]}
+    out_0 {name:"Node_1024:0",dtype:int8,shape:[1, 16, 28, 28, 8]}
+  }
+}
+layer {
+  name:"Node_1025"
+  type:"func_call"
+  top:"Node_1025"
+  bottom:"Node_978"
+  bottom:"Node_1024"
+  bottom:"Node_585"
+  layer_param {
+    idx:1025
+    in_0 {name:"Node_978:0",dtype:int8,shape:[1, 16, 28, 28, 8]}
+    in_1 {name:"Node_1024:0",dtype:int8,shape:[1, 16, 28, 28, 8]}
+    in_2 {name:"Node_585:0",dtype:int8,shape:[1, 16, 28, 28, 8]}
+    out_0 {name:"Node_1025:0",dtype:int8,shape:[1, 16, 28, 28, 8]}
+  }
+}
+layer {
+  name:"Node_1026"
+  type:"const"
+  top:"Node_1026"
+  layer_param {
+    idx:1026
+    out_0 {name:"Node_1026:0",dtype:int8,shape:[16, 16, 3, 3, 8, 8]}
+  }
+}
+layer {
+  name:"Node_1027"
+  type:"func_call"
+  top:"Node_1027"
+  bottom:"Node_1025"
+  bottom:"Node_1026"
+  bottom:"Node_560"
+  layer_param {
+    idx:1027
+    in_0 {name:"Node_1025:0",dtype:int8,shape:[1, 16, 28, 28, 8]}
+    in_1 {name:"Node_1026:0",dtype:int8,shape:[16, 16, 3, 3, 8, 8]}
+    in_2 {name:"Node_560:0",dtype:int8,shape:[1, 16, 28, 28, 8]}
+    out_0 {name:"Node_1027:0",dtype:int8,shape:[1, 16, 28, 28, 8]}
+  }
+}
+layer {
+  name:"Node_1028"
+  type:"const"
+  top:"Node_1028"
+  layer_param {
+    idx:1028
+    out_0 {name:"Node_1028:0",dtype:int32,shape:[1, 16, 1, 1, 8]}
+  }
+}
+layer {
+  name:"Node_1029"
+  type:"const"
+  top:"Node_1029"
+  layer_param {
+    idx:1029
+    out_0 {name:"Node_1029:0",dtype:int32,shape:[1, 16, 1, 1, 8]}
+  }
+}
+layer {
+  name:"Node_1030"
+  type:"func_call"
+  top:"Node_1030"
+  bottom:"Node_1027"
+  bottom:"Node_1028"
+  bottom:"Node_1029"
+  bottom:"Node_543"
+  layer_param {
+    idx:1030
+    in_0 {name:"Node_1027:0",dtype:int8,shape:[1, 16, 28, 28, 8]}
+    in_1 {name:"Node_1028:0",dtype:int32,shape:[1, 16, 1, 1, 8]}
+    in_2 {name:"Node_1029:0",dtype:int32,shape:[1, 16, 1, 1, 8]}
+    in_3 {name:"Node_543:0",dtype:int8,shape:[1, 16, 28, 28, 8]}
+    out_0 {name:"Node_1030:0",dtype:int8,shape:[1, 16, 28, 28, 8]}
+  }
+}
+layer {
+  name:"Node_1031"
+  type:"const"
+  top:"Node_1031"
+  layer_param {
+    idx:1031
+    out_0 {name:"Node_1031:0",dtype:int8,shape:[16, 16, 3, 3, 8, 8]}
+  }
+}
+layer {
+  name:"Node_1032"
+  type:"func_call"
+  top:"Node_1032"
+  bottom:"Node_1030"
+  bottom:"Node_1031"
+  bottom:"Node_518"
+  layer_param {
+    idx:1032
+    in_0 {name:"Node_1030:0",dtype:int8,shape:[1, 16, 28, 28, 8]}
+    in_1 {name:"Node_1031:0",dtype:int8,shape:[16, 16, 3, 3, 8, 8]}
+    in_2 {name:"Node_518:0",dtype:int8,shape:[1, 16, 28, 28, 8]}
+    out_0 {name:"Node_1032:0",dtype:int8,shape:[1, 16, 28, 28, 8]}
+  }
+}
+layer {
+  name:"Node_1033"
+  type:"const"
+  top:"Node_1033"
+  layer_param {
+    idx:1033
+    out_0 {name:"Node_1033:0",dtype:int32,shape:[1, 16, 1, 1, 8]}
+  }
+}
+layer {
+  name:"Node_1034"
+  type:"const"
+  top:"Node_1034"
+  layer_param {
+    idx:1034
+    out_0 {name:"Node_1034:0",dtype:int32,shape:[1, 16, 1, 1, 8]}
+  }
+}
+layer {
+  name:"Node_1035"
+  type:"func_call"
+  top:"Node_1035"
+  bottom:"Node_1032"
+  bottom:"Node_1033"
+  bottom:"Node_1034"
+  bottom:"Node_501"
+  layer_param {
+    idx:1035
+    in_0 {name:"Node_1032:0",dtype:int8,shape:[1, 16, 28, 28, 8]}
+    in_1 {name:"Node_1033:0",dtype:int32,shape:[1, 16, 1, 1, 8]}
+    in_2 {name:"Node_1034:0",dtype:int32,shape:[1, 16, 1, 1, 8]}
+    in_3 {name:"Node_501:0",dtype:int8,shape:[1, 16, 28, 28, 8]}
+    out_0 {name:"Node_1035:0",dtype:int8,shape:[1, 16, 28, 28, 8]}
+  }
+}
+layer {
+  name:"Node_1037"
+  type:"func_call"
+  top:"Node_1037"
+  bottom:"Node_1035"
+  bottom:"Node_1025"
+  bottom:"Node_478"
+  layer_param {
+    idx:1037
+    in_0 {name:"Node_1035:0",dtype:int8,shape:[1, 16, 28, 28, 8]}
+    in_1 {name:"Node_1025:0",dtype:int8,shape:[1, 16, 28, 28, 8]}
+    in_2 {name:"Node_478:0",dtype:int8,shape:[1, 16, 28, 28, 8]}
+    out_0 {name:"Node_1037:0",dtype:int8,shape:[1, 16, 28, 28, 8]}
+  }
+}
+layer {
+  name:"Node_1038"
+  type:"const"
+  top:"Node_1038"
+  layer_param {
+    idx:1038
+    out_0 {name:"Node_1038:0",dtype:int8,shape:[32, 16, 3, 3, 8, 8]}
+  }
+}
+layer {
+  name:"Node_1039"
+  type:"func_call"
+  top:"Node_1039"
+  bottom:"Node_1037"
+  bottom:"Node_1038"
+  bottom:"Node_453"
+  layer_param {
+    idx:1039
+    in_0 {name:"Node_1037:0",dtype:int8,shape:[1, 16, 28, 28, 8]}
+    in_1 {name:"Node_1038:0",dtype:int8,shape:[32, 16, 3, 3, 8, 8]}
+    in_2 {name:"Node_453:0",dtype:int8,shape:[1, 32, 14, 14, 8]}
+    out_0 {name:"Node_1039:0",dtype:int8,shape:[1, 32, 14, 14, 8]}
+  }
+}
+layer {
+  name:"Node_1040"
+  type:"const"
+  top:"Node_1040"
+  layer_param {
+    idx:1040
+    out_0 {name:"Node_1040:0",dtype:int32,shape:[1, 32, 1, 1, 8]}
+  }
+}
+layer {
+  name:"Node_1041"
+  type:"const"
+  top:"Node_1041"
+  layer_param {
+    idx:1041
+    out_0 {name:"Node_1041:0",dtype:int32,shape:[1, 32, 1, 1, 8]}
+  }
+}
+layer {
+  name:"Node_1042"
+  type:"func_call"
+  top:"Node_1042"
+  bottom:"Node_1039"
+  bottom:"Node_1040"
+  bottom:"Node_1041"
+  bottom:"Node_436"
+  layer_param {
+    idx:1042
+    in_0 {name:"Node_1039:0",dtype:int8,shape:[1, 32, 14, 14, 8]}
+    in_1 {name:"Node_1040:0",dtype:int32,shape:[1, 32, 1, 1, 8]}
+    in_2 {name:"Node_1041:0",dtype:int32,shape:[1, 32, 1, 1, 8]}
+    in_3 {name:"Node_436:0",dtype:int8,shape:[1, 32, 14, 14, 8]}
+    out_0 {name:"Node_1042:0",dtype:int8,shape:[1, 32, 14, 14, 8]}
+  }
+}
+layer {
+  name:"Node_1043"
+  type:"const"
+  top:"Node_1043"
+  layer_param {
+    idx:1043
+    out_0 {name:"Node_1043:0",dtype:int8,shape:[32, 32, 3, 3, 8, 8]}
+  }
+}
+layer {
+  name:"Node_1044"
+  type:"func_call"
+  top:"Node_1044"
+  bottom:"Node_1042"
+  bottom:"Node_1043"
+  bottom:"Node_411"
+  layer_param {
+    idx:1044
+    in_0 {name:"Node_1042:0",dtype:int8,shape:[1, 32, 14, 14, 8]}
+    in_1 {name:"Node_1043:0",dtype:int8,shape:[32, 32, 3, 3, 8, 8]}
+    in_2 {name:"Node_411:0",dtype:int8,shape:[1, 32, 14, 14, 8]}
+    out_0 {name:"Node_1044:0",dtype:int8,shape:[1, 32, 14, 14, 8]}
+  }
+}
+layer {
+  name:"Node_1045"
+  type:"const"
+  top:"Node_1045"
+  layer_param {
+    idx:1045
+    out_0 {name:"Node_1045:0",dtype:int32,shape:[1, 32, 1, 1, 8]}
+  }
+}
+layer {
+  name:"Node_1046"
+  type:"const"
+  top:"Node_1046"
+  layer_param {
+    idx:1046
+    out_0 {name:"Node_1046:0",dtype:int32,shape:[1, 32, 1, 1, 8]}
+  }
+}
+layer {
+  name:"Node_1047"
+  type:"func_call"
+  top:"Node_1047"
+  bottom:"Node_1044"
+  bottom:"Node_1045"
+  bottom:"Node_1046"
+  bottom:"Node_394"
+  layer_param {
+    idx:1047
+    in_0 {name:"Node_1044:0",dtype:int8,shape:[1, 32, 14, 14, 8]}
+    in_1 {name:"Node_1045:0",dtype:int32,shape:[1, 32, 1, 1, 8]}
+    in_2 {name:"Node_1046:0",dtype:int32,shape:[1, 32, 1, 1, 8]}
+    in_3 {name:"Node_394:0",dtype:int8,shape:[1, 32, 14, 14, 8]}
+    out_0 {name:"Node_1047:0",dtype:int8,shape:[1, 32, 14, 14, 8]}
+  }
+}
+layer {
+  name:"p0_53"
+  type:"input"
+  top:"p0_53"
+  layer_param {
+    idx:1048
+    out_0 {name:"p0:0",dtype:int8,shape:[1, 32, 14, 14, 8]}
+  }
+}
+layer {
+  name:"p1_45"
+  type:"input"
+  top:"p1_45"
+  layer_param {
+    idx:1049
+    out_0 {name:"p1:0",dtype:int32,shape:[1, 32, 1, 1, 8]}
+  }
+}
+layer {
+  name:"p2_19"
+  type:"input"
+  top:"p2_19"
+  layer_param {
+    idx:1050
+    out_0 {name:"p2:0",dtype:int32,shape:[1, 32, 1, 1, 8]}
+  }
+}
+layer {
+  name:"Node_1060"
+  type:"cast"
+  top:"Node_1060"
+  bottom:"p0_53"
+  layer_param {
+    idx:1060
+    in_0 {name:"p0:0",dtype:int8,shape:[1, 32, 14, 14, 8]}
+    out_0 {name:"Node_1060:0",dtype:int32,shape:[1, 32, 14, 14, 8]}
+    attrs {'dtype': 'int32'}
+  }
+}
+layer {
+  name:"Node_1062"
+  type:"multiply"
+  top:"Node_1062"
+  bottom:"Node_1060"
+  bottom:"p1_45"
+  layer_param {
+    idx:1062
+    in_0 {name:"Node_1060:0",dtype:int32,shape:[1, 32, 14, 14, 8]}
+    in_1 {name:"p1:0",dtype:int32,shape:[1, 32, 1, 1, 8]}
+    out_0 {name:"Node_1062:0",dtype:int32,shape:[1, 32, 14, 14, 8]}
+  }
+}
+layer {
+  name:"Node_1064"
+  type:"add"
+  top:"Node_1064"
+  bottom:"Node_1062"
+  bottom:"p2_19"
+  layer_param {
+    idx:1064
+    in_0 {name:"Node_1062:0",dtype:int32,shape:[1, 32, 14, 14, 8]}
+    in_1 {name:"p2:0",dtype:int32,shape:[1, 32, 1, 1, 8]}
+    out_0 {name:"Node_1064:0",dtype:int32,shape:[1, 32, 14, 14, 8]}
+  }
+}
+layer {
+  name:"Node_1065"
+  type:"cast"
+  top:"Node_1065"
+  bottom:"Node_1064"
+  layer_param {
+    idx:1065
+    in_0 {name:"Node_1064:0",dtype:int32,shape:[1, 32, 14, 14, 8]}
+    out_0 {name:"Node_1065:0",dtype:int64,shape:[1, 32, 14, 14, 8]}
+    attrs {'dtype': 'int64'}
+  }
+}
+layer {
+  name:"Node_1066"
+  type:"fixed_point_multiply"
+  top:"Node_1066"
+  bottom:"Node_1065"
+  layer_param {
+    idx:1066
+    in_0 {name:"Node_1065:0",dtype:int64,shape:[1, 32, 14, 14, 8]}
+    out_0 {name:"Node_1066:0",dtype:int64,shape:[1, 32, 14, 14, 8]}
+  }
+}
+layer {
+  name:"Node_1067"
+  type:"clip"
+  top:"Node_1067"
+  bottom:"Node_1066"
+  layer_param {
+    idx:1067
+    in_0 {name:"Node_1066:0",dtype:int64,shape:[1, 32, 14, 14, 8]}
+    out_0 {name:"Node_1067:0",dtype:int64,shape:[1, 32, 14, 14, 8]}
+    attrs {'a_min': -127.0, 'a_max': 127.0}
+  }
+}
+layer {
+  name:"Node_1068"
+  type:"cast"
+  top:"Node_1068"
+  bottom:"Node_1067"
+  layer_param {
+    idx:1068
+    in_0 {name:"Node_1067:0",dtype:int64,shape:[1, 32, 14, 14, 8]}
+    out_0 {name:"Node_1068:0",dtype:int32,shape:[1, 32, 14, 14, 8]}
+    attrs {'dtype': 'int32'}
+  }
+}
+layer {
+  name:"Node_1069"
+  type:"cast"
+  top:"Node_1069"
+  bottom:"Node_1068"
+  layer_param {
+    idx:1069
+    in_0 {name:"Node_1068:0",dtype:int32,shape:[1, 32, 14, 14, 8]}
+    out_0 {name:"Node_1069:0",dtype:int8,shape:[1, 32, 14, 14, 8]}
+    attrs {'dtype': 'int8'}
+  }
+}
+layer {
+  name:"Node_1070"
+  type:"function"
+  top:"Node_1070"
+  bottom:"p0_53"
+  bottom:"p1_45"
+  bottom:"p2_19"
+  bottom:"Node_1069"
+  layer_param {
+    idx:1070
+    in_0 {name:"p0:0",dtype:int8,shape:[1, 32, 14, 14, 8]}
+    in_1 {name:"p1:0",dtype:int32,shape:[1, 32, 1, 1, 8]}
+    in_2 {name:"p2:0",dtype:int32,shape:[1, 32, 1, 1, 8]}
+    in_3 {name:"Node_1069:0",dtype:int8,shape:[1, 32, 14, 14, 8]}
+    out_0 {name:"Node_1070:0",dtype:int8,shape:[1, 32, 14, 14, 8]}
+  }
+}
+layer {
+  name:"p0_54"
+  type:"input"
+  top:"p0_54"
+  layer_param {
+    idx:1071
+    out_0 {name:"p0:0",dtype:int8,shape:[1, 16, 28, 28, 8]}
+  }
+}
+layer {
+  name:"p1_46"
+  type:"input"
+  top:"p1_46"
+  layer_param {
+    idx:1072
+    out_0 {name:"p1:0",dtype:int8,shape:[32, 16, 1, 1, 8, 8]}
+  }
+}
+layer {
+  name:"Node_1081"
+  type:"nn_contrib_conv2d_NCHWc"
+  top:"Node_1081"
+  bottom:"p0_54"
+  bottom:"p1_46"
+  layer_param {
+    idx:1081
+    in_0 {name:"p0:0",dtype:int8,shape:[1, 16, 28, 28, 8]}
+    in_1 {name:"p1:0",dtype:int8,shape:[32, 16, 1, 1, 8, 8]}
+    out_0 {name:"Node_1081:0",dtype:int32,shape:[1, 32, 14, 14, 8]}
+    attrs {'strides': [2, 2], 'padding': [0, 0, 0, 0], 'dilation': [1, 1], 'groups': 1, 'channels': 256, 'kernel_size': [1, 1], 'data_layout': 'NCHW8c', 'kernel_layout': 'OIHW8i8o', 'out_layout': 'NCHW8c', 'out_dtype': 'int32'}
+  }
+}
+layer {
+  name:"Node_1082"
+  type:"cast"
+  top:"Node_1082"
+  bottom:"Node_1081"
+  layer_param {
+    idx:1082
+    in_0 {name:"Node_1081:0",dtype:int32,shape:[1, 32, 14, 14, 8]}
+    out_0 {name:"Node_1082:0",dtype:int64,shape:[1, 32, 14, 14, 8]}
+    attrs {'dtype': 'int64'}
+  }
+}
+layer {
+  name:"Node_1083"
+  type:"fixed_point_multiply"
+  top:"Node_1083"
+  bottom:"Node_1082"
+  layer_param {
+    idx:1083
+    in_0 {name:"Node_1082:0",dtype:int64,shape:[1, 32, 14, 14, 8]}
+    out_0 {name:"Node_1083:0",dtype:int64,shape:[1, 32, 14, 14, 8]}
+  }
+}
+layer {
+  name:"Node_1084"
+  type:"clip"
+  top:"Node_1084"
+  bottom:"Node_1083"
+  layer_param {
+    idx:1084
+    in_0 {name:"Node_1083:0",dtype:int64,shape:[1, 32, 14, 14, 8]}
+    out_0 {name:"Node_1084:0",dtype:int64,shape:[1, 32, 14, 14, 8]}
+    attrs {'a_min': -127.0, 'a_max': 127.0}
+  }
+}
+layer {
+  name:"Node_1085"
+  type:"cast"
+  top:"Node_1085"
+  bottom:"Node_1084"
+  layer_param {
+    idx:1085
+    in_0 {name:"Node_1084:0",dtype:int64,shape:[1, 32, 14, 14, 8]}
+    out_0 {name:"Node_1085:0",dtype:int32,shape:[1, 32, 14, 14, 8]}
+    attrs {'dtype': 'int32'}
+  }
+}
+layer {
+  name:"Node_1086"
+  type:"cast"
+  top:"Node_1086"
+  bottom:"Node_1085"
+  layer_param {
+    idx:1086
+    in_0 {name:"Node_1085:0",dtype:int32,shape:[1, 32, 14, 14, 8]}
+    out_0 {name:"Node_1086:0",dtype:int8,shape:[1, 32, 14, 14, 8]}
+    attrs {'dtype': 'int8'}
+  }
+}
+layer {
+  name:"Node_1087"
+  type:"function"
+  top:"Node_1087"
+  bottom:"p0_54"
+  bottom:"p1_46"
+  bottom:"Node_1086"
+  layer_param {
+    idx:1087
+    in_0 {name:"p0:0",dtype:int8,shape:[1, 16, 28, 28, 8]}
+    in_1 {name:"p1:0",dtype:int8,shape:[32, 16, 1, 1, 8, 8]}
+    in_2 {name:"Node_1086:0",dtype:int8,shape:[1, 32, 14, 14, 8]}
+    out_0 {name:"Node_1087:0",dtype:int8,shape:[1, 32, 14, 14, 8]}
+  }
+}
+layer {
+  name:"Node_1089"
+  type:"const"
+  top:"Node_1089"
+  layer_param {
+    idx:1089
+    out_0 {name:"Node_1089:0",dtype:int8,shape:[32, 16, 1, 1, 8, 8]}
+  }
+}
+layer {
+  name:"Node_1090"
+  type:"func_call"
+  top:"Node_1090"
+  bottom:"Node_1037"
+  bottom:"Node_1089"
+  bottom:"Node_1087"
+  layer_param {
+    idx:1090
+    in_0 {name:"Node_1037:0",dtype:int8,shape:[1, 16, 28, 28, 8]}
+    in_1 {name:"Node_1089:0",dtype:int8,shape:[32, 16, 1, 1, 8, 8]}
+    in_2 {name:"Node_1087:0",dtype:int8,shape:[1, 32, 14, 14, 8]}
+    out_0 {name:"Node_1090:0",dtype:int8,shape:[1, 32, 14, 14, 8]}
+  }
+}
+layer {
+  name:"Node_1091"
+  type:"const"
+  top:"Node_1091"
+  layer_param {
+    idx:1091
+    out_0 {name:"Node_1091:0",dtype:int32,shape:[1, 32, 1, 1, 8]}
+  }
+}
+layer {
+  name:"Node_1092"
+  type:"const"
+  top:"Node_1092"
+  layer_param {
+    idx:1092
+    out_0 {name:"Node_1092:0",dtype:int32,shape:[1, 32, 1, 1, 8]}
+  }
+}
+layer {
+  name:"Node_1093"
+  type:"func_call"
+  top:"Node_1093"
+  bottom:"Node_1090"
+  bottom:"Node_1091"
+  bottom:"Node_1092"
+  bottom:"Node_1070"
+  layer_param {
+    idx:1093
+    in_0 {name:"Node_1090:0",dtype:int8,shape:[1, 32, 14, 14, 8]}
+    in_1 {name:"Node_1091:0",dtype:int32,shape:[1, 32, 1, 1, 8]}
+    in_2 {name:"Node_1092:0",dtype:int32,shape:[1, 32, 1, 1, 8]}
+    in_3 {name:"Node_1070:0",dtype:int8,shape:[1, 32, 14, 14, 8]}
+    out_0 {name:"Node_1093:0",dtype:int8,shape:[1, 32, 14, 14, 8]}
+  }
+}
+layer {
+  name:"Node_1094"
+  type:"func_call"
+  top:"Node_1094"
+  bottom:"Node_1047"
+  bottom:"Node_1093"
+  bottom:"Node_371"
+  layer_param {
+    idx:1094
+    in_0 {name:"Node_1047:0",dtype:int8,shape:[1, 32, 14, 14, 8]}
+    in_1 {name:"Node_1093:0",dtype:int8,shape:[1, 32, 14, 14, 8]}
+    in_2 {name:"Node_371:0",dtype:int8,shape:[1, 32, 14, 14, 8]}
+    out_0 {name:"Node_1094:0",dtype:int8,shape:[1, 32, 14, 14, 8]}
+  }
+}
+layer {
+  name:"Node_1095"
+  type:"const"
+  top:"Node_1095"
+  layer_param {
+    idx:1095
+    out_0 {name:"Node_1095:0",dtype:int8,shape:[32, 32, 3, 3, 8, 8]}
+  }
+}
+layer {
+  name:"Node_1096"
+  type:"func_call"
+  top:"Node_1096"
+  bottom:"Node_1094"
+  bottom:"Node_1095"
+  bottom:"Node_346"
+  layer_param {
+    idx:1096
+    in_0 {name:"Node_1094:0",dtype:int8,shape:[1, 32, 14, 14, 8]}
+    in_1 {name:"Node_1095:0",dtype:int8,shape:[32, 32, 3, 3, 8, 8]}
+    in_2 {name:"Node_346:0",dtype:int8,shape:[1, 32, 14, 14, 8]}
+    out_0 {name:"Node_1096:0",dtype:int8,shape:[1, 32, 14, 14, 8]}
+  }
+}
+layer {
+  name:"Node_1097"
+  type:"const"
+  top:"Node_1097"
+  layer_param {
+    idx:1097
+    out_0 {name:"Node_1097:0",dtype:int32,shape:[1, 32, 1, 1, 8]}
+  }
+}
+layer {
+  name:"Node_1098"
+  type:"const"
+  top:"Node_1098"
+  layer_param {
+    idx:1098
+    out_0 {name:"Node_1098:0",dtype:int32,shape:[1, 32, 1, 1, 8]}
+  }
+}
+layer {
+  name:"Node_1099"
+  type:"func_call"
+  top:"Node_1099"
+  bottom:"Node_1096"
+  bottom:"Node_1097"
+  bottom:"Node_1098"
+  bottom:"Node_329"
+  layer_param {
+    idx:1099
+    in_0 {name:"Node_1096:0",dtype:int8,shape:[1, 32, 14, 14, 8]}
+    in_1 {name:"Node_1097:0",dtype:int32,shape:[1, 32, 1, 1, 8]}
+    in_2 {name:"Node_1098:0",dtype:int32,shape:[1, 32, 1, 1, 8]}
+    in_3 {name:"Node_329:0",dtype:int8,shape:[1, 32, 14, 14, 8]}
+    out_0 {name:"Node_1099:0",dtype:int8,shape:[1, 32, 14, 14, 8]}
+  }
+}
+layer {
+  name:"Node_1100"
+  type:"const"
+  top:"Node_1100"
+  layer_param {
+    idx:1100
+    out_0 {name:"Node_1100:0",dtype:int8,shape:[32, 32, 3, 3, 8, 8]}
+  }
+}
+layer {
+  name:"Node_1101"
+  type:"func_call"
+  top:"Node_1101"
+  bottom:"Node_1099"
+  bottom:"Node_1100"
+  bottom:"Node_304"
+  layer_param {
+    idx:1101
+    in_0 {name:"Node_1099:0",dtype:int8,shape:[1, 32, 14, 14, 8]}
+    in_1 {name:"Node_1100:0",dtype:int8,shape:[32, 32, 3, 3, 8, 8]}
+    in_2 {name:"Node_304:0",dtype:int8,shape:[1, 32, 14, 14, 8]}
+    out_0 {name:"Node_1101:0",dtype:int8,shape:[1, 32, 14, 14, 8]}
+  }
+}
+layer {
+  name:"Node_1102"
+  type:"const"
+  top:"Node_1102"
+  layer_param {
+    idx:1102
+    out_0 {name:"Node_1102:0",dtype:int32,shape:[1, 32, 1, 1, 8]}
+  }
+}
+layer {
+  name:"Node_1103"
+  type:"const"
+  top:"Node_1103"
+  layer_param {
+    idx:1103
+    out_0 {name:"Node_1103:0",dtype:int32,shape:[1, 32, 1, 1, 8]}
+  }
+}
+layer {
+  name:"Node_1104"
+  type:"func_call"
+  top:"Node_1104"
+  bottom:"Node_1101"
+  bottom:"Node_1102"
+  bottom:"Node_1103"
+  bottom:"Node_287"
+  layer_param {
+    idx:1104
+    in_0 {name:"Node_1101:0",dtype:int8,shape:[1, 32, 14, 14, 8]}
+    in_1 {name:"Node_1102:0",dtype:int32,shape:[1, 32, 1, 1, 8]}
+    in_2 {name:"Node_1103:0",dtype:int32,shape:[1, 32, 1, 1, 8]}
+    in_3 {name:"Node_287:0",dtype:int8,shape:[1, 32, 14, 14, 8]}
+    out_0 {name:"Node_1104:0",dtype:int8,shape:[1, 32, 14, 14, 8]}
+  }
+}
+layer {
+  name:"Node_1106"
+  type:"func_call"
+  top:"Node_1106"
+  bottom:"Node_1104"
+  bottom:"Node_1094"
+  bottom:"Node_264"
+  layer_param {
+    idx:1106
+    in_0 {name:"Node_1104:0",dtype:int8,shape:[1, 32, 14, 14, 8]}
+    in_1 {name:"Node_1094:0",dtype:int8,shape:[1, 32, 14, 14, 8]}
+    in_2 {name:"Node_264:0",dtype:int8,shape:[1, 32, 14, 14, 8]}
+    out_0 {name:"Node_1106:0",dtype:int8,shape:[1, 32, 14, 14, 8]}
+  }
+}
+layer {
+  name:"Node_1107"
+  type:"const"
+  top:"Node_1107"
+  layer_param {
+    idx:1107
+    out_0 {name:"Node_1107:0",dtype:int8,shape:[64, 32, 3, 3, 8, 8]}
+  }
+}
+layer {
+  name:"Node_1108"
+  type:"func_call"
+  top:"Node_1108"
+  bottom:"Node_1106"
+  bottom:"Node_1107"
+  bottom:"Node_239"
+  layer_param {
+    idx:1108
+    in_0 {name:"Node_1106:0",dtype:int8,shape:[1, 32, 14, 14, 8]}
+    in_1 {name:"Node_1107:0",dtype:int8,shape:[64, 32, 3, 3, 8, 8]}
+    in_2 {name:"Node_239:0",dtype:int8,shape:[1, 64, 7, 7, 8]}
+    out_0 {name:"Node_1108:0",dtype:int8,shape:[1, 64, 7, 7, 8]}
+  }
+}
+layer {
+  name:"Node_1109"
+  type:"const"
+  top:"Node_1109"
+  layer_param {
+    idx:1109
+    out_0 {name:"Node_1109:0",dtype:int32,shape:[1, 64, 1, 1, 8]}
+  }
+}
+layer {
+  name:"Node_1110"
+  type:"const"
+  top:"Node_1110"
+  layer_param {
+    idx:1110
+    out_0 {name:"Node_1110:0",dtype:int32,shape:[1, 64, 1, 1, 8]}
+  }
+}
+layer {
+  name:"Node_1111"
+  type:"func_call"
+  top:"Node_1111"
+  bottom:"Node_1108"
+  bottom:"Node_1109"
+  bottom:"Node_1110"
+  bottom:"Node_222"
+  layer_param {
+    idx:1111
+    in_0 {name:"Node_1108:0",dtype:int8,shape:[1, 64, 7, 7, 8]}
+    in_1 {name:"Node_1109:0",dtype:int32,shape:[1, 64, 1, 1, 8]}
+    in_2 {name:"Node_1110:0",dtype:int32,shape:[1, 64, 1, 1, 8]}
+    in_3 {name:"Node_222:0",dtype:int8,shape:[1, 64, 7, 7, 8]}
+    out_0 {name:"Node_1111:0",dtype:int8,shape:[1, 64, 7, 7, 8]}
+  }
+}
+layer {
+  name:"Node_1112"
+  type:"const"
+  top:"Node_1112"
+  layer_param {
+    idx:1112
+    out_0 {name:"Node_1112:0",dtype:int8,shape:[64, 64, 3, 3, 8, 8]}
+  }
+}
+layer {
+  name:"Node_1113"
+  type:"func_call"
+  top:"Node_1113"
+  bottom:"Node_1111"
+  bottom:"Node_1112"
+  bottom:"Node_197"
+  layer_param {
+    idx:1113
+    in_0 {name:"Node_1111:0",dtype:int8,shape:[1, 64, 7, 7, 8]}
+    in_1 {name:"Node_1112:0",dtype:int8,shape:[64, 64, 3, 3, 8, 8]}
+    in_2 {name:"Node_197:0",dtype:int8,shape:[1, 64, 7, 7, 8]}
+    out_0 {name:"Node_1113:0",dtype:int8,shape:[1, 64, 7, 7, 8]}
+  }
+}
+layer {
+  name:"Node_1114"
+  type:"const"
+  top:"Node_1114"
+  layer_param {
+    idx:1114
+    out_0 {name:"Node_1114:0",dtype:int32,shape:[1, 64, 1, 1, 8]}
+  }
+}
+layer {
+  name:"Node_1115"
+  type:"const"
+  top:"Node_1115"
+  layer_param {
+    idx:1115
+    out_0 {name:"Node_1115:0",dtype:int32,shape:[1, 64, 1, 1, 8]}
+  }
+}
+layer {
+  name:"Node_1116"
+  type:"func_call"
+  top:"Node_1116"
+  bottom:"Node_1113"
+  bottom:"Node_1114"
+  bottom:"Node_1115"
+  bottom:"Node_180"
+  layer_param {
+    idx:1116
+    in_0 {name:"Node_1113:0",dtype:int8,shape:[1, 64, 7, 7, 8]}
+    in_1 {name:"Node_1114:0",dtype:int32,shape:[1, 64, 1, 1, 8]}
+    in_2 {name:"Node_1115:0",dtype:int32,shape:[1, 64, 1, 1, 8]}
+    in_3 {name:"Node_180:0",dtype:int8,shape:[1, 64, 7, 7, 8]}
+    out_0 {name:"Node_1116:0",dtype:int8,shape:[1, 64, 7, 7, 8]}
+  }
+}
+layer {
+  name:"p0_55"
+  type:"input"
+  top:"p0_55"
+  layer_param {
+    idx:1117
+    out_0 {name:"p0:0",dtype:int8,shape:[1, 64, 7, 7, 8]}
+  }
+}
+layer {
+  name:"p1_47"
+  type:"input"
+  top:"p1_47"
+  layer_param {
+    idx:1118
+    out_0 {name:"p1:0",dtype:int32,shape:[1, 64, 1, 1, 8]}
+  }
+}
+layer {
+  name:"p2_20"
+  type:"input"
+  top:"p2_20"
+  layer_param {
+    idx:1119
+    out_0 {name:"p2:0",dtype:int32,shape:[1, 64, 1, 1, 8]}
+  }
+}
+layer {
+  name:"Node_1129"
+  type:"cast"
+  top:"Node_1129"
+  bottom:"p0_55"
+  layer_param {
+    idx:1129
+    in_0 {name:"p0:0",dtype:int8,shape:[1, 64, 7, 7, 8]}
+    out_0 {name:"Node_1129:0",dtype:int32,shape:[1, 64, 7, 7, 8]}
+    attrs {'dtype': 'int32'}
+  }
+}
+layer {
+  name:"Node_1131"
+  type:"multiply"
+  top:"Node_1131"
+  bottom:"Node_1129"
+  bottom:"p1_47"
+  layer_param {
+    idx:1131
+    in_0 {name:"Node_1129:0",dtype:int32,shape:[1, 64, 7, 7, 8]}
+    in_1 {name:"p1:0",dtype:int32,shape:[1, 64, 1, 1, 8]}
+    out_0 {name:"Node_1131:0",dtype:int32,shape:[1, 64, 7, 7, 8]}
+  }
+}
+layer {
+  name:"Node_1133"
+  type:"add"
+  top:"Node_1133"
+  bottom:"Node_1131"
+  bottom:"p2_20"
+  layer_param {
+    idx:1133
+    in_0 {name:"Node_1131:0",dtype:int32,shape:[1, 64, 7, 7, 8]}
+    in_1 {name:"p2:0",dtype:int32,shape:[1, 64, 1, 1, 8]}
+    out_0 {name:"Node_1133:0",dtype:int32,shape:[1, 64, 7, 7, 8]}
+  }
+}
+layer {
+  name:"Node_1134"
+  type:"cast"
+  top:"Node_1134"
+  bottom:"Node_1133"
+  layer_param {
+    idx:1134
+    in_0 {name:"Node_1133:0",dtype:int32,shape:[1, 64, 7, 7, 8]}
+    out_0 {name:"Node_1134:0",dtype:int64,shape:[1, 64, 7, 7, 8]}
+    attrs {'dtype': 'int64'}
+  }
+}
+layer {
+  name:"Node_1135"
+  type:"fixed_point_multiply"
+  top:"Node_1135"
+  bottom:"Node_1134"
+  layer_param {
+    idx:1135
+    in_0 {name:"Node_1134:0",dtype:int64,shape:[1, 64, 7, 7, 8]}
+    out_0 {name:"Node_1135:0",dtype:int64,shape:[1, 64, 7, 7, 8]}
+  }
+}
+layer {
+  name:"Node_1136"
+  type:"clip"
+  top:"Node_1136"
+  bottom:"Node_1135"
+  layer_param {
+    idx:1136
+    in_0 {name:"Node_1135:0",dtype:int64,shape:[1, 64, 7, 7, 8]}
+    out_0 {name:"Node_1136:0",dtype:int64,shape:[1, 64, 7, 7, 8]}
+    attrs {'a_min': -127.0, 'a_max': 127.0}
+  }
+}
+layer {
+  name:"Node_1137"
+  type:"cast"
+  top:"Node_1137"
+  bottom:"Node_1136"
+  layer_param {
+    idx:1137
+    in_0 {name:"Node_1136:0",dtype:int64,shape:[1, 64, 7, 7, 8]}
+    out_0 {name:"Node_1137:0",dtype:int32,shape:[1, 64, 7, 7, 8]}
+    attrs {'dtype': 'int32'}
+  }
+}
+layer {
+  name:"Node_1138"
+  type:"cast"
+  top:"Node_1138"
+  bottom:"Node_1137"
+  layer_param {
+    idx:1138
+    in_0 {name:"Node_1137:0",dtype:int32,shape:[1, 64, 7, 7, 8]}
+    out_0 {name:"Node_1138:0",dtype:int8,shape:[1, 64, 7, 7, 8]}
+    attrs {'dtype': 'int8'}
+  }
+}
+layer {
+  name:"Node_1139"
+  type:"function"
+  top:"Node_1139"
+  bottom:"p0_55"
+  bottom:"p1_47"
+  bottom:"p2_20"
+  bottom:"Node_1138"
+  layer_param {
+    idx:1139
+    in_0 {name:"p0:0",dtype:int8,shape:[1, 64, 7, 7, 8]}
+    in_1 {name:"p1:0",dtype:int32,shape:[1, 64, 1, 1, 8]}
+    in_2 {name:"p2:0",dtype:int32,shape:[1, 64, 1, 1, 8]}
+    in_3 {name:"Node_1138:0",dtype:int8,shape:[1, 64, 7, 7, 8]}
+    out_0 {name:"Node_1139:0",dtype:int8,shape:[1, 64, 7, 7, 8]}
+  }
+}
+layer {
+  name:"p0_56"
+  type:"input"
+  top:"p0_56"
+  layer_param {
+    idx:1140
+    out_0 {name:"p0:0",dtype:int8,shape:[1, 32, 14, 14, 8]}
+  }
+}
+layer {
+  name:"p1_48"
+  type:"input"
+  top:"p1_48"
+  layer_param {
+    idx:1141
+    out_0 {name:"p1:0",dtype:int8,shape:[64, 32, 1, 1, 8, 8]}
+  }
+}
+layer {
+  name:"Node_1150"
+  type:"nn_contrib_conv2d_NCHWc"
+  top:"Node_1150"
+  bottom:"p0_56"
+  bottom:"p1_48"
+  layer_param {
+    idx:1150
+    in_0 {name:"p0:0",dtype:int8,shape:[1, 32, 14, 14, 8]}
+    in_1 {name:"p1:0",dtype:int8,shape:[64, 32, 1, 1, 8, 8]}
+    out_0 {name:"Node_1150:0",dtype:int32,shape:[1, 64, 7, 7, 8]}
+    attrs {'strides': [2, 2], 'padding': [0, 0, 0, 0], 'dilation': [1, 1], 'groups': 1, 'channels': 512, 'kernel_size': [1, 1], 'data_layout': 'NCHW8c', 'kernel_layout': 'OIHW8i8o', 'out_layout': 'NCHW8c', 'out_dtype': 'int32'}
+  }
+}
+layer {
+  name:"Node_1151"
+  type:"cast"
+  top:"Node_1151"
+  bottom:"Node_1150"
+  layer_param {
+    idx:1151
+    in_0 {name:"Node_1150:0",dtype:int32,shape:[1, 64, 7, 7, 8]}
+    out_0 {name:"Node_1151:0",dtype:int64,shape:[1, 64, 7, 7, 8]}
+    attrs {'dtype': 'int64'}
+  }
+}
+layer {
+  name:"Node_1152"
+  type:"fixed_point_multiply"
+  top:"Node_1152"
+  bottom:"Node_1151"
+  layer_param {
+    idx:1152
+    in_0 {name:"Node_1151:0",dtype:int64,shape:[1, 64, 7, 7, 8]}
+    out_0 {name:"Node_1152:0",dtype:int64,shape:[1, 64, 7, 7, 8]}
+  }
+}
+layer {
+  name:"Node_1153"
+  type:"clip"
+  top:"Node_1153"
+  bottom:"Node_1152"
+  layer_param {
+    idx:1153
+    in_0 {name:"Node_1152:0",dtype:int64,shape:[1, 64, 7, 7, 8]}
+    out_0 {name:"Node_1153:0",dtype:int64,shape:[1, 64, 7, 7, 8]}
+    attrs {'a_min': -127.0, 'a_max': 127.0}
+  }
+}
+layer {
+  name:"Node_1154"
+  type:"cast"
+  top:"Node_1154"
+  bottom:"Node_1153"
+  layer_param {
+    idx:1154
+    in_0 {name:"Node_1153:0",dtype:int64,shape:[1, 64, 7, 7, 8]}
+    out_0 {name:"Node_1154:0",dtype:int32,shape:[1, 64, 7, 7, 8]}
+    attrs {'dtype': 'int32'}
+  }
+}
+layer {
+  name:"Node_1155"
+  type:"cast"
+  top:"Node_1155"
+  bottom:"Node_1154"
+  layer_param {
+    idx:1155
+    in_0 {name:"Node_1154:0",dtype:int32,shape:[1, 64, 7, 7, 8]}
+    out_0 {name:"Node_1155:0",dtype:int8,shape:[1, 64, 7, 7, 8]}
+    attrs {'dtype': 'int8'}
+  }
+}
+layer {
+  name:"Node_1156"
+  type:"function"
+  top:"Node_1156"
+  bottom:"p0_56"
+  bottom:"p1_48"
+  bottom:"Node_1155"
+  layer_param {
+    idx:1156
+    in_0 {name:"p0:0",dtype:int8,shape:[1, 32, 14, 14, 8]}
+    in_1 {name:"p1:0",dtype:int8,shape:[64, 32, 1, 1, 8, 8]}
+    in_2 {name:"Node_1155:0",dtype:int8,shape:[1, 64, 7, 7, 8]}
+    out_0 {name:"Node_1156:0",dtype:int8,shape:[1, 64, 7, 7, 8]}
+  }
+}
+layer {
+  name:"Node_1158"
+  type:"const"
+  top:"Node_1158"
+  layer_param {
+    idx:1158
+    out_0 {name:"Node_1158:0",dtype:int8,shape:[64, 32, 1, 1, 8, 8]}
+  }
+}
+layer {
+  name:"Node_1159"
+  type:"func_call"
+  top:"Node_1159"
+  bottom:"Node_1106"
+  bottom:"Node_1158"
+  bottom:"Node_1156"
+  layer_param {
+    idx:1159
+    in_0 {name:"Node_1106:0",dtype:int8,shape:[1, 32, 14, 14, 8]}
+    in_1 {name:"Node_1158:0",dtype:int8,shape:[64, 32, 1, 1, 8, 8]}
+    in_2 {name:"Node_1156:0",dtype:int8,shape:[1, 64, 7, 7, 8]}
+    out_0 {name:"Node_1159:0",dtype:int8,shape:[1, 64, 7, 7, 8]}
+  }
+}
+layer {
+  name:"Node_1160"
+  type:"const"
+  top:"Node_1160"
+  layer_param {
+    idx:1160
+    out_0 {name:"Node_1160:0",dtype:int32,shape:[1, 64, 1, 1, 8]}
+  }
+}
+layer {
+  name:"Node_1161"
+  type:"const"
+  top:"Node_1161"
+  layer_param {
+    idx:1161
+    out_0 {name:"Node_1161:0",dtype:int32,shape:[1, 64, 1, 1, 8]}
+  }
+}
+layer {
+  name:"Node_1162"
+  type:"func_call"
+  top:"Node_1162"
+  bottom:"Node_1159"
+  bottom:"Node_1160"
+  bottom:"Node_1161"
+  bottom:"Node_1139"
+  layer_param {
+    idx:1162
+    in_0 {name:"Node_1159:0",dtype:int8,shape:[1, 64, 7, 7, 8]}
+    in_1 {name:"Node_1160:0",dtype:int32,shape:[1, 64, 1, 1, 8]}
+    in_2 {name:"Node_1161:0",dtype:int32,shape:[1, 64, 1, 1, 8]}
+    in_3 {name:"Node_1139:0",dtype:int8,shape:[1, 64, 7, 7, 8]}
+    out_0 {name:"Node_1162:0",dtype:int8,shape:[1, 64, 7, 7, 8]}
+  }
+}
+layer {
+  name:"Node_1163"
+  type:"func_call"
+  top:"Node_1163"
+  bottom:"Node_1116"
+  bottom:"Node_1162"
+  bottom:"Node_157"
+  layer_param {
+    idx:1163
+    in_0 {name:"Node_1116:0",dtype:int8,shape:[1, 64, 7, 7, 8]}
+    in_1 {name:"Node_1162:0",dtype:int8,shape:[1, 64, 7, 7, 8]}
+    in_2 {name:"Node_157:0",dtype:int8,shape:[1, 64, 7, 7, 8]}
+    out_0 {name:"Node_1163:0",dtype:int8,shape:[1, 64, 7, 7, 8]}
+  }
+}
+layer {
+  name:"Node_1164"
+  type:"const"
+  top:"Node_1164"
+  layer_param {
+    idx:1164
+    out_0 {name:"Node_1164:0",dtype:int8,shape:[64, 64, 3, 3, 8, 8]}
+  }
+}
+layer {
+  name:"Node_1165"
+  type:"func_call"
+  top:"Node_1165"
+  bottom:"Node_1163"
+  bottom:"Node_1164"
+  bottom:"Node_132"
+  layer_param {
+    idx:1165
+    in_0 {name:"Node_1163:0",dtype:int8,shape:[1, 64, 7, 7, 8]}
+    in_1 {name:"Node_1164:0",dtype:int8,shape:[64, 64, 3, 3, 8, 8]}
+    in_2 {name:"Node_132:0",dtype:int8,shape:[1, 64, 7, 7, 8]}
+    out_0 {name:"Node_1165:0",dtype:int8,shape:[1, 64, 7, 7, 8]}
+  }
+}
+layer {
+  name:"Node_1166"
+  type:"const"
+  top:"Node_1166"
+  layer_param {
+    idx:1166
+    out_0 {name:"Node_1166:0",dtype:int32,shape:[1, 64, 1, 1, 8]}
+  }
+}
+layer {
+  name:"Node_1167"
+  type:"const"
+  top:"Node_1167"
+  layer_param {
+    idx:1167
+    out_0 {name:"Node_1167:0",dtype:int32,shape:[1, 64, 1, 1, 8]}
+  }
+}
+layer {
+  name:"Node_1168"
+  type:"func_call"
+  top:"Node_1168"
+  bottom:"Node_1165"
+  bottom:"Node_1166"
+  bottom:"Node_1167"
+  bottom:"Node_115"
+  layer_param {
+    idx:1168
+    in_0 {name:"Node_1165:0",dtype:int8,shape:[1, 64, 7, 7, 8]}
+    in_1 {name:"Node_1166:0",dtype:int32,shape:[1, 64, 1, 1, 8]}
+    in_2 {name:"Node_1167:0",dtype:int32,shape:[1, 64, 1, 1, 8]}
+    in_3 {name:"Node_115:0",dtype:int8,shape:[1, 64, 7, 7, 8]}
+    out_0 {name:"Node_1168:0",dtype:int8,shape:[1, 64, 7, 7, 8]}
+  }
+}
+layer {
+  name:"Node_1169"
+  type:"const"
+  top:"Node_1169"
+  layer_param {
+    idx:1169
+    out_0 {name:"Node_1169:0",dtype:int8,shape:[64, 64, 3, 3, 8, 8]}
+  }
+}
+layer {
+  name:"Node_1170"
+  type:"func_call"
+  top:"Node_1170"
+  bottom:"Node_1168"
+  bottom:"Node_1169"
+  bottom:"Node_90"
+  layer_param {
+    idx:1170
+    in_0 {name:"Node_1168:0",dtype:int8,shape:[1, 64, 7, 7, 8]}
+    in_1 {name:"Node_1169:0",dtype:int8,shape:[64, 64, 3, 3, 8, 8]}
+    in_2 {name:"Node_90:0",dtype:int8,shape:[1, 64, 7, 7, 8]}
+    out_0 {name:"Node_1170:0",dtype:int8,shape:[1, 64, 7, 7, 8]}
+  }
+}
+layer {
+  name:"Node_1171"
+  type:"const"
+  top:"Node_1171"
+  layer_param {
+    idx:1171
+    out_0 {name:"Node_1171:0",dtype:int32,shape:[1, 64, 1, 1, 8]}
+  }
+}
+layer {
+  name:"Node_1172"
+  type:"const"
+  top:"Node_1172"
+  layer_param {
+    idx:1172
+    out_0 {name:"Node_1172:0",dtype:int32,shape:[1, 64, 1, 1, 8]}
+  }
+}
+layer {
+  name:"Node_1173"
+  type:"func_call"
+  top:"Node_1173"
+  bottom:"Node_1170"
+  bottom:"Node_1171"
+  bottom:"Node_1172"
+  bottom:"Node_73"
+  layer_param {
+    idx:1173
+    in_0 {name:"Node_1170:0",dtype:int8,shape:[1, 64, 7, 7, 8]}
+    in_1 {name:"Node_1171:0",dtype:int32,shape:[1, 64, 1, 1, 8]}
+    in_2 {name:"Node_1172:0",dtype:int32,shape:[1, 64, 1, 1, 8]}
+    in_3 {name:"Node_73:0",dtype:int8,shape:[1, 64, 7, 7, 8]}
+    out_0 {name:"Node_1173:0",dtype:int8,shape:[1, 64, 7, 7, 8]}
+  }
+}
+layer {
+  name:"Node_1175"
+  type:"func_call"
+  top:"Node_1175"
+  bottom:"Node_1173"
+  bottom:"Node_1163"
+  bottom:"Node_50"
+  layer_param {
+    idx:1175
+    in_0 {name:"Node_1173:0",dtype:int8,shape:[1, 64, 7, 7, 8]}
+    in_1 {name:"Node_1163:0",dtype:int8,shape:[1, 64, 7, 7, 8]}
+    in_2 {name:"Node_50:0",dtype:int8,shape:[1, 64, 7, 7, 8]}
+    out_0 {name:"Node_1175:0",dtype:int8,shape:[1, 64, 7, 7, 8]}
+  }
+}
+layer {
+  name:"Node_1176"
+  type:"func_call"
+  top:"Node_1176"
+  bottom:"Node_1175"
+  bottom:"Node_33"
+  layer_param {
+    idx:1176
+    in_0 {name:"Node_1175:0",dtype:int8,shape:[1, 64, 7, 7, 8]}
+    in_1 {name:"Node_33:0",dtype:float32,shape:[1, 64, 7, 7, 8]}
+    out_0 {name:"Node_1176:0",dtype:float32,shape:[1, 64, 7, 7, 8]}
+  }
+}
+layer {
+  name:"Node_1177"
+  type:"func_call"
+  top:"Node_1177"
+  bottom:"Node_1176"
+  bottom:"Node_25"
+  layer_param {
+    idx:1177
+    in_0 {name:"Node_1176:0",dtype:float32,shape:[1, 64, 7, 7, 8]}
+    in_1 {name:"Node_25:0",dtype:float32,shape:[1, 64, 1, 1, 8]}
+    out_0 {name:"Node_1177:0",dtype:float32,shape:[1, 64, 1, 1, 8]}
+  }
+}
+layer {
+  name:"Node_1178"
+  type:"func_call"
+  top:"Node_1178"
+  bottom:"Node_1177"
+  bottom:"Node_20"
+  layer_param {
+    idx:1178
+    in_0 {name:"Node_1177:0",dtype:float32,shape:[1, 64, 1, 1, 8]}
+    in_1 {name:"Node_20:0",dtype:float32,shape:[1, 512]}
+    out_0 {name:"Node_1178:0",dtype:float32,shape:[1, 512]}
+  }
+}
+layer {
+  name:"Node_1179"
+  type:"const"
+  top:"Node_1179"
+  layer_param {
+    idx:1179
+    out_0 {name:"Node_1179:0",dtype:float32,shape:[100, 512, 10]}
+  }
+}
+layer {
+  name:"Node_1180"
+  type:"const"
+  top:"Node_1180"
+  layer_param {
+    idx:1180
+    out_0 {name:"Node_1180:0",dtype:float32,shape:[1000]}
+  }
+}
+layer {
+  name:"Node_1181"
+  type:"func_call"
+  top:"Node_1181"
+  bottom:"Node_1178"
+  bottom:"Node_1179"
+  bottom:"Node_1180"
+  bottom:"Node_11"
+  layer_param {
+    idx:1181
+    in_0 {name:"Node_1178:0",dtype:float32,shape:[1, 512]}
+    in_1 {name:"Node_1179:0",dtype:float32,shape:[100, 512, 10]}
+    in_2 {name:"Node_1180:0",dtype:float32,shape:[1000]}
+    in_3 {name:"Node_11:0",dtype:float32,shape:[1, 1000]}
+    out_0 {name:"Node_1181:0",dtype:float32,shape:[1, 1000]}
+  }
+}
+layer {
+  name:"Node_1182"
+  type:"function"
+  top:"Node_1182"
+  bottom:"input0"
+  bottom:"Node_1181"
+  layer_param {
+    idx:1182
+    in_0 {name:"input0:0",dtype:float32,shape:[1, 3, 224, 224]}
+    in_1 {name:"Node_1181:0",dtype:float32,shape:[1, 1000]}
+    out_0 {name:"Node_1182:0",dtype:float32,shape:[1, 1000]}
+  }
+}
