@@ -1,0 +1,576 @@
+name : "prim_expr"
+layer {
+  name:"Apad"
+  type:"buffer(node)"
+  top:"Apad"
+  layer_param {
+    idx:0
+    buffer_name:"Apad"
+    shape:[1028, 1028]
+    dtype:float32
+  }
+}
+layer {
+  name:"yy"
+  type:"var(a)"
+  top:"yy"
+  layer_param {
+    idx:1
+    dtype:int32
+  }
+}
+layer {
+  name:"Node_2"
+  type:"int(b)"
+  top:"Node_2"
+  layer_param {
+    idx:2
+    value:2
+    dtype:int32
+  }
+}
+layer {
+  name:"Node_3"
+  type:"greater_equal(a)"
+  top:"Node_3"
+  bottom:"yy"
+  bottom:"Node_2"
+  layer_param {
+    idx:3
+  }
+}
+layer {
+  name:"Node_4"
+  type:"int(b)"
+  top:"Node_4"
+  layer_param {
+    idx:4
+    value:1026
+    dtype:int32
+  }
+}
+layer {
+  name:"Node_5"
+  type:"less_than(b)"
+  top:"Node_5"
+  bottom:"yy"
+  bottom:"Node_4"
+  layer_param {
+    idx:5
+  }
+}
+layer {
+  name:"Node_6"
+  type:"and(a)"
+  top:"Node_6"
+  bottom:"Node_3"
+  bottom:"Node_5"
+  layer_param {
+    idx:6
+  }
+}
+layer {
+  name:"xx"
+  type:"var(a)"
+  top:"xx"
+  layer_param {
+    idx:7
+    dtype:int32
+  }
+}
+layer {
+  name:"Node_8"
+  type:"greater_equal(b)"
+  top:"Node_8"
+  bottom:"xx"
+  bottom:"Node_2"
+  layer_param {
+    idx:8
+  }
+}
+layer {
+  name:"Node_9"
+  type:"and(a)"
+  top:"Node_9"
+  bottom:"Node_6"
+  bottom:"Node_8"
+  layer_param {
+    idx:9
+  }
+}
+layer {
+  name:"Node_10"
+  type:"less_than(b)"
+  top:"Node_10"
+  bottom:"xx"
+  bottom:"Node_4"
+  layer_param {
+    idx:10
+  }
+}
+layer {
+  name:"Node_11"
+  type:"and"
+  top:"Node_11"
+  bottom:"Node_9"
+  bottom:"Node_10"
+  layer_param {
+    idx:11
+  }
+}
+layer {
+  name:"A"
+  type:"buffer(buffer)"
+  top:"A"
+  layer_param {
+    idx:12
+    buffer_name:"A"
+    shape:[1024, 1024]
+    dtype:float32
+  }
+}
+layer {
+  name:"Node_13"
+  type:"sub(indice)"
+  top:"Node_13"
+  bottom:"yy"
+  bottom:"Node_2"
+  layer_param {
+    idx:13
+  }
+}
+layer {
+  name:"Node_14"
+  type:"sub(indice)"
+  top:"Node_14"
+  bottom:"xx"
+  bottom:"Node_2"
+  layer_param {
+    idx:14
+  }
+}
+layer {
+  name:"Node_15"
+  type:"buffer_load"
+  top:"Node_15"
+  bottom:"A"
+  bottom:"Node_13"
+  bottom:"Node_14"
+  layer_param {
+    idx:15
+  }
+}
+layer {
+  name:"Node_16"
+  type:"float"
+  top:"Node_16"
+  layer_param {
+    idx:16
+    value:0.0
+    dtype:float32
+  }
+}
+layer {
+  name:"Node_17"
+  type:"Call_tir.if_then_else(value)"
+  top:"Node_17"
+  bottom:"Node_11"
+  bottom:"Node_15"
+  bottom:"Node_16"
+  layer_param {
+    idx:17
+  }
+}
+layer {
+  name:"Node_18"
+  type:"buffer_store"
+  top:"Node_18"
+  bottom:"Apad"
+  bottom:"Node_17"
+  layer_param {
+    idx:18
+    value_00:"@tir.if_then_else(((((yy: int32 >= 2) && (yy < 1026)) && (xx: int32 >= 2)) && (xx < 1026)), A: Buffer(A_1: Pointer(float32), float32, [1024, 1024], [])[(yy - 2), (xx - 2)], 0f32, dtype=float32)"
+    indices_00:"[yy, xx]"
+  }
+}
+layer {
+  name:"Node_19"
+  type:"for"
+  top:"Node_19"
+  bottom:"Node_18"
+  layer_param {
+    idx:19
+    kind:0
+    body_00:"Apad[yy, xx] = tir.if_then_else(((((yy >= 2) && (yy < 1026)) && (xx >= 2)) && (xx < 1026)), A[(yy - 2), (xx - 2)], 0f)"
+  }
+}
+layer {
+  name:"Node_20"
+  type:"for(seq_0)"
+  top:"Node_20"
+  bottom:"Node_19"
+  layer_param {
+    idx:20
+    kind:0
+    body_00:"for (xx, 0, 1028)"
+    body_01:" Apad[yy, xx] = tir.if_then_else(((((yy >= 2) && (yy < 1026)) && (xx >= 2)) && (xx < 1026)), A[(yy - 2), (xx - 2)], 0f)"
+  }
+}
+layer {
+  name:"B"
+  type:"buffer(node)"
+  top:"B"
+  layer_param {
+    idx:21
+    buffer_name:"B"
+    shape:[1026, 1026]
+    dtype:float32
+  }
+}
+layer {
+  name:"Node_22"
+  type:"float(value)"
+  top:"Node_22"
+  layer_param {
+    idx:22
+    value:0.0
+    dtype:float32
+  }
+}
+layer {
+  name:"Node_23"
+  type:"buffer_store(seq_0)"
+  top:"Node_23"
+  bottom:"B"
+  bottom:"Node_22"
+  layer_param {
+    idx:23
+    value_00:"0f32"
+    indices_00:"[yy, xx]"
+  }
+}
+layer {
+  name:"yy_1"
+  type:"var(indice)"
+  top:"yy_1"
+  layer_param {
+    idx:24
+    dtype:int32
+  }
+}
+layer {
+  name:"xx_1"
+  type:"var(indice)"
+  top:"xx_1"
+  layer_param {
+    idx:25
+    dtype:int32
+  }
+}
+layer {
+  name:"Node_26"
+  type:"buffer_load(a)"
+  top:"Node_26"
+  bottom:"B"
+  bottom:"yy_1"
+  bottom:"xx_1"
+  layer_param {
+    idx:26
+  }
+}
+layer {
+  name:"ry"
+  type:"var(b)"
+  top:"ry"
+  layer_param {
+    idx:27
+    dtype:int32
+  }
+}
+layer {
+  name:"Node_28"
+  type:"add(indice)"
+  top:"Node_28"
+  bottom:"yy_1"
+  bottom:"ry"
+  layer_param {
+    idx:28
+  }
+}
+layer {
+  name:"rx"
+  type:"var(b)"
+  top:"rx"
+  layer_param {
+    idx:29
+    dtype:int32
+  }
+}
+layer {
+  name:"Node_30"
+  type:"add(indice)"
+  top:"Node_30"
+  bottom:"xx_1"
+  bottom:"rx"
+  layer_param {
+    idx:30
+  }
+}
+layer {
+  name:"Node_31"
+  type:"buffer_load(a)"
+  top:"Node_31"
+  bottom:"Apad"
+  bottom:"Node_28"
+  bottom:"Node_30"
+  layer_param {
+    idx:31
+  }
+}
+layer {
+  name:"W"
+  type:"buffer(buffer)"
+  top:"W"
+  layer_param {
+    idx:32
+    buffer_name:"W"
+    shape:[3, 3]
+    dtype:float32
+  }
+}
+layer {
+  name:"Node_33"
+  type:"buffer_load(b)"
+  top:"Node_33"
+  bottom:"W"
+  bottom:"ry"
+  bottom:"rx"
+  layer_param {
+    idx:33
+  }
+}
+layer {
+  name:"Node_34"
+  type:"mul(b)"
+  top:"Node_34"
+  bottom:"Node_31"
+  bottom:"Node_33"
+  layer_param {
+    idx:34
+  }
+}
+layer {
+  name:"Node_35"
+  type:"add(value)"
+  top:"Node_35"
+  bottom:"Node_26"
+  bottom:"Node_34"
+  layer_param {
+    idx:35
+  }
+}
+layer {
+  name:"Node_36"
+  type:"buffer_store"
+  top:"Node_36"
+  bottom:"B"
+  bottom:"Node_35"
+  layer_param {
+    idx:36
+    value_00:"(B: Buffer(B_1: Pointer(float32), float32, [1026, 1026], [])[yy: int32, xx: int32] + (Apad: Buffer(Apad_1: Pointer(float32), float32, [1028, 1028], [])[(yy + ry: int32), (xx + rx: int32)]*W: Buffer(W_1: Pointer(float32), float32, [3, 3], [])[ry, rx]))"
+    indices_00:"[yy, xx]"
+  }
+}
+layer {
+  name:"Node_37"
+  type:"for"
+  top:"Node_37"
+  bottom:"Node_36"
+  layer_param {
+    idx:37
+    kind:0
+    body_00:"B[yy, xx] = (B[yy, xx] + (Apad[(yy + ry), (xx + rx)]*W[ry, rx]))"
+  }
+}
+layer {
+  name:"Node_38"
+  type:"for(seq_1)"
+  top:"Node_38"
+  bottom:"Node_37"
+  layer_param {
+    idx:38
+    kind:0
+    body_00:"for (rx, 0, 3)"
+    body_01:" B[yy, xx] = (B[yy, xx] + (Apad[(yy + ry), (xx + rx)]*W[ry, rx]))"
+  }
+}
+layer {
+  name:"Node_39"
+  type:"seq"
+  top:"Node_39"
+  bottom:"Node_23"
+  bottom:"Node_38"
+  layer_param {
+    idx:39
+    seq_00:"[B[yy, xx] = 0f"
+    seq_01:" , for (ry, 0, 3)"
+    seq_02:"  for (rx, 0, 3)"
+    seq_03:"   B[yy, xx] = (B[yy, xx] + (Apad[(yy + ry), (xx + rx)]*W[ry, rx]))"
+    seq_04:"    ]"
+  }
+}
+layer {
+  name:"Node_40"
+  type:"for"
+  top:"Node_40"
+  bottom:"Node_39"
+  layer_param {
+    idx:40
+    kind:0
+    body_00:"B[yy, xx] = 0f"
+    body_01:" for (ry, 0, 3)"
+    body_02:"  for (rx, 0, 3)"
+    body_03:"   B[yy, xx] = (B[yy, xx] + (Apad[(yy + ry), (xx + rx)]*W[ry, rx]))"
+  }
+}
+layer {
+  name:"Node_41"
+  type:"for"
+  top:"Node_41"
+  bottom:"Node_40"
+  layer_param {
+    idx:41
+    kind:0
+    body_00:"for (xx, 0, 1026)"
+    body_01:" B[yy, xx] = 0f"
+    body_02:"  for (ry, 0, 3)"
+    body_03:"   for (rx, 0, 3)"
+    body_04:"    B[yy, xx] = (B[yy, xx] + (Apad[(yy + ry), (xx + rx)]*W[ry, rx]))"
+  }
+}
+layer {
+  name:"Node_42"
+  type:"buffer_realize"
+  top:"Node_42"
+  bottom:"Node_41"
+  layer_param {
+    idx:42
+    condition:True
+    body_00:"for (yy, 0, 1026)"
+    body_01:" for (xx, 0, 1026)"
+    body_02:"  B[yy, xx] = 0f"
+    body_03:"   for (ry, 0, 3)"
+    body_04:"    for (rx, 0, 3)"
+    body_05:"     B[yy, xx] = (B[yy, xx] + (Apad[(yy + ry), (xx + rx)]*W[ry, rx]))"
+    bounds_00:"[range(min=0, ext=1026), range(min=0, ext=1026)]"
+  }
+}
+layer {
+  name:"Node_43"
+  type:"attribute(seq_1)"
+  top:"Node_43"
+  bottom:"B"
+  bottom:"Node_42"
+  layer_param {
+    idx:43
+    attr_key:realize_scope
+    body_00:"buffer_realize B([0, 1026], [0, 1026])"
+    body_01:" for (yy, 0, 1026)"
+    body_02:"  for (xx, 0, 1026)"
+    body_03:"   B[yy, xx] = 0f"
+    body_04:"    for (ry, 0, 3)"
+    body_05:"     for (rx, 0, 3)"
+    body_06:"      B[yy, xx] = (B[yy, xx] + (Apad[(yy + ry), (xx + rx)]*W[ry, rx]))"
+    value_00:"''"
+  }
+}
+layer {
+  name:"Node_44"
+  type:"seq"
+  top:"Node_44"
+  bottom:"Node_20"
+  bottom:"Node_43"
+  layer_param {
+    idx:44
+    seq_00:"[for (yy, 0, 1028)"
+    seq_01:" for (xx, 0, 1028)"
+    seq_02:"  Apad[yy, xx] = tir.if_then_else(((((yy >= 2) && (yy < 1026)) && (xx >= 2)) && (xx < 1026)), A[(yy - 2), (xx - 2)], 0f)"
+    seq_03:"   , // attr [buffer(B, 0x7ff979d7f8b0)] realize_scope = ''"
+    seq_04:"    buffer_realize B([0, 1026], [0, 1026])"
+    seq_05:"     for (yy, 0, 1026)"
+    seq_06:"      for (xx, 0, 1026)"
+    seq_07:"       B[yy, xx] = 0f"
+    seq_08:"        for (ry, 0, 3)"
+    seq_09:"         for (rx, 0, 3)"
+    seq_10:"          B[yy, xx] = (B[yy, xx] + (Apad[(yy + ry), (xx + rx)]*W[ry, rx]))"
+    seq_11:"           ]"
+  }
+}
+layer {
+  name:"Node_45"
+  type:"buffer_realize"
+  top:"Node_45"
+  bottom:"Node_44"
+  layer_param {
+    idx:45
+    condition:True
+    body_00:"for (yy, 0, 1028)"
+    body_01:" for (xx, 0, 1028)"
+    body_02:"  Apad[yy, xx] = tir.if_then_else(((((yy >= 2) && (yy < 1026)) && (xx >= 2)) && (xx < 1026)), A[(yy - 2), (xx - 2)], 0f)"
+    body_03:"   // attr [buffer(B, 0x7ff979d7f8b0)] realize_scope = ''"
+    body_04:"   buffer_realize B([0, 1026], [0, 1026])"
+    body_05:"    for (yy, 0, 1026)"
+    body_06:"     for (xx, 0, 1026)"
+    body_07:"      B[yy, xx] = 0f"
+    body_08:"       for (ry, 0, 3)"
+    body_09:"        for (rx, 0, 3)"
+    body_10:"         B[yy, xx] = (B[yy, xx] + (Apad[(yy + ry), (xx + rx)]*W[ry, rx]))"
+    bounds_00:"[range(min=0, ext=1028), range(min=0, ext=1028)]"
+  }
+}
+layer {
+  name:"Node_46"
+  type:"attribute"
+  top:"Node_46"
+  bottom:"Apad"
+  bottom:"Node_45"
+  layer_param {
+    idx:46
+    attr_key:realize_scope
+    body_00:"buffer_realize Apad([0, 1028], [0, 1028])"
+    body_01:" for (yy, 0, 1028)"
+    body_02:"  for (xx, 0, 1028)"
+    body_03:"   Apad[yy, xx] = tir.if_then_else(((((yy >= 2) && (yy < 1026)) && (xx >= 2)) && (xx < 1026)), A[(yy - 2), (xx - 2)], 0f)"
+    body_04:"    // attr [buffer(B, 0x7ff979d7f8b0)] realize_scope = ''"
+    body_05:"    buffer_realize B([0, 1026], [0, 1026])"
+    body_06:"     for (yy, 0, 1026)"
+    body_07:"      for (xx, 0, 1026)"
+    body_08:"       B[yy, xx] = 0f"
+    body_09:"        for (ry, 0, 3)"
+    body_10:"         for (rx, 0, 3)"
+    body_11:"          B[yy, xx] = (B[yy, xx] + (Apad[(yy + ry), (xx + rx)]*W[ry, rx]))"
+    value_00:"''"
+  }
+}
+layer {
+  name:"Node_47"
+  type:"primfunc"
+  top:"Node_47"
+  bottom:"Node_46"
+  layer_param {
+    idx:47
+    body_00:"// attr [buffer(Apad, 0x7ff979d812d0)] realize_scope = ''"
+    body_01:"buffer_realize Apad([0, 1028], [0, 1028])"
+    body_02:" for (yy, 0, 1028)"
+    body_03:"  for (xx, 0, 1028)"
+    body_04:"   Apad[yy, xx] = tir.if_then_else(((((yy >= 2) && (yy < 1026)) && (xx >= 2)) && (xx < 1026)), A[(yy - 2), (xx - 2)], 0f)"
+    body_05:"    // attr [buffer(B, 0x7ff979d7f8b0)] realize_scope = ''"
+    body_06:"    buffer_realize B([0, 1026], [0, 1026])"
+    body_07:"     for (yy, 0, 1026)"
+    body_08:"      for (xx, 0, 1026)"
+    body_09:"       B[yy, xx] = 0f"
+    body_10:"        for (ry, 0, 3)"
+    body_11:"         for (rx, 0, 3)"
+    body_12:"          B[yy, xx] = (B[yy, xx] + (Apad[(yy + ry), (xx + rx)]*W[ry, rx]))"
+  }
+}

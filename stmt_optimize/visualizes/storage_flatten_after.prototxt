@@ -1,0 +1,335 @@
+name : "prim_expr"
+layer {
+  name:"A"
+  type:"buffer"
+  top:"A"
+  layer_param {
+    idx:0
+    buffer_name:"A"
+    shape:[tindex, tindex]
+    dtype:float32
+  }
+}
+layer {
+  name:"B"
+  type:"buffer"
+  top:"B"
+  layer_param {
+    idx:1
+    buffer_name:"B"
+    shape:[tindex, tindex]
+    dtype:float32
+  }
+}
+layer {
+  name:"C"
+  type:"buffer"
+  top:"C"
+  layer_param {
+    idx:2
+    buffer_name:"C"
+    shape:[tindex, tindex]
+    dtype:float32
+  }
+}
+layer {
+  name:"i"
+  type:"var(loop_var)"
+  top:"i"
+  layer_param {
+    idx:3
+    dtype:int32
+  }
+}
+layer {
+  name:"Node_4"
+  type:"int(for_min)"
+  top:"Node_4"
+  layer_param {
+    idx:4
+    value:0
+    dtype:int32
+  }
+}
+layer {
+  name:"tindex"
+  type:"var(for_extent)"
+  top:"tindex"
+  layer_param {
+    idx:5
+    dtype:int32
+  }
+}
+layer {
+  name:"j"
+  type:"var(loop_var)"
+  top:"j"
+  layer_param {
+    idx:6
+    dtype:int32
+  }
+}
+layer {
+  name:"C_1"
+  type:"var(store_buffer)"
+  top:"C_1"
+  layer_param {
+    idx:7
+    dtype:handle
+  }
+}
+layer {
+  name:"A_1"
+  type:"var(load_buffer)"
+  top:"A_1"
+  layer_param {
+    idx:8
+    dtype:handle
+  }
+}
+layer {
+  name:"stride"
+  type:"var(b)"
+  top:"stride"
+  layer_param {
+    idx:9
+    dtype:int32
+  }
+}
+layer {
+  name:"Node_10"
+  type:"mul(a)"
+  top:"Node_10"
+  bottom:"i"
+  bottom:"stride"
+  layer_param {
+    idx:10
+  }
+}
+layer {
+  name:"stride_1"
+  type:"var(b)"
+  top:"stride_1"
+  layer_param {
+    idx:11
+    dtype:int32
+  }
+}
+layer {
+  name:"Node_12"
+  type:"mul(b)"
+  top:"Node_12"
+  bottom:"j"
+  bottom:"stride_1"
+  layer_param {
+    idx:12
+  }
+}
+layer {
+  name:"Node_13"
+  type:"add(load_index)"
+  top:"Node_13"
+  bottom:"Node_10"
+  bottom:"Node_12"
+  layer_param {
+    idx:13
+  }
+}
+layer {
+  name:"Node_14"
+  type:"load(a)"
+  top:"Node_14"
+  bottom:"A_1"
+  bottom:"Node_13"
+  layer_param {
+    idx:14
+    predicate_00:"True"
+    body_00:"(float32*)A: Pointer(float32)[((i: int32*stride: int32) + (j: int32*stride_1: int32))]"
+  }
+}
+layer {
+  name:"B_1"
+  type:"var(load_buffer)"
+  top:"B_1"
+  layer_param {
+    idx:15
+    dtype:handle
+  }
+}
+layer {
+  name:"stride_2"
+  type:"var(b)"
+  top:"stride_2"
+  layer_param {
+    idx:16
+    dtype:int32
+  }
+}
+layer {
+  name:"Node_17"
+  type:"mul(a)"
+  top:"Node_17"
+  bottom:"i"
+  bottom:"stride_2"
+  layer_param {
+    idx:17
+  }
+}
+layer {
+  name:"stride_3"
+  type:"var(b)"
+  top:"stride_3"
+  layer_param {
+    idx:18
+    dtype:int32
+  }
+}
+layer {
+  name:"Node_19"
+  type:"mul(b)"
+  top:"Node_19"
+  bottom:"j"
+  bottom:"stride_3"
+  layer_param {
+    idx:19
+  }
+}
+layer {
+  name:"Node_20"
+  type:"add(load_index)"
+  top:"Node_20"
+  bottom:"Node_17"
+  bottom:"Node_19"
+  layer_param {
+    idx:20
+  }
+}
+layer {
+  name:"Node_21"
+  type:"load(b)"
+  top:"Node_21"
+  bottom:"B_1"
+  bottom:"Node_20"
+  layer_param {
+    idx:21
+    predicate_00:"True"
+    body_00:"(float32*)B: Pointer(float32)[((i: int32*stride: int32) + (j: int32*stride_1: int32))]"
+  }
+}
+layer {
+  name:"Node_22"
+  type:"add(store_value)"
+  top:"Node_22"
+  bottom:"Node_14"
+  bottom:"Node_21"
+  layer_param {
+    idx:22
+  }
+}
+layer {
+  name:"stride_4"
+  type:"var(b)"
+  top:"stride_4"
+  layer_param {
+    idx:23
+    dtype:int32
+  }
+}
+layer {
+  name:"Node_24"
+  type:"mul(a)"
+  top:"Node_24"
+  bottom:"i"
+  bottom:"stride_4"
+  layer_param {
+    idx:24
+  }
+}
+layer {
+  name:"stride_5"
+  type:"var(b)"
+  top:"stride_5"
+  layer_param {
+    idx:25
+    dtype:int32
+  }
+}
+layer {
+  name:"Node_26"
+  type:"mul(b)"
+  top:"Node_26"
+  bottom:"j"
+  bottom:"stride_5"
+  layer_param {
+    idx:26
+  }
+}
+layer {
+  name:"Node_27"
+  type:"add(store_index)"
+  top:"Node_27"
+  bottom:"Node_24"
+  bottom:"Node_26"
+  layer_param {
+    idx:27
+  }
+}
+layer {
+  name:"Node_28"
+  type:"store"
+  top:"Node_28"
+  bottom:"C_1"
+  bottom:"Node_22"
+  bottom:"Node_27"
+  layer_param {
+    idx:28
+    predicate_00:"True"
+    value_00:"((float32*)A: Pointer(float32)[((i: int32*stride: int32) + (j: int32*stride_1: int32))] + (float32*)B: Pointer(float32)[((i*stride_2: int32) + (j*stride_3: int32))])"
+    index_00:"((i: int32*stride: int32) + (j: int32*stride_1: int32))"
+    body_00:"C[((i*stride) + (j*stride))] = (A[((i*stride) + (j*stride))] + B[((i*stride) + (j*stride))])"
+  }
+}
+layer {
+  name:"Node_29"
+  type:"for"
+  top:"Node_29"
+  bottom:"j"
+  bottom:"Node_4"
+  bottom:"tindex"
+  bottom:"Node_28"
+  layer_param {
+    idx:29
+    kind:0
+    body_00:"C[((i*stride) + (j*stride))] = (A[((i*stride) + (j*stride))] + B[((i*stride) + (j*stride))])"
+  }
+}
+layer {
+  name:"Node_30"
+  type:"for"
+  top:"Node_30"
+  bottom:"i"
+  bottom:"Node_4"
+  bottom:"tindex"
+  bottom:"Node_29"
+  layer_param {
+    idx:30
+    kind:0
+    body_00:"for (j, 0, tindex)"
+    body_01:" C[((i*stride) + (j*stride))] = (A[((i*stride) + (j*stride))] + B[((i*stride) + (j*stride))])"
+  }
+}
+layer {
+  name:"Node_31"
+  type:"primfunc"
+  top:"Node_31"
+  bottom:"A"
+  bottom:"B"
+  bottom:"C"
+  bottom:"Node_30"
+  layer_param {
+    idx:31
+    body_00:"for (i, 0, tindex)"
+    body_01:" for (j, 0, tindex)"
+    body_02:"  C[((i*stride) + (j*stride))] = (A[((i*stride) + (j*stride))] + B[((i*stride) + (j*stride))])"
+  }
+}

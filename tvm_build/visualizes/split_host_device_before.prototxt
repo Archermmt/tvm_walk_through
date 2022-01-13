@@ -1,0 +1,2832 @@
+name : "prim_expr"
+layer {
+  name:"arg0"
+  type:"var(var)"
+  top:"arg0"
+  layer_param {
+    idx:0
+    dtype:handle
+  }
+}
+layer {
+  name:"Node_1"
+  type:"tir_tvm_struct_get(value)"
+  top:"Node_1"
+  layer_param {
+    idx:1
+    body:"@tir.tvm_struct_get(args: handle, 0, 12, dtype=handle)"
+  }
+}
+layer {
+  name:"arg0.code"
+  type:"var(var)"
+  top:"arg0.code"
+  layer_param {
+    idx:2
+    dtype:int32
+  }
+}
+layer {
+  name:"arg_type_ids"
+  type:"var(load_buffer)"
+  top:"arg_type_ids"
+  layer_param {
+    idx:3
+    dtype:handle
+  }
+}
+layer {
+  name:"Node_4"
+  type:"int(load_index)"
+  top:"Node_4"
+  layer_param {
+    idx:4
+    value:0
+    dtype:int32
+  }
+}
+layer {
+  name:"Node_5"
+  type:"load(value)"
+  top:"Node_5"
+  bottom:"arg_type_ids"
+  bottom:"Node_4"
+  layer_param {
+    idx:5
+    predicate:"True"
+    body:"(int32*)arg_type_ids: handle[0]"
+  }
+}
+layer {
+  name:"arg1"
+  type:"var(var)"
+  top:"arg1"
+  layer_param {
+    idx:6
+    dtype:handle
+  }
+}
+layer {
+  name:"Node_7"
+  type:"tir_tvm_struct_get(value)"
+  top:"Node_7"
+  layer_param {
+    idx:7
+    body:"@tir.tvm_struct_get(args: handle, 1, 12, dtype=handle)"
+  }
+}
+layer {
+  name:"arg1.code"
+  type:"var(var)"
+  top:"arg1.code"
+  layer_param {
+    idx:8
+    dtype:int32
+  }
+}
+layer {
+  name:"Node_9"
+  type:"int(load_index)"
+  top:"Node_9"
+  layer_param {
+    idx:9
+    value:1
+    dtype:int32
+  }
+}
+layer {
+  name:"Node_10"
+  type:"load(value)"
+  top:"Node_10"
+  bottom:"arg_type_ids"
+  bottom:"Node_9"
+  layer_param {
+    idx:10
+    predicate:"True"
+    body:"(int32*)arg_type_ids: handle[1]"
+  }
+}
+layer {
+  name:"arg2"
+  type:"var(var)"
+  top:"arg2"
+  layer_param {
+    idx:11
+    dtype:handle
+  }
+}
+layer {
+  name:"Node_12"
+  type:"tir_tvm_struct_get(value)"
+  top:"Node_12"
+  layer_param {
+    idx:12
+    body:"@tir.tvm_struct_get(args: handle, 2, 12, dtype=handle)"
+  }
+}
+layer {
+  name:"arg2.code"
+  type:"var(var)"
+  top:"arg2.code"
+  layer_param {
+    idx:13
+    dtype:int32
+  }
+}
+layer {
+  name:"Node_14"
+  type:"int(load_index)"
+  top:"Node_14"
+  layer_param {
+    idx:14
+    value:2
+    dtype:int32
+  }
+}
+layer {
+  name:"Node_15"
+  type:"load(value)"
+  top:"Node_15"
+  bottom:"arg_type_ids"
+  bottom:"Node_14"
+  layer_param {
+    idx:15
+    predicate:"True"
+    body:"(int32*)arg_type_ids: handle[2]"
+  }
+}
+layer {
+  name:"arg3"
+  type:"var(var)"
+  top:"arg3"
+  layer_param {
+    idx:16
+    dtype:handle
+  }
+}
+layer {
+  name:"Node_17"
+  type:"tir_tvm_struct_get(value)"
+  top:"Node_17"
+  layer_param {
+    idx:17
+    body:"@tir.tvm_struct_get(args: handle, 3, 12, dtype=handle)"
+  }
+}
+layer {
+  name:"arg3.code"
+  type:"var(var)"
+  top:"arg3.code"
+  layer_param {
+    idx:18
+    dtype:int32
+  }
+}
+layer {
+  name:"Node_19"
+  type:"int(load_index)"
+  top:"Node_19"
+  layer_param {
+    idx:19
+    value:3
+    dtype:int32
+  }
+}
+layer {
+  name:"Node_20"
+  type:"load(value)"
+  top:"Node_20"
+  bottom:"arg_type_ids"
+  bottom:"Node_19"
+  layer_param {
+    idx:20
+    predicate:"True"
+    body:"(int32*)arg_type_ids: handle[3]"
+  }
+}
+layer {
+  name:"placeholder"
+  type:"var(var)"
+  top:"placeholder"
+  layer_param {
+    idx:21
+    dtype:handle
+  }
+}
+layer {
+  name:"Node_22"
+  type:"tir_tvm_struct_get(value)"
+  top:"Node_22"
+  layer_param {
+    idx:22
+    body:"@tir.tvm_struct_get(arg0: handle, 0, 1, dtype=handle)"
+  }
+}
+layer {
+  name:"arg0.shape"
+  type:"var(var)"
+  top:"arg0.shape"
+  layer_param {
+    idx:23
+    dtype:handle
+  }
+}
+layer {
+  name:"Node_24"
+  type:"tir_tvm_struct_get(value)"
+  top:"Node_24"
+  layer_param {
+    idx:24
+    body:"@tir.tvm_struct_get(arg0: handle, 0, 2, dtype=handle)"
+  }
+}
+layer {
+  name:"arg0.strides"
+  type:"var(var)"
+  top:"arg0.strides"
+  layer_param {
+    idx:25
+    dtype:handle
+  }
+}
+layer {
+  name:"Node_26"
+  type:"tir_tvm_struct_get(value)"
+  top:"Node_26"
+  layer_param {
+    idx:26
+    body:"@tir.tvm_struct_get(arg0: handle, 0, 3, dtype=handle)"
+  }
+}
+layer {
+  name:"dev_id"
+  type:"var(var)"
+  top:"dev_id"
+  layer_param {
+    idx:27
+    dtype:int32
+  }
+}
+layer {
+  name:"Node_28"
+  type:"tir_tvm_struct_get(value)"
+  top:"Node_28"
+  layer_param {
+    idx:28
+    body:"@tir.tvm_struct_get(arg0: handle, 0, 9, dtype=int32)"
+  }
+}
+layer {
+  name:"placeholder_1"
+  type:"var(var)"
+  top:"placeholder_1"
+  layer_param {
+    idx:29
+    dtype:handle
+  }
+}
+layer {
+  name:"Node_30"
+  type:"tir_tvm_struct_get(value)"
+  top:"Node_30"
+  layer_param {
+    idx:30
+    body:"@tir.tvm_struct_get(arg1: handle, 0, 1, dtype=handle)"
+  }
+}
+layer {
+  name:"arg1.shape"
+  type:"var(var)"
+  top:"arg1.shape"
+  layer_param {
+    idx:31
+    dtype:handle
+  }
+}
+layer {
+  name:"Node_32"
+  type:"tir_tvm_struct_get(value)"
+  top:"Node_32"
+  layer_param {
+    idx:32
+    body:"@tir.tvm_struct_get(arg1: handle, 0, 2, dtype=handle)"
+  }
+}
+layer {
+  name:"arg1.strides"
+  type:"var(var)"
+  top:"arg1.strides"
+  layer_param {
+    idx:33
+    dtype:handle
+  }
+}
+layer {
+  name:"Node_34"
+  type:"tir_tvm_struct_get(value)"
+  top:"Node_34"
+  layer_param {
+    idx:34
+    body:"@tir.tvm_struct_get(arg1: handle, 0, 3, dtype=handle)"
+  }
+}
+layer {
+  name:"placeholder_2"
+  type:"var(var)"
+  top:"placeholder_2"
+  layer_param {
+    idx:35
+    dtype:handle
+  }
+}
+layer {
+  name:"Node_36"
+  type:"tir_tvm_struct_get(value)"
+  top:"Node_36"
+  layer_param {
+    idx:36
+    body:"@tir.tvm_struct_get(arg2: handle, 0, 1, dtype=handle)"
+  }
+}
+layer {
+  name:"arg2.shape"
+  type:"var(var)"
+  top:"arg2.shape"
+  layer_param {
+    idx:37
+    dtype:handle
+  }
+}
+layer {
+  name:"Node_38"
+  type:"tir_tvm_struct_get(value)"
+  top:"Node_38"
+  layer_param {
+    idx:38
+    body:"@tir.tvm_struct_get(arg2: handle, 0, 2, dtype=handle)"
+  }
+}
+layer {
+  name:"arg2.strides"
+  type:"var(var)"
+  top:"arg2.strides"
+  layer_param {
+    idx:39
+    dtype:handle
+  }
+}
+layer {
+  name:"Node_40"
+  type:"tir_tvm_struct_get(value)"
+  top:"Node_40"
+  layer_param {
+    idx:40
+    body:"@tir.tvm_struct_get(arg2: handle, 0, 3, dtype=handle)"
+  }
+}
+layer {
+  name:"T_add"
+  type:"var(var)"
+  top:"T_add"
+  layer_param {
+    idx:41
+    dtype:handle
+  }
+}
+layer {
+  name:"Node_42"
+  type:"tir_tvm_struct_get(value)"
+  top:"Node_42"
+  layer_param {
+    idx:42
+    body:"@tir.tvm_struct_get(arg3: handle, 0, 1, dtype=handle)"
+  }
+}
+layer {
+  name:"arg3.shape"
+  type:"var(var)"
+  top:"arg3.shape"
+  layer_param {
+    idx:43
+    dtype:handle
+  }
+}
+layer {
+  name:"Node_44"
+  type:"tir_tvm_struct_get(value)"
+  top:"Node_44"
+  layer_param {
+    idx:44
+    body:"@tir.tvm_struct_get(arg3: handle, 0, 2, dtype=handle)"
+  }
+}
+layer {
+  name:"arg3.strides"
+  type:"var(var)"
+  top:"arg3.strides"
+  layer_param {
+    idx:45
+    dtype:handle
+  }
+}
+layer {
+  name:"Node_46"
+  type:"tir_tvm_struct_get(value)"
+  top:"Node_46"
+  layer_param {
+    idx:46
+    body:"@tir.tvm_struct_get(arg3: handle, 0, 3, dtype=handle)"
+  }
+}
+layer {
+  name:"Node_47"
+  type:"evaluate"
+  top:"Node_47"
+  bottom:"Node_4"
+  layer_param {
+    idx:47
+  }
+}
+layer {
+  name:"Node_48"
+  type:"assert(true)"
+  top:"Node_48"
+  bottom:"Node_47"
+  layer_param {
+    idx:48
+    condition:"((1 == cast(int32, (int64*)arg0.strides: handle[1])) && (512 == cast(int32, (int64*)arg0.strides[0])))"
+    message:"'arg0.strides: expected to be compact array'"
+  }
+}
+layer {
+  name:"Node_49"
+  type:"ifthenelse(seq_0)"
+  top:"Node_49"
+  bottom:"Node_48"
+  layer_param {
+    idx:49
+    condition:"!@tir.isnullptr(arg0.strides: handle, dtype=bool)"
+  }
+}
+layer {
+  name:"Node_50"
+  type:"evaluate"
+  top:"Node_50"
+  bottom:"Node_4"
+  layer_param {
+    idx:50
+  }
+}
+layer {
+  name:"Node_51"
+  type:"assert(true)"
+  top:"Node_51"
+  bottom:"Node_50"
+  layer_param {
+    idx:51
+    condition:"((1 == cast(int32, (int64*)arg1.strides: handle[1])) && (512 == cast(int32, (int64*)arg1.strides[0])))"
+    message:"'arg1.strides: expected to be compact array'"
+  }
+}
+layer {
+  name:"Node_52"
+  type:"ifthenelse(seq_0)"
+  top:"Node_52"
+  bottom:"Node_51"
+  layer_param {
+    idx:52
+    condition:"!@tir.isnullptr(arg1.strides: handle, dtype=bool)"
+  }
+}
+layer {
+  name:"Node_53"
+  type:"evaluate"
+  top:"Node_53"
+  bottom:"Node_4"
+  layer_param {
+    idx:53
+  }
+}
+layer {
+  name:"Node_54"
+  type:"assert(true)"
+  top:"Node_54"
+  bottom:"Node_53"
+  layer_param {
+    idx:54
+    condition:"(1 == cast(int32, (int64*)arg2.strides: handle[0]))"
+    message:"'arg2.strides: expected to be compact array'"
+  }
+}
+layer {
+  name:"Node_55"
+  type:"ifthenelse(seq_0)"
+  top:"Node_55"
+  bottom:"Node_54"
+  layer_param {
+    idx:55
+    condition:"!@tir.isnullptr(arg2.strides: handle, dtype=bool)"
+  }
+}
+layer {
+  name:"Node_56"
+  type:"evaluate"
+  top:"Node_56"
+  bottom:"Node_4"
+  layer_param {
+    idx:56
+  }
+}
+layer {
+  name:"Node_57"
+  type:"assert(true)"
+  top:"Node_57"
+  bottom:"Node_56"
+  layer_param {
+    idx:57
+    condition:"((1 == cast(int32, (int64*)arg3.strides: handle[1])) && (1000 == cast(int32, (int64*)arg3.strides[0])))"
+    message:"'arg3.strides: expected to be compact array'"
+  }
+}
+layer {
+  name:"Node_58"
+  type:"ifthenelse(seq_0)"
+  top:"Node_58"
+  bottom:"Node_57"
+  layer_param {
+    idx:58
+    condition:"!@tir.isnullptr(arg3.strides: handle, dtype=bool)"
+  }
+}
+layer {
+  name:"Node_59"
+  type:"tir_tvm_call_packed(value)"
+  top:"Node_59"
+  layer_param {
+    idx:59
+    body:"@tir.tvm_call_packed('__tvm_set_device', 2, dev_id: int32, dtype=int32)"
+  }
+}
+layer {
+  name:"Node_60"
+  type:"evaluate(seq_0)"
+  top:"Node_60"
+  bottom:"Node_59"
+  layer_param {
+    idx:60
+  }
+}
+layer {
+  name:"blockIdx.y"
+  type:"var(iter)"
+  top:"blockIdx.y"
+  layer_param {
+    idx:61
+    dtype:int32
+  }
+}
+layer {
+  name:"Node_62"
+  type:"itervar(node)"
+  top:"Node_62"
+  bottom:"blockIdx.y"
+  layer_param {
+    idx:62
+    dom:"None"
+    iter_type:"1"
+    thread_tag:"blockIdx.y"
+  }
+}
+layer {
+  name:"T_dense.rf"
+  type:"var(node)"
+  top:"T_dense.rf"
+  layer_param {
+    idx:63
+    dtype:handle
+  }
+}
+layer {
+  name:"red_buf0"
+  type:"var(node)"
+  top:"red_buf0"
+  layer_param {
+    idx:64
+    dtype:handle
+  }
+}
+layer {
+  name:"T_dense"
+  type:"var(node)"
+  top:"T_dense"
+  layer_param {
+    idx:65
+    dtype:handle
+  }
+}
+layer {
+  name:"blockIdx.x"
+  type:"var(iter)"
+  top:"blockIdx.x"
+  layer_param {
+    idx:66
+    dtype:int32
+  }
+}
+layer {
+  name:"Node_67"
+  type:"itervar(node)"
+  top:"Node_67"
+  bottom:"blockIdx.x"
+  layer_param {
+    idx:67
+    dom:"None"
+    iter_type:"1"
+    thread_tag:"blockIdx.x"
+  }
+}
+layer {
+  name:"threadIdx.x"
+  type:"var(iter)"
+  top:"threadIdx.x"
+  layer_param {
+    idx:68
+    dtype:int32
+  }
+}
+layer {
+  name:"Node_69"
+  type:"itervar(node)"
+  top:"Node_69"
+  bottom:"threadIdx.x"
+  layer_param {
+    idx:69
+    dom:"None"
+    iter_type:"1"
+    thread_tag:"threadIdx.x"
+  }
+}
+layer {
+  name:"Node_70"
+  type:"float(store_value)"
+  top:"Node_70"
+  layer_param {
+    idx:70
+    value:0.0
+    dtype:float32
+  }
+}
+layer {
+  name:"Node_71"
+  type:"store(seq_0)"
+  top:"Node_71"
+  bottom:"T_dense.rf"
+  bottom:"Node_70"
+  bottom:"Node_4"
+  layer_param {
+    idx:71
+    predicate:"True"
+    value:"0f32"
+    index:"0"
+    body_:"T_dense.rf[0] = 0f"
+  }
+}
+layer {
+  name:"k.outer"
+  type:"var(loop_var)"
+  top:"k.outer"
+  layer_param {
+    idx:72
+    dtype:int32
+  }
+}
+layer {
+  name:"Node_73"
+  type:"int(for_extent)"
+  top:"Node_73"
+  layer_param {
+    idx:73
+    value:8
+    dtype:int32
+  }
+}
+layer {
+  name:"Node_74"
+  type:"load(a)"
+  top:"Node_74"
+  bottom:"T_dense.rf"
+  bottom:"Node_4"
+  layer_param {
+    idx:74
+    predicate:"True"
+    body:"(float32*)T_dense.rf: Pointer(float32)[0]"
+  }
+}
+layer {
+  name:"Node_75"
+  type:"int(b)"
+  top:"Node_75"
+  layer_param {
+    idx:75
+    value:64
+    dtype:int32
+  }
+}
+layer {
+  name:"Node_76"
+  type:"mul(a)"
+  top:"Node_76"
+  bottom:"k.outer"
+  bottom:"Node_75"
+  layer_param {
+    idx:76
+  }
+}
+layer {
+  name:"Node_77"
+  type:"add(load_index)"
+  top:"Node_77"
+  bottom:"Node_76"
+  bottom:"threadIdx.x"
+  layer_param {
+    idx:77
+  }
+}
+layer {
+  name:"Node_78"
+  type:"load(a)"
+  top:"Node_78"
+  bottom:"placeholder"
+  bottom:"Node_77"
+  layer_param {
+    idx:78
+    predicate:"True"
+    body:"(float32*)placeholder: Pointer(float32)[((k.outer: int32*64) + threadIdx.x: int32)]"
+  }
+}
+layer {
+  name:"Node_79"
+  type:"int(b)"
+  top:"Node_79"
+  layer_param {
+    idx:79
+    value:512
+    dtype:int32
+  }
+}
+layer {
+  name:"Node_80"
+  type:"mul(a)"
+  top:"Node_80"
+  bottom:"blockIdx.x"
+  bottom:"Node_79"
+  layer_param {
+    idx:80
+  }
+}
+layer {
+  name:"Node_81"
+  type:"mul(b)"
+  top:"Node_81"
+  bottom:"k.outer"
+  bottom:"Node_75"
+  layer_param {
+    idx:81
+  }
+}
+layer {
+  name:"Node_82"
+  type:"add(a)"
+  top:"Node_82"
+  bottom:"Node_80"
+  bottom:"Node_81"
+  layer_param {
+    idx:82
+  }
+}
+layer {
+  name:"Node_83"
+  type:"add(load_index)"
+  top:"Node_83"
+  bottom:"Node_82"
+  bottom:"threadIdx.x"
+  layer_param {
+    idx:83
+  }
+}
+layer {
+  name:"Node_84"
+  type:"load(b)"
+  top:"Node_84"
+  bottom:"placeholder_1"
+  bottom:"Node_83"
+  layer_param {
+    idx:84
+    predicate:"True"
+    body:"(float32*)placeholder: Pointer(float32)[(((blockIdx.x: int32*512) + (k.outer: int32*64)) + threadIdx.x: int32)]"
+  }
+}
+layer {
+  name:"Node_85"
+  type:"mul(b)"
+  top:"Node_85"
+  bottom:"Node_78"
+  bottom:"Node_84"
+  layer_param {
+    idx:85
+  }
+}
+layer {
+  name:"Node_86"
+  type:"add(store_value)"
+  top:"Node_86"
+  bottom:"Node_74"
+  bottom:"Node_85"
+  layer_param {
+    idx:86
+  }
+}
+layer {
+  name:"Node_87"
+  type:"store"
+  top:"Node_87"
+  bottom:"T_dense.rf"
+  bottom:"Node_86"
+  bottom:"Node_4"
+  layer_param {
+    idx:87
+    predicate:"True"
+    value:"((float32*)T_dense.rf: Pointer(float32)[0] + ((float32*)placeholder: Pointer(float32)[((k.outer: int32*64) + threadIdx.x: int32)]*(float32*)placeholder_1: Pointer(float32)[(((blockIdx.x: int32*512) + (k.outer*64)) + threadIdx.x)]))"
+    index:"0"
+    body_:"T_dense.rf[0] = (T_dense.rf[0] + (placeholder[((k.outer*64) + threadIdx.x)]*placeholder[(((blockIdx.x*512) + (k.outer*64)) + threadIdx.x)]))"
+  }
+}
+layer {
+  name:"Node_88"
+  type:"for(seq_1)"
+  top:"Node_88"
+  bottom:"k.outer"
+  bottom:"Node_4"
+  bottom:"Node_73"
+  bottom:"Node_87"
+  layer_param {
+    idx:88
+    kind:0
+    body_:"T_dense.rf[0] = (T_dense.rf[0] + (placeholder[((k.outer*64) + threadIdx.x)]*placeholder[(((blockIdx.x*512) + (k.outer*64)) + threadIdx.x)]))"
+  }
+}
+layer {
+  name:"x"
+  type:"var(reduce_l)"
+  top:"x"
+  layer_param {
+    idx:89
+    dtype:float32
+  }
+}
+layer {
+  name:"y"
+  type:"var(reduce_r)"
+  top:"y"
+  layer_param {
+    idx:90
+    dtype:float32
+  }
+}
+layer {
+  name:"Node_91"
+  type:"add(reduce_res)"
+  top:"Node_91"
+  bottom:"x"
+  bottom:"y"
+  layer_param {
+    idx:91
+  }
+}
+layer {
+  name:"Node_92"
+  type:"common_reducer(node)"
+  top:"Node_92"
+  bottom:"x"
+  bottom:"y"
+  bottom:"Node_91"
+  bottom:"Node_70"
+  layer_param {
+    idx:92
+    result:"[(x + y)]"
+  }
+}
+layer {
+  name:"Node_93"
+  type:"tir_tvm_storage_sync(value)"
+  top:"Node_93"
+  layer_param {
+    idx:93
+    body:"@tir.tvm_storage_sync('shared', dtype=int32)"
+  }
+}
+layer {
+  name:"Node_94"
+  type:"evaluate(seq_0)"
+  top:"Node_94"
+  bottom:"Node_93"
+  layer_param {
+    idx:94
+  }
+}
+layer {
+  name:"Node_95"
+  type:"load(store_value)"
+  top:"Node_95"
+  bottom:"T_dense.rf"
+  bottom:"Node_4"
+  layer_param {
+    idx:95
+    predicate:"True"
+    body:"(float32*)T_dense.rf: Pointer(float32)[0]"
+  }
+}
+layer {
+  name:"Node_96"
+  type:"store(seq_1)"
+  top:"Node_96"
+  bottom:"red_buf0"
+  bottom:"Node_95"
+  bottom:"threadIdx.x"
+  layer_param {
+    idx:96
+    predicate:"True"
+    value:"(float32*)T_dense.rf: Pointer(float32)[0]"
+    index:"threadIdx.x: int32"
+    body_:"red_buf0[threadIdx.x] = T_dense.rf[0]"
+  }
+}
+layer {
+  name:"Node_97"
+  type:"tir_tvm_storage_sync(value)"
+  top:"Node_97"
+  layer_param {
+    idx:97
+    body:"@tir.tvm_storage_sync('shared', dtype=int32)"
+  }
+}
+layer {
+  name:"Node_98"
+  type:"evaluate(seq_2)"
+  top:"Node_98"
+  bottom:"Node_97"
+  layer_param {
+    idx:98
+  }
+}
+layer {
+  name:"Node_99"
+  type:"load(a)"
+  top:"Node_99"
+  bottom:"red_buf0"
+  bottom:"threadIdx.x"
+  layer_param {
+    idx:99
+    predicate:"True"
+    body:"(float32*)red_buf0: Pointer(float32)[threadIdx.x: int32]"
+  }
+}
+layer {
+  name:"Node_100"
+  type:"int(b)"
+  top:"Node_100"
+  layer_param {
+    idx:100
+    value:32
+    dtype:int32
+  }
+}
+layer {
+  name:"Node_101"
+  type:"add(load_index)"
+  top:"Node_101"
+  bottom:"threadIdx.x"
+  bottom:"Node_100"
+  layer_param {
+    idx:101
+  }
+}
+layer {
+  name:"Node_102"
+  type:"load(b)"
+  top:"Node_102"
+  bottom:"red_buf0"
+  bottom:"Node_101"
+  layer_param {
+    idx:102
+    predicate:"True"
+    body:"(float32*)red_buf0: Pointer(float32)[(threadIdx.x: int32 + 32)]"
+  }
+}
+layer {
+  name:"Node_103"
+  type:"add(store_value)"
+  top:"Node_103"
+  bottom:"Node_99"
+  bottom:"Node_102"
+  layer_param {
+    idx:103
+  }
+}
+layer {
+  name:"Node_104"
+  type:"store(true)"
+  top:"Node_104"
+  bottom:"red_buf0"
+  bottom:"Node_103"
+  bottom:"threadIdx.x"
+  layer_param {
+    idx:104
+    predicate:"True"
+    value:"((float32*)red_buf0: Pointer(float32)[threadIdx.x: int32] + (float32*)red_buf0[(threadIdx.x + 32)])"
+    index:"threadIdx.x: int32"
+    body_:"red_buf0[threadIdx.x] = (red_buf0[threadIdx.x] + red_buf0[(threadIdx.x + 32)])"
+  }
+}
+layer {
+  name:"Node_105"
+  type:"ifthenelse(seq_3)"
+  top:"Node_105"
+  bottom:"Node_104"
+  layer_param {
+    idx:105
+    condition:"(threadIdx.x: int32 < 32)"
+  }
+}
+layer {
+  name:"Node_106"
+  type:"tir_tvm_storage_sync(value)"
+  top:"Node_106"
+  layer_param {
+    idx:106
+    body:"@tir.tvm_storage_sync('shared', dtype=int32)"
+  }
+}
+layer {
+  name:"Node_107"
+  type:"evaluate(seq_4)"
+  top:"Node_107"
+  bottom:"Node_106"
+  layer_param {
+    idx:107
+  }
+}
+layer {
+  name:"Node_108"
+  type:"tir_tvm_storage_sync(value)"
+  top:"Node_108"
+  layer_param {
+    idx:108
+    body:"@tir.tvm_storage_sync('warp', dtype=int32)"
+  }
+}
+layer {
+  name:"Node_109"
+  type:"evaluate(seq_5)"
+  top:"Node_109"
+  bottom:"Node_108"
+  layer_param {
+    idx:109
+  }
+}
+layer {
+  name:"Node_110"
+  type:"tir_tvm_storage_sync(value)"
+  top:"Node_110"
+  layer_param {
+    idx:110
+    body:"@tir.tvm_storage_sync('warp', dtype=int32)"
+  }
+}
+layer {
+  name:"Node_111"
+  type:"evaluate(seq_6)"
+  top:"Node_111"
+  bottom:"Node_110"
+  layer_param {
+    idx:111
+  }
+}
+layer {
+  name:"Node_112"
+  type:"tir_tvm_storage_sync(value)"
+  top:"Node_112"
+  layer_param {
+    idx:112
+    body:"@tir.tvm_storage_sync('warp', dtype=int32)"
+  }
+}
+layer {
+  name:"Node_113"
+  type:"evaluate(seq_7)"
+  top:"Node_113"
+  bottom:"Node_112"
+  layer_param {
+    idx:113
+  }
+}
+layer {
+  name:"Node_114"
+  type:"tir_tvm_storage_sync(value)"
+  top:"Node_114"
+  layer_param {
+    idx:114
+    body:"@tir.tvm_storage_sync('warp', dtype=int32)"
+  }
+}
+layer {
+  name:"Node_115"
+  type:"evaluate(seq_8)"
+  top:"Node_115"
+  bottom:"Node_114"
+  layer_param {
+    idx:115
+  }
+}
+layer {
+  name:"Node_116"
+  type:"tir_tvm_storage_sync(value)"
+  top:"Node_116"
+  layer_param {
+    idx:116
+    body:"@tir.tvm_storage_sync('warp', dtype=int32)"
+  }
+}
+layer {
+  name:"Node_117"
+  type:"evaluate(seq_9)"
+  top:"Node_117"
+  bottom:"Node_116"
+  layer_param {
+    idx:117
+  }
+}
+layer {
+  name:"Node_118"
+  type:"load(a)"
+  top:"Node_118"
+  bottom:"red_buf0"
+  bottom:"threadIdx.x"
+  layer_param {
+    idx:118
+    predicate:"True"
+    body:"(float32*)red_buf0: Pointer(float32)[threadIdx.x: int32]"
+  }
+}
+layer {
+  name:"Node_119"
+  type:"int(b)"
+  top:"Node_119"
+  layer_param {
+    idx:119
+    value:16
+    dtype:int32
+  }
+}
+layer {
+  name:"Node_120"
+  type:"add(load_index)"
+  top:"Node_120"
+  bottom:"threadIdx.x"
+  bottom:"Node_119"
+  layer_param {
+    idx:120
+  }
+}
+layer {
+  name:"Node_121"
+  type:"load(b)"
+  top:"Node_121"
+  bottom:"red_buf0"
+  bottom:"Node_120"
+  layer_param {
+    idx:121
+    predicate:"True"
+    body:"(float32*)red_buf0: Pointer(float32)[(threadIdx.x: int32 + 16)]"
+  }
+}
+layer {
+  name:"Node_122"
+  type:"add(store_value)"
+  top:"Node_122"
+  bottom:"Node_118"
+  bottom:"Node_121"
+  layer_param {
+    idx:122
+  }
+}
+layer {
+  name:"Node_123"
+  type:"store(seq_0)"
+  top:"Node_123"
+  bottom:"red_buf0"
+  bottom:"Node_122"
+  bottom:"threadIdx.x"
+  layer_param {
+    idx:123
+    predicate:"True"
+    value:"((float32*)red_buf0: Pointer(float32)[threadIdx.x: int32] + (float32*)red_buf0[(threadIdx.x + 16)])"
+    index:"threadIdx.x: int32"
+    body_:"red_buf0[threadIdx.x] = (red_buf0[threadIdx.x] + red_buf0[(threadIdx.x + 16)])"
+  }
+}
+layer {
+  name:"Node_124"
+  type:"load(a)"
+  top:"Node_124"
+  bottom:"red_buf0"
+  bottom:"threadIdx.x"
+  layer_param {
+    idx:124
+    predicate:"True"
+    body:"(float32*)red_buf0: Pointer(float32)[threadIdx.x: int32]"
+  }
+}
+layer {
+  name:"Node_125"
+  type:"add(load_index)"
+  top:"Node_125"
+  bottom:"threadIdx.x"
+  bottom:"Node_73"
+  layer_param {
+    idx:125
+  }
+}
+layer {
+  name:"Node_126"
+  type:"load(b)"
+  top:"Node_126"
+  bottom:"red_buf0"
+  bottom:"Node_125"
+  layer_param {
+    idx:126
+    predicate:"True"
+    body:"(float32*)red_buf0: Pointer(float32)[(threadIdx.x: int32 + 8)]"
+  }
+}
+layer {
+  name:"Node_127"
+  type:"add(store_value)"
+  top:"Node_127"
+  bottom:"Node_124"
+  bottom:"Node_126"
+  layer_param {
+    idx:127
+  }
+}
+layer {
+  name:"Node_128"
+  type:"store(seq_1)"
+  top:"Node_128"
+  bottom:"red_buf0"
+  bottom:"Node_127"
+  bottom:"threadIdx.x"
+  layer_param {
+    idx:128
+    predicate:"True"
+    value:"((float32*)red_buf0: Pointer(float32)[threadIdx.x: int32] + (float32*)red_buf0[(threadIdx.x + 8)])"
+    index:"threadIdx.x: int32"
+    body_:"red_buf0[threadIdx.x] = (red_buf0[threadIdx.x] + red_buf0[(threadIdx.x + 8)])"
+  }
+}
+layer {
+  name:"Node_129"
+  type:"load(a)"
+  top:"Node_129"
+  bottom:"red_buf0"
+  bottom:"threadIdx.x"
+  layer_param {
+    idx:129
+    predicate:"True"
+    body:"(float32*)red_buf0: Pointer(float32)[threadIdx.x: int32]"
+  }
+}
+layer {
+  name:"Node_130"
+  type:"int(b)"
+  top:"Node_130"
+  layer_param {
+    idx:130
+    value:4
+    dtype:int32
+  }
+}
+layer {
+  name:"Node_131"
+  type:"add(load_index)"
+  top:"Node_131"
+  bottom:"threadIdx.x"
+  bottom:"Node_130"
+  layer_param {
+    idx:131
+  }
+}
+layer {
+  name:"Node_132"
+  type:"load(b)"
+  top:"Node_132"
+  bottom:"red_buf0"
+  bottom:"Node_131"
+  layer_param {
+    idx:132
+    predicate:"True"
+    body:"(float32*)red_buf0: Pointer(float32)[(threadIdx.x: int32 + 4)]"
+  }
+}
+layer {
+  name:"Node_133"
+  type:"add(store_value)"
+  top:"Node_133"
+  bottom:"Node_129"
+  bottom:"Node_132"
+  layer_param {
+    idx:133
+  }
+}
+layer {
+  name:"Node_134"
+  type:"store(seq_2)"
+  top:"Node_134"
+  bottom:"red_buf0"
+  bottom:"Node_133"
+  bottom:"threadIdx.x"
+  layer_param {
+    idx:134
+    predicate:"True"
+    value:"((float32*)red_buf0: Pointer(float32)[threadIdx.x: int32] + (float32*)red_buf0[(threadIdx.x + 4)])"
+    index:"threadIdx.x: int32"
+    body_:"red_buf0[threadIdx.x] = (red_buf0[threadIdx.x] + red_buf0[(threadIdx.x + 4)])"
+  }
+}
+layer {
+  name:"Node_135"
+  type:"load(a)"
+  top:"Node_135"
+  bottom:"red_buf0"
+  bottom:"threadIdx.x"
+  layer_param {
+    idx:135
+    predicate:"True"
+    body:"(float32*)red_buf0: Pointer(float32)[threadIdx.x: int32]"
+  }
+}
+layer {
+  name:"Node_136"
+  type:"add(load_index)"
+  top:"Node_136"
+  bottom:"threadIdx.x"
+  bottom:"Node_14"
+  layer_param {
+    idx:136
+  }
+}
+layer {
+  name:"Node_137"
+  type:"load(b)"
+  top:"Node_137"
+  bottom:"red_buf0"
+  bottom:"Node_136"
+  layer_param {
+    idx:137
+    predicate:"True"
+    body:"(float32*)red_buf0: Pointer(float32)[(threadIdx.x: int32 + 2)]"
+  }
+}
+layer {
+  name:"Node_138"
+  type:"add(store_value)"
+  top:"Node_138"
+  bottom:"Node_135"
+  bottom:"Node_137"
+  layer_param {
+    idx:138
+  }
+}
+layer {
+  name:"Node_139"
+  type:"store(seq_3)"
+  top:"Node_139"
+  bottom:"red_buf0"
+  bottom:"Node_138"
+  bottom:"threadIdx.x"
+  layer_param {
+    idx:139
+    predicate:"True"
+    value:"((float32*)red_buf0: Pointer(float32)[threadIdx.x: int32] + (float32*)red_buf0[(threadIdx.x + 2)])"
+    index:"threadIdx.x: int32"
+    body_:"red_buf0[threadIdx.x] = (red_buf0[threadIdx.x] + red_buf0[(threadIdx.x + 2)])"
+  }
+}
+layer {
+  name:"Node_140"
+  type:"load(a)"
+  top:"Node_140"
+  bottom:"red_buf0"
+  bottom:"threadIdx.x"
+  layer_param {
+    idx:140
+    predicate:"True"
+    body:"(float32*)red_buf0: Pointer(float32)[threadIdx.x: int32]"
+  }
+}
+layer {
+  name:"Node_141"
+  type:"add(load_index)"
+  top:"Node_141"
+  bottom:"threadIdx.x"
+  bottom:"Node_9"
+  layer_param {
+    idx:141
+  }
+}
+layer {
+  name:"Node_142"
+  type:"load(b)"
+  top:"Node_142"
+  bottom:"red_buf0"
+  bottom:"Node_141"
+  layer_param {
+    idx:142
+    predicate:"True"
+    body:"(float32*)red_buf0: Pointer(float32)[(threadIdx.x: int32 + 1)]"
+  }
+}
+layer {
+  name:"Node_143"
+  type:"add(store_value)"
+  top:"Node_143"
+  bottom:"Node_140"
+  bottom:"Node_142"
+  layer_param {
+    idx:143
+  }
+}
+layer {
+  name:"Node_144"
+  type:"store(seq_4)"
+  top:"Node_144"
+  bottom:"red_buf0"
+  bottom:"Node_143"
+  bottom:"threadIdx.x"
+  layer_param {
+    idx:144
+    predicate:"True"
+    value:"((float32*)red_buf0: Pointer(float32)[threadIdx.x: int32] + (float32*)red_buf0[(threadIdx.x + 1)])"
+    index:"threadIdx.x: int32"
+    body_:"red_buf0[threadIdx.x] = (red_buf0[threadIdx.x] + red_buf0[(threadIdx.x + 1)])"
+  }
+}
+layer {
+  name:"Node_145"
+  type:"seq(true)"
+  top:"Node_145"
+  bottom:"Node_123"
+  bottom:"Node_128"
+  bottom:"Node_134"
+  bottom:"Node_139"
+  bottom:"Node_144"
+  layer_param {
+    idx:145
+    seq_00:"[red_buf0[threadIdx.x] = (red_buf0[threadIdx.x] + red_buf0[(threadIdx.x + 16)])"
+    seq_01:" , red_buf0[threadIdx.x] = (red_buf0[threadIdx.x] + red_buf0[(threadIdx.x + 8)])"
+    seq_02:"  , red_buf0[threadIdx.x] = (red_buf0[threadIdx.x] + red_buf0[(threadIdx.x + 4)])"
+    seq_03:"   , red_buf0[threadIdx.x] = (red_buf0[threadIdx.x] + red_buf0[(threadIdx.x + 2)])"
+    seq_04:"    , red_buf0[threadIdx.x] = (red_buf0[threadIdx.x] + red_buf0[(threadIdx.x + 1)])"
+    seq_05:"     ]"
+  }
+}
+layer {
+  name:"Node_146"
+  type:"ifthenelse(seq_10)"
+  top:"Node_146"
+  bottom:"Node_145"
+  layer_param {
+    idx:146
+    condition:"(threadIdx.x: int32 < 16)"
+  }
+}
+layer {
+  name:"Node_147"
+  type:"tir_tvm_storage_sync(value)"
+  top:"Node_147"
+  layer_param {
+    idx:147
+    body:"@tir.tvm_storage_sync('shared', dtype=int32)"
+  }
+}
+layer {
+  name:"Node_148"
+  type:"evaluate(seq_11)"
+  top:"Node_148"
+  bottom:"Node_147"
+  layer_param {
+    idx:148
+  }
+}
+layer {
+  name:"Node_149"
+  type:"seq"
+  top:"Node_149"
+  bottom:"Node_94"
+  bottom:"Node_96"
+  bottom:"Node_98"
+  bottom:"Node_105"
+  bottom:"Node_107"
+  bottom:"Node_109"
+  bottom:"Node_111"
+  bottom:"Node_113"
+  bottom:"Node_115"
+  bottom:"Node_117"
+  bottom:"Node_146"
+  bottom:"Node_148"
+  layer_param {
+    idx:149
+    seq_00:"[tir.tvm_storage_sync('shared')"
+    seq_01:" , red_buf0[threadIdx.x] = T_dense.rf[0]"
+    seq_02:"  , tir.tvm_storage_sync('shared')"
+    seq_03:"   , if ((threadIdx.x < 32))"
+    seq_04:"    red_buf0[threadIdx.x] = (red_buf0[threadIdx.x] + red_buf0[(threadIdx.x + 32)])"
+    seq_05:"     , tir.tvm_storage_sync('shared')"
+    seq_06:"      , tir.tvm_storage_sync('warp')"
+    seq_07:"       , tir.tvm_storage_sync('warp')"
+    seq_08:"        , tir.tvm_storage_sync('warp')"
+    seq_09:"         , tir.tvm_storage_sync('warp')"
+  }
+}
+layer {
+  name:"Node_150"
+  type:"attribute(seq_2)"
+  top:"Node_150"
+  bottom:"Node_92"
+  bottom:"Node_149"
+  layer_param {
+    idx:150
+    attr_key:reduce_scope
+    body_00:"tir.tvm_storage_sync('shared')"
+    body_01:" red_buf0[threadIdx.x] = T_dense.rf[0]"
+    body_02:"  tir.tvm_storage_sync('shared')"
+    body_03:"   if ((threadIdx.x < 32))"
+    body_04:"    red_buf0[threadIdx.x] = (red_buf0[threadIdx.x] + red_buf0[(threadIdx.x + 32)])"
+    body_05:"     tir.tvm_storage_sync('shared')"
+    body_06:"      tir.tvm_storage_sync('warp')"
+    body_07:"       tir.tvm_storage_sync('warp')"
+    body_08:"        tir.tvm_storage_sync('warp')"
+    body_09:"         tir.tvm_storage_sync('warp')"
+    value:"@tir.reinterpret(0u64, dtype=handle)"
+  }
+}
+layer {
+  name:"Node_151"
+  type:"load(store_value)"
+  top:"Node_151"
+  bottom:"red_buf0"
+  bottom:"Node_4"
+  layer_param {
+    idx:151
+    predicate:"True"
+    body:"(float32*)red_buf0: Pointer(float32)[0]"
+  }
+}
+layer {
+  name:"Node_152"
+  type:"store(true)"
+  top:"Node_152"
+  bottom:"T_dense"
+  bottom:"Node_151"
+  bottom:"Node_4"
+  layer_param {
+    idx:152
+    predicate:"True"
+    value:"(float32*)red_buf0: Pointer(float32)[0]"
+    index:"0"
+    body_:"T_dense[0] = red_buf0[0]"
+  }
+}
+layer {
+  name:"Node_153"
+  type:"ifthenelse(seq_3)"
+  top:"Node_153"
+  bottom:"Node_152"
+  layer_param {
+    idx:153
+    condition:"(threadIdx.x: int32 == 0)"
+  }
+}
+layer {
+  name:"Node_154"
+  type:"seq"
+  top:"Node_154"
+  bottom:"Node_71"
+  bottom:"Node_88"
+  bottom:"Node_150"
+  bottom:"Node_153"
+  layer_param {
+    idx:154
+    seq_00:"[T_dense.rf[0] = 0f"
+    seq_01:" , for (k.outer, 0, 8)"
+    seq_02:"  T_dense.rf[0] = (T_dense.rf[0] + (placeholder[((k.outer*64) + threadIdx.x)]*placeholder[(((blockIdx.x*512) + (k.outer*64)) + threadIdx.x)]))"
+    seq_03:"   , // attr [comm_reducer(result=[(x + y)], lhs=[x], rhs=[y], identity_element=[0f])] reduce_scope = tir.reinterpret((uint64)0)"
+    seq_04:"    tir.tvm_storage_sync('shared')"
+    seq_05:"     red_buf0[threadIdx.x] = T_dense.rf[0]"
+    seq_06:"      tir.tvm_storage_sync('shared')"
+    seq_07:"       if ((threadIdx.x < 32))"
+    seq_08:"        red_buf0[threadIdx.x] = (red_buf0[threadIdx.x] + red_buf0[(threadIdx.x + 32)])"
+    seq_09:"         tir.tvm_storage_sync('shared')"
+  }
+}
+layer {
+  name:"Node_155"
+  type:"attribute(seq_0)"
+  top:"Node_155"
+  bottom:"Node_69"
+  bottom:"Node_154"
+  layer_param {
+    idx:155
+    attr_key:thread_extent
+    body_00:"T_dense.rf[0] = 0f"
+    body_01:" for (k.outer, 0, 8)"
+    body_02:"  T_dense.rf[0] = (T_dense.rf[0] + (placeholder[((k.outer*64) + threadIdx.x)]*placeholder[(((blockIdx.x*512) + (k.outer*64)) + threadIdx.x)]))"
+    body_03:"   // attr [comm_reducer(result=[(x + y)], lhs=[x], rhs=[y], identity_element=[0f])] reduce_scope = tir.reinterpret((uint64)0)"
+    body_04:"   tir.tvm_storage_sync('shared')"
+    body_05:"    red_buf0[threadIdx.x] = T_dense.rf[0]"
+    body_06:"     tir.tvm_storage_sync('shared')"
+    body_07:"      if ((threadIdx.x < 32))"
+    body_08:"       red_buf0[threadIdx.x] = (red_buf0[threadIdx.x] + red_buf0[(threadIdx.x + 32)])"
+    body_09:"        tir.tvm_storage_sync('shared')"
+    value:"64"
+  }
+}
+layer {
+  name:"Node_156"
+  type:"load(a)"
+  top:"Node_156"
+  bottom:"T_dense"
+  bottom:"Node_4"
+  layer_param {
+    idx:156
+    predicate:"True"
+    body:"(float32*)T_dense: Pointer(float32)[0]"
+  }
+}
+layer {
+  name:"Node_157"
+  type:"load(b)"
+  top:"Node_157"
+  bottom:"placeholder_2"
+  bottom:"blockIdx.x"
+  layer_param {
+    idx:157
+    predicate:"True"
+    body:"(float32*)placeholder: Pointer(float32)[blockIdx.x: int32]"
+  }
+}
+layer {
+  name:"Node_158"
+  type:"add(store_value)"
+  top:"Node_158"
+  bottom:"Node_156"
+  bottom:"Node_157"
+  layer_param {
+    idx:158
+  }
+}
+layer {
+  name:"Node_159"
+  type:"store(true)"
+  top:"Node_159"
+  bottom:"T_add"
+  bottom:"Node_158"
+  bottom:"blockIdx.x"
+  layer_param {
+    idx:159
+    predicate:"True"
+    value:"((float32*)T_dense: Pointer(float32)[0] + (float32*)placeholder: Pointer(float32)[blockIdx.x: int32])"
+    index:"blockIdx.x: int32"
+    body_:"T_add[blockIdx.x] = (T_dense[0] + placeholder[blockIdx.x])"
+  }
+}
+layer {
+  name:"Node_160"
+  type:"ifthenelse(seq_1)"
+  top:"Node_160"
+  bottom:"Node_159"
+  layer_param {
+    idx:160
+    condition:"(threadIdx.x: int32 == 0)"
+  }
+}
+layer {
+  name:"Node_161"
+  type:"seq"
+  top:"Node_161"
+  bottom:"Node_155"
+  bottom:"Node_160"
+  layer_param {
+    idx:161
+    seq_00:"[// attr [iter_var(threadIdx.x, , threadIdx.x)] thread_extent = 64"
+    seq_01:" T_dense.rf[0] = 0f"
+    seq_02:"  for (k.outer, 0, 8)"
+    seq_03:"   T_dense.rf[0] = (T_dense.rf[0] + (placeholder[((k.outer*64) + threadIdx.x)]*placeholder[(((blockIdx.x*512) + (k.outer*64)) + threadIdx.x)]))"
+    seq_04:"    // attr [comm_reducer(result=[(x + y)], lhs=[x], rhs=[y], identity_element=[0f])] reduce_scope = tir.reinterpret((uint64)0)"
+    seq_05:"    tir.tvm_storage_sync('shared')"
+    seq_06:"     red_buf0[threadIdx.x] = T_dense.rf[0]"
+    seq_07:"      tir.tvm_storage_sync('shared')"
+    seq_08:"       if ((threadIdx.x < 32))"
+    seq_09:"        red_buf0[threadIdx.x] = (red_buf0[threadIdx.x] + red_buf0[(threadIdx.x + 32)])"
+  }
+}
+layer {
+  name:"Node_162"
+  type:"attribute"
+  top:"Node_162"
+  bottom:"Node_67"
+  bottom:"Node_161"
+  layer_param {
+    idx:162
+    attr_key:thread_extent
+    body_00:"// attr [iter_var(threadIdx.x, , threadIdx.x)] thread_extent = 64"
+    body_01:"T_dense.rf[0] = 0f"
+    body_02:" for (k.outer, 0, 8)"
+    body_03:"  T_dense.rf[0] = (T_dense.rf[0] + (placeholder[((k.outer*64) + threadIdx.x)]*placeholder[(((blockIdx.x*512) + (k.outer*64)) + threadIdx.x)]))"
+    body_04:"   // attr [comm_reducer(result=[(x + y)], lhs=[x], rhs=[y], identity_element=[0f])] reduce_scope = tir.reinterpret((uint64)0)"
+    body_05:"   tir.tvm_storage_sync('shared')"
+    body_06:"    red_buf0[threadIdx.x] = T_dense.rf[0]"
+    body_07:"     tir.tvm_storage_sync('shared')"
+    body_08:"      if ((threadIdx.x < 32))"
+    body_09:"       red_buf0[threadIdx.x] = (red_buf0[threadIdx.x] + red_buf0[(threadIdx.x + 32)])"
+    value:"1000"
+  }
+}
+layer {
+  name:"Node_163"
+  type:"allocate"
+  top:"Node_163"
+  bottom:"T_dense"
+  bottom:"Node_162"
+  layer_param {
+    idx:163
+    dtype:float32
+    extents:"[1]"
+    condition:"True"
+    body_00:"// attr [iter_var(blockIdx.x, , blockIdx.x)] thread_extent = 1000"
+    body_01:"// attr [iter_var(threadIdx.x, , threadIdx.x)] thread_extent = 64"
+    body_02:"T_dense.rf[0] = 0f"
+    body_03:" for (k.outer, 0, 8)"
+    body_04:"  T_dense.rf[0] = (T_dense.rf[0] + (placeholder[((k.outer*64) + threadIdx.x)]*placeholder[(((blockIdx.x*512) + (k.outer*64)) + threadIdx.x)]))"
+    body_05:"   // attr [comm_reducer(result=[(x + y)], lhs=[x], rhs=[y], identity_element=[0f])] reduce_scope = tir.reinterpret((uint64)0)"
+    body_06:"   tir.tvm_storage_sync('shared')"
+    body_07:"    red_buf0[threadIdx.x] = T_dense.rf[0]"
+    body_08:"     tir.tvm_storage_sync('shared')"
+    body_09:"      if ((threadIdx.x < 32))"
+  }
+}
+layer {
+  name:"Node_164"
+  type:"attribute"
+  top:"Node_164"
+  bottom:"T_dense"
+  bottom:"Node_163"
+  layer_param {
+    idx:164
+    attr_key:storage_scope
+    body_00:"allocate T_dense[float32 * 1]"
+    body_01:" // attr [iter_var(blockIdx.x, , blockIdx.x)] thread_extent = 1000"
+    body_02:" // attr [iter_var(threadIdx.x, , threadIdx.x)] thread_extent = 64"
+    body_03:" T_dense.rf[0] = 0f"
+    body_04:"  for (k.outer, 0, 8)"
+    body_05:"   T_dense.rf[0] = (T_dense.rf[0] + (placeholder[((k.outer*64) + threadIdx.x)]*placeholder[(((blockIdx.x*512) + (k.outer*64)) + threadIdx.x)]))"
+    body_06:"    // attr [comm_reducer(result=[(x + y)], lhs=[x], rhs=[y], identity_element=[0f])] reduce_scope = tir.reinterpret((uint64)0)"
+    body_07:"    tir.tvm_storage_sync('shared')"
+    body_08:"     red_buf0[threadIdx.x] = T_dense.rf[0]"
+    body_09:"      tir.tvm_storage_sync('shared')"
+    value:"'shared'"
+  }
+}
+layer {
+  name:"Node_165"
+  type:"attribute"
+  top:"Node_165"
+  bottom:"red_buf0"
+  bottom:"Node_164"
+  layer_param {
+    idx:165
+    attr_key:volatile_scope
+    body_00:"// attr [T_dense] storage_scope = 'shared'"
+    body_01:"allocate T_dense[float32 * 1]"
+    body_02:" // attr [iter_var(blockIdx.x, , blockIdx.x)] thread_extent = 1000"
+    body_03:" // attr [iter_var(threadIdx.x, , threadIdx.x)] thread_extent = 64"
+    body_04:" T_dense.rf[0] = 0f"
+    body_05:"  for (k.outer, 0, 8)"
+    body_06:"   T_dense.rf[0] = (T_dense.rf[0] + (placeholder[((k.outer*64) + threadIdx.x)]*placeholder[(((blockIdx.x*512) + (k.outer*64)) + threadIdx.x)]))"
+    body_07:"    // attr [comm_reducer(result=[(x + y)], lhs=[x], rhs=[y], identity_element=[0f])] reduce_scope = tir.reinterpret((uint64)0)"
+    body_08:"    tir.tvm_storage_sync('shared')"
+    body_09:"     red_buf0[threadIdx.x] = T_dense.rf[0]"
+    value:"1"
+  }
+}
+layer {
+  name:"Node_166"
+  type:"allocate"
+  top:"Node_166"
+  bottom:"red_buf0"
+  bottom:"Node_165"
+  layer_param {
+    idx:166
+    dtype:float32
+    extents:"[1, 64]"
+    condition:"True"
+    body_00:"// attr [red_buf0] volatile_scope = 1"
+    body_01:"// attr [T_dense] storage_scope = 'shared'"
+    body_02:"allocate T_dense[float32 * 1]"
+    body_03:" // attr [iter_var(blockIdx.x, , blockIdx.x)] thread_extent = 1000"
+    body_04:" // attr [iter_var(threadIdx.x, , threadIdx.x)] thread_extent = 64"
+    body_05:" T_dense.rf[0] = 0f"
+    body_06:"  for (k.outer, 0, 8)"
+    body_07:"   T_dense.rf[0] = (T_dense.rf[0] + (placeholder[((k.outer*64) + threadIdx.x)]*placeholder[(((blockIdx.x*512) + (k.outer*64)) + threadIdx.x)]))"
+    body_08:"    // attr [comm_reducer(result=[(x + y)], lhs=[x], rhs=[y], identity_element=[0f])] reduce_scope = tir.reinterpret((uint64)0)"
+    body_09:"    tir.tvm_storage_sync('shared')"
+  }
+}
+layer {
+  name:"Node_167"
+  type:"attribute"
+  top:"Node_167"
+  bottom:"red_buf0"
+  bottom:"Node_166"
+  layer_param {
+    idx:167
+    attr_key:storage_scope
+    body_00:"allocate red_buf0[float32 * 1 * 64]"
+    body_01:" // attr [red_buf0] volatile_scope = 1"
+    body_02:" // attr [T_dense] storage_scope = 'shared'"
+    body_03:" allocate T_dense[float32 * 1]"
+    body_04:"  // attr [iter_var(blockIdx.x, , blockIdx.x)] thread_extent = 1000"
+    body_05:"  // attr [iter_var(threadIdx.x, , threadIdx.x)] thread_extent = 64"
+    body_06:"  T_dense.rf[0] = 0f"
+    body_07:"   for (k.outer, 0, 8)"
+    body_08:"    T_dense.rf[0] = (T_dense.rf[0] + (placeholder[((k.outer*64) + threadIdx.x)]*placeholder[(((blockIdx.x*512) + (k.outer*64)) + threadIdx.x)]))"
+    body_09:"     // attr [comm_reducer(result=[(x + y)], lhs=[x], rhs=[y], identity_element=[0f])] reduce_scope = tir.reinterpret((uint64)0)"
+    value:"'shared'"
+  }
+}
+layer {
+  name:"Node_168"
+  type:"allocate"
+  top:"Node_168"
+  bottom:"T_dense.rf"
+  bottom:"Node_167"
+  layer_param {
+    idx:168
+    dtype:float32
+    extents:"[1]"
+    condition:"True"
+    body_00:"// attr [red_buf0] storage_scope = 'shared'"
+    body_01:"allocate red_buf0[float32 * 1 * 64]"
+    body_02:" // attr [red_buf0] volatile_scope = 1"
+    body_03:" // attr [T_dense] storage_scope = 'shared'"
+    body_04:" allocate T_dense[float32 * 1]"
+    body_05:"  // attr [iter_var(blockIdx.x, , blockIdx.x)] thread_extent = 1000"
+    body_06:"  // attr [iter_var(threadIdx.x, , threadIdx.x)] thread_extent = 64"
+    body_07:"  T_dense.rf[0] = 0f"
+    body_08:"   for (k.outer, 0, 8)"
+    body_09:"    T_dense.rf[0] = (T_dense.rf[0] + (placeholder[((k.outer*64) + threadIdx.x)]*placeholder[(((blockIdx.x*512) + (k.outer*64)) + threadIdx.x)]))"
+  }
+}
+layer {
+  name:"Node_169"
+  type:"attribute"
+  top:"Node_169"
+  bottom:"T_dense.rf"
+  bottom:"Node_168"
+  layer_param {
+    idx:169
+    attr_key:storage_scope
+    body_00:"allocate T_dense.rf[float32 * 1]"
+    body_01:" // attr [red_buf0] storage_scope = 'shared'"
+    body_02:" allocate red_buf0[float32 * 1 * 64]"
+    body_03:"  // attr [red_buf0] volatile_scope = 1"
+    body_04:"  // attr [T_dense] storage_scope = 'shared'"
+    body_05:"  allocate T_dense[float32 * 1]"
+    body_06:"   // attr [iter_var(blockIdx.x, , blockIdx.x)] thread_extent = 1000"
+    body_07:"   // attr [iter_var(threadIdx.x, , threadIdx.x)] thread_extent = 64"
+    body_08:"   T_dense.rf[0] = 0f"
+    body_09:"    for (k.outer, 0, 8)"
+    value:"'local'"
+  }
+}
+layer {
+  name:"Node_170"
+  type:"attribute"
+  top:"Node_170"
+  bottom:"Node_62"
+  bottom:"Node_169"
+  layer_param {
+    idx:170
+    attr_key:thread_extent
+    body_00:"// attr [T_dense.rf] storage_scope = 'local'"
+    body_01:"allocate T_dense.rf[float32 * 1]"
+    body_02:" // attr [red_buf0] storage_scope = 'shared'"
+    body_03:" allocate red_buf0[float32 * 1 * 64]"
+    body_04:"  // attr [red_buf0] volatile_scope = 1"
+    body_05:"  // attr [T_dense] storage_scope = 'shared'"
+    body_06:"  allocate T_dense[float32 * 1]"
+    body_07:"   // attr [iter_var(blockIdx.x, , blockIdx.x)] thread_extent = 1000"
+    body_08:"   // attr [iter_var(threadIdx.x, , threadIdx.x)] thread_extent = 64"
+    body_09:"   T_dense.rf[0] = 0f"
+    value:"1"
+  }
+}
+layer {
+  name:"Node_171"
+  type:"attribute(seq_1)"
+  top:"Node_171"
+  bottom:"Node_4"
+  bottom:"Node_170"
+  layer_param {
+    idx:171
+    attr_key:compute_scope
+    body_00:"// attr [iter_var(blockIdx.y, , blockIdx.y)] thread_extent = 1"
+    body_01:"// attr [T_dense.rf] storage_scope = 'local'"
+    body_02:"allocate T_dense.rf[float32 * 1]"
+    body_03:" // attr [red_buf0] storage_scope = 'shared'"
+    body_04:" allocate red_buf0[float32 * 1 * 64]"
+    body_05:"  // attr [red_buf0] volatile_scope = 1"
+    body_06:"  // attr [T_dense] storage_scope = 'shared'"
+    body_07:"  allocate T_dense[float32 * 1]"
+    body_08:"   // attr [iter_var(blockIdx.x, , blockIdx.x)] thread_extent = 1000"
+    body_09:"   // attr [iter_var(threadIdx.x, , threadIdx.x)] thread_extent = 64"
+    value:"'fused_nn_dense_add_compute_'"
+  }
+}
+layer {
+  name:"Node_172"
+  type:"seq"
+  top:"Node_172"
+  bottom:"Node_60"
+  bottom:"Node_171"
+  layer_param {
+    idx:172
+    seq_00:"[tir.tvm_call_packed('__tvm_set_device', 2, dev_id)"
+    seq_01:" , // attr [0] compute_scope = 'fused_nn_dense_add_compute_'"
+    seq_02:"  // attr [iter_var(blockIdx.y, , blockIdx.y)] thread_extent = 1"
+    seq_03:"  // attr [T_dense.rf] storage_scope = 'local'"
+    seq_04:"  allocate T_dense.rf[float32 * 1]"
+    seq_05:"   // attr [red_buf0] storage_scope = 'shared'"
+    seq_06:"   allocate red_buf0[float32 * 1 * 64]"
+    seq_07:"    // attr [red_buf0] volatile_scope = 1"
+    seq_08:"    // attr [T_dense] storage_scope = 'shared'"
+    seq_09:"    allocate T_dense[float32 * 1]"
+  }
+}
+layer {
+  name:"Node_173"
+  type:"assert"
+  top:"Node_173"
+  bottom:"Node_172"
+  layer_param {
+    idx:173
+    condition:"(dev_id: int32 == @tir.tvm_struct_get(arg3: handle, 0, 9, dtype=int32))"
+    message:"'Argument arg3.device_id has an unsatisfied constraint: (dev_id == tir.tvm_struct_get(arg3, 0, 9))'"
+  }
+}
+layer {
+  name:"Node_174"
+  type:"assert"
+  top:"Node_174"
+  bottom:"Node_173"
+  layer_param {
+    idx:174
+    condition:"(2 == @tir.tvm_struct_get(arg3: handle, 0, 10, dtype=int32))"
+    message:"'Argument arg3.device_type has an unsatisfied constraint: (2 == tir.tvm_struct_get(arg3, 0, 10))'"
+  }
+}
+layer {
+  name:"Node_175"
+  type:"assert(seq_1)"
+  top:"Node_175"
+  bottom:"Node_174"
+  layer_param {
+    idx:175
+    condition:"(0u64 == @tir.tvm_struct_get(arg3: handle, 0, 8, dtype=uint64))"
+    message:"'Argument arg3.byte_offset has an unsatisfied constraint: ((uint64)0 == tir.tvm_struct_get(arg3, 0, 8))'"
+  }
+}
+layer {
+  name:"Node_176"
+  type:"seq"
+  top:"Node_176"
+  bottom:"Node_58"
+  bottom:"Node_175"
+  layer_param {
+    idx:176
+    seq_00:"[if (!tir.isnullptr(arg3.strides))"
+    seq_01:" assert(((1 == int32(arg3.strides[1])) && (1000 == int32(arg3.strides[0]))), 'arg3.strides: expected to be compact array')"
+    seq_02:"  0"
+    seq_03:"   , assert(((uint64)0 == tir.tvm_struct_get(arg3, 0, 8)), 'Argument arg3.byte_offset has an unsatisfied constraint: ((uint64)0 == tir.tvm_struct_get(arg3, 0, 8))')"
+    seq_04:"    assert((2 == tir.tvm_struct_get(arg3, 0, 10)), 'Argument arg3.device_type has an unsatisfied constraint: (2 == tir.tvm_struct_get(arg3, 0, 10))')"
+    seq_05:"     assert((dev_id == tir.tvm_struct_get(arg3, 0, 9)), 'Argument arg3.device_id has an unsatisfied constraint: (dev_id == tir.tvm_struct_get(arg3, 0, 9))')"
+    seq_06:"      tir.tvm_call_packed('__tvm_set_device', 2, dev_id)"
+    seq_07:"       // attr [0] compute_scope = 'fused_nn_dense_add_compute_'"
+    seq_08:"       // attr [iter_var(blockIdx.y, , blockIdx.y)] thread_extent = 1"
+    seq_09:"       // attr [T_dense.rf] storage_scope = 'local'"
+  }
+}
+layer {
+  name:"Node_177"
+  type:"assert"
+  top:"Node_177"
+  bottom:"Node_176"
+  layer_param {
+    idx:177
+    condition:"(1000 == cast(int32, (int64*)arg3.shape: handle[1]))"
+    message:"'Argument arg3.shape[1] has an unsatisfied constraint: (1000 == int32(arg3.shape[1]))'"
+  }
+}
+layer {
+  name:"Node_178"
+  type:"assert"
+  top:"Node_178"
+  bottom:"Node_177"
+  layer_param {
+    idx:178
+    condition:"(1 == cast(int32, (int64*)arg3.shape: handle[0]))"
+    message:"'Argument arg3.shape[0] has an unsatisfied constraint: (1 == int32(arg3.shape[0]))'"
+  }
+}
+layer {
+  name:"Node_179"
+  type:"assert"
+  top:"Node_179"
+  bottom:"Node_178"
+  layer_param {
+    idx:179
+    condition:"(((@tir.tvm_struct_get(arg3: handle, 0, 5, dtype=uint8) == 2u8) && (@tir.tvm_struct_get(arg3, 0, 6, dtype=uint8) == 32u8)) && (@tir.tvm_struct_get(arg3, 0, 7, dtype=uint16) == 1u16))"
+    message:"'arg3.dtype is expected to be float32'"
+  }
+}
+layer {
+  name:"Node_180"
+  type:"assert"
+  top:"Node_180"
+  bottom:"Node_179"
+  layer_param {
+    idx:180
+    condition:"(2 == @tir.tvm_struct_get(arg3: handle, 0, 4, dtype=int32))"
+    message:"'arg3.ndim is expected to equal 2'"
+  }
+}
+layer {
+  name:"Node_181"
+  type:"assert"
+  top:"Node_181"
+  bottom:"Node_180"
+  layer_param {
+    idx:181
+    condition:"(2 == @tir.tvm_struct_get(arg3: handle, 0, 4, dtype=int32))"
+    message:"'arg3.ndim is expected to equal 2'"
+  }
+}
+layer {
+  name:"Node_182"
+  type:"assert"
+  top:"Node_182"
+  bottom:"Node_181"
+  layer_param {
+    idx:182
+    condition:"(dev_id: int32 == @tir.tvm_struct_get(arg2: handle, 0, 9, dtype=int32))"
+    message:"'Argument arg2.device_id has an unsatisfied constraint: (dev_id == tir.tvm_struct_get(arg2, 0, 9))'"
+  }
+}
+layer {
+  name:"Node_183"
+  type:"assert"
+  top:"Node_183"
+  bottom:"Node_182"
+  layer_param {
+    idx:183
+    condition:"(2 == @tir.tvm_struct_get(arg2: handle, 0, 10, dtype=int32))"
+    message:"'Argument arg2.device_type has an unsatisfied constraint: (2 == tir.tvm_struct_get(arg2, 0, 10))'"
+  }
+}
+layer {
+  name:"Node_184"
+  type:"assert(seq_1)"
+  top:"Node_184"
+  bottom:"Node_183"
+  layer_param {
+    idx:184
+    condition:"(0u64 == @tir.tvm_struct_get(arg2: handle, 0, 8, dtype=uint64))"
+    message:"'Argument arg2.byte_offset has an unsatisfied constraint: ((uint64)0 == tir.tvm_struct_get(arg2, 0, 8))'"
+  }
+}
+layer {
+  name:"Node_185"
+  type:"seq"
+  top:"Node_185"
+  bottom:"Node_55"
+  bottom:"Node_184"
+  layer_param {
+    idx:185
+    seq_00:"[if (!tir.isnullptr(arg2.strides))"
+    seq_01:" assert((1 == int32(arg2.strides[0])), 'arg2.strides: expected to be compact array')"
+    seq_02:"  0"
+    seq_03:"   , assert(((uint64)0 == tir.tvm_struct_get(arg2, 0, 8)), 'Argument arg2.byte_offset has an unsatisfied constraint: ((uint64)0 == tir.tvm_struct_get(arg2, 0, 8))')"
+    seq_04:"    assert((2 == tir.tvm_struct_get(arg2, 0, 10)), 'Argument arg2.device_type has an unsatisfied constraint: (2 == tir.tvm_struct_get(arg2, 0, 10))')"
+    seq_05:"     assert((dev_id == tir.tvm_struct_get(arg2, 0, 9)), 'Argument arg2.device_id has an unsatisfied constraint: (dev_id == tir.tvm_struct_get(arg2, 0, 9))')"
+    seq_06:"      assert((2 == tir.tvm_struct_get(arg3, 0, 4)), 'arg3.ndim is expected to equal 2')"
+    seq_07:"       assert((2 == tir.tvm_struct_get(arg3, 0, 4)), 'arg3.ndim is expected to equal 2')"
+    seq_08:"        assert((((tir.tvm_struct_get(arg3, 0, 5) == (uint8)2) && (tir.tvm_struct_get(arg3, 0, 6) == (uint8)32)) && (tir.tvm_struct_get(arg3, 0, 7) == (uint16)1)), 'arg3.dtype is expected to be float32')"
+    seq_09:"         assert((1 == int32(arg3.shape[0])), 'Argument arg3.shape[0] has an unsatisfied constraint: (1 == int32(arg3.shape[0]))')"
+  }
+}
+layer {
+  name:"Node_186"
+  type:"assert"
+  top:"Node_186"
+  bottom:"Node_185"
+  layer_param {
+    idx:186
+    condition:"(1000 == cast(int32, (int64*)arg2.shape: handle[0]))"
+    message:"'Argument arg2.shape[0] has an unsatisfied constraint: (1000 == int32(arg2.shape[0]))'"
+  }
+}
+layer {
+  name:"Node_187"
+  type:"assert"
+  top:"Node_187"
+  bottom:"Node_186"
+  layer_param {
+    idx:187
+    condition:"(((@tir.tvm_struct_get(arg2: handle, 0, 5, dtype=uint8) == 2u8) && (@tir.tvm_struct_get(arg2, 0, 6, dtype=uint8) == 32u8)) && (@tir.tvm_struct_get(arg2, 0, 7, dtype=uint16) == 1u16))"
+    message:"'arg2.dtype is expected to be float32'"
+  }
+}
+layer {
+  name:"Node_188"
+  type:"assert"
+  top:"Node_188"
+  bottom:"Node_187"
+  layer_param {
+    idx:188
+    condition:"(1 == @tir.tvm_struct_get(arg2: handle, 0, 4, dtype=int32))"
+    message:"'arg2.ndim is expected to equal 1'"
+  }
+}
+layer {
+  name:"Node_189"
+  type:"assert"
+  top:"Node_189"
+  bottom:"Node_188"
+  layer_param {
+    idx:189
+    condition:"(1 == @tir.tvm_struct_get(arg2: handle, 0, 4, dtype=int32))"
+    message:"'arg2.ndim is expected to equal 1'"
+  }
+}
+layer {
+  name:"Node_190"
+  type:"assert"
+  top:"Node_190"
+  bottom:"Node_189"
+  layer_param {
+    idx:190
+    condition:"(dev_id: int32 == @tir.tvm_struct_get(arg1: handle, 0, 9, dtype=int32))"
+    message:"'Argument arg1.device_id has an unsatisfied constraint: (dev_id == tir.tvm_struct_get(arg1, 0, 9))'"
+  }
+}
+layer {
+  name:"Node_191"
+  type:"assert"
+  top:"Node_191"
+  bottom:"Node_190"
+  layer_param {
+    idx:191
+    condition:"(2 == @tir.tvm_struct_get(arg1: handle, 0, 10, dtype=int32))"
+    message:"'Argument arg1.device_type has an unsatisfied constraint: (2 == tir.tvm_struct_get(arg1, 0, 10))'"
+  }
+}
+layer {
+  name:"Node_192"
+  type:"assert(seq_1)"
+  top:"Node_192"
+  bottom:"Node_191"
+  layer_param {
+    idx:192
+    condition:"(0u64 == @tir.tvm_struct_get(arg1: handle, 0, 8, dtype=uint64))"
+    message:"'Argument arg1.byte_offset has an unsatisfied constraint: ((uint64)0 == tir.tvm_struct_get(arg1, 0, 8))'"
+  }
+}
+layer {
+  name:"Node_193"
+  type:"seq"
+  top:"Node_193"
+  bottom:"Node_52"
+  bottom:"Node_192"
+  layer_param {
+    idx:193
+    seq_00:"[if (!tir.isnullptr(arg1.strides))"
+    seq_01:" assert(((1 == int32(arg1.strides[1])) && (512 == int32(arg1.strides[0]))), 'arg1.strides: expected to be compact array')"
+    seq_02:"  0"
+    seq_03:"   , assert(((uint64)0 == tir.tvm_struct_get(arg1, 0, 8)), 'Argument arg1.byte_offset has an unsatisfied constraint: ((uint64)0 == tir.tvm_struct_get(arg1, 0, 8))')"
+    seq_04:"    assert((2 == tir.tvm_struct_get(arg1, 0, 10)), 'Argument arg1.device_type has an unsatisfied constraint: (2 == tir.tvm_struct_get(arg1, 0, 10))')"
+    seq_05:"     assert((dev_id == tir.tvm_struct_get(arg1, 0, 9)), 'Argument arg1.device_id has an unsatisfied constraint: (dev_id == tir.tvm_struct_get(arg1, 0, 9))')"
+    seq_06:"      assert((1 == tir.tvm_struct_get(arg2, 0, 4)), 'arg2.ndim is expected to equal 1')"
+    seq_07:"       assert((1 == tir.tvm_struct_get(arg2, 0, 4)), 'arg2.ndim is expected to equal 1')"
+    seq_08:"        assert((((tir.tvm_struct_get(arg2, 0, 5) == (uint8)2) && (tir.tvm_struct_get(arg2, 0, 6) == (uint8)32)) && (tir.tvm_struct_get(arg2, 0, 7) == (uint16)1)), 'arg2.dtype is expected to be float32')"
+    seq_09:"         assert((1000 == int32(arg2.shape[0])), 'Argument arg2.shape[0] has an unsatisfied constraint: (1000 == int32(arg2.shape[0]))')"
+  }
+}
+layer {
+  name:"Node_194"
+  type:"assert"
+  top:"Node_194"
+  bottom:"Node_193"
+  layer_param {
+    idx:194
+    condition:"(512 == cast(int32, (int64*)arg1.shape: handle[1]))"
+    message:"'Argument arg1.shape[1] has an unsatisfied constraint: (512 == int32(arg1.shape[1]))'"
+  }
+}
+layer {
+  name:"Node_195"
+  type:"assert"
+  top:"Node_195"
+  bottom:"Node_194"
+  layer_param {
+    idx:195
+    condition:"(1000 == cast(int32, (int64*)arg1.shape: handle[0]))"
+    message:"'Argument arg1.shape[0] has an unsatisfied constraint: (1000 == int32(arg1.shape[0]))'"
+  }
+}
+layer {
+  name:"Node_196"
+  type:"assert"
+  top:"Node_196"
+  bottom:"Node_195"
+  layer_param {
+    idx:196
+    condition:"(((@tir.tvm_struct_get(arg1: handle, 0, 5, dtype=uint8) == 2u8) && (@tir.tvm_struct_get(arg1, 0, 6, dtype=uint8) == 32u8)) && (@tir.tvm_struct_get(arg1, 0, 7, dtype=uint16) == 1u16))"
+    message:"'arg1.dtype is expected to be float32'"
+  }
+}
+layer {
+  name:"Node_197"
+  type:"assert"
+  top:"Node_197"
+  bottom:"Node_196"
+  layer_param {
+    idx:197
+    condition:"(2 == @tir.tvm_struct_get(arg1: handle, 0, 4, dtype=int32))"
+    message:"'arg1.ndim is expected to equal 2'"
+  }
+}
+layer {
+  name:"Node_198"
+  type:"assert"
+  top:"Node_198"
+  bottom:"Node_197"
+  layer_param {
+    idx:198
+    condition:"(2 == @tir.tvm_struct_get(arg1: handle, 0, 4, dtype=int32))"
+    message:"'arg1.ndim is expected to equal 2'"
+  }
+}
+layer {
+  name:"Node_199"
+  type:"assert"
+  top:"Node_199"
+  bottom:"Node_198"
+  layer_param {
+    idx:199
+    condition:"(2 == @tir.tvm_struct_get(arg0: handle, 0, 10, dtype=int32))"
+    message:"'Argument arg0.device_type has an unsatisfied constraint: (2 == tir.tvm_struct_get(arg0, 0, 10))'"
+  }
+}
+layer {
+  name:"Node_200"
+  type:"assert(seq_1)"
+  top:"Node_200"
+  bottom:"Node_199"
+  layer_param {
+    idx:200
+    condition:"(0u64 == @tir.tvm_struct_get(arg0: handle, 0, 8, dtype=uint64))"
+    message:"'Argument arg0.byte_offset has an unsatisfied constraint: ((uint64)0 == tir.tvm_struct_get(arg0, 0, 8))'"
+  }
+}
+layer {
+  name:"Node_201"
+  type:"seq"
+  top:"Node_201"
+  bottom:"Node_49"
+  bottom:"Node_200"
+  layer_param {
+    idx:201
+    seq_00:"[if (!tir.isnullptr(arg0.strides))"
+    seq_01:" assert(((1 == int32(arg0.strides[1])) && (512 == int32(arg0.strides[0]))), 'arg0.strides: expected to be compact array')"
+    seq_02:"  0"
+    seq_03:"   , assert(((uint64)0 == tir.tvm_struct_get(arg0, 0, 8)), 'Argument arg0.byte_offset has an unsatisfied constraint: ((uint64)0 == tir.tvm_struct_get(arg0, 0, 8))')"
+    seq_04:"    assert((2 == tir.tvm_struct_get(arg0, 0, 10)), 'Argument arg0.device_type has an unsatisfied constraint: (2 == tir.tvm_struct_get(arg0, 0, 10))')"
+    seq_05:"     assert((2 == tir.tvm_struct_get(arg1, 0, 4)), 'arg1.ndim is expected to equal 2')"
+    seq_06:"      assert((2 == tir.tvm_struct_get(arg1, 0, 4)), 'arg1.ndim is expected to equal 2')"
+    seq_07:"       assert((((tir.tvm_struct_get(arg1, 0, 5) == (uint8)2) && (tir.tvm_struct_get(arg1, 0, 6) == (uint8)32)) && (tir.tvm_struct_get(arg1, 0, 7) == (uint16)1)), 'arg1.dtype is expected to be float32')"
+    seq_08:"        assert((1000 == int32(arg1.shape[0])), 'Argument arg1.shape[0] has an unsatisfied constraint: (1000 == int32(arg1.shape[0]))')"
+    seq_09:"         assert((512 == int32(arg1.shape[1])), 'Argument arg1.shape[1] has an unsatisfied constraint: (512 == int32(arg1.shape[1]))')"
+  }
+}
+layer {
+  name:"Node_202"
+  type:"assert"
+  top:"Node_202"
+  bottom:"Node_201"
+  layer_param {
+    idx:202
+    condition:"(512 == cast(int32, (int64*)arg0.shape: handle[1]))"
+    message:"'Argument arg0.shape[1] has an unsatisfied constraint: (512 == int32(arg0.shape[1]))'"
+  }
+}
+layer {
+  name:"Node_203"
+  type:"assert"
+  top:"Node_203"
+  bottom:"Node_202"
+  layer_param {
+    idx:203
+    condition:"(1 == cast(int32, (int64*)arg0.shape: handle[0]))"
+    message:"'Argument arg0.shape[0] has an unsatisfied constraint: (1 == int32(arg0.shape[0]))'"
+  }
+}
+layer {
+  name:"Node_204"
+  type:"assert"
+  top:"Node_204"
+  bottom:"Node_203"
+  layer_param {
+    idx:204
+    condition:"(((@tir.tvm_struct_get(arg0: handle, 0, 5, dtype=uint8) == 2u8) && (@tir.tvm_struct_get(arg0, 0, 6, dtype=uint8) == 32u8)) && (@tir.tvm_struct_get(arg0, 0, 7, dtype=uint16) == 1u16))"
+    message:"'arg0.dtype is expected to be float32'"
+  }
+}
+layer {
+  name:"Node_205"
+  type:"assert"
+  top:"Node_205"
+  bottom:"Node_204"
+  layer_param {
+    idx:205
+    condition:"(2 == @tir.tvm_struct_get(arg0: handle, 0, 4, dtype=int32))"
+    message:"'arg0.ndim is expected to equal 2'"
+  }
+}
+layer {
+  name:"Node_206"
+  type:"assert"
+  top:"Node_206"
+  bottom:"Node_205"
+  layer_param {
+    idx:206
+    condition:"(2 == @tir.tvm_struct_get(arg0: handle, 0, 4, dtype=int32))"
+    message:"'arg0.ndim is expected to equal 2'"
+  }
+}
+layer {
+  name:"Node_207"
+  type:"attribute"
+  top:"Node_207"
+  bottom:"Node_206"
+  layer_param {
+    idx:207
+    attr_key:device_type
+    body_00:"assert((2 == tir.tvm_struct_get(arg0, 0, 4)), 'arg0.ndim is expected to equal 2')"
+    body_01:" assert((2 == tir.tvm_struct_get(arg0, 0, 4)), 'arg0.ndim is expected to equal 2')"
+    body_02:"  assert((((tir.tvm_struct_get(arg0, 0, 5) == (uint8)2) && (tir.tvm_struct_get(arg0, 0, 6) == (uint8)32)) && (tir.tvm_struct_get(arg0, 0, 7) == (uint16)1)), 'arg0.dtype is expected to be float32')"
+    body_03:"   assert((1 == int32(arg0.shape[0])), 'Argument arg0.shape[0] has an unsatisfied constraint: (1 == int32(arg0.shape[0]))')"
+    body_04:"    assert((512 == int32(arg0.shape[1])), 'Argument arg0.shape[1] has an unsatisfied constraint: (512 == int32(arg0.shape[1]))')"
+    body_05:"     if (!tir.isnullptr(arg0.strides))"
+    body_06:"      assert(((1 == int32(arg0.strides[1])) && (512 == int32(arg0.strides[0]))), 'arg0.strides: expected to be compact array')"
+    body_07:"       0"
+    body_08:"        assert(((uint64)0 == tir.tvm_struct_get(arg0, 0, 8)), 'Argument arg0.byte_offset has an unsatisfied constraint: ((uint64)0 == tir.tvm_struct_get(arg0, 0, 8))')"
+    body_09:"         assert((2 == tir.tvm_struct_get(arg0, 0, 10)), 'Argument arg0.device_type has an unsatisfied constraint: (2 == tir.tvm_struct_get(arg0, 0, 10))')"
+    value:"2"
+    node:"'default'"
+  }
+}
+layer {
+  name:"Node_208"
+  type:"attribute"
+  top:"Node_208"
+  bottom:"Node_207"
+  layer_param {
+    idx:208
+    attr_key:device_id
+    body_00:"// attr ['default'] device_type = 2"
+    body_01:"assert((2 == tir.tvm_struct_get(arg0, 0, 4)), 'arg0.ndim is expected to equal 2')"
+    body_02:" assert((2 == tir.tvm_struct_get(arg0, 0, 4)), 'arg0.ndim is expected to equal 2')"
+    body_03:"  assert((((tir.tvm_struct_get(arg0, 0, 5) == (uint8)2) && (tir.tvm_struct_get(arg0, 0, 6) == (uint8)32)) && (tir.tvm_struct_get(arg0, 0, 7) == (uint16)1)), 'arg0.dtype is expected to be float32')"
+    body_04:"   assert((1 == int32(arg0.shape[0])), 'Argument arg0.shape[0] has an unsatisfied constraint: (1 == int32(arg0.shape[0]))')"
+    body_05:"    assert((512 == int32(arg0.shape[1])), 'Argument arg0.shape[1] has an unsatisfied constraint: (512 == int32(arg0.shape[1]))')"
+    body_06:"     if (!tir.isnullptr(arg0.strides))"
+    body_07:"      assert(((1 == int32(arg0.strides[1])) && (512 == int32(arg0.strides[0]))), 'arg0.strides: expected to be compact array')"
+    body_08:"       0"
+    body_09:"        assert(((uint64)0 == tir.tvm_struct_get(arg0, 0, 8)), 'Argument arg0.byte_offset has an unsatisfied constraint: ((uint64)0 == tir.tvm_struct_get(arg0, 0, 8))')"
+    value:"dev_id: int32"
+    node:"'default'"
+  }
+}
+layer {
+  name:"Node_209"
+  type:"assert"
+  top:"Node_209"
+  bottom:"Node_208"
+  layer_param {
+    idx:209
+    condition:"((((arg3.code: int32 == 3) || (arg3.code == 13)) || (arg3.code == 7)) || (arg3.code == 4))"
+    message:"'fused_nn_dense_add: Expect arg[3] to be pointer'"
+  }
+}
+layer {
+  name:"Node_210"
+  type:"assert"
+  top:"Node_210"
+  bottom:"Node_209"
+  layer_param {
+    idx:210
+    condition:"((((arg2.code: int32 == 3) || (arg2.code == 13)) || (arg2.code == 7)) || (arg2.code == 4))"
+    message:"'fused_nn_dense_add: Expect arg[2] to be pointer'"
+  }
+}
+layer {
+  name:"Node_211"
+  type:"assert"
+  top:"Node_211"
+  bottom:"Node_210"
+  layer_param {
+    idx:211
+    condition:"((((arg1.code: int32 == 3) || (arg1.code == 13)) || (arg1.code == 7)) || (arg1.code == 4))"
+    message:"'fused_nn_dense_add: Expect arg[1] to be pointer'"
+  }
+}
+layer {
+  name:"Node_212"
+  type:"assert"
+  top:"Node_212"
+  bottom:"Node_211"
+  layer_param {
+    idx:212
+    condition:"((((arg0.code: int32 == 3) || (arg0.code == 13)) || (arg0.code == 7)) || (arg0.code == 4))"
+    message:"'fused_nn_dense_add: Expect arg[0] to be pointer'"
+  }
+}
+layer {
+  name:"Node_213"
+  type:"let"
+  top:"Node_213"
+  bottom:"arg3.strides"
+  bottom:"Node_46"
+  bottom:"Node_212"
+  layer_param {
+    idx:213
+  }
+}
+layer {
+  name:"Node_214"
+  type:"let"
+  top:"Node_214"
+  bottom:"arg3.shape"
+  bottom:"Node_44"
+  bottom:"Node_213"
+  layer_param {
+    idx:214
+  }
+}
+layer {
+  name:"Node_215"
+  type:"attribute"
+  top:"Node_215"
+  bottom:"T_add"
+  bottom:"Node_214"
+  layer_param {
+    idx:215
+    attr_key:storage_alignment
+    body_00:"let arg3.shape = tir.tvm_struct_get(arg3, 0, 2)"
+    body_01:" let arg3.strides = tir.tvm_struct_get(arg3, 0, 3)"
+    body_02:"  assert(((((arg0.code == 3) || (arg0.code == 13)) || (arg0.code == 7)) || (arg0.code == 4)), 'fused_nn_dense_add: Expect arg[0] to be pointer')"
+    body_03:"   assert(((((arg1.code == 3) || (arg1.code == 13)) || (arg1.code == 7)) || (arg1.code == 4)), 'fused_nn_dense_add: Expect arg[1] to be pointer')"
+    body_04:"    assert(((((arg2.code == 3) || (arg2.code == 13)) || (arg2.code == 7)) || (arg2.code == 4)), 'fused_nn_dense_add: Expect arg[2] to be pointer')"
+    body_05:"     assert(((((arg3.code == 3) || (arg3.code == 13)) || (arg3.code == 7)) || (arg3.code == 4)), 'fused_nn_dense_add: Expect arg[3] to be pointer')"
+    body_06:"      // attr ['default'] device_id = dev_id"
+    body_07:"      // attr ['default'] device_type = 2"
+    body_08:"      assert((2 == tir.tvm_struct_get(arg0, 0, 4)), 'arg0.ndim is expected to equal 2')"
+    body_09:"       assert((2 == tir.tvm_struct_get(arg0, 0, 4)), 'arg0.ndim is expected to equal 2')"
+    value:"128"
+  }
+}
+layer {
+  name:"Node_216"
+  type:"let"
+  top:"Node_216"
+  bottom:"T_add"
+  bottom:"Node_42"
+  bottom:"Node_215"
+  layer_param {
+    idx:216
+  }
+}
+layer {
+  name:"Node_217"
+  type:"let"
+  top:"Node_217"
+  bottom:"arg2.strides"
+  bottom:"Node_40"
+  bottom:"Node_216"
+  layer_param {
+    idx:217
+  }
+}
+layer {
+  name:"Node_218"
+  type:"let"
+  top:"Node_218"
+  bottom:"arg2.shape"
+  bottom:"Node_38"
+  bottom:"Node_217"
+  layer_param {
+    idx:218
+  }
+}
+layer {
+  name:"Node_219"
+  type:"attribute"
+  top:"Node_219"
+  bottom:"placeholder_2"
+  bottom:"Node_218"
+  layer_param {
+    idx:219
+    attr_key:storage_alignment
+    body_00:"let arg2.shape = tir.tvm_struct_get(arg2, 0, 2)"
+    body_01:" let arg2.strides = tir.tvm_struct_get(arg2, 0, 3)"
+    body_02:"  let T_add = tir.tvm_struct_get(arg3, 0, 1)"
+    body_03:"   // attr [T_add] storage_alignment = 128"
+    body_04:"   let arg3.shape = tir.tvm_struct_get(arg3, 0, 2)"
+    body_05:"    let arg3.strides = tir.tvm_struct_get(arg3, 0, 3)"
+    body_06:"     assert(((((arg0.code == 3) || (arg0.code == 13)) || (arg0.code == 7)) || (arg0.code == 4)), 'fused_nn_dense_add: Expect arg[0] to be pointer')"
+    body_07:"      assert(((((arg1.code == 3) || (arg1.code == 13)) || (arg1.code == 7)) || (arg1.code == 4)), 'fused_nn_dense_add: Expect arg[1] to be pointer')"
+    body_08:"       assert(((((arg2.code == 3) || (arg2.code == 13)) || (arg2.code == 7)) || (arg2.code == 4)), 'fused_nn_dense_add: Expect arg[2] to be pointer')"
+    body_09:"        assert(((((arg3.code == 3) || (arg3.code == 13)) || (arg3.code == 7)) || (arg3.code == 4)), 'fused_nn_dense_add: Expect arg[3] to be pointer')"
+    value:"128"
+  }
+}
+layer {
+  name:"Node_220"
+  type:"let"
+  top:"Node_220"
+  bottom:"placeholder_2"
+  bottom:"Node_36"
+  bottom:"Node_219"
+  layer_param {
+    idx:220
+  }
+}
+layer {
+  name:"Node_221"
+  type:"let"
+  top:"Node_221"
+  bottom:"arg1.strides"
+  bottom:"Node_34"
+  bottom:"Node_220"
+  layer_param {
+    idx:221
+  }
+}
+layer {
+  name:"Node_222"
+  type:"let"
+  top:"Node_222"
+  bottom:"arg1.shape"
+  bottom:"Node_32"
+  bottom:"Node_221"
+  layer_param {
+    idx:222
+  }
+}
+layer {
+  name:"Node_223"
+  type:"attribute"
+  top:"Node_223"
+  bottom:"placeholder_1"
+  bottom:"Node_222"
+  layer_param {
+    idx:223
+    attr_key:storage_alignment
+    body_00:"let arg1.shape = tir.tvm_struct_get(arg1, 0, 2)"
+    body_01:" let arg1.strides = tir.tvm_struct_get(arg1, 0, 3)"
+    body_02:"  let placeholder = tir.tvm_struct_get(arg2, 0, 1)"
+    body_03:"   // attr [placeholder] storage_alignment = 128"
+    body_04:"   let arg2.shape = tir.tvm_struct_get(arg2, 0, 2)"
+    body_05:"    let arg2.strides = tir.tvm_struct_get(arg2, 0, 3)"
+    body_06:"     let T_add = tir.tvm_struct_get(arg3, 0, 1)"
+    body_07:"      // attr [T_add] storage_alignment = 128"
+    body_08:"      let arg3.shape = tir.tvm_struct_get(arg3, 0, 2)"
+    body_09:"       let arg3.strides = tir.tvm_struct_get(arg3, 0, 3)"
+    value:"128"
+  }
+}
+layer {
+  name:"Node_224"
+  type:"let"
+  top:"Node_224"
+  bottom:"placeholder_1"
+  bottom:"Node_30"
+  bottom:"Node_223"
+  layer_param {
+    idx:224
+  }
+}
+layer {
+  name:"Node_225"
+  type:"let"
+  top:"Node_225"
+  bottom:"dev_id"
+  bottom:"Node_28"
+  bottom:"Node_224"
+  layer_param {
+    idx:225
+  }
+}
+layer {
+  name:"Node_226"
+  type:"let"
+  top:"Node_226"
+  bottom:"arg0.strides"
+  bottom:"Node_26"
+  bottom:"Node_225"
+  layer_param {
+    idx:226
+  }
+}
+layer {
+  name:"Node_227"
+  type:"let"
+  top:"Node_227"
+  bottom:"arg0.shape"
+  bottom:"Node_24"
+  bottom:"Node_226"
+  layer_param {
+    idx:227
+  }
+}
+layer {
+  name:"Node_228"
+  type:"attribute"
+  top:"Node_228"
+  bottom:"placeholder"
+  bottom:"Node_227"
+  layer_param {
+    idx:228
+    attr_key:storage_alignment
+    body_00:"let arg0.shape = tir.tvm_struct_get(arg0, 0, 2)"
+    body_01:" let arg0.strides = tir.tvm_struct_get(arg0, 0, 3)"
+    body_02:"  let dev_id = tir.tvm_struct_get(arg0, 0, 9)"
+    body_03:"   let placeholder = tir.tvm_struct_get(arg1, 0, 1)"
+    body_04:"    // attr [placeholder] storage_alignment = 128"
+    body_05:"    let arg1.shape = tir.tvm_struct_get(arg1, 0, 2)"
+    body_06:"     let arg1.strides = tir.tvm_struct_get(arg1, 0, 3)"
+    body_07:"      let placeholder = tir.tvm_struct_get(arg2, 0, 1)"
+    body_08:"       // attr [placeholder] storage_alignment = 128"
+    body_09:"       let arg2.shape = tir.tvm_struct_get(arg2, 0, 2)"
+    value:"128"
+  }
+}
+layer {
+  name:"Node_229"
+  type:"let"
+  top:"Node_229"
+  bottom:"placeholder"
+  bottom:"Node_22"
+  bottom:"Node_228"
+  layer_param {
+    idx:229
+  }
+}
+layer {
+  name:"Node_230"
+  type:"let"
+  top:"Node_230"
+  bottom:"arg3.code"
+  bottom:"Node_20"
+  bottom:"Node_229"
+  layer_param {
+    idx:230
+  }
+}
+layer {
+  name:"Node_231"
+  type:"let"
+  top:"Node_231"
+  bottom:"arg3"
+  bottom:"Node_17"
+  bottom:"Node_230"
+  layer_param {
+    idx:231
+  }
+}
+layer {
+  name:"Node_232"
+  type:"let"
+  top:"Node_232"
+  bottom:"arg2.code"
+  bottom:"Node_15"
+  bottom:"Node_231"
+  layer_param {
+    idx:232
+  }
+}
+layer {
+  name:"Node_233"
+  type:"let"
+  top:"Node_233"
+  bottom:"arg2"
+  bottom:"Node_12"
+  bottom:"Node_232"
+  layer_param {
+    idx:233
+  }
+}
+layer {
+  name:"Node_234"
+  type:"let"
+  top:"Node_234"
+  bottom:"arg1.code"
+  bottom:"Node_10"
+  bottom:"Node_233"
+  layer_param {
+    idx:234
+  }
+}
+layer {
+  name:"Node_235"
+  type:"let"
+  top:"Node_235"
+  bottom:"arg1"
+  bottom:"Node_7"
+  bottom:"Node_234"
+  layer_param {
+    idx:235
+  }
+}
+layer {
+  name:"Node_236"
+  type:"let"
+  top:"Node_236"
+  bottom:"arg0.code"
+  bottom:"Node_5"
+  bottom:"Node_235"
+  layer_param {
+    idx:236
+  }
+}
+layer {
+  name:"Node_237"
+  type:"let"
+  top:"Node_237"
+  bottom:"arg0"
+  bottom:"Node_1"
+  bottom:"Node_236"
+  layer_param {
+    idx:237
+  }
+}
+layer {
+  name:"Node_238"
+  type:"assert"
+  top:"Node_238"
+  bottom:"Node_237"
+  layer_param {
+    idx:238
+    condition:"(num_args: int32 == 4)"
+    message:"'fused_nn_dense_add: num_args should be 4'"
+  }
+}
+layer {
+  name:"Node_239"
+  type:"primfunc"
+  top:"Node_239"
+  bottom:"Node_238"
+  layer_param {
+    idx:239
+    body_00:"assert((num_args == 4), 'fused_nn_dense_add: num_args should be 4')"
+    body_01:" let arg0 = tir.tvm_struct_get(args, 0, 12)"
+    body_02:"  let arg0.code = arg_type_ids[0]"
+    body_03:"   let arg1 = tir.tvm_struct_get(args, 1, 12)"
+    body_04:"    let arg1.code = arg_type_ids[1]"
+    body_05:"     let arg2 = tir.tvm_struct_get(args, 2, 12)"
+    body_06:"      let arg2.code = arg_type_ids[2]"
+    body_07:"       let arg3 = tir.tvm_struct_get(args, 3, 12)"
+    body_08:"        let arg3.code = arg_type_ids[3]"
+    body_09:"         let placeholder = tir.tvm_struct_get(arg0, 0, 1)"
+  }
+}

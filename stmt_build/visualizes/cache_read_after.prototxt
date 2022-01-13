@@ -1,0 +1,333 @@
+name : "prim_expr"
+layer {
+  name:"A.shared"
+  type:"buffer(node)"
+  top:"A.shared"
+  layer_param {
+    idx:0
+    buffer_name:"A.shared"
+    shape:[1024, 1024]
+    dtype:float32
+  }
+}
+layer {
+  name:"A"
+  type:"buffer(buffer)"
+  top:"A"
+  layer_param {
+    idx:1
+    buffer_name:"A"
+    shape:[1024, 1024]
+    dtype:float32
+  }
+}
+layer {
+  name:"ax0"
+  type:"var(indice)"
+  top:"ax0"
+  layer_param {
+    idx:2
+    dtype:int32
+  }
+}
+layer {
+  name:"ax1"
+  type:"var(indice)"
+  top:"ax1"
+  layer_param {
+    idx:3
+    dtype:int32
+  }
+}
+layer {
+  name:"Node_4"
+  type:"buffer_load(value)"
+  top:"Node_4"
+  bottom:"A"
+  bottom:"ax0"
+  bottom:"ax1"
+  layer_param {
+    idx:4
+  }
+}
+layer {
+  name:"Node_5"
+  type:"buffer_store"
+  top:"Node_5"
+  bottom:"A.shared"
+  bottom:"Node_4"
+  layer_param {
+    idx:5
+    value_00:"A: Buffer(A_1: Pointer(float32), float32, [1024, 1024], [])[ax0: int32, ax1: int32]"
+    indices_00:"[ax0, ax1]"
+  }
+}
+layer {
+  name:"Node_6"
+  type:"for"
+  top:"Node_6"
+  bottom:"Node_5"
+  layer_param {
+    idx:6
+    kind:0
+    body_00:"A.shared[ax0, ax1] = A[ax0, ax1]"
+  }
+}
+layer {
+  name:"Node_7"
+  type:"for(seq_0)"
+  top:"Node_7"
+  bottom:"Node_6"
+  layer_param {
+    idx:7
+    kind:0
+    body_00:"for (ax1, 0, 1024)"
+    body_01:" A.shared[ax0, ax1] = A[ax0, ax1]"
+  }
+}
+layer {
+  name:"B"
+  type:"buffer(node)"
+  top:"B"
+  layer_param {
+    idx:8
+    buffer_name:"B"
+    shape:[1024]
+    dtype:float32
+  }
+}
+layer {
+  name:"Node_9"
+  type:"float(value)"
+  top:"Node_9"
+  layer_param {
+    idx:9
+    value:0.0
+    dtype:float32
+  }
+}
+layer {
+  name:"Node_10"
+  type:"buffer_store(seq_0)"
+  top:"Node_10"
+  bottom:"B"
+  bottom:"Node_9"
+  layer_param {
+    idx:10
+    value_00:"0f32"
+    indices_00:"[i]"
+  }
+}
+layer {
+  name:"i"
+  type:"var(indice)"
+  top:"i"
+  layer_param {
+    idx:11
+    dtype:int32
+  }
+}
+layer {
+  name:"Node_12"
+  type:"buffer_load(a)"
+  top:"Node_12"
+  bottom:"B"
+  bottom:"i"
+  layer_param {
+    idx:12
+  }
+}
+layer {
+  name:"k"
+  type:"var(indice)"
+  top:"k"
+  layer_param {
+    idx:13
+    dtype:int32
+  }
+}
+layer {
+  name:"Node_14"
+  type:"buffer_load(b)"
+  top:"Node_14"
+  bottom:"A.shared"
+  bottom:"i"
+  bottom:"k"
+  layer_param {
+    idx:14
+  }
+}
+layer {
+  name:"Node_15"
+  type:"add(value)"
+  top:"Node_15"
+  bottom:"Node_12"
+  bottom:"Node_14"
+  layer_param {
+    idx:15
+  }
+}
+layer {
+  name:"Node_16"
+  type:"buffer_store"
+  top:"Node_16"
+  bottom:"B"
+  bottom:"Node_15"
+  layer_param {
+    idx:16
+    value_00:"(B: Buffer(B_1: Pointer(float32), float32, [1024], [])[i: int32] + A.shared: Buffer(A.shared_1: Pointer(float32), float32, [1024, 1024], [])[i, k: int32])"
+    indices_00:"[i]"
+  }
+}
+layer {
+  name:"Node_17"
+  type:"for(seq_1)"
+  top:"Node_17"
+  bottom:"Node_16"
+  layer_param {
+    idx:17
+    kind:0
+    body_00:"B[i] = (B[i] + A.shared[i, k])"
+  }
+}
+layer {
+  name:"Node_18"
+  type:"seq"
+  top:"Node_18"
+  bottom:"Node_10"
+  bottom:"Node_17"
+  layer_param {
+    idx:18
+    seq_00:"[B[i] = 0f"
+    seq_01:" , for (k, 0, 1024)"
+    seq_02:"  B[i] = (B[i] + A.shared[i, k])"
+    seq_03:"   ]"
+  }
+}
+layer {
+  name:"Node_19"
+  type:"for"
+  top:"Node_19"
+  bottom:"Node_18"
+  layer_param {
+    idx:19
+    kind:0
+    body_00:"B[i] = 0f"
+    body_01:" for (k, 0, 1024)"
+    body_02:"  B[i] = (B[i] + A.shared[i, k])"
+  }
+}
+layer {
+  name:"Node_20"
+  type:"buffer_realize"
+  top:"Node_20"
+  bottom:"Node_19"
+  layer_param {
+    idx:20
+    condition:True
+    body_00:"for (i, 0, 1024)"
+    body_01:" B[i] = 0f"
+    body_02:"  for (k, 0, 1024)"
+    body_03:"   B[i] = (B[i] + A.shared[i, k])"
+    bounds_00:"[range(min=0, ext=1024)]"
+  }
+}
+layer {
+  name:"Node_21"
+  type:"attribute(seq_1)"
+  top:"Node_21"
+  bottom:"B"
+  bottom:"Node_20"
+  layer_param {
+    idx:21
+    attr_key:realize_scope
+    body_00:"buffer_realize B([0, 1024])"
+    body_01:" for (i, 0, 1024)"
+    body_02:"  B[i] = 0f"
+    body_03:"   for (k, 0, 1024)"
+    body_04:"    B[i] = (B[i] + A.shared[i, k])"
+    value_00:"''"
+  }
+}
+layer {
+  name:"Node_22"
+  type:"seq"
+  top:"Node_22"
+  bottom:"Node_7"
+  bottom:"Node_21"
+  layer_param {
+    idx:22
+    seq_00:"[for (ax0, 0, 1024)"
+    seq_01:" for (ax1, 0, 1024)"
+    seq_02:"  A.shared[ax0, ax1] = A[ax0, ax1]"
+    seq_03:"   , // attr [buffer(B, 0x7ff97c733100)] realize_scope = ''"
+    seq_04:"    buffer_realize B([0, 1024])"
+    seq_05:"     for (i, 0, 1024)"
+    seq_06:"      B[i] = 0f"
+    seq_07:"       for (k, 0, 1024)"
+    seq_08:"        B[i] = (B[i] + A.shared[i, k])"
+    seq_09:"         ]"
+  }
+}
+layer {
+  name:"Node_23"
+  type:"buffer_realize"
+  top:"Node_23"
+  bottom:"Node_22"
+  layer_param {
+    idx:23
+    condition:True
+    body_00:"for (ax0, 0, 1024)"
+    body_01:" for (ax1, 0, 1024)"
+    body_02:"  A.shared[ax0, ax1] = A[ax0, ax1]"
+    body_03:"   // attr [buffer(B, 0x7ff97c733100)] realize_scope = ''"
+    body_04:"   buffer_realize B([0, 1024])"
+    body_05:"    for (i, 0, 1024)"
+    body_06:"     B[i] = 0f"
+    body_07:"      for (k, 0, 1024)"
+    body_08:"       B[i] = (B[i] + A.shared[i, k])"
+    bounds_00:"[range(min=0, ext=1024), range(min=0, ext=1024)]"
+  }
+}
+layer {
+  name:"Node_24"
+  type:"attribute"
+  top:"Node_24"
+  bottom:"A.shared"
+  bottom:"Node_23"
+  layer_param {
+    idx:24
+    attr_key:realize_scope
+    body_00:"buffer_realize A.shared([0, 1024], [0, 1024])"
+    body_01:" for (ax0, 0, 1024)"
+    body_02:"  for (ax1, 0, 1024)"
+    body_03:"   A.shared[ax0, ax1] = A[ax0, ax1]"
+    body_04:"    // attr [buffer(B, 0x7ff97c733100)] realize_scope = ''"
+    body_05:"    buffer_realize B([0, 1024])"
+    body_06:"     for (i, 0, 1024)"
+    body_07:"      B[i] = 0f"
+    body_08:"       for (k, 0, 1024)"
+    body_09:"        B[i] = (B[i] + A.shared[i, k])"
+    value_00:"'shared'"
+  }
+}
+layer {
+  name:"Node_25"
+  type:"primfunc"
+  top:"Node_25"
+  bottom:"Node_24"
+  layer_param {
+    idx:25
+    body_00:"// attr [buffer(A.shared, 0x7ff97c732c10)] realize_scope = 'shared'"
+    body_01:"buffer_realize A.shared([0, 1024], [0, 1024])"
+    body_02:" for (ax0, 0, 1024)"
+    body_03:"  for (ax1, 0, 1024)"
+    body_04:"   A.shared[ax0, ax1] = A[ax0, ax1]"
+    body_05:"    // attr [buffer(B, 0x7ff97c733100)] realize_scope = ''"
+    body_06:"    buffer_realize B([0, 1024])"
+    body_07:"     for (i, 0, 1024)"
+    body_08:"      B[i] = 0f"
+    body_09:"       for (k, 0, 1024)"
+    body_10:"        B[i] = (B[i] + A.shared[i, k])"
+  }
+}

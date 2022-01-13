@@ -1,0 +1,437 @@
+name : "prim_expr"
+layer {
+  name:"A"
+  type:"buffer"
+  top:"A"
+  layer_param {
+    idx:0
+    buffer_name:"A"
+    shape:[1024, 1024]
+    dtype:float32
+  }
+}
+layer {
+  name:"B"
+  type:"buffer"
+  top:"B"
+  layer_param {
+    idx:1
+    buffer_name:"B"
+    shape:[1024, 1024]
+    dtype:float32
+  }
+}
+layer {
+  name:"C"
+  type:"buffer"
+  top:"C"
+  layer_param {
+    idx:2
+    buffer_name:"C"
+    shape:[1024, 1024]
+    dtype:float32
+  }
+}
+layer {
+  name:"x.outer"
+  type:"var(loop_var)"
+  top:"x.outer"
+  layer_param {
+    idx:3
+    dtype:int32
+  }
+}
+layer {
+  name:"Node_4"
+  type:"int(for_min)"
+  top:"Node_4"
+  layer_param {
+    idx:4
+    value:0
+    dtype:int32
+  }
+}
+layer {
+  name:"Node_5"
+  type:"int(for_extent)"
+  top:"Node_5"
+  layer_param {
+    idx:5
+    value:32
+    dtype:int32
+  }
+}
+layer {
+  name:"y.outer"
+  type:"var(loop_var)"
+  top:"y.outer"
+  layer_param {
+    idx:6
+    dtype:int32
+  }
+}
+layer {
+  name:"x.inner"
+  type:"var(loop_var)"
+  top:"x.inner"
+  layer_param {
+    idx:7
+    dtype:int32
+  }
+}
+layer {
+  name:"C_1"
+  type:"var(store_buffer)"
+  top:"C_1"
+  layer_param {
+    idx:8
+    dtype:handle
+  }
+}
+layer {
+  name:"A_1"
+  type:"var(load_buffer)"
+  top:"A_1"
+  layer_param {
+    idx:9
+    dtype:handle
+  }
+}
+layer {
+  name:"Node_10"
+  type:"int(b)"
+  top:"Node_10"
+  layer_param {
+    idx:10
+    value:32768
+    dtype:int32
+  }
+}
+layer {
+  name:"Node_11"
+  type:"mul(a)"
+  top:"Node_11"
+  bottom:"x.outer"
+  bottom:"Node_10"
+  layer_param {
+    idx:11
+  }
+}
+layer {
+  name:"Node_12"
+  type:"int(b)"
+  top:"Node_12"
+  layer_param {
+    idx:12
+    value:1024
+    dtype:int32
+  }
+}
+layer {
+  name:"Node_13"
+  type:"mul(b)"
+  top:"Node_13"
+  bottom:"x.inner"
+  bottom:"Node_12"
+  layer_param {
+    idx:13
+  }
+}
+layer {
+  name:"Node_14"
+  type:"add(a)"
+  top:"Node_14"
+  bottom:"Node_11"
+  bottom:"Node_13"
+  layer_param {
+    idx:14
+  }
+}
+layer {
+  name:"Node_15"
+  type:"mul(b)"
+  top:"Node_15"
+  bottom:"y.outer"
+  bottom:"Node_5"
+  layer_param {
+    idx:15
+  }
+}
+layer {
+  name:"Node_16"
+  type:"add(base)"
+  top:"Node_16"
+  bottom:"Node_14"
+  bottom:"Node_15"
+  layer_param {
+    idx:16
+  }
+}
+layer {
+  name:"Node_17"
+  type:"int(stride)"
+  top:"Node_17"
+  layer_param {
+    idx:17
+    value:1
+    dtype:int32
+  }
+}
+layer {
+  name:"Node_18"
+  type:"ramp(load_index)"
+  top:"Node_18"
+  bottom:"Node_16"
+  bottom:"Node_17"
+  layer_param {
+    idx:18
+    lanes:32
+    base_00:"(((x.outer: int32*32768) + (x.inner: int32*1024)) + (y.outer: int32*32))"
+    stride_00:"1"
+  }
+}
+layer {
+  name:"Node_19"
+  type:"load(a)"
+  top:"Node_19"
+  bottom:"A_1"
+  bottom:"Node_18"
+  layer_param {
+    idx:19
+    predicate_00:"broadcast(True, 32)"
+    body_00:"(float32x32*)A: Pointer(float32)[ramp((((x.outer: int32*32768) + (x.inner: int32*1024)) + (y.outer: int32*32)), 1, 32)]"
+  }
+}
+layer {
+  name:"B_1"
+  type:"var(load_buffer)"
+  top:"B_1"
+  layer_param {
+    idx:20
+    dtype:handle
+  }
+}
+layer {
+  name:"Node_21"
+  type:"mul(a)"
+  top:"Node_21"
+  bottom:"x.outer"
+  bottom:"Node_10"
+  layer_param {
+    idx:21
+  }
+}
+layer {
+  name:"Node_22"
+  type:"mul(b)"
+  top:"Node_22"
+  bottom:"x.inner"
+  bottom:"Node_12"
+  layer_param {
+    idx:22
+  }
+}
+layer {
+  name:"Node_23"
+  type:"add(a)"
+  top:"Node_23"
+  bottom:"Node_21"
+  bottom:"Node_22"
+  layer_param {
+    idx:23
+  }
+}
+layer {
+  name:"Node_24"
+  type:"mul(b)"
+  top:"Node_24"
+  bottom:"y.outer"
+  bottom:"Node_5"
+  layer_param {
+    idx:24
+  }
+}
+layer {
+  name:"Node_25"
+  type:"add(base)"
+  top:"Node_25"
+  bottom:"Node_23"
+  bottom:"Node_24"
+  layer_param {
+    idx:25
+  }
+}
+layer {
+  name:"Node_26"
+  type:"ramp(load_index)"
+  top:"Node_26"
+  bottom:"Node_25"
+  bottom:"Node_17"
+  layer_param {
+    idx:26
+    lanes:32
+    base_00:"(((x.outer: int32*32768) + (x.inner: int32*1024)) + (y.outer: int32*32))"
+    stride_00:"1"
+  }
+}
+layer {
+  name:"Node_27"
+  type:"load(b)"
+  top:"Node_27"
+  bottom:"B_1"
+  bottom:"Node_26"
+  layer_param {
+    idx:27
+    predicate_00:"broadcast(True, 32)"
+    body_00:"(float32x32*)B: Pointer(float32)[ramp((((x.outer: int32*32768) + (x.inner: int32*1024)) + (y.outer: int32*32)), 1, 32)]"
+  }
+}
+layer {
+  name:"Node_28"
+  type:"add(store_value)"
+  top:"Node_28"
+  bottom:"Node_19"
+  bottom:"Node_27"
+  layer_param {
+    idx:28
+  }
+}
+layer {
+  name:"Node_29"
+  type:"mul(a)"
+  top:"Node_29"
+  bottom:"x.outer"
+  bottom:"Node_10"
+  layer_param {
+    idx:29
+  }
+}
+layer {
+  name:"Node_30"
+  type:"mul(b)"
+  top:"Node_30"
+  bottom:"x.inner"
+  bottom:"Node_12"
+  layer_param {
+    idx:30
+  }
+}
+layer {
+  name:"Node_31"
+  type:"add(a)"
+  top:"Node_31"
+  bottom:"Node_29"
+  bottom:"Node_30"
+  layer_param {
+    idx:31
+  }
+}
+layer {
+  name:"Node_32"
+  type:"mul(b)"
+  top:"Node_32"
+  bottom:"y.outer"
+  bottom:"Node_5"
+  layer_param {
+    idx:32
+  }
+}
+layer {
+  name:"Node_33"
+  type:"add(base)"
+  top:"Node_33"
+  bottom:"Node_31"
+  bottom:"Node_32"
+  layer_param {
+    idx:33
+  }
+}
+layer {
+  name:"Node_34"
+  type:"ramp(store_index)"
+  top:"Node_34"
+  bottom:"Node_33"
+  bottom:"Node_17"
+  layer_param {
+    idx:34
+    lanes:32
+    base_00:"(((x.outer: int32*32768) + (x.inner: int32*1024)) + (y.outer: int32*32))"
+    stride_00:"1"
+  }
+}
+layer {
+  name:"Node_35"
+  type:"store"
+  top:"Node_35"
+  bottom:"C_1"
+  bottom:"Node_28"
+  bottom:"Node_34"
+  layer_param {
+    idx:35
+    predicate_00:"broadcast(True, 32)"
+    value_00:"((float32x32*)A: Pointer(float32)[ramp((((x.outer: int32*32768) + (x.inner: int32*1024)) + (y.outer: int32*32)), 1, 32)] + (float32x32*)B: Pointer(float32)[ramp((((x.outer*32768) + (x.inner*1024)) + (y.outer*32)), 1, 32)])"
+    index_00:"ramp((((x.outer: int32*32768) + (x.inner: int32*1024)) + (y.outer: int32*32)), 1, 32)"
+    body_00:"C[ramp((((x.outer*32768) + (x.inner*1024)) + (y.outer*32)), 1, 32)] = (A[ramp((((x.outer*32768) + (x.inner*1024)) + (y.outer*32)), 1, 32)] + B[ramp((((x.outer*32768) + (x.inner*1024)) + (y.outer*32)), 1, 32)])"
+  }
+}
+layer {
+  name:"Node_36"
+  type:"for"
+  top:"Node_36"
+  bottom:"x.inner"
+  bottom:"Node_4"
+  bottom:"Node_5"
+  bottom:"Node_35"
+  layer_param {
+    idx:36
+    kind:0
+    body_00:"C[ramp((((x.outer*32768) + (x.inner*1024)) + (y.outer*32)), 1, 32)] = (A[ramp((((x.outer*32768) + (x.inner*1024)) + (y.outer*32)), 1, 32)] + B[ramp((((x.outer*32768) + (x.inner*1024)) + (y.outer*32)), 1, 32)])"
+  }
+}
+layer {
+  name:"Node_37"
+  type:"for"
+  top:"Node_37"
+  bottom:"y.outer"
+  bottom:"Node_4"
+  bottom:"Node_5"
+  bottom:"Node_36"
+  layer_param {
+    idx:37
+    kind:0
+    body_00:"for (x.inner, 0, 32)"
+    body_01:" C[ramp((((x.outer*32768) + (x.inner*1024)) + (y.outer*32)), 1, 32)] = (A[ramp((((x.outer*32768) + (x.inner*1024)) + (y.outer*32)), 1, 32)] + B[ramp((((x.outer*32768) + (x.inner*1024)) + (y.outer*32)), 1, 32)])"
+  }
+}
+layer {
+  name:"Node_38"
+  type:"for"
+  top:"Node_38"
+  bottom:"x.outer"
+  bottom:"Node_4"
+  bottom:"Node_5"
+  bottom:"Node_37"
+  layer_param {
+    idx:38
+    kind:0
+    body_00:"for (y.outer, 0, 32)"
+    body_01:" for (x.inner, 0, 32)"
+    body_02:"  C[ramp((((x.outer*32768) + (x.inner*1024)) + (y.outer*32)), 1, 32)] = (A[ramp((((x.outer*32768) + (x.inner*1024)) + (y.outer*32)), 1, 32)] + B[ramp((((x.outer*32768) + (x.inner*1024)) + (y.outer*32)), 1, 32)])"
+  }
+}
+layer {
+  name:"Node_39"
+  type:"primfunc"
+  top:"Node_39"
+  bottom:"A"
+  bottom:"B"
+  bottom:"C"
+  bottom:"Node_38"
+  layer_param {
+    idx:39
+    body_00:"for (x.outer, 0, 32)"
+    body_01:" for (y.outer, 0, 32)"
+    body_02:"  for (x.inner, 0, 32)"
+    body_03:"   C[ramp((((x.outer*32768) + (x.inner*1024)) + (y.outer*32)), 1, 32)] = (A[ramp((((x.outer*32768) + (x.inner*1024)) + (y.outer*32)), 1, 32)] + B[ramp((((x.outer*32768) + (x.inner*1024)) + (y.outer*32)), 1, 32)])"
+  }
+}

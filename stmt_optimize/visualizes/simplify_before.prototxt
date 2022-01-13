@@ -1,0 +1,383 @@
+name : "prim_expr"
+layer {
+  name:"A"
+  type:"buffer"
+  top:"A"
+  layer_param {
+    idx:0
+    buffer_name:"A"
+    shape:[1024]
+    dtype:float32
+  }
+}
+layer {
+  name:"B"
+  type:"buffer"
+  top:"B"
+  layer_param {
+    idx:1
+    buffer_name:"B"
+    shape:[1]
+    dtype:float32
+  }
+}
+layer {
+  name:"blockIdx.x"
+  type:"var(iter)"
+  top:"blockIdx.x"
+  layer_param {
+    idx:2
+    dtype:int32
+  }
+}
+layer {
+  name:"Node_3"
+  type:"itervar(node)"
+  top:"Node_3"
+  bottom:"blockIdx.x"
+  layer_param {
+    idx:3
+    dom:"None"
+    iter_type:"1"
+    thread_tag:"blockIdx.x"
+  }
+}
+layer {
+  name:"threadIdx.x"
+  type:"var(iter)"
+  top:"threadIdx.x"
+  layer_param {
+    idx:4
+    dtype:int32
+  }
+}
+layer {
+  name:"Node_5"
+  type:"itervar(node)"
+  top:"Node_5"
+  bottom:"threadIdx.x"
+  layer_param {
+    idx:5
+    dom:"None"
+    iter_type:"1"
+    thread_tag:"threadIdx.x"
+  }
+}
+layer {
+  name:"reduce_temp0"
+  type:"var(node)"
+  top:"reduce_temp0"
+  layer_param {
+    idx:6
+    dtype:handle
+  }
+}
+layer {
+  name:"x"
+  type:"var(reduce_l)"
+  top:"x"
+  layer_param {
+    idx:7
+    dtype:float32
+  }
+}
+layer {
+  name:"y"
+  type:"var(reduce_r)"
+  top:"y"
+  layer_param {
+    idx:8
+    dtype:float32
+  }
+}
+layer {
+  name:"Node_9"
+  type:"add(reduce_res)"
+  top:"Node_9"
+  bottom:"x"
+  bottom:"y"
+  layer_param {
+    idx:9
+  }
+}
+layer {
+  name:"Node_10"
+  type:"float(reduce_ind)"
+  top:"Node_10"
+  layer_param {
+    idx:10
+    value:0.0
+    dtype:float32
+  }
+}
+layer {
+  name:"Node_11"
+  type:"common_reducer(node)"
+  top:"Node_11"
+  bottom:"x"
+  bottom:"y"
+  bottom:"Node_9"
+  bottom:"Node_10"
+  layer_param {
+    idx:11
+    result_00:"[(x + y)]"
+  }
+}
+layer {
+  name:"Node_12"
+  type:"int"
+  top:"Node_12"
+  layer_param {
+    idx:12
+    value:1
+    dtype:uint32
+  }
+}
+layer {
+  name:"A_1"
+  type:"var(load_buffer)"
+  top:"A_1"
+  layer_param {
+    idx:13
+    dtype:handle
+  }
+}
+layer {
+  name:"Node_14"
+  type:"int(b)"
+  top:"Node_14"
+  layer_param {
+    idx:14
+    value:32
+    dtype:int32
+  }
+}
+layer {
+  name:"Node_15"
+  type:"mul(b)"
+  top:"Node_15"
+  bottom:"blockIdx.x"
+  bottom:"Node_14"
+  layer_param {
+    idx:15
+  }
+}
+layer {
+  name:"Node_16"
+  type:"add(load_index)"
+  top:"Node_16"
+  bottom:"threadIdx.x"
+  bottom:"Node_15"
+  layer_param {
+    idx:16
+  }
+}
+layer {
+  name:"Node_17"
+  type:"load"
+  top:"Node_17"
+  bottom:"A_1"
+  bottom:"Node_16"
+  layer_param {
+    idx:17
+    predicate_00:"True"
+    body_00:"(float32*)A: Pointer(float32)[(threadIdx.x: int32 + (blockIdx.x: int32*32))]"
+  }
+}
+layer {
+  name:"Node_18"
+  type:"Call_tir.tvm_thread_allreduce(value)"
+  top:"Node_18"
+  bottom:"Node_12"
+  bottom:"Node_17"
+  bottom:"Node_12"
+  bottom:"reduce_temp0"
+  bottom:"blockIdx.x"
+  bottom:"threadIdx.x"
+  layer_param {
+    idx:18
+  }
+}
+layer {
+  name:"Node_19"
+  type:"evaluate"
+  top:"Node_19"
+  bottom:"Node_18"
+  layer_param {
+    idx:19
+  }
+}
+layer {
+  name:"Node_20"
+  type:"attribute(seq_0)"
+  top:"Node_20"
+  bottom:"Node_11"
+  bottom:"Node_19"
+  layer_param {
+    idx:20
+    attr_key:reduce_scope
+    body_00:"tir.tvm_thread_allreduce((uint32)1, A[(threadIdx.x + (blockIdx.x*32))], (bool)1, reduce_temp0, blockIdx.x, threadIdx.x)"
+    value_00:"@tir.reinterpret(0u64, dtype=handle)"
+  }
+}
+layer {
+  name:"B_1"
+  type:"var(store_buffer)"
+  top:"B_1"
+  layer_param {
+    idx:21
+    dtype:handle
+  }
+}
+layer {
+  name:"Node_22"
+  type:"int(load_index)"
+  top:"Node_22"
+  layer_param {
+    idx:22
+    value:0
+    dtype:int32
+  }
+}
+layer {
+  name:"Node_23"
+  type:"load(store_value)"
+  top:"Node_23"
+  bottom:"reduce_temp0"
+  bottom:"Node_22"
+  layer_param {
+    idx:23
+    predicate_00:"True"
+    body_00:"(float32*)reduce_temp0: Pointer(float32)[0]"
+  }
+}
+layer {
+  name:"Node_24"
+  type:"store(true)"
+  top:"Node_24"
+  bottom:"B_1"
+  bottom:"Node_23"
+  bottom:"Node_22"
+  layer_param {
+    idx:24
+    predicate_00:"True"
+    value_00:"(float32*)reduce_temp0: Pointer(float32)[0]"
+    index_00:"0"
+    body_00:"B[0] = reduce_temp0[0]"
+  }
+}
+layer {
+  name:"Node_25"
+  type:"ifthenelse(seq_1)"
+  top:"Node_25"
+  bottom:"Node_24"
+  layer_param {
+    idx:25
+    condition:"True"
+  }
+}
+layer {
+  name:"Node_26"
+  type:"seq"
+  top:"Node_26"
+  bottom:"Node_20"
+  bottom:"Node_25"
+  layer_param {
+    idx:26
+    seq_00:"[// attr [comm_reducer(result=[(x + y)], lhs=[x], rhs=[y], identity_element=[0f])] reduce_scope = tir.reinterpret((uint64)0)"
+    seq_01:" tir.tvm_thread_allreduce((uint32)1, A[(threadIdx.x + (blockIdx.x*32))], (bool)1, reduce_temp0, blockIdx.x, threadIdx.x)"
+    seq_02:"  , if ((bool)1)"
+    seq_03:"   B[0] = reduce_temp0[0]"
+    seq_04:"    ]"
+  }
+}
+layer {
+  name:"Node_27"
+  type:"allocate"
+  top:"Node_27"
+  bottom:"reduce_temp0"
+  bottom:"Node_26"
+  layer_param {
+    idx:27
+    dtype:float32
+    extents:"[1]"
+    condition:"True"
+    body_00:"// attr [comm_reducer(result=[(x + y)], lhs=[x], rhs=[y], identity_element=[0f])] reduce_scope = tir.reinterpret((uint64)0)"
+    body_01:"tir.tvm_thread_allreduce((uint32)1, A[(threadIdx.x + (blockIdx.x*32))], (bool)1, reduce_temp0, blockIdx.x, threadIdx.x)"
+    body_02:" if ((bool)1)"
+    body_03:"  B[0] = reduce_temp0[0]"
+  }
+}
+layer {
+  name:"Node_28"
+  type:"attribute"
+  top:"Node_28"
+  bottom:"reduce_temp0"
+  bottom:"Node_27"
+  layer_param {
+    idx:28
+    attr_key:storage_scope
+    body_00:"allocate reduce_temp0[float32 * 1]"
+    body_01:" // attr [comm_reducer(result=[(x + y)], lhs=[x], rhs=[y], identity_element=[0f])] reduce_scope = tir.reinterpret((uint64)0)"
+    body_02:" tir.tvm_thread_allreduce((uint32)1, A[(threadIdx.x + (blockIdx.x*32))], (bool)1, reduce_temp0, blockIdx.x, threadIdx.x)"
+    body_03:"  if ((bool)1)"
+    body_04:"   B[0] = reduce_temp0[0]"
+    value_00:"'local'"
+  }
+}
+layer {
+  name:"Node_29"
+  type:"attribute"
+  top:"Node_29"
+  bottom:"Node_5"
+  bottom:"Node_28"
+  layer_param {
+    idx:29
+    attr_key:thread_extent
+    body_00:"// attr [reduce_temp0] storage_scope = 'local'"
+    body_01:"allocate reduce_temp0[float32 * 1]"
+    body_02:" // attr [comm_reducer(result=[(x + y)], lhs=[x], rhs=[y], identity_element=[0f])] reduce_scope = tir.reinterpret((uint64)0)"
+    body_03:" tir.tvm_thread_allreduce((uint32)1, A[(threadIdx.x + (blockIdx.x*32))], (bool)1, reduce_temp0, blockIdx.x, threadIdx.x)"
+    body_04:"  if ((bool)1)"
+    body_05:"   B[0] = reduce_temp0[0]"
+    value_00:"32"
+  }
+}
+layer {
+  name:"Node_30"
+  type:"attribute"
+  top:"Node_30"
+  bottom:"Node_3"
+  bottom:"Node_29"
+  layer_param {
+    idx:30
+    attr_key:thread_extent
+    body_00:"// attr [iter_var(threadIdx.x, , threadIdx.x)] thread_extent = 32"
+    body_01:"// attr [reduce_temp0] storage_scope = 'local'"
+    body_02:"allocate reduce_temp0[float32 * 1]"
+    body_03:" // attr [comm_reducer(result=[(x + y)], lhs=[x], rhs=[y], identity_element=[0f])] reduce_scope = tir.reinterpret((uint64)0)"
+    body_04:" tir.tvm_thread_allreduce((uint32)1, A[(threadIdx.x + (blockIdx.x*32))], (bool)1, reduce_temp0, blockIdx.x, threadIdx.x)"
+    body_05:"  if ((bool)1)"
+    body_06:"   B[0] = reduce_temp0[0]"
+    value_00:"32"
+  }
+}
+layer {
+  name:"Node_31"
+  type:"primfunc"
+  top:"Node_31"
+  bottom:"A"
+  bottom:"B"
+  bottom:"Node_30"
+  layer_param {
+    idx:31
+    body_00:"// attr [iter_var(blockIdx.x, , blockIdx.x)] thread_extent = 32"
+    body_01:"// attr [iter_var(threadIdx.x, , threadIdx.x)] thread_extent = 32"
+    body_02:"// attr [reduce_temp0] storage_scope = 'local'"
+    body_03:"allocate reduce_temp0[float32 * 1]"
+    body_04:" // attr [comm_reducer(result=[(x + y)], lhs=[x], rhs=[y], identity_element=[0f])] reduce_scope = tir.reinterpret((uint64)0)"
+    body_05:" tir.tvm_thread_allreduce((uint32)1, A[(threadIdx.x + (blockIdx.x*32))], (bool)1, reduce_temp0, blockIdx.x, threadIdx.x)"
+    body_06:"  if ((bool)1)"
+    body_07:"   B[0] = reduce_temp0[0]"
+  }
+}

@@ -1,0 +1,385 @@
+name : "prim_expr"
+layer {
+  name:"placeholder"
+  type:"buffer"
+  top:"placeholder"
+  layer_param {
+    idx:0
+    shape:[1, 2, 56, 56, 32]
+    dtype:float32
+    name:"placeholder"
+  }
+}
+layer {
+  name:"T_layout_trans"
+  type:"buffer"
+  top:"T_layout_trans"
+  layer_param {
+    idx:1
+    shape:[1, 8, 56, 56, 8]
+    dtype:float32
+    name:"T_layout_trans"
+  }
+}
+layer {
+  name:"ax0.ax1.fused.ax2.fused"
+  type:"var(loop_var)"
+  top:"ax0.ax1.fused.ax2.fused"
+  layer_param {
+    idx:2
+    dtype:int32
+  }
+}
+layer {
+  name:"Node_3"
+  type:"int(for_min)"
+  top:"Node_3"
+  layer_param {
+    idx:3
+    value:0
+    dtype:int32
+  }
+}
+layer {
+  name:"Node_4"
+  type:"int(for_extent)"
+  top:"Node_4"
+  layer_param {
+    idx:4
+    value:448
+    dtype:int32
+  }
+}
+layer {
+  name:"ax3"
+  type:"var(loop_var)"
+  top:"ax3"
+  layer_param {
+    idx:5
+    dtype:int32
+  }
+}
+layer {
+  name:"Node_6"
+  type:"int(for_extent)"
+  top:"Node_6"
+  layer_param {
+    idx:6
+    value:56
+    dtype:int32
+  }
+}
+layer {
+  name:"T_layout_trans_1"
+  type:"var(store_buffer)"
+  top:"T_layout_trans_1"
+  layer_param {
+    idx:7
+    dtype:handle
+  }
+}
+layer {
+  name:"placeholder_1"
+  type:"var(load_buffer)"
+  top:"placeholder_1"
+  layer_param {
+    idx:8
+    dtype:handle
+  }
+}
+layer {
+  name:"Node_9"
+  type:"int(b)"
+  top:"Node_9"
+  layer_param {
+    idx:9
+    value:224
+    dtype:int32
+  }
+}
+layer {
+  name:"Node_10"
+  type:"floor_div(a)"
+  top:"Node_10"
+  bottom:"ax0.ax1.fused.ax2.fused"
+  bottom:"Node_9"
+  layer_param {
+    idx:10
+  }
+}
+layer {
+  name:"Node_11"
+  type:"int(b)"
+  top:"Node_11"
+  layer_param {
+    idx:11
+    value:100352
+    dtype:int32
+  }
+}
+layer {
+  name:"Node_12"
+  type:"mul(a)"
+  top:"Node_12"
+  bottom:"Node_10"
+  bottom:"Node_11"
+  layer_param {
+    idx:12
+  }
+}
+layer {
+  name:"Node_13"
+  type:"floor_mod(a)"
+  top:"Node_13"
+  bottom:"ax0.ax1.fused.ax2.fused"
+  bottom:"Node_6"
+  layer_param {
+    idx:13
+  }
+}
+layer {
+  name:"Node_14"
+  type:"int(b)"
+  top:"Node_14"
+  layer_param {
+    idx:14
+    value:1792
+    dtype:int32
+  }
+}
+layer {
+  name:"Node_15"
+  type:"mul(b)"
+  top:"Node_15"
+  bottom:"Node_13"
+  bottom:"Node_14"
+  layer_param {
+    idx:15
+  }
+}
+layer {
+  name:"Node_16"
+  type:"add(a)"
+  top:"Node_16"
+  bottom:"Node_12"
+  bottom:"Node_15"
+  layer_param {
+    idx:16
+  }
+}
+layer {
+  name:"Node_17"
+  type:"int(b)"
+  top:"Node_17"
+  layer_param {
+    idx:17
+    value:32
+    dtype:int32
+  }
+}
+layer {
+  name:"Node_18"
+  type:"mul(b)"
+  top:"Node_18"
+  bottom:"ax3"
+  bottom:"Node_17"
+  layer_param {
+    idx:18
+  }
+}
+layer {
+  name:"Node_19"
+  type:"add(a)"
+  top:"Node_19"
+  bottom:"Node_16"
+  bottom:"Node_18"
+  layer_param {
+    idx:19
+  }
+}
+layer {
+  name:"Node_20"
+  type:"floor_mod(a)"
+  top:"Node_20"
+  bottom:"ax0.ax1.fused.ax2.fused"
+  bottom:"Node_9"
+  layer_param {
+    idx:20
+  }
+}
+layer {
+  name:"Node_21"
+  type:"floor_div(a)"
+  top:"Node_21"
+  bottom:"Node_20"
+  bottom:"Node_6"
+  layer_param {
+    idx:21
+  }
+}
+layer {
+  name:"Node_22"
+  type:"int(b)"
+  top:"Node_22"
+  layer_param {
+    idx:22
+    value:8
+    dtype:int32
+  }
+}
+layer {
+  name:"Node_23"
+  type:"mul(b)"
+  top:"Node_23"
+  bottom:"Node_21"
+  bottom:"Node_22"
+  layer_param {
+    idx:23
+  }
+}
+layer {
+  name:"Node_24"
+  type:"add(base)"
+  top:"Node_24"
+  bottom:"Node_19"
+  bottom:"Node_23"
+  layer_param {
+    idx:24
+  }
+}
+layer {
+  name:"Node_25"
+  type:"int(stride)"
+  top:"Node_25"
+  layer_param {
+    idx:25
+    value:1
+    dtype:int32
+  }
+}
+layer {
+  name:"Node_26"
+  type:"ramp(load_index)"
+  top:"Node_26"
+  bottom:"Node_24"
+  bottom:"Node_25"
+  layer_param {
+    idx:26
+    lanes:8
+    base:"((((floordiv(ax0.ax1.fused.ax2.fused: int32, 224)*100352) + (floormod(ax0.ax1.fused.ax2.fused, 56)*1792)) + (ax3: int32*32)) + (floordiv(floormod(ax0.ax1.fused.ax2.fused, 224), 56)*8))"
+    stride:"1"
+  }
+}
+layer {
+  name:"Node_27"
+  type:"load(store_value)"
+  top:"Node_27"
+  bottom:"placeholder_1"
+  bottom:"Node_26"
+  layer_param {
+    idx:27
+    predicate:"broadcast(True, 8)"
+    body:"(float32x8*)placeholder: Pointer(float32)[ramp(((((floordiv(ax0.ax1.fused.ax2.fused: int32, 224)*100352) + (floormod(ax0.ax1.fused.ax2.fused, 56)*1792)) + (ax3: int32*32)) + (floordiv(floormod(ax0.ax1.fused.ax2.fused, 224), 56)*8)), 1, 8)]"
+  }
+}
+layer {
+  name:"Node_28"
+  type:"mul(a)"
+  top:"Node_28"
+  bottom:"ax0.ax1.fused.ax2.fused"
+  bottom:"Node_4"
+  layer_param {
+    idx:28
+  }
+}
+layer {
+  name:"Node_29"
+  type:"mul(b)"
+  top:"Node_29"
+  bottom:"ax3"
+  bottom:"Node_22"
+  layer_param {
+    idx:29
+  }
+}
+layer {
+  name:"Node_30"
+  type:"add(base)"
+  top:"Node_30"
+  bottom:"Node_28"
+  bottom:"Node_29"
+  layer_param {
+    idx:30
+  }
+}
+layer {
+  name:"Node_31"
+  type:"ramp(store_index)"
+  top:"Node_31"
+  bottom:"Node_30"
+  bottom:"Node_25"
+  layer_param {
+    idx:31
+    lanes:8
+    base:"((ax0.ax1.fused.ax2.fused: int32*448) + (ax3: int32*8))"
+    stride:"1"
+  }
+}
+layer {
+  name:"Node_32"
+  type:"store"
+  top:"Node_32"
+  bottom:"T_layout_trans_1"
+  bottom:"Node_27"
+  bottom:"Node_31"
+  layer_param {
+    idx:32
+    predicate:"broadcast(True, 8)"
+    value:"(float32x8*)placeholder: Pointer(float32)[ramp(((((floordiv(ax0.ax1.fused.ax2.fused: int32, 224)*100352) + (floormod(ax0.ax1.fused.ax2.fused, 56)*1792)) + (ax3: int32*32)) + (floordiv(floormod(ax0.ax1.fused.ax2.fused, 224), 56)*8)), 1, 8)]"
+    index:"ramp(((ax0.ax1.fused.ax2.fused: int32*448) + (ax3: int32*8)), 1, 8)"
+    body_:"T_layout_trans[ramp(((ax0.ax1.fused.ax2.fused*448) + (ax3*8)), 1, 8)] = placeholder[ramp(((((floordiv(ax0.ax1.fused.ax2.fused, 224)*100352) + (floormod(ax0.ax1.fused.ax2.fused, 56)*1792)) + (ax3*32)) + (floordiv(floormod(ax0.ax1.fused.ax2.fused, 224), 56)*8)), 1, 8)]"
+  }
+}
+layer {
+  name:"Node_33"
+  type:"for"
+  top:"Node_33"
+  bottom:"ax3"
+  bottom:"Node_3"
+  bottom:"Node_6"
+  bottom:"Node_32"
+  layer_param {
+    idx:33
+    kind:0
+    body_:"T_layout_trans[ramp(((ax0.ax1.fused.ax2.fused*448) + (ax3*8)), 1, 8)] = placeholder[ramp(((((floordiv(ax0.ax1.fused.ax2.fused, 224)*100352) + (floormod(ax0.ax1.fused.ax2.fused, 56)*1792)) + (ax3*32)) + (floordiv(floormod(ax0.ax1.fused.ax2.fused, 224), 56)*8)), 1, 8)]"
+  }
+}
+layer {
+  name:"Node_34"
+  type:"for"
+  top:"Node_34"
+  bottom:"ax0.ax1.fused.ax2.fused"
+  bottom:"Node_3"
+  bottom:"Node_4"
+  bottom:"Node_33"
+  layer_param {
+    idx:34
+    kind:1
+    body_00:"for (ax3, 0, 56)"
+    body_01:" T_layout_trans[ramp(((ax0.ax1.fused.ax2.fused*448) + (ax3*8)), 1, 8)] = placeholder[ramp(((((floordiv(ax0.ax1.fused.ax2.fused, 224)*100352) + (floormod(ax0.ax1.fused.ax2.fused, 56)*1792)) + (ax3*32)) + (floordiv(floormod(ax0.ax1.fused.ax2.fused, 224), 56)*8)), 1, 8)]"
+  }
+}
+layer {
+  name:"Node_35"
+  type:"primfunc"
+  top:"Node_35"
+  bottom:"placeholder"
+  bottom:"T_layout_trans"
+  bottom:"Node_34"
+  layer_param {
+    idx:35
+    body_00:"parallel (ax0.ax1.fused.ax2.fused, 0, 448)"
+    body_01:" for (ax3, 0, 56)"
+    body_02:"  T_layout_trans[ramp(((ax0.ax1.fused.ax2.fused*448) + (ax3*8)), 1, 8)] = placeholder[ramp(((((floordiv(ax0.ax1.fused.ax2.fused, 224)*100352) + (floormod(ax0.ax1.fused.ax2.fused, 56)*1792)) + (ax3*32)) + (floordiv(floormod(ax0.ax1.fused.ax2.fused, 224), 56)*8)), 1, 8)]"
+  }
+}

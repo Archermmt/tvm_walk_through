@@ -1,0 +1,78 @@
+name : "prim_expr"
+layer {
+  name:"A"
+  type:"place_holder"
+  top:"A"
+  layer_param {
+    idx:0
+    dtype:float32
+  }
+}
+layer {
+  name:"i"
+  type:"var(indice)"
+  top:"i"
+  layer_param {
+    idx:1
+    dtype:int32
+  }
+}
+layer {
+  name:"j"
+  type:"var(indice)"
+  top:"j"
+  layer_param {
+    idx:2
+    dtype:int32
+  }
+}
+layer {
+  name:"Node_3"
+  type:"producer_load(a)"
+  top:"Node_3"
+  bottom:"A"
+  bottom:"i"
+  bottom:"j"
+  layer_param {
+    idx:3
+  }
+}
+layer {
+  name:"B"
+  type:"place_holder"
+  top:"B"
+  layer_param {
+    idx:4
+    dtype:float32
+  }
+}
+layer {
+  name:"Node_5"
+  type:"producer_load(b)"
+  top:"Node_5"
+  bottom:"B"
+  bottom:"i"
+  bottom:"j"
+  layer_param {
+    idx:5
+  }
+}
+layer {
+  name:"Node_6"
+  type:"add"
+  top:"Node_6"
+  bottom:"Node_3"
+  bottom:"Node_5"
+  layer_param {
+    idx:6
+  }
+}
+layer {
+  name:"C"
+  type:"compute"
+  top:"C"
+  bottom:"Node_6"
+  layer_param {
+    idx:7
+  }
+}

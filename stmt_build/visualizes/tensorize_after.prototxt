@@ -1,0 +1,239 @@
+name : "prim_expr"
+layer {
+  name:"C"
+  type:"buffer(node)"
+  top:"C"
+  layer_param {
+    idx:0
+    buffer_name:"C"
+    shape:[1024, 512]
+    dtype:float32
+  }
+}
+layer {
+  name:"A"
+  type:"buffer(array_0)"
+  top:"A"
+  layer_param {
+    idx:1
+    buffer_name:"A"
+    shape:[64]
+    dtype:float32
+  }
+}
+layer {
+  name:"A_1"
+  type:"buffer(array_1)"
+  top:"A_1"
+  layer_param {
+    idx:2
+    buffer_name:"A"
+    shape:[1024, 64]
+    dtype:float32
+  }
+}
+layer {
+  name:"Node_3"
+  type:"array(node)"
+  top:"Node_3"
+  bottom:"A"
+  bottom:"A_1"
+  layer_param {
+    idx:3
+  }
+}
+layer {
+  name:"B"
+  type:"buffer(array_0)"
+  top:"B"
+  layer_param {
+    idx:4
+    buffer_name:"B"
+    shape:[16, 64]
+    dtype:float32
+  }
+}
+layer {
+  name:"B_1"
+  type:"buffer(array_1)"
+  top:"B_1"
+  layer_param {
+    idx:5
+    buffer_name:"B"
+    shape:[512, 64]
+    dtype:float32
+  }
+}
+layer {
+  name:"Node_6"
+  type:"array(node)"
+  top:"Node_6"
+  bottom:"B"
+  bottom:"B_1"
+  layer_param {
+    idx:6
+  }
+}
+layer {
+  name:"C_1"
+  type:"buffer(array_0)"
+  top:"C_1"
+  layer_param {
+    idx:7
+    buffer_name:"C"
+    shape:[16]
+    dtype:float32
+  }
+}
+layer {
+  name:"Node_8"
+  type:"array(node)"
+  top:"Node_8"
+  bottom:"C_1"
+  bottom:"C"
+  layer_param {
+    idx:8
+  }
+}
+layer {
+  name:"Node_9"
+  type:"Call_tir.call_extern(value)"
+  top:"Node_9"
+  layer_param {
+    idx:9
+    body_00:"@tir.call_extern('gemv_update', @tir.tvm_access_ptr(@tir.type_annotation(, dtype=float32), C: Pointer(float32), C_elem_offset: int32, 16, 2, dtype=handle), @tir.tvm_access_ptr(@tir.type_annotation(, dtype=float32), A: Pointer(float32), A_elem_offset: int32, 64, 1, dtype=handle), @tir.tvm_access_ptr(@tir.type_annotation(, dtype=float32), B: Pointer(float32), B_elem_offset: int32, (s1: int32*16), 1, dtype=handle), 16, 64, s1, dtype=int32)"
+  }
+}
+layer {
+  name:"Node_10"
+  type:"evaluate"
+  top:"Node_10"
+  bottom:"Node_9"
+  layer_param {
+    idx:10
+  }
+}
+layer {
+  name:"Node_11"
+  type:"attribute"
+  top:"Node_11"
+  bottom:"Node_8"
+  bottom:"Node_10"
+  layer_param {
+    idx:11
+    attr_key:buffer_bind_scope
+    body_00:"tir.call_extern('gemv_update', tir.tvm_access_ptr(tir.type_annotation(), C, C_elem_offset, 16, 2), tir.tvm_access_ptr(tir.type_annotation(), A, A_elem_offset, 64, 1), tir.tvm_access_ptr(tir.type_annotation(), B, B_elem_offset, (s1*16), 1), 16, 64, s1)"
+    value_00:"@tir.tvm_tuple(i: int32, 1, (j.outer: int32*16), 16, dtype=handle)"
+  }
+}
+layer {
+  name:"Node_12"
+  type:"attribute"
+  top:"Node_12"
+  bottom:"Node_6"
+  bottom:"Node_11"
+  layer_param {
+    idx:12
+    attr_key:buffer_bind_scope
+    body_00:"// attr [[buffer(C, 0x7ff97c52cfe0), buffer(C, 0x7ff97c558780)]] buffer_bind_scope = tir.tvm_tuple(i, 1, (j.outer*16), 16)"
+    body_01:"tir.call_extern('gemv_update', tir.tvm_access_ptr(tir.type_annotation(), C, C_elem_offset, 16, 2), tir.tvm_access_ptr(tir.type_annotation(), A, A_elem_offset, 64, 1), tir.tvm_access_ptr(tir.type_annotation(), B, B_elem_offset, (s1*16), 1), 16, 64, s1)"
+    value_00:"@tir.tvm_tuple((j.outer: int32*16), 16, 0, 64, dtype=handle)"
+  }
+}
+layer {
+  name:"Node_13"
+  type:"attribute"
+  top:"Node_13"
+  bottom:"Node_3"
+  bottom:"Node_12"
+  layer_param {
+    idx:13
+    attr_key:buffer_bind_scope
+    body_00:"// attr [[buffer(B, 0x7ff97c52cd90), buffer(B, 0x7ff97c558ae0)]] buffer_bind_scope = tir.tvm_tuple((j.outer*16), 16, 0, 64)"
+    body_01:"// attr [[buffer(C, 0x7ff97c52cfe0), buffer(C, 0x7ff97c558780)]] buffer_bind_scope = tir.tvm_tuple(i, 1, (j.outer*16), 16)"
+    body_02:"tir.call_extern('gemv_update', tir.tvm_access_ptr(tir.type_annotation(), C, C_elem_offset, 16, 2), tir.tvm_access_ptr(tir.type_annotation(), A, A_elem_offset, 64, 1), tir.tvm_access_ptr(tir.type_annotation(), B, B_elem_offset, (s1*16), 1), 16, 64, s1)"
+    value_00:"@tir.tvm_tuple(i: int32, 1, 0, 64, dtype=handle)"
+  }
+}
+layer {
+  name:"Node_14"
+  type:"for"
+  top:"Node_14"
+  bottom:"Node_13"
+  layer_param {
+    idx:14
+    kind:0
+    body_00:"// attr [[buffer(A, 0x7ff97c52b910), buffer(A, 0x7ff97c561dd0)]] buffer_bind_scope = tir.tvm_tuple(i, 1, 0, 64)"
+    body_01:"// attr [[buffer(B, 0x7ff97c52cd90), buffer(B, 0x7ff97c558ae0)]] buffer_bind_scope = tir.tvm_tuple((j.outer*16), 16, 0, 64)"
+    body_02:"// attr [[buffer(C, 0x7ff97c52cfe0), buffer(C, 0x7ff97c558780)]] buffer_bind_scope = tir.tvm_tuple(i, 1, (j.outer*16), 16)"
+    body_03:"tir.call_extern('gemv_update', tir.tvm_access_ptr(tir.type_annotation(), C, C_elem_offset, 16, 2), tir.tvm_access_ptr(tir.type_annotation(), A, A_elem_offset, 64, 1), tir.tvm_access_ptr(tir.type_annotation(), B, B_elem_offset, (s1*16), 1), 16, 64, s1)"
+  }
+}
+layer {
+  name:"Node_15"
+  type:"for"
+  top:"Node_15"
+  bottom:"Node_14"
+  layer_param {
+    idx:15
+    kind:0
+    body_00:"for (j.outer, 0, 32)"
+    body_01:" // attr [[buffer(A, 0x7ff97c52b910), buffer(A, 0x7ff97c561dd0)]] buffer_bind_scope = tir.tvm_tuple(i, 1, 0, 64)"
+    body_02:" // attr [[buffer(B, 0x7ff97c52cd90), buffer(B, 0x7ff97c558ae0)]] buffer_bind_scope = tir.tvm_tuple((j.outer*16), 16, 0, 64)"
+    body_03:" // attr [[buffer(C, 0x7ff97c52cfe0), buffer(C, 0x7ff97c558780)]] buffer_bind_scope = tir.tvm_tuple(i, 1, (j.outer*16), 16)"
+    body_04:" tir.call_extern('gemv_update', tir.tvm_access_ptr(tir.type_annotation(), C, C_elem_offset, 16, 2), tir.tvm_access_ptr(tir.type_annotation(), A, A_elem_offset, 64, 1), tir.tvm_access_ptr(tir.type_annotation(), B, B_elem_offset, (s1*16), 1), 16, 64, s1)"
+  }
+}
+layer {
+  name:"Node_16"
+  type:"buffer_realize"
+  top:"Node_16"
+  bottom:"Node_15"
+  layer_param {
+    idx:16
+    condition:True
+    body_00:"for (i, 0, 1024)"
+    body_01:" for (j.outer, 0, 32)"
+    body_02:"  // attr [[buffer(A, 0x7ff97c52b910), buffer(A, 0x7ff97c561dd0)]] buffer_bind_scope = tir.tvm_tuple(i, 1, 0, 64)"
+    body_03:"  // attr [[buffer(B, 0x7ff97c52cd90), buffer(B, 0x7ff97c558ae0)]] buffer_bind_scope = tir.tvm_tuple((j.outer*16), 16, 0, 64)"
+    body_04:"  // attr [[buffer(C, 0x7ff97c52cfe0), buffer(C, 0x7ff97c558780)]] buffer_bind_scope = tir.tvm_tuple(i, 1, (j.outer*16), 16)"
+    body_05:"  tir.call_extern('gemv_update', tir.tvm_access_ptr(tir.type_annotation(), C, C_elem_offset, 16, 2), tir.tvm_access_ptr(tir.type_annotation(), A, A_elem_offset, 64, 1), tir.tvm_access_ptr(tir.type_annotation(), B, B_elem_offset, (s1*16), 1), 16, 64, s1)"
+    bounds_00:"[range(min=0, ext=1024), range(min=0, ext=512)]"
+  }
+}
+layer {
+  name:"Node_17"
+  type:"attribute"
+  top:"Node_17"
+  bottom:"C"
+  bottom:"Node_16"
+  layer_param {
+    idx:17
+    attr_key:realize_scope
+    body_00:"buffer_realize C([0, 1024], [0, 512])"
+    body_01:" for (i, 0, 1024)"
+    body_02:"  for (j.outer, 0, 32)"
+    body_03:"   // attr [[buffer(A, 0x7ff97c52b910), buffer(A, 0x7ff97c561dd0)]] buffer_bind_scope = tir.tvm_tuple(i, 1, 0, 64)"
+    body_04:"   // attr [[buffer(B, 0x7ff97c52cd90), buffer(B, 0x7ff97c558ae0)]] buffer_bind_scope = tir.tvm_tuple((j.outer*16), 16, 0, 64)"
+    body_05:"   // attr [[buffer(C, 0x7ff97c52cfe0), buffer(C, 0x7ff97c558780)]] buffer_bind_scope = tir.tvm_tuple(i, 1, (j.outer*16), 16)"
+    body_06:"   tir.call_extern('gemv_update', tir.tvm_access_ptr(tir.type_annotation(), C, C_elem_offset, 16, 2), tir.tvm_access_ptr(tir.type_annotation(), A, A_elem_offset, 64, 1), tir.tvm_access_ptr(tir.type_annotation(), B, B_elem_offset, (s1*16), 1), 16, 64, s1)"
+    value_00:"''"
+  }
+}
+layer {
+  name:"Node_18"
+  type:"primfunc"
+  top:"Node_18"
+  bottom:"Node_17"
+  layer_param {
+    idx:18
+    body_00:"// attr [buffer(C, 0x7ff97c558780)] realize_scope = ''"
+    body_01:"buffer_realize C([0, 1024], [0, 512])"
+    body_02:" for (i, 0, 1024)"
+    body_03:"  for (j.outer, 0, 32)"
+    body_04:"   // attr [[buffer(A, 0x7ff97c52b910), buffer(A, 0x7ff97c561dd0)]] buffer_bind_scope = tir.tvm_tuple(i, 1, 0, 64)"
+    body_05:"   // attr [[buffer(B, 0x7ff97c52cd90), buffer(B, 0x7ff97c558ae0)]] buffer_bind_scope = tir.tvm_tuple((j.outer*16), 16, 0, 64)"
+    body_06:"   // attr [[buffer(C, 0x7ff97c52cfe0), buffer(C, 0x7ff97c558780)]] buffer_bind_scope = tir.tvm_tuple(i, 1, (j.outer*16), 16)"
+    body_07:"   tir.call_extern('gemv_update', tir.tvm_access_ptr(tir.type_annotation(), C, C_elem_offset, 16, 2), tir.tvm_access_ptr(tir.type_annotation(), A, A_elem_offset, 64, 1), tir.tvm_access_ptr(tir.type_annotation(), B, B_elem_offset, (s1*16), 1), 16, 64, s1)"
+  }
+}

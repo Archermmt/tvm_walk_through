@@ -1,0 +1,218 @@
+name : "prim_expr"
+layer {
+  name:"A"
+  type:"buffer"
+  top:"A"
+  layer_param {
+    idx:0
+    buffer_name:"A"
+    shape:[tindex, tindex]
+    dtype:float32
+  }
+}
+layer {
+  name:"B"
+  type:"buffer"
+  top:"B"
+  layer_param {
+    idx:1
+    buffer_name:"B"
+    shape:[tindex, tindex]
+    dtype:float32
+  }
+}
+layer {
+  name:"C"
+  type:"buffer"
+  top:"C"
+  layer_param {
+    idx:2
+    buffer_name:"C"
+    shape:[tindex, tindex]
+    dtype:float32
+  }
+}
+layer {
+  name:"Node_3"
+  type:"int"
+  top:"Node_3"
+  layer_param {
+    idx:3
+    value:0
+    dtype:int32
+  }
+}
+layer {
+  name:"tindex"
+  type:"var"
+  top:"tindex"
+  layer_param {
+    idx:4
+    dtype:int32
+  }
+}
+layer {
+  name:"Node_5"
+  type:"range(bound_0)"
+  top:"Node_5"
+  bottom:"Node_3"
+  bottom:"tindex"
+  layer_param {
+    idx:5
+    range_00:"range(min=0, ext=tindex)"
+  }
+}
+layer {
+  name:"Node_6"
+  type:"range(bound_1)"
+  top:"Node_6"
+  bottom:"Node_3"
+  bottom:"tindex"
+  layer_param {
+    idx:6
+    range_00:"range(min=0, ext=tindex)"
+  }
+}
+layer {
+  name:"i"
+  type:"var(loop_var)"
+  top:"i"
+  layer_param {
+    idx:7
+    dtype:int32
+  }
+}
+layer {
+  name:"j"
+  type:"var(loop_var)"
+  top:"j"
+  layer_param {
+    idx:8
+    dtype:int32
+  }
+}
+layer {
+  name:"Node_9"
+  type:"buffer_load(a)"
+  top:"Node_9"
+  bottom:"A"
+  bottom:"i"
+  bottom:"j"
+  layer_param {
+    idx:9
+  }
+}
+layer {
+  name:"Node_10"
+  type:"buffer_load(b)"
+  top:"Node_10"
+  bottom:"B"
+  bottom:"i"
+  bottom:"j"
+  layer_param {
+    idx:10
+  }
+}
+layer {
+  name:"Node_11"
+  type:"add(value)"
+  top:"Node_11"
+  bottom:"Node_9"
+  bottom:"Node_10"
+  layer_param {
+    idx:11
+  }
+}
+layer {
+  name:"Node_12"
+  type:"buffer_store"
+  top:"Node_12"
+  bottom:"C"
+  bottom:"Node_11"
+  bottom:"i"
+  bottom:"j"
+  layer_param {
+    idx:12
+    value_00:"(A: Buffer(A_1: Pointer(float32), float32, [tindex: int32, tindex], [stride: int32, stride_1: int32], type='auto')[i: int32, j: int32] + B: Buffer(B_1: Pointer(float32), float32, [tindex, tindex], [stride_2: int32, stride_3: int32], type='auto')[i, j])"
+    indices_00:"[i, j]"
+  }
+}
+layer {
+  name:"Node_13"
+  type:"for"
+  top:"Node_13"
+  bottom:"j"
+  bottom:"Node_3"
+  bottom:"tindex"
+  bottom:"Node_12"
+  layer_param {
+    idx:13
+    kind:0
+    body_00:"C[i, j] = (A[i, j] + B[i, j])"
+  }
+}
+layer {
+  name:"Node_14"
+  type:"for"
+  top:"Node_14"
+  bottom:"i"
+  bottom:"Node_3"
+  bottom:"tindex"
+  bottom:"Node_13"
+  layer_param {
+    idx:14
+    kind:0
+    body_00:"for (j, 0, tindex)"
+    body_01:" C[i, j] = (A[i, j] + B[i, j])"
+  }
+}
+layer {
+  name:"Node_15"
+  type:"buffer_realize"
+  top:"Node_15"
+  bottom:"Node_5"
+  bottom:"Node_6"
+  bottom:"C"
+  bottom:"Node_14"
+  layer_param {
+    idx:15
+    condition:True
+    body_00:"for (i, 0, tindex)"
+    body_01:" for (j, 0, tindex)"
+    body_02:"  C[i, j] = (A[i, j] + B[i, j])"
+    bounds_00:"[range(min=0, ext=tindex), range(min=0, ext=tindex)]"
+  }
+}
+layer {
+  name:"Node_16"
+  type:"attribute"
+  top:"Node_16"
+  bottom:"C"
+  bottom:"Node_15"
+  layer_param {
+    idx:16
+    attr_key:realize_scope
+    body_00:"buffer_realize C([0, tindex], [0, tindex])"
+    body_01:" for (i, 0, tindex)"
+    body_02:"  for (j, 0, tindex)"
+    body_03:"   C[i, j] = (A[i, j] + B[i, j])"
+    value_00:"''"
+  }
+}
+layer {
+  name:"Node_17"
+  type:"primfunc"
+  top:"Node_17"
+  bottom:"A"
+  bottom:"B"
+  bottom:"C"
+  bottom:"Node_16"
+  layer_param {
+    idx:17
+    body_00:"// attr [buffer(C, 0x7fed84a9e610)] realize_scope = ''"
+    body_01:"buffer_realize C([0, tindex], [0, tindex])"
+    body_02:" for (i, 0, tindex)"
+    body_03:"  for (j, 0, tindex)"
+    body_04:"   C[i, j] = (A[i, j] + B[i, j])"
+  }
+}

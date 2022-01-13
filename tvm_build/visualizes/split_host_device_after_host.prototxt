@@ -1,0 +1,1470 @@
+name : "prim_expr"
+layer {
+  name:"arg0"
+  type:"var(var)"
+  top:"arg0"
+  layer_param {
+    idx:0
+    dtype:handle
+  }
+}
+layer {
+  name:"Node_1"
+  type:"tir_tvm_struct_get(value)"
+  top:"Node_1"
+  layer_param {
+    idx:1
+    body:"@tir.tvm_struct_get(args: handle, 0, 12, dtype=handle)"
+  }
+}
+layer {
+  name:"arg0.code"
+  type:"var(var)"
+  top:"arg0.code"
+  layer_param {
+    idx:2
+    dtype:int32
+  }
+}
+layer {
+  name:"arg_type_ids"
+  type:"var(load_buffer)"
+  top:"arg_type_ids"
+  layer_param {
+    idx:3
+    dtype:handle
+  }
+}
+layer {
+  name:"Node_4"
+  type:"int(load_index)"
+  top:"Node_4"
+  layer_param {
+    idx:4
+    value:0
+    dtype:int32
+  }
+}
+layer {
+  name:"Node_5"
+  type:"load(value)"
+  top:"Node_5"
+  bottom:"arg_type_ids"
+  bottom:"Node_4"
+  layer_param {
+    idx:5
+    predicate:"True"
+    body:"(int32*)arg_type_ids: handle[0]"
+  }
+}
+layer {
+  name:"arg1"
+  type:"var(var)"
+  top:"arg1"
+  layer_param {
+    idx:6
+    dtype:handle
+  }
+}
+layer {
+  name:"Node_7"
+  type:"tir_tvm_struct_get(value)"
+  top:"Node_7"
+  layer_param {
+    idx:7
+    body:"@tir.tvm_struct_get(args: handle, 1, 12, dtype=handle)"
+  }
+}
+layer {
+  name:"arg1.code"
+  type:"var(var)"
+  top:"arg1.code"
+  layer_param {
+    idx:8
+    dtype:int32
+  }
+}
+layer {
+  name:"Node_9"
+  type:"int(load_index)"
+  top:"Node_9"
+  layer_param {
+    idx:9
+    value:1
+    dtype:int32
+  }
+}
+layer {
+  name:"Node_10"
+  type:"load(value)"
+  top:"Node_10"
+  bottom:"arg_type_ids"
+  bottom:"Node_9"
+  layer_param {
+    idx:10
+    predicate:"True"
+    body:"(int32*)arg_type_ids: handle[1]"
+  }
+}
+layer {
+  name:"arg2"
+  type:"var(var)"
+  top:"arg2"
+  layer_param {
+    idx:11
+    dtype:handle
+  }
+}
+layer {
+  name:"Node_12"
+  type:"tir_tvm_struct_get(value)"
+  top:"Node_12"
+  layer_param {
+    idx:12
+    body:"@tir.tvm_struct_get(args: handle, 2, 12, dtype=handle)"
+  }
+}
+layer {
+  name:"arg2.code"
+  type:"var(var)"
+  top:"arg2.code"
+  layer_param {
+    idx:13
+    dtype:int32
+  }
+}
+layer {
+  name:"Node_14"
+  type:"int(load_index)"
+  top:"Node_14"
+  layer_param {
+    idx:14
+    value:2
+    dtype:int32
+  }
+}
+layer {
+  name:"Node_15"
+  type:"load(value)"
+  top:"Node_15"
+  bottom:"arg_type_ids"
+  bottom:"Node_14"
+  layer_param {
+    idx:15
+    predicate:"True"
+    body:"(int32*)arg_type_ids: handle[2]"
+  }
+}
+layer {
+  name:"arg3"
+  type:"var(var)"
+  top:"arg3"
+  layer_param {
+    idx:16
+    dtype:handle
+  }
+}
+layer {
+  name:"Node_17"
+  type:"tir_tvm_struct_get(value)"
+  top:"Node_17"
+  layer_param {
+    idx:17
+    body:"@tir.tvm_struct_get(args: handle, 3, 12, dtype=handle)"
+  }
+}
+layer {
+  name:"arg3.code"
+  type:"var(var)"
+  top:"arg3.code"
+  layer_param {
+    idx:18
+    dtype:int32
+  }
+}
+layer {
+  name:"Node_19"
+  type:"int(load_index)"
+  top:"Node_19"
+  layer_param {
+    idx:19
+    value:3
+    dtype:int32
+  }
+}
+layer {
+  name:"Node_20"
+  type:"load(value)"
+  top:"Node_20"
+  bottom:"arg_type_ids"
+  bottom:"Node_19"
+  layer_param {
+    idx:20
+    predicate:"True"
+    body:"(int32*)arg_type_ids: handle[3]"
+  }
+}
+layer {
+  name:"placeholder"
+  type:"var(var)"
+  top:"placeholder"
+  layer_param {
+    idx:21
+    dtype:handle
+  }
+}
+layer {
+  name:"Node_22"
+  type:"tir_tvm_struct_get(value)"
+  top:"Node_22"
+  layer_param {
+    idx:22
+    body:"@tir.tvm_struct_get(arg0: handle, 0, 1, dtype=handle)"
+  }
+}
+layer {
+  name:"arg0.shape"
+  type:"var(var)"
+  top:"arg0.shape"
+  layer_param {
+    idx:23
+    dtype:handle
+  }
+}
+layer {
+  name:"Node_24"
+  type:"tir_tvm_struct_get(value)"
+  top:"Node_24"
+  layer_param {
+    idx:24
+    body:"@tir.tvm_struct_get(arg0: handle, 0, 2, dtype=handle)"
+  }
+}
+layer {
+  name:"arg0.strides"
+  type:"var(var)"
+  top:"arg0.strides"
+  layer_param {
+    idx:25
+    dtype:handle
+  }
+}
+layer {
+  name:"Node_26"
+  type:"tir_tvm_struct_get(value)"
+  top:"Node_26"
+  layer_param {
+    idx:26
+    body:"@tir.tvm_struct_get(arg0: handle, 0, 3, dtype=handle)"
+  }
+}
+layer {
+  name:"dev_id"
+  type:"var(var)"
+  top:"dev_id"
+  layer_param {
+    idx:27
+    dtype:int32
+  }
+}
+layer {
+  name:"Node_28"
+  type:"tir_tvm_struct_get(value)"
+  top:"Node_28"
+  layer_param {
+    idx:28
+    body:"@tir.tvm_struct_get(arg0: handle, 0, 9, dtype=int32)"
+  }
+}
+layer {
+  name:"placeholder_1"
+  type:"var(var)"
+  top:"placeholder_1"
+  layer_param {
+    idx:29
+    dtype:handle
+  }
+}
+layer {
+  name:"Node_30"
+  type:"tir_tvm_struct_get(value)"
+  top:"Node_30"
+  layer_param {
+    idx:30
+    body:"@tir.tvm_struct_get(arg1: handle, 0, 1, dtype=handle)"
+  }
+}
+layer {
+  name:"arg1.shape"
+  type:"var(var)"
+  top:"arg1.shape"
+  layer_param {
+    idx:31
+    dtype:handle
+  }
+}
+layer {
+  name:"Node_32"
+  type:"tir_tvm_struct_get(value)"
+  top:"Node_32"
+  layer_param {
+    idx:32
+    body:"@tir.tvm_struct_get(arg1: handle, 0, 2, dtype=handle)"
+  }
+}
+layer {
+  name:"arg1.strides"
+  type:"var(var)"
+  top:"arg1.strides"
+  layer_param {
+    idx:33
+    dtype:handle
+  }
+}
+layer {
+  name:"Node_34"
+  type:"tir_tvm_struct_get(value)"
+  top:"Node_34"
+  layer_param {
+    idx:34
+    body:"@tir.tvm_struct_get(arg1: handle, 0, 3, dtype=handle)"
+  }
+}
+layer {
+  name:"placeholder_2"
+  type:"var(var)"
+  top:"placeholder_2"
+  layer_param {
+    idx:35
+    dtype:handle
+  }
+}
+layer {
+  name:"Node_36"
+  type:"tir_tvm_struct_get(value)"
+  top:"Node_36"
+  layer_param {
+    idx:36
+    body:"@tir.tvm_struct_get(arg2: handle, 0, 1, dtype=handle)"
+  }
+}
+layer {
+  name:"arg2.shape"
+  type:"var(var)"
+  top:"arg2.shape"
+  layer_param {
+    idx:37
+    dtype:handle
+  }
+}
+layer {
+  name:"Node_38"
+  type:"tir_tvm_struct_get(value)"
+  top:"Node_38"
+  layer_param {
+    idx:38
+    body:"@tir.tvm_struct_get(arg2: handle, 0, 2, dtype=handle)"
+  }
+}
+layer {
+  name:"arg2.strides"
+  type:"var(var)"
+  top:"arg2.strides"
+  layer_param {
+    idx:39
+    dtype:handle
+  }
+}
+layer {
+  name:"Node_40"
+  type:"tir_tvm_struct_get(value)"
+  top:"Node_40"
+  layer_param {
+    idx:40
+    body:"@tir.tvm_struct_get(arg2: handle, 0, 3, dtype=handle)"
+  }
+}
+layer {
+  name:"T_add"
+  type:"var(var)"
+  top:"T_add"
+  layer_param {
+    idx:41
+    dtype:handle
+  }
+}
+layer {
+  name:"Node_42"
+  type:"tir_tvm_struct_get(value)"
+  top:"Node_42"
+  layer_param {
+    idx:42
+    body:"@tir.tvm_struct_get(arg3: handle, 0, 1, dtype=handle)"
+  }
+}
+layer {
+  name:"arg3.shape"
+  type:"var(var)"
+  top:"arg3.shape"
+  layer_param {
+    idx:43
+    dtype:handle
+  }
+}
+layer {
+  name:"Node_44"
+  type:"tir_tvm_struct_get(value)"
+  top:"Node_44"
+  layer_param {
+    idx:44
+    body:"@tir.tvm_struct_get(arg3: handle, 0, 2, dtype=handle)"
+  }
+}
+layer {
+  name:"arg3.strides"
+  type:"var(var)"
+  top:"arg3.strides"
+  layer_param {
+    idx:45
+    dtype:handle
+  }
+}
+layer {
+  name:"Node_46"
+  type:"tir_tvm_struct_get(value)"
+  top:"Node_46"
+  layer_param {
+    idx:46
+    body:"@tir.tvm_struct_get(arg3: handle, 0, 3, dtype=handle)"
+  }
+}
+layer {
+  name:"Node_47"
+  type:"evaluate"
+  top:"Node_47"
+  bottom:"Node_4"
+  layer_param {
+    idx:47
+  }
+}
+layer {
+  name:"Node_48"
+  type:"assert(true)"
+  top:"Node_48"
+  bottom:"Node_47"
+  layer_param {
+    idx:48
+    condition:"((1 == cast(int32, (int64*)arg0.strides: handle[1])) && (512 == cast(int32, (int64*)arg0.strides[0])))"
+    message:"'arg0.strides: expected to be compact array'"
+  }
+}
+layer {
+  name:"Node_49"
+  type:"ifthenelse(seq_0)"
+  top:"Node_49"
+  bottom:"Node_48"
+  layer_param {
+    idx:49
+    condition:"!@tir.isnullptr(arg0.strides: handle, dtype=bool)"
+  }
+}
+layer {
+  name:"Node_50"
+  type:"evaluate"
+  top:"Node_50"
+  bottom:"Node_4"
+  layer_param {
+    idx:50
+  }
+}
+layer {
+  name:"Node_51"
+  type:"assert(true)"
+  top:"Node_51"
+  bottom:"Node_50"
+  layer_param {
+    idx:51
+    condition:"((1 == cast(int32, (int64*)arg1.strides: handle[1])) && (512 == cast(int32, (int64*)arg1.strides[0])))"
+    message:"'arg1.strides: expected to be compact array'"
+  }
+}
+layer {
+  name:"Node_52"
+  type:"ifthenelse(seq_0)"
+  top:"Node_52"
+  bottom:"Node_51"
+  layer_param {
+    idx:52
+    condition:"!@tir.isnullptr(arg1.strides: handle, dtype=bool)"
+  }
+}
+layer {
+  name:"Node_53"
+  type:"evaluate"
+  top:"Node_53"
+  bottom:"Node_4"
+  layer_param {
+    idx:53
+  }
+}
+layer {
+  name:"Node_54"
+  type:"assert(true)"
+  top:"Node_54"
+  bottom:"Node_53"
+  layer_param {
+    idx:54
+    condition:"(1 == cast(int32, (int64*)arg2.strides: handle[0]))"
+    message:"'arg2.strides: expected to be compact array'"
+  }
+}
+layer {
+  name:"Node_55"
+  type:"ifthenelse(seq_0)"
+  top:"Node_55"
+  bottom:"Node_54"
+  layer_param {
+    idx:55
+    condition:"!@tir.isnullptr(arg2.strides: handle, dtype=bool)"
+  }
+}
+layer {
+  name:"Node_56"
+  type:"evaluate"
+  top:"Node_56"
+  bottom:"Node_4"
+  layer_param {
+    idx:56
+  }
+}
+layer {
+  name:"Node_57"
+  type:"assert(true)"
+  top:"Node_57"
+  bottom:"Node_56"
+  layer_param {
+    idx:57
+    condition:"((1 == cast(int32, (int64*)arg3.strides: handle[1])) && (1000 == cast(int32, (int64*)arg3.strides[0])))"
+    message:"'arg3.strides: expected to be compact array'"
+  }
+}
+layer {
+  name:"Node_58"
+  type:"ifthenelse(seq_0)"
+  top:"Node_58"
+  bottom:"Node_57"
+  layer_param {
+    idx:58
+    condition:"!@tir.isnullptr(arg3.strides: handle, dtype=bool)"
+  }
+}
+layer {
+  name:"Node_59"
+  type:"tir_tvm_call_packed(value)"
+  top:"Node_59"
+  layer_param {
+    idx:59
+    body:"@tir.tvm_call_packed('__tvm_set_device', 2, dev_id: int32, dtype=int32)"
+  }
+}
+layer {
+  name:"Node_60"
+  type:"evaluate(seq_0)"
+  top:"Node_60"
+  bottom:"Node_59"
+  layer_param {
+    idx:60
+  }
+}
+layer {
+  name:"Node_61"
+  type:"tir_tvm_call_packed(value)"
+  top:"Node_61"
+  layer_param {
+    idx:61
+    body:"@tir.tvm_call_packed('fused_nn_dense_add_kernel0', placeholder: Pointer(float32), placeholder_1: Pointer(float32), T_add: Pointer(float32), placeholder_2: Pointer(float32), 1, 1000, 64, dtype=int32)"
+  }
+}
+layer {
+  name:"Node_62"
+  type:"evaluate"
+  top:"Node_62"
+  bottom:"Node_61"
+  layer_param {
+    idx:62
+  }
+}
+layer {
+  name:"Node_63"
+  type:"attribute(seq_1)"
+  top:"Node_63"
+  bottom:"Node_4"
+  bottom:"Node_62"
+  layer_param {
+    idx:63
+    attr_key:compute_scope
+    body_:"tir.tvm_call_packed('fused_nn_dense_add_kernel0', placeholder, placeholder, T_add, placeholder, 1, 1000, 64)"
+    value:"'fused_nn_dense_add_compute_'"
+  }
+}
+layer {
+  name:"Node_64"
+  type:"seq"
+  top:"Node_64"
+  bottom:"Node_60"
+  bottom:"Node_63"
+  layer_param {
+    idx:64
+    seq_00:"[tir.tvm_call_packed('__tvm_set_device', 2, dev_id)"
+    seq_01:" , // attr [0] compute_scope = 'fused_nn_dense_add_compute_'"
+    seq_02:"  tir.tvm_call_packed('fused_nn_dense_add_kernel0', placeholder, placeholder, T_add, placeholder, 1, 1000, 64)"
+    seq_03:"   ]"
+  }
+}
+layer {
+  name:"Node_65"
+  type:"assert"
+  top:"Node_65"
+  bottom:"Node_64"
+  layer_param {
+    idx:65
+    condition:"(dev_id: int32 == @tir.tvm_struct_get(arg3: handle, 0, 9, dtype=int32))"
+    message:"'Argument arg3.device_id has an unsatisfied constraint: (dev_id == tir.tvm_struct_get(arg3, 0, 9))'"
+  }
+}
+layer {
+  name:"Node_66"
+  type:"assert"
+  top:"Node_66"
+  bottom:"Node_65"
+  layer_param {
+    idx:66
+    condition:"(2 == @tir.tvm_struct_get(arg3: handle, 0, 10, dtype=int32))"
+    message:"'Argument arg3.device_type has an unsatisfied constraint: (2 == tir.tvm_struct_get(arg3, 0, 10))'"
+  }
+}
+layer {
+  name:"Node_67"
+  type:"assert(seq_1)"
+  top:"Node_67"
+  bottom:"Node_66"
+  layer_param {
+    idx:67
+    condition:"(0u64 == @tir.tvm_struct_get(arg3: handle, 0, 8, dtype=uint64))"
+    message:"'Argument arg3.byte_offset has an unsatisfied constraint: ((uint64)0 == tir.tvm_struct_get(arg3, 0, 8))'"
+  }
+}
+layer {
+  name:"Node_68"
+  type:"seq"
+  top:"Node_68"
+  bottom:"Node_58"
+  bottom:"Node_67"
+  layer_param {
+    idx:68
+    seq_00:"[if (!tir.isnullptr(arg3.strides))"
+    seq_01:" assert(((1 == int32(arg3.strides[1])) && (1000 == int32(arg3.strides[0]))), 'arg3.strides: expected to be compact array')"
+    seq_02:"  0"
+    seq_03:"   , assert(((uint64)0 == tir.tvm_struct_get(arg3, 0, 8)), 'Argument arg3.byte_offset has an unsatisfied constraint: ((uint64)0 == tir.tvm_struct_get(arg3, 0, 8))')"
+    seq_04:"    assert((2 == tir.tvm_struct_get(arg3, 0, 10)), 'Argument arg3.device_type has an unsatisfied constraint: (2 == tir.tvm_struct_get(arg3, 0, 10))')"
+    seq_05:"     assert((dev_id == tir.tvm_struct_get(arg3, 0, 9)), 'Argument arg3.device_id has an unsatisfied constraint: (dev_id == tir.tvm_struct_get(arg3, 0, 9))')"
+    seq_06:"      tir.tvm_call_packed('__tvm_set_device', 2, dev_id)"
+    seq_07:"       // attr [0] compute_scope = 'fused_nn_dense_add_compute_'"
+    seq_08:"       tir.tvm_call_packed('fused_nn_dense_add_kernel0', placeholder, placeholder, T_add, placeholder, 1, 1000, 64)"
+    seq_09:"        ]"
+  }
+}
+layer {
+  name:"Node_69"
+  type:"assert"
+  top:"Node_69"
+  bottom:"Node_68"
+  layer_param {
+    idx:69
+    condition:"(1000 == cast(int32, (int64*)arg3.shape: handle[1]))"
+    message:"'Argument arg3.shape[1] has an unsatisfied constraint: (1000 == int32(arg3.shape[1]))'"
+  }
+}
+layer {
+  name:"Node_70"
+  type:"assert"
+  top:"Node_70"
+  bottom:"Node_69"
+  layer_param {
+    idx:70
+    condition:"(1 == cast(int32, (int64*)arg3.shape: handle[0]))"
+    message:"'Argument arg3.shape[0] has an unsatisfied constraint: (1 == int32(arg3.shape[0]))'"
+  }
+}
+layer {
+  name:"Node_71"
+  type:"assert"
+  top:"Node_71"
+  bottom:"Node_70"
+  layer_param {
+    idx:71
+    condition:"(((@tir.tvm_struct_get(arg3: handle, 0, 5, dtype=uint8) == 2u8) && (@tir.tvm_struct_get(arg3, 0, 6, dtype=uint8) == 32u8)) && (@tir.tvm_struct_get(arg3, 0, 7, dtype=uint16) == 1u16))"
+    message:"'arg3.dtype is expected to be float32'"
+  }
+}
+layer {
+  name:"Node_72"
+  type:"assert"
+  top:"Node_72"
+  bottom:"Node_71"
+  layer_param {
+    idx:72
+    condition:"(2 == @tir.tvm_struct_get(arg3: handle, 0, 4, dtype=int32))"
+    message:"'arg3.ndim is expected to equal 2'"
+  }
+}
+layer {
+  name:"Node_73"
+  type:"assert"
+  top:"Node_73"
+  bottom:"Node_72"
+  layer_param {
+    idx:73
+    condition:"(2 == @tir.tvm_struct_get(arg3: handle, 0, 4, dtype=int32))"
+    message:"'arg3.ndim is expected to equal 2'"
+  }
+}
+layer {
+  name:"Node_74"
+  type:"assert"
+  top:"Node_74"
+  bottom:"Node_73"
+  layer_param {
+    idx:74
+    condition:"(dev_id: int32 == @tir.tvm_struct_get(arg2: handle, 0, 9, dtype=int32))"
+    message:"'Argument arg2.device_id has an unsatisfied constraint: (dev_id == tir.tvm_struct_get(arg2, 0, 9))'"
+  }
+}
+layer {
+  name:"Node_75"
+  type:"assert"
+  top:"Node_75"
+  bottom:"Node_74"
+  layer_param {
+    idx:75
+    condition:"(2 == @tir.tvm_struct_get(arg2: handle, 0, 10, dtype=int32))"
+    message:"'Argument arg2.device_type has an unsatisfied constraint: (2 == tir.tvm_struct_get(arg2, 0, 10))'"
+  }
+}
+layer {
+  name:"Node_76"
+  type:"assert(seq_1)"
+  top:"Node_76"
+  bottom:"Node_75"
+  layer_param {
+    idx:76
+    condition:"(0u64 == @tir.tvm_struct_get(arg2: handle, 0, 8, dtype=uint64))"
+    message:"'Argument arg2.byte_offset has an unsatisfied constraint: ((uint64)0 == tir.tvm_struct_get(arg2, 0, 8))'"
+  }
+}
+layer {
+  name:"Node_77"
+  type:"seq"
+  top:"Node_77"
+  bottom:"Node_55"
+  bottom:"Node_76"
+  layer_param {
+    idx:77
+    seq_00:"[if (!tir.isnullptr(arg2.strides))"
+    seq_01:" assert((1 == int32(arg2.strides[0])), 'arg2.strides: expected to be compact array')"
+    seq_02:"  0"
+    seq_03:"   , assert(((uint64)0 == tir.tvm_struct_get(arg2, 0, 8)), 'Argument arg2.byte_offset has an unsatisfied constraint: ((uint64)0 == tir.tvm_struct_get(arg2, 0, 8))')"
+    seq_04:"    assert((2 == tir.tvm_struct_get(arg2, 0, 10)), 'Argument arg2.device_type has an unsatisfied constraint: (2 == tir.tvm_struct_get(arg2, 0, 10))')"
+    seq_05:"     assert((dev_id == tir.tvm_struct_get(arg2, 0, 9)), 'Argument arg2.device_id has an unsatisfied constraint: (dev_id == tir.tvm_struct_get(arg2, 0, 9))')"
+    seq_06:"      assert((2 == tir.tvm_struct_get(arg3, 0, 4)), 'arg3.ndim is expected to equal 2')"
+    seq_07:"       assert((2 == tir.tvm_struct_get(arg3, 0, 4)), 'arg3.ndim is expected to equal 2')"
+    seq_08:"        assert((((tir.tvm_struct_get(arg3, 0, 5) == (uint8)2) && (tir.tvm_struct_get(arg3, 0, 6) == (uint8)32)) && (tir.tvm_struct_get(arg3, 0, 7) == (uint16)1)), 'arg3.dtype is expected to be float32')"
+    seq_09:"         assert((1 == int32(arg3.shape[0])), 'Argument arg3.shape[0] has an unsatisfied constraint: (1 == int32(arg3.shape[0]))')"
+  }
+}
+layer {
+  name:"Node_78"
+  type:"assert"
+  top:"Node_78"
+  bottom:"Node_77"
+  layer_param {
+    idx:78
+    condition:"(1000 == cast(int32, (int64*)arg2.shape: handle[0]))"
+    message:"'Argument arg2.shape[0] has an unsatisfied constraint: (1000 == int32(arg2.shape[0]))'"
+  }
+}
+layer {
+  name:"Node_79"
+  type:"assert"
+  top:"Node_79"
+  bottom:"Node_78"
+  layer_param {
+    idx:79
+    condition:"(((@tir.tvm_struct_get(arg2: handle, 0, 5, dtype=uint8) == 2u8) && (@tir.tvm_struct_get(arg2, 0, 6, dtype=uint8) == 32u8)) && (@tir.tvm_struct_get(arg2, 0, 7, dtype=uint16) == 1u16))"
+    message:"'arg2.dtype is expected to be float32'"
+  }
+}
+layer {
+  name:"Node_80"
+  type:"assert"
+  top:"Node_80"
+  bottom:"Node_79"
+  layer_param {
+    idx:80
+    condition:"(1 == @tir.tvm_struct_get(arg2: handle, 0, 4, dtype=int32))"
+    message:"'arg2.ndim is expected to equal 1'"
+  }
+}
+layer {
+  name:"Node_81"
+  type:"assert"
+  top:"Node_81"
+  bottom:"Node_80"
+  layer_param {
+    idx:81
+    condition:"(1 == @tir.tvm_struct_get(arg2: handle, 0, 4, dtype=int32))"
+    message:"'arg2.ndim is expected to equal 1'"
+  }
+}
+layer {
+  name:"Node_82"
+  type:"assert"
+  top:"Node_82"
+  bottom:"Node_81"
+  layer_param {
+    idx:82
+    condition:"(dev_id: int32 == @tir.tvm_struct_get(arg1: handle, 0, 9, dtype=int32))"
+    message:"'Argument arg1.device_id has an unsatisfied constraint: (dev_id == tir.tvm_struct_get(arg1, 0, 9))'"
+  }
+}
+layer {
+  name:"Node_83"
+  type:"assert"
+  top:"Node_83"
+  bottom:"Node_82"
+  layer_param {
+    idx:83
+    condition:"(2 == @tir.tvm_struct_get(arg1: handle, 0, 10, dtype=int32))"
+    message:"'Argument arg1.device_type has an unsatisfied constraint: (2 == tir.tvm_struct_get(arg1, 0, 10))'"
+  }
+}
+layer {
+  name:"Node_84"
+  type:"assert(seq_1)"
+  top:"Node_84"
+  bottom:"Node_83"
+  layer_param {
+    idx:84
+    condition:"(0u64 == @tir.tvm_struct_get(arg1: handle, 0, 8, dtype=uint64))"
+    message:"'Argument arg1.byte_offset has an unsatisfied constraint: ((uint64)0 == tir.tvm_struct_get(arg1, 0, 8))'"
+  }
+}
+layer {
+  name:"Node_85"
+  type:"seq"
+  top:"Node_85"
+  bottom:"Node_52"
+  bottom:"Node_84"
+  layer_param {
+    idx:85
+    seq_00:"[if (!tir.isnullptr(arg1.strides))"
+    seq_01:" assert(((1 == int32(arg1.strides[1])) && (512 == int32(arg1.strides[0]))), 'arg1.strides: expected to be compact array')"
+    seq_02:"  0"
+    seq_03:"   , assert(((uint64)0 == tir.tvm_struct_get(arg1, 0, 8)), 'Argument arg1.byte_offset has an unsatisfied constraint: ((uint64)0 == tir.tvm_struct_get(arg1, 0, 8))')"
+    seq_04:"    assert((2 == tir.tvm_struct_get(arg1, 0, 10)), 'Argument arg1.device_type has an unsatisfied constraint: (2 == tir.tvm_struct_get(arg1, 0, 10))')"
+    seq_05:"     assert((dev_id == tir.tvm_struct_get(arg1, 0, 9)), 'Argument arg1.device_id has an unsatisfied constraint: (dev_id == tir.tvm_struct_get(arg1, 0, 9))')"
+    seq_06:"      assert((1 == tir.tvm_struct_get(arg2, 0, 4)), 'arg2.ndim is expected to equal 1')"
+    seq_07:"       assert((1 == tir.tvm_struct_get(arg2, 0, 4)), 'arg2.ndim is expected to equal 1')"
+    seq_08:"        assert((((tir.tvm_struct_get(arg2, 0, 5) == (uint8)2) && (tir.tvm_struct_get(arg2, 0, 6) == (uint8)32)) && (tir.tvm_struct_get(arg2, 0, 7) == (uint16)1)), 'arg2.dtype is expected to be float32')"
+    seq_09:"         assert((1000 == int32(arg2.shape[0])), 'Argument arg2.shape[0] has an unsatisfied constraint: (1000 == int32(arg2.shape[0]))')"
+  }
+}
+layer {
+  name:"Node_86"
+  type:"assert"
+  top:"Node_86"
+  bottom:"Node_85"
+  layer_param {
+    idx:86
+    condition:"(512 == cast(int32, (int64*)arg1.shape: handle[1]))"
+    message:"'Argument arg1.shape[1] has an unsatisfied constraint: (512 == int32(arg1.shape[1]))'"
+  }
+}
+layer {
+  name:"Node_87"
+  type:"assert"
+  top:"Node_87"
+  bottom:"Node_86"
+  layer_param {
+    idx:87
+    condition:"(1000 == cast(int32, (int64*)arg1.shape: handle[0]))"
+    message:"'Argument arg1.shape[0] has an unsatisfied constraint: (1000 == int32(arg1.shape[0]))'"
+  }
+}
+layer {
+  name:"Node_88"
+  type:"assert"
+  top:"Node_88"
+  bottom:"Node_87"
+  layer_param {
+    idx:88
+    condition:"(((@tir.tvm_struct_get(arg1: handle, 0, 5, dtype=uint8) == 2u8) && (@tir.tvm_struct_get(arg1, 0, 6, dtype=uint8) == 32u8)) && (@tir.tvm_struct_get(arg1, 0, 7, dtype=uint16) == 1u16))"
+    message:"'arg1.dtype is expected to be float32'"
+  }
+}
+layer {
+  name:"Node_89"
+  type:"assert"
+  top:"Node_89"
+  bottom:"Node_88"
+  layer_param {
+    idx:89
+    condition:"(2 == @tir.tvm_struct_get(arg1: handle, 0, 4, dtype=int32))"
+    message:"'arg1.ndim is expected to equal 2'"
+  }
+}
+layer {
+  name:"Node_90"
+  type:"assert"
+  top:"Node_90"
+  bottom:"Node_89"
+  layer_param {
+    idx:90
+    condition:"(2 == @tir.tvm_struct_get(arg1: handle, 0, 4, dtype=int32))"
+    message:"'arg1.ndim is expected to equal 2'"
+  }
+}
+layer {
+  name:"Node_91"
+  type:"assert"
+  top:"Node_91"
+  bottom:"Node_90"
+  layer_param {
+    idx:91
+    condition:"(2 == @tir.tvm_struct_get(arg0: handle, 0, 10, dtype=int32))"
+    message:"'Argument arg0.device_type has an unsatisfied constraint: (2 == tir.tvm_struct_get(arg0, 0, 10))'"
+  }
+}
+layer {
+  name:"Node_92"
+  type:"assert(seq_1)"
+  top:"Node_92"
+  bottom:"Node_91"
+  layer_param {
+    idx:92
+    condition:"(0u64 == @tir.tvm_struct_get(arg0: handle, 0, 8, dtype=uint64))"
+    message:"'Argument arg0.byte_offset has an unsatisfied constraint: ((uint64)0 == tir.tvm_struct_get(arg0, 0, 8))'"
+  }
+}
+layer {
+  name:"Node_93"
+  type:"seq"
+  top:"Node_93"
+  bottom:"Node_49"
+  bottom:"Node_92"
+  layer_param {
+    idx:93
+    seq_00:"[if (!tir.isnullptr(arg0.strides))"
+    seq_01:" assert(((1 == int32(arg0.strides[1])) && (512 == int32(arg0.strides[0]))), 'arg0.strides: expected to be compact array')"
+    seq_02:"  0"
+    seq_03:"   , assert(((uint64)0 == tir.tvm_struct_get(arg0, 0, 8)), 'Argument arg0.byte_offset has an unsatisfied constraint: ((uint64)0 == tir.tvm_struct_get(arg0, 0, 8))')"
+    seq_04:"    assert((2 == tir.tvm_struct_get(arg0, 0, 10)), 'Argument arg0.device_type has an unsatisfied constraint: (2 == tir.tvm_struct_get(arg0, 0, 10))')"
+    seq_05:"     assert((2 == tir.tvm_struct_get(arg1, 0, 4)), 'arg1.ndim is expected to equal 2')"
+    seq_06:"      assert((2 == tir.tvm_struct_get(arg1, 0, 4)), 'arg1.ndim is expected to equal 2')"
+    seq_07:"       assert((((tir.tvm_struct_get(arg1, 0, 5) == (uint8)2) && (tir.tvm_struct_get(arg1, 0, 6) == (uint8)32)) && (tir.tvm_struct_get(arg1, 0, 7) == (uint16)1)), 'arg1.dtype is expected to be float32')"
+    seq_08:"        assert((1000 == int32(arg1.shape[0])), 'Argument arg1.shape[0] has an unsatisfied constraint: (1000 == int32(arg1.shape[0]))')"
+    seq_09:"         assert((512 == int32(arg1.shape[1])), 'Argument arg1.shape[1] has an unsatisfied constraint: (512 == int32(arg1.shape[1]))')"
+  }
+}
+layer {
+  name:"Node_94"
+  type:"assert"
+  top:"Node_94"
+  bottom:"Node_93"
+  layer_param {
+    idx:94
+    condition:"(512 == cast(int32, (int64*)arg0.shape: handle[1]))"
+    message:"'Argument arg0.shape[1] has an unsatisfied constraint: (512 == int32(arg0.shape[1]))'"
+  }
+}
+layer {
+  name:"Node_95"
+  type:"assert"
+  top:"Node_95"
+  bottom:"Node_94"
+  layer_param {
+    idx:95
+    condition:"(1 == cast(int32, (int64*)arg0.shape: handle[0]))"
+    message:"'Argument arg0.shape[0] has an unsatisfied constraint: (1 == int32(arg0.shape[0]))'"
+  }
+}
+layer {
+  name:"Node_96"
+  type:"assert"
+  top:"Node_96"
+  bottom:"Node_95"
+  layer_param {
+    idx:96
+    condition:"(((@tir.tvm_struct_get(arg0: handle, 0, 5, dtype=uint8) == 2u8) && (@tir.tvm_struct_get(arg0, 0, 6, dtype=uint8) == 32u8)) && (@tir.tvm_struct_get(arg0, 0, 7, dtype=uint16) == 1u16))"
+    message:"'arg0.dtype is expected to be float32'"
+  }
+}
+layer {
+  name:"Node_97"
+  type:"assert"
+  top:"Node_97"
+  bottom:"Node_96"
+  layer_param {
+    idx:97
+    condition:"(2 == @tir.tvm_struct_get(arg0: handle, 0, 4, dtype=int32))"
+    message:"'arg0.ndim is expected to equal 2'"
+  }
+}
+layer {
+  name:"Node_98"
+  type:"assert"
+  top:"Node_98"
+  bottom:"Node_97"
+  layer_param {
+    idx:98
+    condition:"(2 == @tir.tvm_struct_get(arg0: handle, 0, 4, dtype=int32))"
+    message:"'arg0.ndim is expected to equal 2'"
+  }
+}
+layer {
+  name:"Node_99"
+  type:"attribute"
+  top:"Node_99"
+  bottom:"Node_98"
+  layer_param {
+    idx:99
+    attr_key:device_type
+    body_00:"assert((2 == tir.tvm_struct_get(arg0, 0, 4)), 'arg0.ndim is expected to equal 2')"
+    body_01:" assert((2 == tir.tvm_struct_get(arg0, 0, 4)), 'arg0.ndim is expected to equal 2')"
+    body_02:"  assert((((tir.tvm_struct_get(arg0, 0, 5) == (uint8)2) && (tir.tvm_struct_get(arg0, 0, 6) == (uint8)32)) && (tir.tvm_struct_get(arg0, 0, 7) == (uint16)1)), 'arg0.dtype is expected to be float32')"
+    body_03:"   assert((1 == int32(arg0.shape[0])), 'Argument arg0.shape[0] has an unsatisfied constraint: (1 == int32(arg0.shape[0]))')"
+    body_04:"    assert((512 == int32(arg0.shape[1])), 'Argument arg0.shape[1] has an unsatisfied constraint: (512 == int32(arg0.shape[1]))')"
+    body_05:"     if (!tir.isnullptr(arg0.strides))"
+    body_06:"      assert(((1 == int32(arg0.strides[1])) && (512 == int32(arg0.strides[0]))), 'arg0.strides: expected to be compact array')"
+    body_07:"       0"
+    body_08:"        assert(((uint64)0 == tir.tvm_struct_get(arg0, 0, 8)), 'Argument arg0.byte_offset has an unsatisfied constraint: ((uint64)0 == tir.tvm_struct_get(arg0, 0, 8))')"
+    body_09:"         assert((2 == tir.tvm_struct_get(arg0, 0, 10)), 'Argument arg0.device_type has an unsatisfied constraint: (2 == tir.tvm_struct_get(arg0, 0, 10))')"
+    value:"2"
+    node:"'default'"
+  }
+}
+layer {
+  name:"Node_100"
+  type:"attribute"
+  top:"Node_100"
+  bottom:"Node_99"
+  layer_param {
+    idx:100
+    attr_key:device_id
+    body_00:"// attr ['default'] device_type = 2"
+    body_01:"assert((2 == tir.tvm_struct_get(arg0, 0, 4)), 'arg0.ndim is expected to equal 2')"
+    body_02:" assert((2 == tir.tvm_struct_get(arg0, 0, 4)), 'arg0.ndim is expected to equal 2')"
+    body_03:"  assert((((tir.tvm_struct_get(arg0, 0, 5) == (uint8)2) && (tir.tvm_struct_get(arg0, 0, 6) == (uint8)32)) && (tir.tvm_struct_get(arg0, 0, 7) == (uint16)1)), 'arg0.dtype is expected to be float32')"
+    body_04:"   assert((1 == int32(arg0.shape[0])), 'Argument arg0.shape[0] has an unsatisfied constraint: (1 == int32(arg0.shape[0]))')"
+    body_05:"    assert((512 == int32(arg0.shape[1])), 'Argument arg0.shape[1] has an unsatisfied constraint: (512 == int32(arg0.shape[1]))')"
+    body_06:"     if (!tir.isnullptr(arg0.strides))"
+    body_07:"      assert(((1 == int32(arg0.strides[1])) && (512 == int32(arg0.strides[0]))), 'arg0.strides: expected to be compact array')"
+    body_08:"       0"
+    body_09:"        assert(((uint64)0 == tir.tvm_struct_get(arg0, 0, 8)), 'Argument arg0.byte_offset has an unsatisfied constraint: ((uint64)0 == tir.tvm_struct_get(arg0, 0, 8))')"
+    value:"dev_id: int32"
+    node:"'default'"
+  }
+}
+layer {
+  name:"Node_101"
+  type:"assert"
+  top:"Node_101"
+  bottom:"Node_100"
+  layer_param {
+    idx:101
+    condition:"((((arg3.code: int32 == 3) || (arg3.code == 13)) || (arg3.code == 7)) || (arg3.code == 4))"
+    message:"'fused_nn_dense_add: Expect arg[3] to be pointer'"
+  }
+}
+layer {
+  name:"Node_102"
+  type:"assert"
+  top:"Node_102"
+  bottom:"Node_101"
+  layer_param {
+    idx:102
+    condition:"((((arg2.code: int32 == 3) || (arg2.code == 13)) || (arg2.code == 7)) || (arg2.code == 4))"
+    message:"'fused_nn_dense_add: Expect arg[2] to be pointer'"
+  }
+}
+layer {
+  name:"Node_103"
+  type:"assert"
+  top:"Node_103"
+  bottom:"Node_102"
+  layer_param {
+    idx:103
+    condition:"((((arg1.code: int32 == 3) || (arg1.code == 13)) || (arg1.code == 7)) || (arg1.code == 4))"
+    message:"'fused_nn_dense_add: Expect arg[1] to be pointer'"
+  }
+}
+layer {
+  name:"Node_104"
+  type:"assert"
+  top:"Node_104"
+  bottom:"Node_103"
+  layer_param {
+    idx:104
+    condition:"((((arg0.code: int32 == 3) || (arg0.code == 13)) || (arg0.code == 7)) || (arg0.code == 4))"
+    message:"'fused_nn_dense_add: Expect arg[0] to be pointer'"
+  }
+}
+layer {
+  name:"Node_105"
+  type:"let"
+  top:"Node_105"
+  bottom:"arg3.strides"
+  bottom:"Node_46"
+  bottom:"Node_104"
+  layer_param {
+    idx:105
+  }
+}
+layer {
+  name:"Node_106"
+  type:"let"
+  top:"Node_106"
+  bottom:"arg3.shape"
+  bottom:"Node_44"
+  bottom:"Node_105"
+  layer_param {
+    idx:106
+  }
+}
+layer {
+  name:"Node_107"
+  type:"attribute"
+  top:"Node_107"
+  bottom:"T_add"
+  bottom:"Node_106"
+  layer_param {
+    idx:107
+    attr_key:storage_alignment
+    body_00:"let arg3.shape = tir.tvm_struct_get(arg3, 0, 2)"
+    body_01:" let arg3.strides = tir.tvm_struct_get(arg3, 0, 3)"
+    body_02:"  assert(((((arg0.code == 3) || (arg0.code == 13)) || (arg0.code == 7)) || (arg0.code == 4)), 'fused_nn_dense_add: Expect arg[0] to be pointer')"
+    body_03:"   assert(((((arg1.code == 3) || (arg1.code == 13)) || (arg1.code == 7)) || (arg1.code == 4)), 'fused_nn_dense_add: Expect arg[1] to be pointer')"
+    body_04:"    assert(((((arg2.code == 3) || (arg2.code == 13)) || (arg2.code == 7)) || (arg2.code == 4)), 'fused_nn_dense_add: Expect arg[2] to be pointer')"
+    body_05:"     assert(((((arg3.code == 3) || (arg3.code == 13)) || (arg3.code == 7)) || (arg3.code == 4)), 'fused_nn_dense_add: Expect arg[3] to be pointer')"
+    body_06:"      // attr ['default'] device_id = dev_id"
+    body_07:"      // attr ['default'] device_type = 2"
+    body_08:"      assert((2 == tir.tvm_struct_get(arg0, 0, 4)), 'arg0.ndim is expected to equal 2')"
+    body_09:"       assert((2 == tir.tvm_struct_get(arg0, 0, 4)), 'arg0.ndim is expected to equal 2')"
+    value:"128"
+  }
+}
+layer {
+  name:"Node_108"
+  type:"let"
+  top:"Node_108"
+  bottom:"T_add"
+  bottom:"Node_42"
+  bottom:"Node_107"
+  layer_param {
+    idx:108
+  }
+}
+layer {
+  name:"Node_109"
+  type:"let"
+  top:"Node_109"
+  bottom:"arg2.strides"
+  bottom:"Node_40"
+  bottom:"Node_108"
+  layer_param {
+    idx:109
+  }
+}
+layer {
+  name:"Node_110"
+  type:"let"
+  top:"Node_110"
+  bottom:"arg2.shape"
+  bottom:"Node_38"
+  bottom:"Node_109"
+  layer_param {
+    idx:110
+  }
+}
+layer {
+  name:"Node_111"
+  type:"attribute"
+  top:"Node_111"
+  bottom:"placeholder_2"
+  bottom:"Node_110"
+  layer_param {
+    idx:111
+    attr_key:storage_alignment
+    body_00:"let arg2.shape = tir.tvm_struct_get(arg2, 0, 2)"
+    body_01:" let arg2.strides = tir.tvm_struct_get(arg2, 0, 3)"
+    body_02:"  let T_add = tir.tvm_struct_get(arg3, 0, 1)"
+    body_03:"   // attr [T_add] storage_alignment = 128"
+    body_04:"   let arg3.shape = tir.tvm_struct_get(arg3, 0, 2)"
+    body_05:"    let arg3.strides = tir.tvm_struct_get(arg3, 0, 3)"
+    body_06:"     assert(((((arg0.code == 3) || (arg0.code == 13)) || (arg0.code == 7)) || (arg0.code == 4)), 'fused_nn_dense_add: Expect arg[0] to be pointer')"
+    body_07:"      assert(((((arg1.code == 3) || (arg1.code == 13)) || (arg1.code == 7)) || (arg1.code == 4)), 'fused_nn_dense_add: Expect arg[1] to be pointer')"
+    body_08:"       assert(((((arg2.code == 3) || (arg2.code == 13)) || (arg2.code == 7)) || (arg2.code == 4)), 'fused_nn_dense_add: Expect arg[2] to be pointer')"
+    body_09:"        assert(((((arg3.code == 3) || (arg3.code == 13)) || (arg3.code == 7)) || (arg3.code == 4)), 'fused_nn_dense_add: Expect arg[3] to be pointer')"
+    value:"128"
+  }
+}
+layer {
+  name:"Node_112"
+  type:"let"
+  top:"Node_112"
+  bottom:"placeholder_2"
+  bottom:"Node_36"
+  bottom:"Node_111"
+  layer_param {
+    idx:112
+  }
+}
+layer {
+  name:"Node_113"
+  type:"let"
+  top:"Node_113"
+  bottom:"arg1.strides"
+  bottom:"Node_34"
+  bottom:"Node_112"
+  layer_param {
+    idx:113
+  }
+}
+layer {
+  name:"Node_114"
+  type:"let"
+  top:"Node_114"
+  bottom:"arg1.shape"
+  bottom:"Node_32"
+  bottom:"Node_113"
+  layer_param {
+    idx:114
+  }
+}
+layer {
+  name:"Node_115"
+  type:"attribute"
+  top:"Node_115"
+  bottom:"placeholder_1"
+  bottom:"Node_114"
+  layer_param {
+    idx:115
+    attr_key:storage_alignment
+    body_00:"let arg1.shape = tir.tvm_struct_get(arg1, 0, 2)"
+    body_01:" let arg1.strides = tir.tvm_struct_get(arg1, 0, 3)"
+    body_02:"  let placeholder = tir.tvm_struct_get(arg2, 0, 1)"
+    body_03:"   // attr [placeholder] storage_alignment = 128"
+    body_04:"   let arg2.shape = tir.tvm_struct_get(arg2, 0, 2)"
+    body_05:"    let arg2.strides = tir.tvm_struct_get(arg2, 0, 3)"
+    body_06:"     let T_add = tir.tvm_struct_get(arg3, 0, 1)"
+    body_07:"      // attr [T_add] storage_alignment = 128"
+    body_08:"      let arg3.shape = tir.tvm_struct_get(arg3, 0, 2)"
+    body_09:"       let arg3.strides = tir.tvm_struct_get(arg3, 0, 3)"
+    value:"128"
+  }
+}
+layer {
+  name:"Node_116"
+  type:"let"
+  top:"Node_116"
+  bottom:"placeholder_1"
+  bottom:"Node_30"
+  bottom:"Node_115"
+  layer_param {
+    idx:116
+  }
+}
+layer {
+  name:"Node_117"
+  type:"let"
+  top:"Node_117"
+  bottom:"dev_id"
+  bottom:"Node_28"
+  bottom:"Node_116"
+  layer_param {
+    idx:117
+  }
+}
+layer {
+  name:"Node_118"
+  type:"let"
+  top:"Node_118"
+  bottom:"arg0.strides"
+  bottom:"Node_26"
+  bottom:"Node_117"
+  layer_param {
+    idx:118
+  }
+}
+layer {
+  name:"Node_119"
+  type:"let"
+  top:"Node_119"
+  bottom:"arg0.shape"
+  bottom:"Node_24"
+  bottom:"Node_118"
+  layer_param {
+    idx:119
+  }
+}
+layer {
+  name:"Node_120"
+  type:"attribute"
+  top:"Node_120"
+  bottom:"placeholder"
+  bottom:"Node_119"
+  layer_param {
+    idx:120
+    attr_key:storage_alignment
+    body_00:"let arg0.shape = tir.tvm_struct_get(arg0, 0, 2)"
+    body_01:" let arg0.strides = tir.tvm_struct_get(arg0, 0, 3)"
+    body_02:"  let dev_id = tir.tvm_struct_get(arg0, 0, 9)"
+    body_03:"   let placeholder = tir.tvm_struct_get(arg1, 0, 1)"
+    body_04:"    // attr [placeholder] storage_alignment = 128"
+    body_05:"    let arg1.shape = tir.tvm_struct_get(arg1, 0, 2)"
+    body_06:"     let arg1.strides = tir.tvm_struct_get(arg1, 0, 3)"
+    body_07:"      let placeholder = tir.tvm_struct_get(arg2, 0, 1)"
+    body_08:"       // attr [placeholder] storage_alignment = 128"
+    body_09:"       let arg2.shape = tir.tvm_struct_get(arg2, 0, 2)"
+    value:"128"
+  }
+}
+layer {
+  name:"Node_121"
+  type:"let"
+  top:"Node_121"
+  bottom:"placeholder"
+  bottom:"Node_22"
+  bottom:"Node_120"
+  layer_param {
+    idx:121
+  }
+}
+layer {
+  name:"Node_122"
+  type:"let"
+  top:"Node_122"
+  bottom:"arg3.code"
+  bottom:"Node_20"
+  bottom:"Node_121"
+  layer_param {
+    idx:122
+  }
+}
+layer {
+  name:"Node_123"
+  type:"let"
+  top:"Node_123"
+  bottom:"arg3"
+  bottom:"Node_17"
+  bottom:"Node_122"
+  layer_param {
+    idx:123
+  }
+}
+layer {
+  name:"Node_124"
+  type:"let"
+  top:"Node_124"
+  bottom:"arg2.code"
+  bottom:"Node_15"
+  bottom:"Node_123"
+  layer_param {
+    idx:124
+  }
+}
+layer {
+  name:"Node_125"
+  type:"let"
+  top:"Node_125"
+  bottom:"arg2"
+  bottom:"Node_12"
+  bottom:"Node_124"
+  layer_param {
+    idx:125
+  }
+}
+layer {
+  name:"Node_126"
+  type:"let"
+  top:"Node_126"
+  bottom:"arg1.code"
+  bottom:"Node_10"
+  bottom:"Node_125"
+  layer_param {
+    idx:126
+  }
+}
+layer {
+  name:"Node_127"
+  type:"let"
+  top:"Node_127"
+  bottom:"arg1"
+  bottom:"Node_7"
+  bottom:"Node_126"
+  layer_param {
+    idx:127
+  }
+}
+layer {
+  name:"Node_128"
+  type:"let"
+  top:"Node_128"
+  bottom:"arg0.code"
+  bottom:"Node_5"
+  bottom:"Node_127"
+  layer_param {
+    idx:128
+  }
+}
+layer {
+  name:"Node_129"
+  type:"let"
+  top:"Node_129"
+  bottom:"arg0"
+  bottom:"Node_1"
+  bottom:"Node_128"
+  layer_param {
+    idx:129
+  }
+}
+layer {
+  name:"Node_130"
+  type:"assert"
+  top:"Node_130"
+  bottom:"Node_129"
+  layer_param {
+    idx:130
+    condition:"(num_args: int32 == 4)"
+    message:"'fused_nn_dense_add: num_args should be 4'"
+  }
+}
+layer {
+  name:"Node_131"
+  type:"primfunc"
+  top:"Node_131"
+  bottom:"Node_130"
+  layer_param {
+    idx:131
+    body_00:"assert((num_args == 4), 'fused_nn_dense_add: num_args should be 4')"
+    body_01:" let arg0 = tir.tvm_struct_get(args, 0, 12)"
+    body_02:"  let arg0.code = arg_type_ids[0]"
+    body_03:"   let arg1 = tir.tvm_struct_get(args, 1, 12)"
+    body_04:"    let arg1.code = arg_type_ids[1]"
+    body_05:"     let arg2 = tir.tvm_struct_get(args, 2, 12)"
+    body_06:"      let arg2.code = arg_type_ids[2]"
+    body_07:"       let arg3 = tir.tvm_struct_get(args, 3, 12)"
+    body_08:"        let arg3.code = arg_type_ids[3]"
+    body_09:"         let placeholder = tir.tvm_struct_get(arg0, 0, 1)"
+  }
+}

@@ -1,0 +1,307 @@
+name : "prim_expr"
+layer {
+  name:"C"
+  type:"buffer(node)"
+  top:"C"
+  layer_param {
+    idx:0
+    buffer_name:"C"
+    shape:[1024, 512]
+    dtype:float32
+  }
+}
+layer {
+  name:"Node_1"
+  type:"float(value)"
+  top:"Node_1"
+  layer_param {
+    idx:1
+    value:0.0
+    dtype:float32
+  }
+}
+layer {
+  name:"Node_2"
+  type:"buffer_store(seq_0)"
+  top:"Node_2"
+  bottom:"C"
+  bottom:"Node_1"
+  layer_param {
+    idx:2
+    value_00:"0f32"
+    indices_00:"[i, (j.inner + (j.outer*16))]"
+  }
+}
+layer {
+  name:"i"
+  type:"var(indice)"
+  top:"i"
+  layer_param {
+    idx:3
+    dtype:int32
+  }
+}
+layer {
+  name:"j.inner"
+  type:"var(a)"
+  top:"j.inner"
+  layer_param {
+    idx:4
+    dtype:int32
+  }
+}
+layer {
+  name:"j.outer"
+  type:"var(a)"
+  top:"j.outer"
+  layer_param {
+    idx:5
+    dtype:int32
+  }
+}
+layer {
+  name:"Node_6"
+  type:"int(b)"
+  top:"Node_6"
+  layer_param {
+    idx:6
+    value:16
+    dtype:int32
+  }
+}
+layer {
+  name:"Node_7"
+  type:"mul(b)"
+  top:"Node_7"
+  bottom:"j.outer"
+  bottom:"Node_6"
+  layer_param {
+    idx:7
+  }
+}
+layer {
+  name:"Node_8"
+  type:"add(indice)"
+  top:"Node_8"
+  bottom:"j.inner"
+  bottom:"Node_7"
+  layer_param {
+    idx:8
+  }
+}
+layer {
+  name:"Node_9"
+  type:"buffer_load(a)"
+  top:"Node_9"
+  bottom:"C"
+  bottom:"i"
+  bottom:"Node_8"
+  layer_param {
+    idx:9
+  }
+}
+layer {
+  name:"A"
+  type:"buffer(buffer)"
+  top:"A"
+  layer_param {
+    idx:10
+    buffer_name:"A"
+    shape:[1024, 64]
+    dtype:float32
+  }
+}
+layer {
+  name:"k"
+  type:"var(indice)"
+  top:"k"
+  layer_param {
+    idx:11
+    dtype:int32
+  }
+}
+layer {
+  name:"Node_12"
+  type:"buffer_load(a)"
+  top:"Node_12"
+  bottom:"A"
+  bottom:"i"
+  bottom:"k"
+  layer_param {
+    idx:12
+  }
+}
+layer {
+  name:"B"
+  type:"buffer(buffer)"
+  top:"B"
+  layer_param {
+    idx:13
+    buffer_name:"B"
+    shape:[512, 64]
+    dtype:float32
+  }
+}
+layer {
+  name:"Node_14"
+  type:"buffer_load(b)"
+  top:"Node_14"
+  bottom:"B"
+  bottom:"Node_8"
+  bottom:"k"
+  layer_param {
+    idx:14
+  }
+}
+layer {
+  name:"Node_15"
+  type:"mul(b)"
+  top:"Node_15"
+  bottom:"Node_12"
+  bottom:"Node_14"
+  layer_param {
+    idx:15
+  }
+}
+layer {
+  name:"Node_16"
+  type:"add(value)"
+  top:"Node_16"
+  bottom:"Node_9"
+  bottom:"Node_15"
+  layer_param {
+    idx:16
+  }
+}
+layer {
+  name:"Node_17"
+  type:"buffer_store"
+  top:"Node_17"
+  bottom:"C"
+  bottom:"Node_16"
+  layer_param {
+    idx:17
+    value_00:"(C: Buffer(C_1: Pointer(float32), float32, [1024, 512], [])[i: int32, (j.inner: int32 + (j.outer: int32*16))] + (A: Buffer(A_1: Pointer(float32), float32, [1024, 64], [])[i, k: int32]*B: Buffer(B_1: Pointer(float32), float32, [512, 64], [])[(j.inner + (j.outer*16)), k]))"
+    indices_00:"[i, (j.inner + (j.outer*16))]"
+  }
+}
+layer {
+  name:"Node_18"
+  type:"for(seq_1)"
+  top:"Node_18"
+  bottom:"Node_17"
+  layer_param {
+    idx:18
+    kind:0
+    body_00:"C[i, (j.inner + (j.outer*16))] = (C[i, (j.inner + (j.outer*16))] + (A[i, k]*B[(j.inner + (j.outer*16)), k]))"
+  }
+}
+layer {
+  name:"Node_19"
+  type:"seq"
+  top:"Node_19"
+  bottom:"Node_2"
+  bottom:"Node_18"
+  layer_param {
+    idx:19
+    seq_00:"[C[i, (j.inner + (j.outer*16))] = 0f"
+    seq_01:" , for (k, 0, 64)"
+    seq_02:"  C[i, (j.inner + (j.outer*16))] = (C[i, (j.inner + (j.outer*16))] + (A[i, k]*B[(j.inner + (j.outer*16)), k]))"
+    seq_03:"   ]"
+  }
+}
+layer {
+  name:"Node_20"
+  type:"for"
+  top:"Node_20"
+  bottom:"Node_19"
+  layer_param {
+    idx:20
+    kind:0
+    body_00:"C[i, (j.inner + (j.outer*16))] = 0f"
+    body_01:" for (k, 0, 64)"
+    body_02:"  C[i, (j.inner + (j.outer*16))] = (C[i, (j.inner + (j.outer*16))] + (A[i, k]*B[(j.inner + (j.outer*16)), k]))"
+  }
+}
+layer {
+  name:"Node_21"
+  type:"for"
+  top:"Node_21"
+  bottom:"Node_20"
+  layer_param {
+    idx:21
+    kind:0
+    body_00:"for (j.inner, 0, 16)"
+    body_01:" C[i, (j.inner + (j.outer*16))] = 0f"
+    body_02:"  for (k, 0, 64)"
+    body_03:"   C[i, (j.inner + (j.outer*16))] = (C[i, (j.inner + (j.outer*16))] + (A[i, k]*B[(j.inner + (j.outer*16)), k]))"
+  }
+}
+layer {
+  name:"Node_22"
+  type:"for"
+  top:"Node_22"
+  bottom:"Node_21"
+  layer_param {
+    idx:22
+    kind:0
+    body_00:"for (j.outer, 0, 32)"
+    body_01:" for (j.inner, 0, 16)"
+    body_02:"  C[i, (j.inner + (j.outer*16))] = 0f"
+    body_03:"   for (k, 0, 64)"
+    body_04:"    C[i, (j.inner + (j.outer*16))] = (C[i, (j.inner + (j.outer*16))] + (A[i, k]*B[(j.inner + (j.outer*16)), k]))"
+  }
+}
+layer {
+  name:"Node_23"
+  type:"buffer_realize"
+  top:"Node_23"
+  bottom:"Node_22"
+  layer_param {
+    idx:23
+    condition:True
+    body_00:"for (i, 0, 1024)"
+    body_01:" for (j.outer, 0, 32)"
+    body_02:"  for (j.inner, 0, 16)"
+    body_03:"   C[i, (j.inner + (j.outer*16))] = 0f"
+    body_04:"    for (k, 0, 64)"
+    body_05:"     C[i, (j.inner + (j.outer*16))] = (C[i, (j.inner + (j.outer*16))] + (A[i, k]*B[(j.inner + (j.outer*16)), k]))"
+    bounds_00:"[range(min=0, ext=1024), range(min=0, ext=512)]"
+  }
+}
+layer {
+  name:"Node_24"
+  type:"attribute"
+  top:"Node_24"
+  bottom:"C"
+  bottom:"Node_23"
+  layer_param {
+    idx:24
+    attr_key:realize_scope
+    body_00:"buffer_realize C([0, 1024], [0, 512])"
+    body_01:" for (i, 0, 1024)"
+    body_02:"  for (j.outer, 0, 32)"
+    body_03:"   for (j.inner, 0, 16)"
+    body_04:"    C[i, (j.inner + (j.outer*16))] = 0f"
+    body_05:"     for (k, 0, 64)"
+    body_06:"      C[i, (j.inner + (j.outer*16))] = (C[i, (j.inner + (j.outer*16))] + (A[i, k]*B[(j.inner + (j.outer*16)), k]))"
+    value_00:"''"
+  }
+}
+layer {
+  name:"Node_25"
+  type:"primfunc"
+  top:"Node_25"
+  bottom:"Node_24"
+  layer_param {
+    idx:25
+    body_00:"// attr [buffer(C, 0x7ff97c52bca0)] realize_scope = ''"
+    body_01:"buffer_realize C([0, 1024], [0, 512])"
+    body_02:" for (i, 0, 1024)"
+    body_03:"  for (j.outer, 0, 32)"
+    body_04:"   for (j.inner, 0, 16)"
+    body_05:"    C[i, (j.inner + (j.outer*16))] = 0f"
+    body_06:"     for (k, 0, 64)"
+    body_07:"      C[i, (j.inner + (j.outer*16))] = (C[i, (j.inner + (j.outer*16))] + (A[i, k]*B[(j.inner + (j.outer*16)), k]))"
+  }
+}

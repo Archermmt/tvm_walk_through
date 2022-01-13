@@ -1,0 +1,1451 @@
+name : "prim_expr"
+layer {
+  name:"blockIdx.y"
+  type:"var(iter)"
+  top:"blockIdx.y"
+  layer_param {
+    idx:0
+    dtype:int32
+  }
+}
+layer {
+  name:"Node_1"
+  type:"itervar(node)"
+  top:"Node_1"
+  bottom:"blockIdx.y"
+  layer_param {
+    idx:1
+    dom:"None"
+    iter_type:"1"
+    thread_tag:"blockIdx.y"
+  }
+}
+layer {
+  name:"T_dense.rf"
+  type:"var(node)"
+  top:"T_dense.rf"
+  layer_param {
+    idx:2
+    dtype:handle
+  }
+}
+layer {
+  name:"red_buf0"
+  type:"var(node)"
+  top:"red_buf0"
+  layer_param {
+    idx:3
+    dtype:handle
+  }
+}
+layer {
+  name:"T_dense"
+  type:"var(node)"
+  top:"T_dense"
+  layer_param {
+    idx:4
+    dtype:handle
+  }
+}
+layer {
+  name:"blockIdx.x"
+  type:"var(iter)"
+  top:"blockIdx.x"
+  layer_param {
+    idx:5
+    dtype:int32
+  }
+}
+layer {
+  name:"Node_6"
+  type:"itervar(node)"
+  top:"Node_6"
+  bottom:"blockIdx.x"
+  layer_param {
+    idx:6
+    dom:"None"
+    iter_type:"1"
+    thread_tag:"blockIdx.x"
+  }
+}
+layer {
+  name:"threadIdx.x"
+  type:"var(iter)"
+  top:"threadIdx.x"
+  layer_param {
+    idx:7
+    dtype:int32
+  }
+}
+layer {
+  name:"Node_8"
+  type:"itervar(node)"
+  top:"Node_8"
+  bottom:"threadIdx.x"
+  layer_param {
+    idx:8
+    dom:"None"
+    iter_type:"1"
+    thread_tag:"threadIdx.x"
+  }
+}
+layer {
+  name:"Node_9"
+  type:"float(store_value)"
+  top:"Node_9"
+  layer_param {
+    idx:9
+    value:0.0
+    dtype:float32
+  }
+}
+layer {
+  name:"Node_10"
+  type:"int(store_index)"
+  top:"Node_10"
+  layer_param {
+    idx:10
+    value:0
+    dtype:int32
+  }
+}
+layer {
+  name:"Node_11"
+  type:"store(seq_0)"
+  top:"Node_11"
+  bottom:"T_dense.rf"
+  bottom:"Node_9"
+  bottom:"Node_10"
+  layer_param {
+    idx:11
+    predicate:"True"
+    value:"0f32"
+    index:"0"
+    body_:"T_dense.rf[0] = 0f"
+  }
+}
+layer {
+  name:"k.outer"
+  type:"var(loop_var)"
+  top:"k.outer"
+  layer_param {
+    idx:12
+    dtype:int32
+  }
+}
+layer {
+  name:"Node_13"
+  type:"int(for_extent)"
+  top:"Node_13"
+  layer_param {
+    idx:13
+    value:8
+    dtype:int32
+  }
+}
+layer {
+  name:"Node_14"
+  type:"load(a)"
+  top:"Node_14"
+  bottom:"T_dense.rf"
+  bottom:"Node_10"
+  layer_param {
+    idx:14
+    predicate:"True"
+    body:"(float32*)T_dense.rf: Pointer(float32)[0]"
+  }
+}
+layer {
+  name:"placeholder"
+  type:"var(load_buffer)"
+  top:"placeholder"
+  layer_param {
+    idx:15
+    dtype:handle
+  }
+}
+layer {
+  name:"Node_16"
+  type:"int(b)"
+  top:"Node_16"
+  layer_param {
+    idx:16
+    value:64
+    dtype:int32
+  }
+}
+layer {
+  name:"Node_17"
+  type:"mul(a)"
+  top:"Node_17"
+  bottom:"k.outer"
+  bottom:"Node_16"
+  layer_param {
+    idx:17
+  }
+}
+layer {
+  name:"Node_18"
+  type:"add(load_index)"
+  top:"Node_18"
+  bottom:"Node_17"
+  bottom:"threadIdx.x"
+  layer_param {
+    idx:18
+  }
+}
+layer {
+  name:"Node_19"
+  type:"load(a)"
+  top:"Node_19"
+  bottom:"placeholder"
+  bottom:"Node_18"
+  layer_param {
+    idx:19
+    predicate:"True"
+    body:"(float32*)placeholder: Pointer(float32)[((k.outer: int32*64) + threadIdx.x: int32)]"
+  }
+}
+layer {
+  name:"placeholder_1"
+  type:"var(load_buffer)"
+  top:"placeholder_1"
+  layer_param {
+    idx:20
+    dtype:handle
+  }
+}
+layer {
+  name:"Node_21"
+  type:"int(b)"
+  top:"Node_21"
+  layer_param {
+    idx:21
+    value:512
+    dtype:int32
+  }
+}
+layer {
+  name:"Node_22"
+  type:"mul(a)"
+  top:"Node_22"
+  bottom:"blockIdx.x"
+  bottom:"Node_21"
+  layer_param {
+    idx:22
+  }
+}
+layer {
+  name:"Node_23"
+  type:"mul(b)"
+  top:"Node_23"
+  bottom:"k.outer"
+  bottom:"Node_16"
+  layer_param {
+    idx:23
+  }
+}
+layer {
+  name:"Node_24"
+  type:"add(a)"
+  top:"Node_24"
+  bottom:"Node_22"
+  bottom:"Node_23"
+  layer_param {
+    idx:24
+  }
+}
+layer {
+  name:"Node_25"
+  type:"add(load_index)"
+  top:"Node_25"
+  bottom:"Node_24"
+  bottom:"threadIdx.x"
+  layer_param {
+    idx:25
+  }
+}
+layer {
+  name:"Node_26"
+  type:"load(b)"
+  top:"Node_26"
+  bottom:"placeholder_1"
+  bottom:"Node_25"
+  layer_param {
+    idx:26
+    predicate:"True"
+    body:"(float32*)placeholder: Pointer(float32)[(((blockIdx.x: int32*512) + (k.outer: int32*64)) + threadIdx.x: int32)]"
+  }
+}
+layer {
+  name:"Node_27"
+  type:"mul(b)"
+  top:"Node_27"
+  bottom:"Node_19"
+  bottom:"Node_26"
+  layer_param {
+    idx:27
+  }
+}
+layer {
+  name:"Node_28"
+  type:"add(store_value)"
+  top:"Node_28"
+  bottom:"Node_14"
+  bottom:"Node_27"
+  layer_param {
+    idx:28
+  }
+}
+layer {
+  name:"Node_29"
+  type:"store"
+  top:"Node_29"
+  bottom:"T_dense.rf"
+  bottom:"Node_28"
+  bottom:"Node_10"
+  layer_param {
+    idx:29
+    predicate:"True"
+    value:"((float32*)T_dense.rf: Pointer(float32)[0] + ((float32*)placeholder: Pointer(float32)[((k.outer: int32*64) + threadIdx.x: int32)]*(float32*)placeholder_1: Pointer(float32)[(((blockIdx.x: int32*512) + (k.outer*64)) + threadIdx.x)]))"
+    index:"0"
+    body_:"T_dense.rf[0] = (T_dense.rf[0] + (placeholder[((k.outer*64) + threadIdx.x)]*placeholder[(((blockIdx.x*512) + (k.outer*64)) + threadIdx.x)]))"
+  }
+}
+layer {
+  name:"Node_30"
+  type:"for(seq_1)"
+  top:"Node_30"
+  bottom:"k.outer"
+  bottom:"Node_10"
+  bottom:"Node_13"
+  bottom:"Node_29"
+  layer_param {
+    idx:30
+    kind:0
+    body_:"T_dense.rf[0] = (T_dense.rf[0] + (placeholder[((k.outer*64) + threadIdx.x)]*placeholder[(((blockIdx.x*512) + (k.outer*64)) + threadIdx.x)]))"
+  }
+}
+layer {
+  name:"x"
+  type:"var(reduce_l)"
+  top:"x"
+  layer_param {
+    idx:31
+    dtype:float32
+  }
+}
+layer {
+  name:"y"
+  type:"var(reduce_r)"
+  top:"y"
+  layer_param {
+    idx:32
+    dtype:float32
+  }
+}
+layer {
+  name:"Node_33"
+  type:"add(reduce_res)"
+  top:"Node_33"
+  bottom:"x"
+  bottom:"y"
+  layer_param {
+    idx:33
+  }
+}
+layer {
+  name:"Node_34"
+  type:"common_reducer(node)"
+  top:"Node_34"
+  bottom:"x"
+  bottom:"y"
+  bottom:"Node_33"
+  bottom:"Node_9"
+  layer_param {
+    idx:34
+    result:"[(x + y)]"
+  }
+}
+layer {
+  name:"Node_35"
+  type:"tir_tvm_storage_sync(value)"
+  top:"Node_35"
+  layer_param {
+    idx:35
+    body:"@tir.tvm_storage_sync('shared', dtype=int32)"
+  }
+}
+layer {
+  name:"Node_36"
+  type:"evaluate(seq_0)"
+  top:"Node_36"
+  bottom:"Node_35"
+  layer_param {
+    idx:36
+  }
+}
+layer {
+  name:"Node_37"
+  type:"load(store_value)"
+  top:"Node_37"
+  bottom:"T_dense.rf"
+  bottom:"Node_10"
+  layer_param {
+    idx:37
+    predicate:"True"
+    body:"(float32*)T_dense.rf: Pointer(float32)[0]"
+  }
+}
+layer {
+  name:"Node_38"
+  type:"store(seq_1)"
+  top:"Node_38"
+  bottom:"red_buf0"
+  bottom:"Node_37"
+  bottom:"threadIdx.x"
+  layer_param {
+    idx:38
+    predicate:"True"
+    value:"(float32*)T_dense.rf: Pointer(float32)[0]"
+    index:"threadIdx.x: int32"
+    body_:"red_buf0[threadIdx.x] = T_dense.rf[0]"
+  }
+}
+layer {
+  name:"Node_39"
+  type:"tir_tvm_storage_sync(value)"
+  top:"Node_39"
+  layer_param {
+    idx:39
+    body:"@tir.tvm_storage_sync('shared', dtype=int32)"
+  }
+}
+layer {
+  name:"Node_40"
+  type:"evaluate(seq_2)"
+  top:"Node_40"
+  bottom:"Node_39"
+  layer_param {
+    idx:40
+  }
+}
+layer {
+  name:"Node_41"
+  type:"load(a)"
+  top:"Node_41"
+  bottom:"red_buf0"
+  bottom:"threadIdx.x"
+  layer_param {
+    idx:41
+    predicate:"True"
+    body:"(float32*)red_buf0: Pointer(float32)[threadIdx.x: int32]"
+  }
+}
+layer {
+  name:"Node_42"
+  type:"int(b)"
+  top:"Node_42"
+  layer_param {
+    idx:42
+    value:32
+    dtype:int32
+  }
+}
+layer {
+  name:"Node_43"
+  type:"add(load_index)"
+  top:"Node_43"
+  bottom:"threadIdx.x"
+  bottom:"Node_42"
+  layer_param {
+    idx:43
+  }
+}
+layer {
+  name:"Node_44"
+  type:"load(b)"
+  top:"Node_44"
+  bottom:"red_buf0"
+  bottom:"Node_43"
+  layer_param {
+    idx:44
+    predicate:"True"
+    body:"(float32*)red_buf0: Pointer(float32)[(threadIdx.x: int32 + 32)]"
+  }
+}
+layer {
+  name:"Node_45"
+  type:"add(store_value)"
+  top:"Node_45"
+  bottom:"Node_41"
+  bottom:"Node_44"
+  layer_param {
+    idx:45
+  }
+}
+layer {
+  name:"Node_46"
+  type:"store(true)"
+  top:"Node_46"
+  bottom:"red_buf0"
+  bottom:"Node_45"
+  bottom:"threadIdx.x"
+  layer_param {
+    idx:46
+    predicate:"True"
+    value:"((float32*)red_buf0: Pointer(float32)[threadIdx.x: int32] + (float32*)red_buf0[(threadIdx.x + 32)])"
+    index:"threadIdx.x: int32"
+    body_:"red_buf0[threadIdx.x] = (red_buf0[threadIdx.x] + red_buf0[(threadIdx.x + 32)])"
+  }
+}
+layer {
+  name:"Node_47"
+  type:"ifthenelse(seq_3)"
+  top:"Node_47"
+  bottom:"Node_46"
+  layer_param {
+    idx:47
+    condition:"(threadIdx.x: int32 < 32)"
+  }
+}
+layer {
+  name:"Node_48"
+  type:"tir_tvm_storage_sync(value)"
+  top:"Node_48"
+  layer_param {
+    idx:48
+    body:"@tir.tvm_storage_sync('shared', dtype=int32)"
+  }
+}
+layer {
+  name:"Node_49"
+  type:"evaluate(seq_4)"
+  top:"Node_49"
+  bottom:"Node_48"
+  layer_param {
+    idx:49
+  }
+}
+layer {
+  name:"Node_50"
+  type:"tir_tvm_storage_sync(value)"
+  top:"Node_50"
+  layer_param {
+    idx:50
+    body:"@tir.tvm_storage_sync('warp', dtype=int32)"
+  }
+}
+layer {
+  name:"Node_51"
+  type:"evaluate(seq_5)"
+  top:"Node_51"
+  bottom:"Node_50"
+  layer_param {
+    idx:51
+  }
+}
+layer {
+  name:"Node_52"
+  type:"tir_tvm_storage_sync(value)"
+  top:"Node_52"
+  layer_param {
+    idx:52
+    body:"@tir.tvm_storage_sync('warp', dtype=int32)"
+  }
+}
+layer {
+  name:"Node_53"
+  type:"evaluate(seq_6)"
+  top:"Node_53"
+  bottom:"Node_52"
+  layer_param {
+    idx:53
+  }
+}
+layer {
+  name:"Node_54"
+  type:"tir_tvm_storage_sync(value)"
+  top:"Node_54"
+  layer_param {
+    idx:54
+    body:"@tir.tvm_storage_sync('warp', dtype=int32)"
+  }
+}
+layer {
+  name:"Node_55"
+  type:"evaluate(seq_7)"
+  top:"Node_55"
+  bottom:"Node_54"
+  layer_param {
+    idx:55
+  }
+}
+layer {
+  name:"Node_56"
+  type:"tir_tvm_storage_sync(value)"
+  top:"Node_56"
+  layer_param {
+    idx:56
+    body:"@tir.tvm_storage_sync('warp', dtype=int32)"
+  }
+}
+layer {
+  name:"Node_57"
+  type:"evaluate(seq_8)"
+  top:"Node_57"
+  bottom:"Node_56"
+  layer_param {
+    idx:57
+  }
+}
+layer {
+  name:"Node_58"
+  type:"tir_tvm_storage_sync(value)"
+  top:"Node_58"
+  layer_param {
+    idx:58
+    body:"@tir.tvm_storage_sync('warp', dtype=int32)"
+  }
+}
+layer {
+  name:"Node_59"
+  type:"evaluate(seq_9)"
+  top:"Node_59"
+  bottom:"Node_58"
+  layer_param {
+    idx:59
+  }
+}
+layer {
+  name:"Node_60"
+  type:"load(a)"
+  top:"Node_60"
+  bottom:"red_buf0"
+  bottom:"threadIdx.x"
+  layer_param {
+    idx:60
+    predicate:"True"
+    body:"(float32*)red_buf0: Pointer(float32)[threadIdx.x: int32]"
+  }
+}
+layer {
+  name:"Node_61"
+  type:"int(b)"
+  top:"Node_61"
+  layer_param {
+    idx:61
+    value:16
+    dtype:int32
+  }
+}
+layer {
+  name:"Node_62"
+  type:"add(load_index)"
+  top:"Node_62"
+  bottom:"threadIdx.x"
+  bottom:"Node_61"
+  layer_param {
+    idx:62
+  }
+}
+layer {
+  name:"Node_63"
+  type:"load(b)"
+  top:"Node_63"
+  bottom:"red_buf0"
+  bottom:"Node_62"
+  layer_param {
+    idx:63
+    predicate:"True"
+    body:"(float32*)red_buf0: Pointer(float32)[(threadIdx.x: int32 + 16)]"
+  }
+}
+layer {
+  name:"Node_64"
+  type:"add(store_value)"
+  top:"Node_64"
+  bottom:"Node_60"
+  bottom:"Node_63"
+  layer_param {
+    idx:64
+  }
+}
+layer {
+  name:"Node_65"
+  type:"store(seq_0)"
+  top:"Node_65"
+  bottom:"red_buf0"
+  bottom:"Node_64"
+  bottom:"threadIdx.x"
+  layer_param {
+    idx:65
+    predicate:"True"
+    value:"((float32*)red_buf0: Pointer(float32)[threadIdx.x: int32] + (float32*)red_buf0[(threadIdx.x + 16)])"
+    index:"threadIdx.x: int32"
+    body_:"red_buf0[threadIdx.x] = (red_buf0[threadIdx.x] + red_buf0[(threadIdx.x + 16)])"
+  }
+}
+layer {
+  name:"Node_66"
+  type:"load(a)"
+  top:"Node_66"
+  bottom:"red_buf0"
+  bottom:"threadIdx.x"
+  layer_param {
+    idx:66
+    predicate:"True"
+    body:"(float32*)red_buf0: Pointer(float32)[threadIdx.x: int32]"
+  }
+}
+layer {
+  name:"Node_67"
+  type:"add(load_index)"
+  top:"Node_67"
+  bottom:"threadIdx.x"
+  bottom:"Node_13"
+  layer_param {
+    idx:67
+  }
+}
+layer {
+  name:"Node_68"
+  type:"load(b)"
+  top:"Node_68"
+  bottom:"red_buf0"
+  bottom:"Node_67"
+  layer_param {
+    idx:68
+    predicate:"True"
+    body:"(float32*)red_buf0: Pointer(float32)[(threadIdx.x: int32 + 8)]"
+  }
+}
+layer {
+  name:"Node_69"
+  type:"add(store_value)"
+  top:"Node_69"
+  bottom:"Node_66"
+  bottom:"Node_68"
+  layer_param {
+    idx:69
+  }
+}
+layer {
+  name:"Node_70"
+  type:"store(seq_1)"
+  top:"Node_70"
+  bottom:"red_buf0"
+  bottom:"Node_69"
+  bottom:"threadIdx.x"
+  layer_param {
+    idx:70
+    predicate:"True"
+    value:"((float32*)red_buf0: Pointer(float32)[threadIdx.x: int32] + (float32*)red_buf0[(threadIdx.x + 8)])"
+    index:"threadIdx.x: int32"
+    body_:"red_buf0[threadIdx.x] = (red_buf0[threadIdx.x] + red_buf0[(threadIdx.x + 8)])"
+  }
+}
+layer {
+  name:"Node_71"
+  type:"load(a)"
+  top:"Node_71"
+  bottom:"red_buf0"
+  bottom:"threadIdx.x"
+  layer_param {
+    idx:71
+    predicate:"True"
+    body:"(float32*)red_buf0: Pointer(float32)[threadIdx.x: int32]"
+  }
+}
+layer {
+  name:"Node_72"
+  type:"int(b)"
+  top:"Node_72"
+  layer_param {
+    idx:72
+    value:4
+    dtype:int32
+  }
+}
+layer {
+  name:"Node_73"
+  type:"add(load_index)"
+  top:"Node_73"
+  bottom:"threadIdx.x"
+  bottom:"Node_72"
+  layer_param {
+    idx:73
+  }
+}
+layer {
+  name:"Node_74"
+  type:"load(b)"
+  top:"Node_74"
+  bottom:"red_buf0"
+  bottom:"Node_73"
+  layer_param {
+    idx:74
+    predicate:"True"
+    body:"(float32*)red_buf0: Pointer(float32)[(threadIdx.x: int32 + 4)]"
+  }
+}
+layer {
+  name:"Node_75"
+  type:"add(store_value)"
+  top:"Node_75"
+  bottom:"Node_71"
+  bottom:"Node_74"
+  layer_param {
+    idx:75
+  }
+}
+layer {
+  name:"Node_76"
+  type:"store(seq_2)"
+  top:"Node_76"
+  bottom:"red_buf0"
+  bottom:"Node_75"
+  bottom:"threadIdx.x"
+  layer_param {
+    idx:76
+    predicate:"True"
+    value:"((float32*)red_buf0: Pointer(float32)[threadIdx.x: int32] + (float32*)red_buf0[(threadIdx.x + 4)])"
+    index:"threadIdx.x: int32"
+    body_:"red_buf0[threadIdx.x] = (red_buf0[threadIdx.x] + red_buf0[(threadIdx.x + 4)])"
+  }
+}
+layer {
+  name:"Node_77"
+  type:"load(a)"
+  top:"Node_77"
+  bottom:"red_buf0"
+  bottom:"threadIdx.x"
+  layer_param {
+    idx:77
+    predicate:"True"
+    body:"(float32*)red_buf0: Pointer(float32)[threadIdx.x: int32]"
+  }
+}
+layer {
+  name:"Node_78"
+  type:"int(b)"
+  top:"Node_78"
+  layer_param {
+    idx:78
+    value:2
+    dtype:int32
+  }
+}
+layer {
+  name:"Node_79"
+  type:"add(load_index)"
+  top:"Node_79"
+  bottom:"threadIdx.x"
+  bottom:"Node_78"
+  layer_param {
+    idx:79
+  }
+}
+layer {
+  name:"Node_80"
+  type:"load(b)"
+  top:"Node_80"
+  bottom:"red_buf0"
+  bottom:"Node_79"
+  layer_param {
+    idx:80
+    predicate:"True"
+    body:"(float32*)red_buf0: Pointer(float32)[(threadIdx.x: int32 + 2)]"
+  }
+}
+layer {
+  name:"Node_81"
+  type:"add(store_value)"
+  top:"Node_81"
+  bottom:"Node_77"
+  bottom:"Node_80"
+  layer_param {
+    idx:81
+  }
+}
+layer {
+  name:"Node_82"
+  type:"store(seq_3)"
+  top:"Node_82"
+  bottom:"red_buf0"
+  bottom:"Node_81"
+  bottom:"threadIdx.x"
+  layer_param {
+    idx:82
+    predicate:"True"
+    value:"((float32*)red_buf0: Pointer(float32)[threadIdx.x: int32] + (float32*)red_buf0[(threadIdx.x + 2)])"
+    index:"threadIdx.x: int32"
+    body_:"red_buf0[threadIdx.x] = (red_buf0[threadIdx.x] + red_buf0[(threadIdx.x + 2)])"
+  }
+}
+layer {
+  name:"Node_83"
+  type:"load(a)"
+  top:"Node_83"
+  bottom:"red_buf0"
+  bottom:"threadIdx.x"
+  layer_param {
+    idx:83
+    predicate:"True"
+    body:"(float32*)red_buf0: Pointer(float32)[threadIdx.x: int32]"
+  }
+}
+layer {
+  name:"Node_84"
+  type:"int(b)"
+  top:"Node_84"
+  layer_param {
+    idx:84
+    value:1
+    dtype:int32
+  }
+}
+layer {
+  name:"Node_85"
+  type:"add(load_index)"
+  top:"Node_85"
+  bottom:"threadIdx.x"
+  bottom:"Node_84"
+  layer_param {
+    idx:85
+  }
+}
+layer {
+  name:"Node_86"
+  type:"load(b)"
+  top:"Node_86"
+  bottom:"red_buf0"
+  bottom:"Node_85"
+  layer_param {
+    idx:86
+    predicate:"True"
+    body:"(float32*)red_buf0: Pointer(float32)[(threadIdx.x: int32 + 1)]"
+  }
+}
+layer {
+  name:"Node_87"
+  type:"add(store_value)"
+  top:"Node_87"
+  bottom:"Node_83"
+  bottom:"Node_86"
+  layer_param {
+    idx:87
+  }
+}
+layer {
+  name:"Node_88"
+  type:"store(seq_4)"
+  top:"Node_88"
+  bottom:"red_buf0"
+  bottom:"Node_87"
+  bottom:"threadIdx.x"
+  layer_param {
+    idx:88
+    predicate:"True"
+    value:"((float32*)red_buf0: Pointer(float32)[threadIdx.x: int32] + (float32*)red_buf0[(threadIdx.x + 1)])"
+    index:"threadIdx.x: int32"
+    body_:"red_buf0[threadIdx.x] = (red_buf0[threadIdx.x] + red_buf0[(threadIdx.x + 1)])"
+  }
+}
+layer {
+  name:"Node_89"
+  type:"seq(true)"
+  top:"Node_89"
+  bottom:"Node_65"
+  bottom:"Node_70"
+  bottom:"Node_76"
+  bottom:"Node_82"
+  bottom:"Node_88"
+  layer_param {
+    idx:89
+    seq_00:"[red_buf0[threadIdx.x] = (red_buf0[threadIdx.x] + red_buf0[(threadIdx.x + 16)])"
+    seq_01:" , red_buf0[threadIdx.x] = (red_buf0[threadIdx.x] + red_buf0[(threadIdx.x + 8)])"
+    seq_02:"  , red_buf0[threadIdx.x] = (red_buf0[threadIdx.x] + red_buf0[(threadIdx.x + 4)])"
+    seq_03:"   , red_buf0[threadIdx.x] = (red_buf0[threadIdx.x] + red_buf0[(threadIdx.x + 2)])"
+    seq_04:"    , red_buf0[threadIdx.x] = (red_buf0[threadIdx.x] + red_buf0[(threadIdx.x + 1)])"
+    seq_05:"     ]"
+  }
+}
+layer {
+  name:"Node_90"
+  type:"ifthenelse(seq_10)"
+  top:"Node_90"
+  bottom:"Node_89"
+  layer_param {
+    idx:90
+    condition:"(threadIdx.x: int32 < 16)"
+  }
+}
+layer {
+  name:"Node_91"
+  type:"tir_tvm_storage_sync(value)"
+  top:"Node_91"
+  layer_param {
+    idx:91
+    body:"@tir.tvm_storage_sync('shared', dtype=int32)"
+  }
+}
+layer {
+  name:"Node_92"
+  type:"evaluate(seq_11)"
+  top:"Node_92"
+  bottom:"Node_91"
+  layer_param {
+    idx:92
+  }
+}
+layer {
+  name:"Node_93"
+  type:"seq"
+  top:"Node_93"
+  bottom:"Node_36"
+  bottom:"Node_38"
+  bottom:"Node_40"
+  bottom:"Node_47"
+  bottom:"Node_49"
+  bottom:"Node_51"
+  bottom:"Node_53"
+  bottom:"Node_55"
+  bottom:"Node_57"
+  bottom:"Node_59"
+  bottom:"Node_90"
+  bottom:"Node_92"
+  layer_param {
+    idx:93
+    seq_00:"[tir.tvm_storage_sync('shared')"
+    seq_01:" , red_buf0[threadIdx.x] = T_dense.rf[0]"
+    seq_02:"  , tir.tvm_storage_sync('shared')"
+    seq_03:"   , if ((threadIdx.x < 32))"
+    seq_04:"    red_buf0[threadIdx.x] = (red_buf0[threadIdx.x] + red_buf0[(threadIdx.x + 32)])"
+    seq_05:"     , tir.tvm_storage_sync('shared')"
+    seq_06:"      , tir.tvm_storage_sync('warp')"
+    seq_07:"       , tir.tvm_storage_sync('warp')"
+    seq_08:"        , tir.tvm_storage_sync('warp')"
+    seq_09:"         , tir.tvm_storage_sync('warp')"
+  }
+}
+layer {
+  name:"Node_94"
+  type:"attribute(seq_2)"
+  top:"Node_94"
+  bottom:"Node_34"
+  bottom:"Node_93"
+  layer_param {
+    idx:94
+    attr_key:reduce_scope
+    body_00:"tir.tvm_storage_sync('shared')"
+    body_01:" red_buf0[threadIdx.x] = T_dense.rf[0]"
+    body_02:"  tir.tvm_storage_sync('shared')"
+    body_03:"   if ((threadIdx.x < 32))"
+    body_04:"    red_buf0[threadIdx.x] = (red_buf0[threadIdx.x] + red_buf0[(threadIdx.x + 32)])"
+    body_05:"     tir.tvm_storage_sync('shared')"
+    body_06:"      tir.tvm_storage_sync('warp')"
+    body_07:"       tir.tvm_storage_sync('warp')"
+    body_08:"        tir.tvm_storage_sync('warp')"
+    body_09:"         tir.tvm_storage_sync('warp')"
+    value:"@tir.reinterpret(0u64, dtype=handle)"
+  }
+}
+layer {
+  name:"Node_95"
+  type:"load(store_value)"
+  top:"Node_95"
+  bottom:"red_buf0"
+  bottom:"Node_10"
+  layer_param {
+    idx:95
+    predicate:"True"
+    body:"(float32*)red_buf0: Pointer(float32)[0]"
+  }
+}
+layer {
+  name:"Node_96"
+  type:"store(true)"
+  top:"Node_96"
+  bottom:"T_dense"
+  bottom:"Node_95"
+  bottom:"Node_10"
+  layer_param {
+    idx:96
+    predicate:"True"
+    value:"(float32*)red_buf0: Pointer(float32)[0]"
+    index:"0"
+    body_:"T_dense[0] = red_buf0[0]"
+  }
+}
+layer {
+  name:"Node_97"
+  type:"ifthenelse(seq_3)"
+  top:"Node_97"
+  bottom:"Node_96"
+  layer_param {
+    idx:97
+    condition:"(threadIdx.x: int32 == 0)"
+  }
+}
+layer {
+  name:"Node_98"
+  type:"seq"
+  top:"Node_98"
+  bottom:"Node_11"
+  bottom:"Node_30"
+  bottom:"Node_94"
+  bottom:"Node_97"
+  layer_param {
+    idx:98
+    seq_00:"[T_dense.rf[0] = 0f"
+    seq_01:" , for (k.outer, 0, 8)"
+    seq_02:"  T_dense.rf[0] = (T_dense.rf[0] + (placeholder[((k.outer*64) + threadIdx.x)]*placeholder[(((blockIdx.x*512) + (k.outer*64)) + threadIdx.x)]))"
+    seq_03:"   , // attr [comm_reducer(result=[(x + y)], lhs=[x], rhs=[y], identity_element=[0f])] reduce_scope = tir.reinterpret((uint64)0)"
+    seq_04:"    tir.tvm_storage_sync('shared')"
+    seq_05:"     red_buf0[threadIdx.x] = T_dense.rf[0]"
+    seq_06:"      tir.tvm_storage_sync('shared')"
+    seq_07:"       if ((threadIdx.x < 32))"
+    seq_08:"        red_buf0[threadIdx.x] = (red_buf0[threadIdx.x] + red_buf0[(threadIdx.x + 32)])"
+    seq_09:"         tir.tvm_storage_sync('shared')"
+  }
+}
+layer {
+  name:"Node_99"
+  type:"attribute(seq_0)"
+  top:"Node_99"
+  bottom:"Node_8"
+  bottom:"Node_98"
+  layer_param {
+    idx:99
+    attr_key:thread_extent
+    body_00:"T_dense.rf[0] = 0f"
+    body_01:" for (k.outer, 0, 8)"
+    body_02:"  T_dense.rf[0] = (T_dense.rf[0] + (placeholder[((k.outer*64) + threadIdx.x)]*placeholder[(((blockIdx.x*512) + (k.outer*64)) + threadIdx.x)]))"
+    body_03:"   // attr [comm_reducer(result=[(x + y)], lhs=[x], rhs=[y], identity_element=[0f])] reduce_scope = tir.reinterpret((uint64)0)"
+    body_04:"   tir.tvm_storage_sync('shared')"
+    body_05:"    red_buf0[threadIdx.x] = T_dense.rf[0]"
+    body_06:"     tir.tvm_storage_sync('shared')"
+    body_07:"      if ((threadIdx.x < 32))"
+    body_08:"       red_buf0[threadIdx.x] = (red_buf0[threadIdx.x] + red_buf0[(threadIdx.x + 32)])"
+    body_09:"        tir.tvm_storage_sync('shared')"
+    value:"64"
+  }
+}
+layer {
+  name:"T_add"
+  type:"var(store_buffer)"
+  top:"T_add"
+  layer_param {
+    idx:100
+    dtype:handle
+  }
+}
+layer {
+  name:"Node_101"
+  type:"load(a)"
+  top:"Node_101"
+  bottom:"T_dense"
+  bottom:"Node_10"
+  layer_param {
+    idx:101
+    predicate:"True"
+    body:"(float32*)T_dense: Pointer(float32)[0]"
+  }
+}
+layer {
+  name:"placeholder_2"
+  type:"var(load_buffer)"
+  top:"placeholder_2"
+  layer_param {
+    idx:102
+    dtype:handle
+  }
+}
+layer {
+  name:"Node_103"
+  type:"load(b)"
+  top:"Node_103"
+  bottom:"placeholder_2"
+  bottom:"blockIdx.x"
+  layer_param {
+    idx:103
+    predicate:"True"
+    body:"(float32*)placeholder: Pointer(float32)[blockIdx.x: int32]"
+  }
+}
+layer {
+  name:"Node_104"
+  type:"add(store_value)"
+  top:"Node_104"
+  bottom:"Node_101"
+  bottom:"Node_103"
+  layer_param {
+    idx:104
+  }
+}
+layer {
+  name:"Node_105"
+  type:"store(true)"
+  top:"Node_105"
+  bottom:"T_add"
+  bottom:"Node_104"
+  bottom:"blockIdx.x"
+  layer_param {
+    idx:105
+    predicate:"True"
+    value:"((float32*)T_dense: Pointer(float32)[0] + (float32*)placeholder: Pointer(float32)[blockIdx.x: int32])"
+    index:"blockIdx.x: int32"
+    body_:"T_add[blockIdx.x] = (T_dense[0] + placeholder[blockIdx.x])"
+  }
+}
+layer {
+  name:"Node_106"
+  type:"ifthenelse(seq_1)"
+  top:"Node_106"
+  bottom:"Node_105"
+  layer_param {
+    idx:106
+    condition:"(threadIdx.x: int32 == 0)"
+  }
+}
+layer {
+  name:"Node_107"
+  type:"seq"
+  top:"Node_107"
+  bottom:"Node_99"
+  bottom:"Node_106"
+  layer_param {
+    idx:107
+    seq_00:"[// attr [iter_var(threadIdx.x, , threadIdx.x)] thread_extent = 64"
+    seq_01:" T_dense.rf[0] = 0f"
+    seq_02:"  for (k.outer, 0, 8)"
+    seq_03:"   T_dense.rf[0] = (T_dense.rf[0] + (placeholder[((k.outer*64) + threadIdx.x)]*placeholder[(((blockIdx.x*512) + (k.outer*64)) + threadIdx.x)]))"
+    seq_04:"    // attr [comm_reducer(result=[(x + y)], lhs=[x], rhs=[y], identity_element=[0f])] reduce_scope = tir.reinterpret((uint64)0)"
+    seq_05:"    tir.tvm_storage_sync('shared')"
+    seq_06:"     red_buf0[threadIdx.x] = T_dense.rf[0]"
+    seq_07:"      tir.tvm_storage_sync('shared')"
+    seq_08:"       if ((threadIdx.x < 32))"
+    seq_09:"        red_buf0[threadIdx.x] = (red_buf0[threadIdx.x] + red_buf0[(threadIdx.x + 32)])"
+  }
+}
+layer {
+  name:"Node_108"
+  type:"attribute"
+  top:"Node_108"
+  bottom:"Node_6"
+  bottom:"Node_107"
+  layer_param {
+    idx:108
+    attr_key:thread_extent
+    body_00:"// attr [iter_var(threadIdx.x, , threadIdx.x)] thread_extent = 64"
+    body_01:"T_dense.rf[0] = 0f"
+    body_02:" for (k.outer, 0, 8)"
+    body_03:"  T_dense.rf[0] = (T_dense.rf[0] + (placeholder[((k.outer*64) + threadIdx.x)]*placeholder[(((blockIdx.x*512) + (k.outer*64)) + threadIdx.x)]))"
+    body_04:"   // attr [comm_reducer(result=[(x + y)], lhs=[x], rhs=[y], identity_element=[0f])] reduce_scope = tir.reinterpret((uint64)0)"
+    body_05:"   tir.tvm_storage_sync('shared')"
+    body_06:"    red_buf0[threadIdx.x] = T_dense.rf[0]"
+    body_07:"     tir.tvm_storage_sync('shared')"
+    body_08:"      if ((threadIdx.x < 32))"
+    body_09:"       red_buf0[threadIdx.x] = (red_buf0[threadIdx.x] + red_buf0[(threadIdx.x + 32)])"
+    value:"1000"
+  }
+}
+layer {
+  name:"Node_109"
+  type:"allocate"
+  top:"Node_109"
+  bottom:"T_dense"
+  bottom:"Node_108"
+  layer_param {
+    idx:109
+    dtype:float32
+    extents:"[1]"
+    condition:"True"
+    body_00:"// attr [iter_var(blockIdx.x, , blockIdx.x)] thread_extent = 1000"
+    body_01:"// attr [iter_var(threadIdx.x, , threadIdx.x)] thread_extent = 64"
+    body_02:"T_dense.rf[0] = 0f"
+    body_03:" for (k.outer, 0, 8)"
+    body_04:"  T_dense.rf[0] = (T_dense.rf[0] + (placeholder[((k.outer*64) + threadIdx.x)]*placeholder[(((blockIdx.x*512) + (k.outer*64)) + threadIdx.x)]))"
+    body_05:"   // attr [comm_reducer(result=[(x + y)], lhs=[x], rhs=[y], identity_element=[0f])] reduce_scope = tir.reinterpret((uint64)0)"
+    body_06:"   tir.tvm_storage_sync('shared')"
+    body_07:"    red_buf0[threadIdx.x] = T_dense.rf[0]"
+    body_08:"     tir.tvm_storage_sync('shared')"
+    body_09:"      if ((threadIdx.x < 32))"
+  }
+}
+layer {
+  name:"Node_110"
+  type:"attribute"
+  top:"Node_110"
+  bottom:"T_dense"
+  bottom:"Node_109"
+  layer_param {
+    idx:110
+    attr_key:storage_scope
+    body_00:"allocate T_dense[float32 * 1]"
+    body_01:" // attr [iter_var(blockIdx.x, , blockIdx.x)] thread_extent = 1000"
+    body_02:" // attr [iter_var(threadIdx.x, , threadIdx.x)] thread_extent = 64"
+    body_03:" T_dense.rf[0] = 0f"
+    body_04:"  for (k.outer, 0, 8)"
+    body_05:"   T_dense.rf[0] = (T_dense.rf[0] + (placeholder[((k.outer*64) + threadIdx.x)]*placeholder[(((blockIdx.x*512) + (k.outer*64)) + threadIdx.x)]))"
+    body_06:"    // attr [comm_reducer(result=[(x + y)], lhs=[x], rhs=[y], identity_element=[0f])] reduce_scope = tir.reinterpret((uint64)0)"
+    body_07:"    tir.tvm_storage_sync('shared')"
+    body_08:"     red_buf0[threadIdx.x] = T_dense.rf[0]"
+    body_09:"      tir.tvm_storage_sync('shared')"
+    value:"'shared'"
+  }
+}
+layer {
+  name:"Node_111"
+  type:"attribute"
+  top:"Node_111"
+  bottom:"red_buf0"
+  bottom:"Node_110"
+  layer_param {
+    idx:111
+    attr_key:volatile_scope
+    body_00:"// attr [T_dense] storage_scope = 'shared'"
+    body_01:"allocate T_dense[float32 * 1]"
+    body_02:" // attr [iter_var(blockIdx.x, , blockIdx.x)] thread_extent = 1000"
+    body_03:" // attr [iter_var(threadIdx.x, , threadIdx.x)] thread_extent = 64"
+    body_04:" T_dense.rf[0] = 0f"
+    body_05:"  for (k.outer, 0, 8)"
+    body_06:"   T_dense.rf[0] = (T_dense.rf[0] + (placeholder[((k.outer*64) + threadIdx.x)]*placeholder[(((blockIdx.x*512) + (k.outer*64)) + threadIdx.x)]))"
+    body_07:"    // attr [comm_reducer(result=[(x + y)], lhs=[x], rhs=[y], identity_element=[0f])] reduce_scope = tir.reinterpret((uint64)0)"
+    body_08:"    tir.tvm_storage_sync('shared')"
+    body_09:"     red_buf0[threadIdx.x] = T_dense.rf[0]"
+    value:"1"
+  }
+}
+layer {
+  name:"Node_112"
+  type:"allocate"
+  top:"Node_112"
+  bottom:"red_buf0"
+  bottom:"Node_111"
+  layer_param {
+    idx:112
+    dtype:float32
+    extents:"[1, 64]"
+    condition:"True"
+    body_00:"// attr [red_buf0] volatile_scope = 1"
+    body_01:"// attr [T_dense] storage_scope = 'shared'"
+    body_02:"allocate T_dense[float32 * 1]"
+    body_03:" // attr [iter_var(blockIdx.x, , blockIdx.x)] thread_extent = 1000"
+    body_04:" // attr [iter_var(threadIdx.x, , threadIdx.x)] thread_extent = 64"
+    body_05:" T_dense.rf[0] = 0f"
+    body_06:"  for (k.outer, 0, 8)"
+    body_07:"   T_dense.rf[0] = (T_dense.rf[0] + (placeholder[((k.outer*64) + threadIdx.x)]*placeholder[(((blockIdx.x*512) + (k.outer*64)) + threadIdx.x)]))"
+    body_08:"    // attr [comm_reducer(result=[(x + y)], lhs=[x], rhs=[y], identity_element=[0f])] reduce_scope = tir.reinterpret((uint64)0)"
+    body_09:"    tir.tvm_storage_sync('shared')"
+  }
+}
+layer {
+  name:"Node_113"
+  type:"attribute"
+  top:"Node_113"
+  bottom:"red_buf0"
+  bottom:"Node_112"
+  layer_param {
+    idx:113
+    attr_key:storage_scope
+    body_00:"allocate red_buf0[float32 * 1 * 64]"
+    body_01:" // attr [red_buf0] volatile_scope = 1"
+    body_02:" // attr [T_dense] storage_scope = 'shared'"
+    body_03:" allocate T_dense[float32 * 1]"
+    body_04:"  // attr [iter_var(blockIdx.x, , blockIdx.x)] thread_extent = 1000"
+    body_05:"  // attr [iter_var(threadIdx.x, , threadIdx.x)] thread_extent = 64"
+    body_06:"  T_dense.rf[0] = 0f"
+    body_07:"   for (k.outer, 0, 8)"
+    body_08:"    T_dense.rf[0] = (T_dense.rf[0] + (placeholder[((k.outer*64) + threadIdx.x)]*placeholder[(((blockIdx.x*512) + (k.outer*64)) + threadIdx.x)]))"
+    body_09:"     // attr [comm_reducer(result=[(x + y)], lhs=[x], rhs=[y], identity_element=[0f])] reduce_scope = tir.reinterpret((uint64)0)"
+    value:"'shared'"
+  }
+}
+layer {
+  name:"Node_114"
+  type:"allocate"
+  top:"Node_114"
+  bottom:"T_dense.rf"
+  bottom:"Node_113"
+  layer_param {
+    idx:114
+    dtype:float32
+    extents:"[1]"
+    condition:"True"
+    body_00:"// attr [red_buf0] storage_scope = 'shared'"
+    body_01:"allocate red_buf0[float32 * 1 * 64]"
+    body_02:" // attr [red_buf0] volatile_scope = 1"
+    body_03:" // attr [T_dense] storage_scope = 'shared'"
+    body_04:" allocate T_dense[float32 * 1]"
+    body_05:"  // attr [iter_var(blockIdx.x, , blockIdx.x)] thread_extent = 1000"
+    body_06:"  // attr [iter_var(threadIdx.x, , threadIdx.x)] thread_extent = 64"
+    body_07:"  T_dense.rf[0] = 0f"
+    body_08:"   for (k.outer, 0, 8)"
+    body_09:"    T_dense.rf[0] = (T_dense.rf[0] + (placeholder[((k.outer*64) + threadIdx.x)]*placeholder[(((blockIdx.x*512) + (k.outer*64)) + threadIdx.x)]))"
+  }
+}
+layer {
+  name:"Node_115"
+  type:"attribute"
+  top:"Node_115"
+  bottom:"T_dense.rf"
+  bottom:"Node_114"
+  layer_param {
+    idx:115
+    attr_key:storage_scope
+    body_00:"allocate T_dense.rf[float32 * 1]"
+    body_01:" // attr [red_buf0] storage_scope = 'shared'"
+    body_02:" allocate red_buf0[float32 * 1 * 64]"
+    body_03:"  // attr [red_buf0] volatile_scope = 1"
+    body_04:"  // attr [T_dense] storage_scope = 'shared'"
+    body_05:"  allocate T_dense[float32 * 1]"
+    body_06:"   // attr [iter_var(blockIdx.x, , blockIdx.x)] thread_extent = 1000"
+    body_07:"   // attr [iter_var(threadIdx.x, , threadIdx.x)] thread_extent = 64"
+    body_08:"   T_dense.rf[0] = 0f"
+    body_09:"    for (k.outer, 0, 8)"
+    value:"'local'"
+  }
+}
+layer {
+  name:"Node_116"
+  type:"attribute"
+  top:"Node_116"
+  bottom:"Node_1"
+  bottom:"Node_115"
+  layer_param {
+    idx:116
+    attr_key:thread_extent
+    body_00:"// attr [T_dense.rf] storage_scope = 'local'"
+    body_01:"allocate T_dense.rf[float32 * 1]"
+    body_02:" // attr [red_buf0] storage_scope = 'shared'"
+    body_03:" allocate red_buf0[float32 * 1 * 64]"
+    body_04:"  // attr [red_buf0] volatile_scope = 1"
+    body_05:"  // attr [T_dense] storage_scope = 'shared'"
+    body_06:"  allocate T_dense[float32 * 1]"
+    body_07:"   // attr [iter_var(blockIdx.x, , blockIdx.x)] thread_extent = 1000"
+    body_08:"   // attr [iter_var(threadIdx.x, , threadIdx.x)] thread_extent = 64"
+    body_09:"   T_dense.rf[0] = 0f"
+    value:"1"
+  }
+}
+layer {
+  name:"Node_117"
+  type:"primfunc"
+  top:"Node_117"
+  bottom:"Node_116"
+  layer_param {
+    idx:117
+    body_00:"// attr [iter_var(blockIdx.y, , blockIdx.y)] thread_extent = 1"
+    body_01:"// attr [T_dense.rf] storage_scope = 'local'"
+    body_02:"allocate T_dense.rf[float32 * 1]"
+    body_03:" // attr [red_buf0] storage_scope = 'shared'"
+    body_04:" allocate red_buf0[float32 * 1 * 64]"
+    body_05:"  // attr [red_buf0] volatile_scope = 1"
+    body_06:"  // attr [T_dense] storage_scope = 'shared'"
+    body_07:"  allocate T_dense[float32 * 1]"
+    body_08:"   // attr [iter_var(blockIdx.x, , blockIdx.x)] thread_extent = 1000"
+    body_09:"   // attr [iter_var(threadIdx.x, , threadIdx.x)] thread_extent = 64"
+  }
+}
