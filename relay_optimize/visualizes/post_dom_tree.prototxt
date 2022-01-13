@@ -1,0 +1,3470 @@
+name : "dependency"
+layer {  name:"Node_415"
+  top : "Node_415"
+  type : "Call_Op(add)[kOpaque]"
+  layer_param : {
+    depth : "1"
+  }
+}
+layer {  name:"Node_414"
+  top : "Node_414"
+  bottom : "Node_415"
+  type : "Constant[kBroadcast]"
+  layer_param : {
+    depth : "2"
+    tensor_type : "TensorType([1000], float32)"
+  }
+}
+layer {  name:"Node_413"
+  top : "Node_413"
+  bottom : "Node_415"
+  type : "Call_Op(nn.dense)[kElemWise]"
+  layer_param : {
+    depth : "2"
+  }
+}
+layer {  name:"Node_412"
+  top : "Node_412"
+  bottom : "Node_413"
+  type : "Call_Op(transpose)[kOutEWiseFusable]"
+  layer_param : {
+    depth : "3"
+  }
+}
+layer {  name:"Node_411"
+  top : "Node_411"
+  bottom : "Node_412"
+  type : "Call_Op(transpose)[kInjective]"
+  layer_param : {
+    depth : "4"
+  }
+}
+layer {  name:"Node_410"
+  top : "Node_410"
+  bottom : "Node_411"
+  type : "Constant[kInjective]"
+  layer_param : {
+    depth : "5"
+    tensor_type : "TensorType([1000, 512], float32)"
+  }
+}
+layer {  name:"Node_409"
+  top : "Node_409"
+  bottom : "Node_413"
+  type : "Call_Op(squeeze)[kOutEWiseFusable]"
+  layer_param : {
+    depth : "3"
+  }
+}
+layer {  name:"Node_408"
+  top : "Node_408"
+  bottom : "Node_409"
+  type : "Call_Op(reshape)[kInjective]"
+  layer_param : {
+    depth : "4"
+  }
+}
+layer {  name:"Node_407"
+  top : "Node_407"
+  bottom : "Node_408"
+  type : "Call_Op(nn.adaptive_avg_pool2d)[kInjective]"
+  layer_param : {
+    depth : "5"
+  }
+}
+layer {  name:"Node_406"
+  top : "Node_406"
+  bottom : "Node_407"
+  type : "Call_Op(nn.relu)[kOutEWiseFusable]"
+  layer_param : {
+    depth : "6"
+  }
+}
+layer {  name:"Node_405"
+  top : "Node_405"
+  bottom : "Node_406"
+  type : "Call_Op(add)[kElemWise]"
+  layer_param : {
+    depth : "7"
+  }
+}
+layer {  name:"Node_404"
+  top : "Node_404"
+  bottom : "Node_405"
+  type : "Call_Op(add)[kElemWise]"
+  layer_param : {
+    depth : "8"
+  }
+}
+layer {  name:"Node_403"
+  top : "Node_403"
+  bottom : "Node_404"
+  type : "Call_Op(expand_dims)[kBroadcast]"
+  layer_param : {
+    depth : "9"
+  }
+}
+layer {  name:"Node_402"
+  top : "Node_402"
+  bottom : "Node_403"
+  type : "Call_Op(add)[kBroadcast]"
+  layer_param : {
+    depth : "10"
+  }
+}
+layer {  name:"Node_401"
+  top : "Node_401"
+  bottom : "Node_402"
+  type : "Constant[kElemWise]"
+  layer_param : {
+    depth : "11"
+    tensor_type : "TensorType([512], float32)"
+  }
+}
+layer {  name:"Node_400"
+  top : "Node_400"
+  bottom : "Node_402"
+  type : "Call_Op(multiply)[kElemWise]"
+  layer_param : {
+    depth : "11"
+  }
+}
+layer {  name:"Node_399"
+  top : "Node_399"
+  bottom : "Node_400"
+  type : "Call_Op(negative)[kElemWise]"
+  layer_param : {
+    depth : "12"
+  }
+}
+layer {  name:"Node_398"
+  top : "Node_398"
+  bottom : "Node_399"
+  type : "Constant[kElemWise]"
+  layer_param : {
+    depth : "13"
+    tensor_type : "TensorType([512], float32)"
+  }
+}
+layer {  name:"Node_397"
+  top : "Node_397"
+  bottom : "Node_404"
+  type : "Call_Op(multiply)[kElemWise]"
+  layer_param : {
+    depth : "9"
+  }
+}
+layer {  name:"Node_396"
+  top : "Node_396"
+  bottom : "Node_397"
+  type : "Call_Op(expand_dims)[kBroadcast]"
+  layer_param : {
+    depth : "10"
+  }
+}
+layer {  name:"Node_395"
+  top : "Node_395"
+  bottom : "Node_404"
+  type : "Call_Op(multiply)[kBroadcast]"
+  layer_param : {
+    depth : "9"
+  }
+}
+layer {  name:"Node_394"
+  top : "Node_394"
+  bottom : "Node_395"
+  type : "Constant[kElemWise]"
+  layer_param : {
+    depth : "10"
+    tensor_type : "TensorType([512], float32)"
+  }
+}
+layer {  name:"Node_393"
+  top : "Node_393"
+  bottom : "Node_395"
+  type : "Call_Op(divide)[kElemWise]"
+  layer_param : {
+    depth : "10"
+  }
+}
+layer {  name:"Node_392"
+  top : "Node_392"
+  bottom : "Node_393"
+  type : "Call_Op(sqrt)[kElemWise]"
+  layer_param : {
+    depth : "11"
+  }
+}
+layer {  name:"Node_391"
+  top : "Node_391"
+  bottom : "Node_392"
+  type : "Call_Op(add)[kElemWise]"
+  layer_param : {
+    depth : "12"
+  }
+}
+layer {  name:"Node_390"
+  top : "Node_390"
+  bottom : "Node_391"
+  type : "Constant[kBroadcast]"
+  layer_param : {
+    depth : "13"
+    tensor_type : "TensorType([], float32)"
+  }
+}
+layer {  name:"Node_389"
+  top : "Node_389"
+  bottom : "Node_391"
+  type : "Constant[kElemWise]"
+  layer_param : {
+    depth : "13"
+    tensor_type : "TensorType([512], float32)"
+  }
+}
+layer {  name:"Node_388"
+  top : "Node_388"
+  bottom : "Node_393"
+  type : "Constant[kBroadcast]"
+  layer_param : {
+    depth : "11"
+    tensor_type : "TensorType([], float32)"
+  }
+}
+layer {  name:"Node_387"
+  top : "Node_387"
+  bottom : "Node_397"
+  type : "Call_Op(nn.conv2d)[kElemWise]"
+  layer_param : {
+    depth : "10"
+  }
+}
+layer {  name:"Node_386"
+  top : "Node_386"
+  bottom : "Node_387"
+  type : "Constant[kOutEWiseFusable]"
+  layer_param : {
+    depth : "11"
+    tensor_type : "TensorType([512, 512, 3, 3], float32)"
+  }
+}
+layer {  name:"Node_385"
+  top : "Node_385"
+  bottom : "Node_387"
+  type : "Call_Op(nn.relu)[kOutEWiseFusable]"
+  layer_param : {
+    depth : "11"
+  }
+}
+layer {  name:"Node_384"
+  top : "Node_384"
+  bottom : "Node_385"
+  type : "Call_Op(add)[kElemWise]"
+  layer_param : {
+    depth : "12"
+  }
+}
+layer {  name:"Node_383"
+  top : "Node_383"
+  bottom : "Node_384"
+  type : "Call_Op(expand_dims)[kBroadcast]"
+  layer_param : {
+    depth : "13"
+  }
+}
+layer {  name:"Node_382"
+  top : "Node_382"
+  bottom : "Node_383"
+  type : "Call_Op(add)[kBroadcast]"
+  layer_param : {
+    depth : "14"
+  }
+}
+layer {  name:"Node_381"
+  top : "Node_381"
+  bottom : "Node_382"
+  type : "Constant[kElemWise]"
+  layer_param : {
+    depth : "15"
+    tensor_type : "TensorType([512], float32)"
+  }
+}
+layer {  name:"Node_380"
+  top : "Node_380"
+  bottom : "Node_382"
+  type : "Call_Op(multiply)[kElemWise]"
+  layer_param : {
+    depth : "15"
+  }
+}
+layer {  name:"Node_379"
+  top : "Node_379"
+  bottom : "Node_380"
+  type : "Call_Op(negative)[kElemWise]"
+  layer_param : {
+    depth : "16"
+  }
+}
+layer {  name:"Node_378"
+  top : "Node_378"
+  bottom : "Node_379"
+  type : "Constant[kElemWise]"
+  layer_param : {
+    depth : "17"
+    tensor_type : "TensorType([512], float32)"
+  }
+}
+layer {  name:"Node_377"
+  top : "Node_377"
+  bottom : "Node_384"
+  type : "Call_Op(multiply)[kElemWise]"
+  layer_param : {
+    depth : "13"
+  }
+}
+layer {  name:"Node_376"
+  top : "Node_376"
+  bottom : "Node_377"
+  type : "Call_Op(expand_dims)[kBroadcast]"
+  layer_param : {
+    depth : "14"
+  }
+}
+layer {  name:"Node_375"
+  top : "Node_375"
+  bottom : "Node_384"
+  type : "Call_Op(multiply)[kBroadcast]"
+  layer_param : {
+    depth : "13"
+  }
+}
+layer {  name:"Node_374"
+  top : "Node_374"
+  bottom : "Node_375"
+  type : "Constant[kElemWise]"
+  layer_param : {
+    depth : "14"
+    tensor_type : "TensorType([512], float32)"
+  }
+}
+layer {  name:"Node_373"
+  top : "Node_373"
+  bottom : "Node_375"
+  type : "Call_Op(divide)[kElemWise]"
+  layer_param : {
+    depth : "14"
+  }
+}
+layer {  name:"Node_372"
+  top : "Node_372"
+  bottom : "Node_373"
+  type : "Call_Op(sqrt)[kElemWise]"
+  layer_param : {
+    depth : "15"
+  }
+}
+layer {  name:"Node_371"
+  top : "Node_371"
+  bottom : "Node_372"
+  type : "Call_Op(add)[kElemWise]"
+  layer_param : {
+    depth : "16"
+  }
+}
+layer {  name:"Node_370"
+  top : "Node_370"
+  bottom : "Node_371"
+  type : "Constant[kBroadcast]"
+  layer_param : {
+    depth : "17"
+    tensor_type : "TensorType([], float32)"
+  }
+}
+layer {  name:"Node_369"
+  top : "Node_369"
+  bottom : "Node_371"
+  type : "Constant[kElemWise]"
+  layer_param : {
+    depth : "17"
+    tensor_type : "TensorType([512], float32)"
+  }
+}
+layer {  name:"Node_368"
+  top : "Node_368"
+  bottom : "Node_373"
+  type : "Constant[kBroadcast]"
+  layer_param : {
+    depth : "15"
+    tensor_type : "TensorType([], float32)"
+  }
+}
+layer {  name:"Node_367"
+  top : "Node_367"
+  bottom : "Node_377"
+  type : "Call_Op(nn.conv2d)[kElemWise]"
+  layer_param : {
+    depth : "14"
+  }
+}
+layer {  name:"Node_366"
+  top : "Node_366"
+  bottom : "Node_367"
+  type : "Constant[kOutEWiseFusable]"
+  layer_param : {
+    depth : "15"
+    tensor_type : "TensorType([512, 512, 3, 3], float32)"
+  }
+}
+layer {  name:"Node_365"
+  top : "Node_365"
+  bottom : "Node_405"
+  type : "Call_Op(nn.relu)[kOutEWiseFusable]"
+  layer_param : {
+    depth : "8"
+  }
+}
+layer {  name:"Node_364"
+  top : "Node_364"
+  bottom : "Node_365"
+  type : "Call_Op(add)[kElemWise]"
+  layer_param : {
+    depth : "9"
+  }
+}
+layer {  name:"Node_363"
+  top : "Node_363"
+  bottom : "Node_364"
+  type : "Call_Op(add)[kElemWise]"
+  layer_param : {
+    depth : "10"
+  }
+}
+layer {  name:"Node_362"
+  top : "Node_362"
+  bottom : "Node_363"
+  type : "Call_Op(expand_dims)[kBroadcast]"
+  layer_param : {
+    depth : "11"
+  }
+}
+layer {  name:"Node_361"
+  top : "Node_361"
+  bottom : "Node_362"
+  type : "Call_Op(add)[kBroadcast]"
+  layer_param : {
+    depth : "12"
+  }
+}
+layer {  name:"Node_360"
+  top : "Node_360"
+  bottom : "Node_361"
+  type : "Constant[kElemWise]"
+  layer_param : {
+    depth : "13"
+    tensor_type : "TensorType([512], float32)"
+  }
+}
+layer {  name:"Node_359"
+  top : "Node_359"
+  bottom : "Node_361"
+  type : "Call_Op(multiply)[kElemWise]"
+  layer_param : {
+    depth : "13"
+  }
+}
+layer {  name:"Node_358"
+  top : "Node_358"
+  bottom : "Node_359"
+  type : "Call_Op(negative)[kElemWise]"
+  layer_param : {
+    depth : "14"
+  }
+}
+layer {  name:"Node_357"
+  top : "Node_357"
+  bottom : "Node_358"
+  type : "Constant[kElemWise]"
+  layer_param : {
+    depth : "15"
+    tensor_type : "TensorType([512], float32)"
+  }
+}
+layer {  name:"Node_356"
+  top : "Node_356"
+  bottom : "Node_363"
+  type : "Call_Op(multiply)[kElemWise]"
+  layer_param : {
+    depth : "11"
+  }
+}
+layer {  name:"Node_355"
+  top : "Node_355"
+  bottom : "Node_356"
+  type : "Call_Op(expand_dims)[kBroadcast]"
+  layer_param : {
+    depth : "12"
+  }
+}
+layer {  name:"Node_354"
+  top : "Node_354"
+  bottom : "Node_363"
+  type : "Call_Op(multiply)[kBroadcast]"
+  layer_param : {
+    depth : "11"
+  }
+}
+layer {  name:"Node_353"
+  top : "Node_353"
+  bottom : "Node_354"
+  type : "Constant[kElemWise]"
+  layer_param : {
+    depth : "12"
+    tensor_type : "TensorType([512], float32)"
+  }
+}
+layer {  name:"Node_352"
+  top : "Node_352"
+  bottom : "Node_354"
+  type : "Call_Op(divide)[kElemWise]"
+  layer_param : {
+    depth : "12"
+  }
+}
+layer {  name:"Node_351"
+  top : "Node_351"
+  bottom : "Node_352"
+  type : "Call_Op(sqrt)[kElemWise]"
+  layer_param : {
+    depth : "13"
+  }
+}
+layer {  name:"Node_350"
+  top : "Node_350"
+  bottom : "Node_351"
+  type : "Call_Op(add)[kElemWise]"
+  layer_param : {
+    depth : "14"
+  }
+}
+layer {  name:"Node_349"
+  top : "Node_349"
+  bottom : "Node_350"
+  type : "Constant[kBroadcast]"
+  layer_param : {
+    depth : "15"
+    tensor_type : "TensorType([], float32)"
+  }
+}
+layer {  name:"Node_348"
+  top : "Node_348"
+  bottom : "Node_350"
+  type : "Constant[kElemWise]"
+  layer_param : {
+    depth : "15"
+    tensor_type : "TensorType([512], float32)"
+  }
+}
+layer {  name:"Node_347"
+  top : "Node_347"
+  bottom : "Node_352"
+  type : "Constant[kBroadcast]"
+  layer_param : {
+    depth : "13"
+    tensor_type : "TensorType([], float32)"
+  }
+}
+layer {  name:"Node_346"
+  top : "Node_346"
+  bottom : "Node_356"
+  type : "Call_Op(nn.conv2d)[kElemWise]"
+  layer_param : {
+    depth : "12"
+  }
+}
+layer {  name:"Node_345"
+  top : "Node_345"
+  bottom : "Node_346"
+  type : "Constant[kOutEWiseFusable]"
+  layer_param : {
+    depth : "13"
+    tensor_type : "TensorType([512, 256, 1, 1], float32)"
+  }
+}
+layer {  name:"Node_344"
+  top : "Node_344"
+  bottom : "Node_364"
+  type : "Call_Op(add)[kElemWise]"
+  layer_param : {
+    depth : "10"
+  }
+}
+layer {  name:"Node_343"
+  top : "Node_343"
+  bottom : "Node_344"
+  type : "Call_Op(expand_dims)[kBroadcast]"
+  layer_param : {
+    depth : "11"
+  }
+}
+layer {  name:"Node_342"
+  top : "Node_342"
+  bottom : "Node_343"
+  type : "Call_Op(add)[kBroadcast]"
+  layer_param : {
+    depth : "12"
+  }
+}
+layer {  name:"Node_341"
+  top : "Node_341"
+  bottom : "Node_342"
+  type : "Constant[kElemWise]"
+  layer_param : {
+    depth : "13"
+    tensor_type : "TensorType([512], float32)"
+  }
+}
+layer {  name:"Node_340"
+  top : "Node_340"
+  bottom : "Node_342"
+  type : "Call_Op(multiply)[kElemWise]"
+  layer_param : {
+    depth : "13"
+  }
+}
+layer {  name:"Node_339"
+  top : "Node_339"
+  bottom : "Node_340"
+  type : "Call_Op(negative)[kElemWise]"
+  layer_param : {
+    depth : "14"
+  }
+}
+layer {  name:"Node_338"
+  top : "Node_338"
+  bottom : "Node_339"
+  type : "Constant[kElemWise]"
+  layer_param : {
+    depth : "15"
+    tensor_type : "TensorType([512], float32)"
+  }
+}
+layer {  name:"Node_337"
+  top : "Node_337"
+  bottom : "Node_344"
+  type : "Call_Op(multiply)[kElemWise]"
+  layer_param : {
+    depth : "11"
+  }
+}
+layer {  name:"Node_336"
+  top : "Node_336"
+  bottom : "Node_337"
+  type : "Call_Op(expand_dims)[kBroadcast]"
+  layer_param : {
+    depth : "12"
+  }
+}
+layer {  name:"Node_335"
+  top : "Node_335"
+  bottom : "Node_344"
+  type : "Call_Op(multiply)[kBroadcast]"
+  layer_param : {
+    depth : "11"
+  }
+}
+layer {  name:"Node_334"
+  top : "Node_334"
+  bottom : "Node_335"
+  type : "Constant[kElemWise]"
+  layer_param : {
+    depth : "12"
+    tensor_type : "TensorType([512], float32)"
+  }
+}
+layer {  name:"Node_333"
+  top : "Node_333"
+  bottom : "Node_335"
+  type : "Call_Op(divide)[kElemWise]"
+  layer_param : {
+    depth : "12"
+  }
+}
+layer {  name:"Node_332"
+  top : "Node_332"
+  bottom : "Node_333"
+  type : "Call_Op(sqrt)[kElemWise]"
+  layer_param : {
+    depth : "13"
+  }
+}
+layer {  name:"Node_331"
+  top : "Node_331"
+  bottom : "Node_332"
+  type : "Call_Op(add)[kElemWise]"
+  layer_param : {
+    depth : "14"
+  }
+}
+layer {  name:"Node_330"
+  top : "Node_330"
+  bottom : "Node_331"
+  type : "Constant[kBroadcast]"
+  layer_param : {
+    depth : "15"
+    tensor_type : "TensorType([], float32)"
+  }
+}
+layer {  name:"Node_329"
+  top : "Node_329"
+  bottom : "Node_331"
+  type : "Constant[kElemWise]"
+  layer_param : {
+    depth : "15"
+    tensor_type : "TensorType([512], float32)"
+  }
+}
+layer {  name:"Node_328"
+  top : "Node_328"
+  bottom : "Node_333"
+  type : "Constant[kBroadcast]"
+  layer_param : {
+    depth : "13"
+    tensor_type : "TensorType([], float32)"
+  }
+}
+layer {  name:"Node_327"
+  top : "Node_327"
+  bottom : "Node_337"
+  type : "Call_Op(nn.conv2d)[kElemWise]"
+  layer_param : {
+    depth : "12"
+  }
+}
+layer {  name:"Node_326"
+  top : "Node_326"
+  bottom : "Node_327"
+  type : "Constant[kOutEWiseFusable]"
+  layer_param : {
+    depth : "13"
+    tensor_type : "TensorType([512, 512, 3, 3], float32)"
+  }
+}
+layer {  name:"Node_325"
+  top : "Node_325"
+  bottom : "Node_327"
+  type : "Call_Op(nn.relu)[kOutEWiseFusable]"
+  layer_param : {
+    depth : "13"
+  }
+}
+layer {  name:"Node_324"
+  top : "Node_324"
+  bottom : "Node_325"
+  type : "Call_Op(add)[kElemWise]"
+  layer_param : {
+    depth : "14"
+  }
+}
+layer {  name:"Node_323"
+  top : "Node_323"
+  bottom : "Node_324"
+  type : "Call_Op(expand_dims)[kBroadcast]"
+  layer_param : {
+    depth : "15"
+  }
+}
+layer {  name:"Node_322"
+  top : "Node_322"
+  bottom : "Node_323"
+  type : "Call_Op(add)[kBroadcast]"
+  layer_param : {
+    depth : "16"
+  }
+}
+layer {  name:"Node_321"
+  top : "Node_321"
+  bottom : "Node_322"
+  type : "Constant[kElemWise]"
+  layer_param : {
+    depth : "17"
+    tensor_type : "TensorType([512], float32)"
+  }
+}
+layer {  name:"Node_320"
+  top : "Node_320"
+  bottom : "Node_322"
+  type : "Call_Op(multiply)[kElemWise]"
+  layer_param : {
+    depth : "17"
+  }
+}
+layer {  name:"Node_319"
+  top : "Node_319"
+  bottom : "Node_320"
+  type : "Call_Op(negative)[kElemWise]"
+  layer_param : {
+    depth : "18"
+  }
+}
+layer {  name:"Node_318"
+  top : "Node_318"
+  bottom : "Node_319"
+  type : "Constant[kElemWise]"
+  layer_param : {
+    depth : "19"
+    tensor_type : "TensorType([512], float32)"
+  }
+}
+layer {  name:"Node_317"
+  top : "Node_317"
+  bottom : "Node_324"
+  type : "Call_Op(multiply)[kElemWise]"
+  layer_param : {
+    depth : "15"
+  }
+}
+layer {  name:"Node_316"
+  top : "Node_316"
+  bottom : "Node_317"
+  type : "Call_Op(expand_dims)[kBroadcast]"
+  layer_param : {
+    depth : "16"
+  }
+}
+layer {  name:"Node_315"
+  top : "Node_315"
+  bottom : "Node_324"
+  type : "Call_Op(multiply)[kBroadcast]"
+  layer_param : {
+    depth : "15"
+  }
+}
+layer {  name:"Node_314"
+  top : "Node_314"
+  bottom : "Node_315"
+  type : "Constant[kElemWise]"
+  layer_param : {
+    depth : "16"
+    tensor_type : "TensorType([512], float32)"
+  }
+}
+layer {  name:"Node_313"
+  top : "Node_313"
+  bottom : "Node_315"
+  type : "Call_Op(divide)[kElemWise]"
+  layer_param : {
+    depth : "16"
+  }
+}
+layer {  name:"Node_312"
+  top : "Node_312"
+  bottom : "Node_313"
+  type : "Call_Op(sqrt)[kElemWise]"
+  layer_param : {
+    depth : "17"
+  }
+}
+layer {  name:"Node_311"
+  top : "Node_311"
+  bottom : "Node_312"
+  type : "Call_Op(add)[kElemWise]"
+  layer_param : {
+    depth : "18"
+  }
+}
+layer {  name:"Node_310"
+  top : "Node_310"
+  bottom : "Node_311"
+  type : "Constant[kBroadcast]"
+  layer_param : {
+    depth : "19"
+    tensor_type : "TensorType([], float32)"
+  }
+}
+layer {  name:"Node_309"
+  top : "Node_309"
+  bottom : "Node_311"
+  type : "Constant[kElemWise]"
+  layer_param : {
+    depth : "19"
+    tensor_type : "TensorType([512], float32)"
+  }
+}
+layer {  name:"Node_308"
+  top : "Node_308"
+  bottom : "Node_313"
+  type : "Constant[kBroadcast]"
+  layer_param : {
+    depth : "17"
+    tensor_type : "TensorType([], float32)"
+  }
+}
+layer {  name:"Node_307"
+  top : "Node_307"
+  bottom : "Node_317"
+  type : "Call_Op(nn.conv2d)[kElemWise]"
+  layer_param : {
+    depth : "16"
+  }
+}
+layer {  name:"Node_306"
+  top : "Node_306"
+  bottom : "Node_307"
+  type : "Constant[kOutEWiseFusable]"
+  layer_param : {
+    depth : "17"
+    tensor_type : "TensorType([512, 256, 3, 3], float32)"
+  }
+}
+layer {  name:"Node_305"
+  top : "Node_305"
+  bottom : "Node_364"
+  type : "Call_Op(nn.relu)[kOutEWiseFusable]"
+  layer_param : {
+    depth : "10"
+  }
+}
+layer {  name:"Node_304"
+  top : "Node_304"
+  bottom : "Node_305"
+  type : "Call_Op(add)[kElemWise]"
+  layer_param : {
+    depth : "11"
+  }
+}
+layer {  name:"Node_303"
+  top : "Node_303"
+  bottom : "Node_304"
+  type : "Call_Op(add)[kElemWise]"
+  layer_param : {
+    depth : "12"
+  }
+}
+layer {  name:"Node_302"
+  top : "Node_302"
+  bottom : "Node_303"
+  type : "Call_Op(expand_dims)[kBroadcast]"
+  layer_param : {
+    depth : "13"
+  }
+}
+layer {  name:"Node_301"
+  top : "Node_301"
+  bottom : "Node_302"
+  type : "Call_Op(add)[kBroadcast]"
+  layer_param : {
+    depth : "14"
+  }
+}
+layer {  name:"Node_300"
+  top : "Node_300"
+  bottom : "Node_301"
+  type : "Constant[kElemWise]"
+  layer_param : {
+    depth : "15"
+    tensor_type : "TensorType([256], float32)"
+  }
+}
+layer {  name:"Node_299"
+  top : "Node_299"
+  bottom : "Node_301"
+  type : "Call_Op(multiply)[kElemWise]"
+  layer_param : {
+    depth : "15"
+  }
+}
+layer {  name:"Node_298"
+  top : "Node_298"
+  bottom : "Node_299"
+  type : "Call_Op(negative)[kElemWise]"
+  layer_param : {
+    depth : "16"
+  }
+}
+layer {  name:"Node_297"
+  top : "Node_297"
+  bottom : "Node_298"
+  type : "Constant[kElemWise]"
+  layer_param : {
+    depth : "17"
+    tensor_type : "TensorType([256], float32)"
+  }
+}
+layer {  name:"Node_296"
+  top : "Node_296"
+  bottom : "Node_303"
+  type : "Call_Op(multiply)[kElemWise]"
+  layer_param : {
+    depth : "13"
+  }
+}
+layer {  name:"Node_295"
+  top : "Node_295"
+  bottom : "Node_296"
+  type : "Call_Op(expand_dims)[kBroadcast]"
+  layer_param : {
+    depth : "14"
+  }
+}
+layer {  name:"Node_294"
+  top : "Node_294"
+  bottom : "Node_303"
+  type : "Call_Op(multiply)[kBroadcast]"
+  layer_param : {
+    depth : "13"
+  }
+}
+layer {  name:"Node_293"
+  top : "Node_293"
+  bottom : "Node_294"
+  type : "Constant[kElemWise]"
+  layer_param : {
+    depth : "14"
+    tensor_type : "TensorType([256], float32)"
+  }
+}
+layer {  name:"Node_292"
+  top : "Node_292"
+  bottom : "Node_294"
+  type : "Call_Op(divide)[kElemWise]"
+  layer_param : {
+    depth : "14"
+  }
+}
+layer {  name:"Node_291"
+  top : "Node_291"
+  bottom : "Node_292"
+  type : "Call_Op(sqrt)[kElemWise]"
+  layer_param : {
+    depth : "15"
+  }
+}
+layer {  name:"Node_290"
+  top : "Node_290"
+  bottom : "Node_291"
+  type : "Call_Op(add)[kElemWise]"
+  layer_param : {
+    depth : "16"
+  }
+}
+layer {  name:"Node_289"
+  top : "Node_289"
+  bottom : "Node_290"
+  type : "Constant[kBroadcast]"
+  layer_param : {
+    depth : "17"
+    tensor_type : "TensorType([], float32)"
+  }
+}
+layer {  name:"Node_288"
+  top : "Node_288"
+  bottom : "Node_290"
+  type : "Constant[kElemWise]"
+  layer_param : {
+    depth : "17"
+    tensor_type : "TensorType([256], float32)"
+  }
+}
+layer {  name:"Node_287"
+  top : "Node_287"
+  bottom : "Node_292"
+  type : "Constant[kBroadcast]"
+  layer_param : {
+    depth : "15"
+    tensor_type : "TensorType([], float32)"
+  }
+}
+layer {  name:"Node_286"
+  top : "Node_286"
+  bottom : "Node_296"
+  type : "Call_Op(nn.conv2d)[kElemWise]"
+  layer_param : {
+    depth : "14"
+  }
+}
+layer {  name:"Node_285"
+  top : "Node_285"
+  bottom : "Node_286"
+  type : "Constant[kOutEWiseFusable]"
+  layer_param : {
+    depth : "15"
+    tensor_type : "TensorType([256, 256, 3, 3], float32)"
+  }
+}
+layer {  name:"Node_284"
+  top : "Node_284"
+  bottom : "Node_286"
+  type : "Call_Op(nn.relu)[kOutEWiseFusable]"
+  layer_param : {
+    depth : "15"
+  }
+}
+layer {  name:"Node_283"
+  top : "Node_283"
+  bottom : "Node_284"
+  type : "Call_Op(add)[kElemWise]"
+  layer_param : {
+    depth : "16"
+  }
+}
+layer {  name:"Node_282"
+  top : "Node_282"
+  bottom : "Node_283"
+  type : "Call_Op(expand_dims)[kBroadcast]"
+  layer_param : {
+    depth : "17"
+  }
+}
+layer {  name:"Node_281"
+  top : "Node_281"
+  bottom : "Node_282"
+  type : "Call_Op(add)[kBroadcast]"
+  layer_param : {
+    depth : "18"
+  }
+}
+layer {  name:"Node_280"
+  top : "Node_280"
+  bottom : "Node_281"
+  type : "Constant[kElemWise]"
+  layer_param : {
+    depth : "19"
+    tensor_type : "TensorType([256], float32)"
+  }
+}
+layer {  name:"Node_279"
+  top : "Node_279"
+  bottom : "Node_281"
+  type : "Call_Op(multiply)[kElemWise]"
+  layer_param : {
+    depth : "19"
+  }
+}
+layer {  name:"Node_278"
+  top : "Node_278"
+  bottom : "Node_279"
+  type : "Call_Op(negative)[kElemWise]"
+  layer_param : {
+    depth : "20"
+  }
+}
+layer {  name:"Node_277"
+  top : "Node_277"
+  bottom : "Node_278"
+  type : "Constant[kElemWise]"
+  layer_param : {
+    depth : "21"
+    tensor_type : "TensorType([256], float32)"
+  }
+}
+layer {  name:"Node_276"
+  top : "Node_276"
+  bottom : "Node_283"
+  type : "Call_Op(multiply)[kElemWise]"
+  layer_param : {
+    depth : "17"
+  }
+}
+layer {  name:"Node_275"
+  top : "Node_275"
+  bottom : "Node_276"
+  type : "Call_Op(expand_dims)[kBroadcast]"
+  layer_param : {
+    depth : "18"
+  }
+}
+layer {  name:"Node_274"
+  top : "Node_274"
+  bottom : "Node_283"
+  type : "Call_Op(multiply)[kBroadcast]"
+  layer_param : {
+    depth : "17"
+  }
+}
+layer {  name:"Node_273"
+  top : "Node_273"
+  bottom : "Node_274"
+  type : "Constant[kElemWise]"
+  layer_param : {
+    depth : "18"
+    tensor_type : "TensorType([256], float32)"
+  }
+}
+layer {  name:"Node_272"
+  top : "Node_272"
+  bottom : "Node_274"
+  type : "Call_Op(divide)[kElemWise]"
+  layer_param : {
+    depth : "18"
+  }
+}
+layer {  name:"Node_271"
+  top : "Node_271"
+  bottom : "Node_272"
+  type : "Call_Op(sqrt)[kElemWise]"
+  layer_param : {
+    depth : "19"
+  }
+}
+layer {  name:"Node_270"
+  top : "Node_270"
+  bottom : "Node_271"
+  type : "Call_Op(add)[kElemWise]"
+  layer_param : {
+    depth : "20"
+  }
+}
+layer {  name:"Node_269"
+  top : "Node_269"
+  bottom : "Node_270"
+  type : "Constant[kBroadcast]"
+  layer_param : {
+    depth : "21"
+    tensor_type : "TensorType([], float32)"
+  }
+}
+layer {  name:"Node_268"
+  top : "Node_268"
+  bottom : "Node_270"
+  type : "Constant[kElemWise]"
+  layer_param : {
+    depth : "21"
+    tensor_type : "TensorType([256], float32)"
+  }
+}
+layer {  name:"Node_267"
+  top : "Node_267"
+  bottom : "Node_272"
+  type : "Constant[kBroadcast]"
+  layer_param : {
+    depth : "19"
+    tensor_type : "TensorType([], float32)"
+  }
+}
+layer {  name:"Node_266"
+  top : "Node_266"
+  bottom : "Node_276"
+  type : "Call_Op(nn.conv2d)[kElemWise]"
+  layer_param : {
+    depth : "18"
+  }
+}
+layer {  name:"Node_265"
+  top : "Node_265"
+  bottom : "Node_266"
+  type : "Constant[kOutEWiseFusable]"
+  layer_param : {
+    depth : "19"
+    tensor_type : "TensorType([256, 256, 3, 3], float32)"
+  }
+}
+layer {  name:"Node_264"
+  top : "Node_264"
+  bottom : "Node_304"
+  type : "Call_Op(nn.relu)[kOutEWiseFusable]"
+  layer_param : {
+    depth : "12"
+  }
+}
+layer {  name:"Node_263"
+  top : "Node_263"
+  bottom : "Node_264"
+  type : "Call_Op(add)[kElemWise]"
+  layer_param : {
+    depth : "13"
+  }
+}
+layer {  name:"Node_262"
+  top : "Node_262"
+  bottom : "Node_263"
+  type : "Call_Op(add)[kElemWise]"
+  layer_param : {
+    depth : "14"
+  }
+}
+layer {  name:"Node_261"
+  top : "Node_261"
+  bottom : "Node_262"
+  type : "Call_Op(expand_dims)[kBroadcast]"
+  layer_param : {
+    depth : "15"
+  }
+}
+layer {  name:"Node_260"
+  top : "Node_260"
+  bottom : "Node_261"
+  type : "Call_Op(add)[kBroadcast]"
+  layer_param : {
+    depth : "16"
+  }
+}
+layer {  name:"Node_259"
+  top : "Node_259"
+  bottom : "Node_260"
+  type : "Constant[kElemWise]"
+  layer_param : {
+    depth : "17"
+    tensor_type : "TensorType([256], float32)"
+  }
+}
+layer {  name:"Node_258"
+  top : "Node_258"
+  bottom : "Node_260"
+  type : "Call_Op(multiply)[kElemWise]"
+  layer_param : {
+    depth : "17"
+  }
+}
+layer {  name:"Node_257"
+  top : "Node_257"
+  bottom : "Node_258"
+  type : "Call_Op(negative)[kElemWise]"
+  layer_param : {
+    depth : "18"
+  }
+}
+layer {  name:"Node_256"
+  top : "Node_256"
+  bottom : "Node_257"
+  type : "Constant[kElemWise]"
+  layer_param : {
+    depth : "19"
+    tensor_type : "TensorType([256], float32)"
+  }
+}
+layer {  name:"Node_255"
+  top : "Node_255"
+  bottom : "Node_262"
+  type : "Call_Op(multiply)[kElemWise]"
+  layer_param : {
+    depth : "15"
+  }
+}
+layer {  name:"Node_254"
+  top : "Node_254"
+  bottom : "Node_255"
+  type : "Call_Op(expand_dims)[kBroadcast]"
+  layer_param : {
+    depth : "16"
+  }
+}
+layer {  name:"Node_253"
+  top : "Node_253"
+  bottom : "Node_262"
+  type : "Call_Op(multiply)[kBroadcast]"
+  layer_param : {
+    depth : "15"
+  }
+}
+layer {  name:"Node_252"
+  top : "Node_252"
+  bottom : "Node_253"
+  type : "Constant[kElemWise]"
+  layer_param : {
+    depth : "16"
+    tensor_type : "TensorType([256], float32)"
+  }
+}
+layer {  name:"Node_251"
+  top : "Node_251"
+  bottom : "Node_253"
+  type : "Call_Op(divide)[kElemWise]"
+  layer_param : {
+    depth : "16"
+  }
+}
+layer {  name:"Node_250"
+  top : "Node_250"
+  bottom : "Node_251"
+  type : "Call_Op(sqrt)[kElemWise]"
+  layer_param : {
+    depth : "17"
+  }
+}
+layer {  name:"Node_249"
+  top : "Node_249"
+  bottom : "Node_250"
+  type : "Call_Op(add)[kElemWise]"
+  layer_param : {
+    depth : "18"
+  }
+}
+layer {  name:"Node_248"
+  top : "Node_248"
+  bottom : "Node_249"
+  type : "Constant[kBroadcast]"
+  layer_param : {
+    depth : "19"
+    tensor_type : "TensorType([], float32)"
+  }
+}
+layer {  name:"Node_247"
+  top : "Node_247"
+  bottom : "Node_249"
+  type : "Constant[kElemWise]"
+  layer_param : {
+    depth : "19"
+    tensor_type : "TensorType([256], float32)"
+  }
+}
+layer {  name:"Node_246"
+  top : "Node_246"
+  bottom : "Node_251"
+  type : "Constant[kBroadcast]"
+  layer_param : {
+    depth : "17"
+    tensor_type : "TensorType([], float32)"
+  }
+}
+layer {  name:"Node_245"
+  top : "Node_245"
+  bottom : "Node_255"
+  type : "Call_Op(nn.conv2d)[kElemWise]"
+  layer_param : {
+    depth : "16"
+  }
+}
+layer {  name:"Node_244"
+  top : "Node_244"
+  bottom : "Node_245"
+  type : "Constant[kOutEWiseFusable]"
+  layer_param : {
+    depth : "17"
+    tensor_type : "TensorType([256, 128, 1, 1], float32)"
+  }
+}
+layer {  name:"Node_243"
+  top : "Node_243"
+  bottom : "Node_263"
+  type : "Call_Op(add)[kElemWise]"
+  layer_param : {
+    depth : "14"
+  }
+}
+layer {  name:"Node_242"
+  top : "Node_242"
+  bottom : "Node_243"
+  type : "Call_Op(expand_dims)[kBroadcast]"
+  layer_param : {
+    depth : "15"
+  }
+}
+layer {  name:"Node_241"
+  top : "Node_241"
+  bottom : "Node_242"
+  type : "Call_Op(add)[kBroadcast]"
+  layer_param : {
+    depth : "16"
+  }
+}
+layer {  name:"Node_240"
+  top : "Node_240"
+  bottom : "Node_241"
+  type : "Constant[kElemWise]"
+  layer_param : {
+    depth : "17"
+    tensor_type : "TensorType([256], float32)"
+  }
+}
+layer {  name:"Node_239"
+  top : "Node_239"
+  bottom : "Node_241"
+  type : "Call_Op(multiply)[kElemWise]"
+  layer_param : {
+    depth : "17"
+  }
+}
+layer {  name:"Node_238"
+  top : "Node_238"
+  bottom : "Node_239"
+  type : "Call_Op(negative)[kElemWise]"
+  layer_param : {
+    depth : "18"
+  }
+}
+layer {  name:"Node_237"
+  top : "Node_237"
+  bottom : "Node_238"
+  type : "Constant[kElemWise]"
+  layer_param : {
+    depth : "19"
+    tensor_type : "TensorType([256], float32)"
+  }
+}
+layer {  name:"Node_236"
+  top : "Node_236"
+  bottom : "Node_243"
+  type : "Call_Op(multiply)[kElemWise]"
+  layer_param : {
+    depth : "15"
+  }
+}
+layer {  name:"Node_235"
+  top : "Node_235"
+  bottom : "Node_236"
+  type : "Call_Op(expand_dims)[kBroadcast]"
+  layer_param : {
+    depth : "16"
+  }
+}
+layer {  name:"Node_234"
+  top : "Node_234"
+  bottom : "Node_243"
+  type : "Call_Op(multiply)[kBroadcast]"
+  layer_param : {
+    depth : "15"
+  }
+}
+layer {  name:"Node_233"
+  top : "Node_233"
+  bottom : "Node_234"
+  type : "Constant[kElemWise]"
+  layer_param : {
+    depth : "16"
+    tensor_type : "TensorType([256], float32)"
+  }
+}
+layer {  name:"Node_232"
+  top : "Node_232"
+  bottom : "Node_234"
+  type : "Call_Op(divide)[kElemWise]"
+  layer_param : {
+    depth : "16"
+  }
+}
+layer {  name:"Node_231"
+  top : "Node_231"
+  bottom : "Node_232"
+  type : "Call_Op(sqrt)[kElemWise]"
+  layer_param : {
+    depth : "17"
+  }
+}
+layer {  name:"Node_230"
+  top : "Node_230"
+  bottom : "Node_231"
+  type : "Call_Op(add)[kElemWise]"
+  layer_param : {
+    depth : "18"
+  }
+}
+layer {  name:"Node_229"
+  top : "Node_229"
+  bottom : "Node_230"
+  type : "Constant[kBroadcast]"
+  layer_param : {
+    depth : "19"
+    tensor_type : "TensorType([], float32)"
+  }
+}
+layer {  name:"Node_228"
+  top : "Node_228"
+  bottom : "Node_230"
+  type : "Constant[kElemWise]"
+  layer_param : {
+    depth : "19"
+    tensor_type : "TensorType([256], float32)"
+  }
+}
+layer {  name:"Node_227"
+  top : "Node_227"
+  bottom : "Node_232"
+  type : "Constant[kBroadcast]"
+  layer_param : {
+    depth : "17"
+    tensor_type : "TensorType([], float32)"
+  }
+}
+layer {  name:"Node_226"
+  top : "Node_226"
+  bottom : "Node_236"
+  type : "Call_Op(nn.conv2d)[kElemWise]"
+  layer_param : {
+    depth : "16"
+  }
+}
+layer {  name:"Node_225"
+  top : "Node_225"
+  bottom : "Node_226"
+  type : "Constant[kOutEWiseFusable]"
+  layer_param : {
+    depth : "17"
+    tensor_type : "TensorType([256, 256, 3, 3], float32)"
+  }
+}
+layer {  name:"Node_224"
+  top : "Node_224"
+  bottom : "Node_226"
+  type : "Call_Op(nn.relu)[kOutEWiseFusable]"
+  layer_param : {
+    depth : "17"
+  }
+}
+layer {  name:"Node_223"
+  top : "Node_223"
+  bottom : "Node_224"
+  type : "Call_Op(add)[kElemWise]"
+  layer_param : {
+    depth : "18"
+  }
+}
+layer {  name:"Node_222"
+  top : "Node_222"
+  bottom : "Node_223"
+  type : "Call_Op(expand_dims)[kBroadcast]"
+  layer_param : {
+    depth : "19"
+  }
+}
+layer {  name:"Node_221"
+  top : "Node_221"
+  bottom : "Node_222"
+  type : "Call_Op(add)[kBroadcast]"
+  layer_param : {
+    depth : "20"
+  }
+}
+layer {  name:"Node_220"
+  top : "Node_220"
+  bottom : "Node_221"
+  type : "Constant[kElemWise]"
+  layer_param : {
+    depth : "21"
+    tensor_type : "TensorType([256], float32)"
+  }
+}
+layer {  name:"Node_219"
+  top : "Node_219"
+  bottom : "Node_221"
+  type : "Call_Op(multiply)[kElemWise]"
+  layer_param : {
+    depth : "21"
+  }
+}
+layer {  name:"Node_218"
+  top : "Node_218"
+  bottom : "Node_219"
+  type : "Call_Op(negative)[kElemWise]"
+  layer_param : {
+    depth : "22"
+  }
+}
+layer {  name:"Node_217"
+  top : "Node_217"
+  bottom : "Node_218"
+  type : "Constant[kElemWise]"
+  layer_param : {
+    depth : "23"
+    tensor_type : "TensorType([256], float32)"
+  }
+}
+layer {  name:"Node_216"
+  top : "Node_216"
+  bottom : "Node_223"
+  type : "Call_Op(multiply)[kElemWise]"
+  layer_param : {
+    depth : "19"
+  }
+}
+layer {  name:"Node_215"
+  top : "Node_215"
+  bottom : "Node_216"
+  type : "Call_Op(expand_dims)[kBroadcast]"
+  layer_param : {
+    depth : "20"
+  }
+}
+layer {  name:"Node_214"
+  top : "Node_214"
+  bottom : "Node_223"
+  type : "Call_Op(multiply)[kBroadcast]"
+  layer_param : {
+    depth : "19"
+  }
+}
+layer {  name:"Node_213"
+  top : "Node_213"
+  bottom : "Node_214"
+  type : "Constant[kElemWise]"
+  layer_param : {
+    depth : "20"
+    tensor_type : "TensorType([256], float32)"
+  }
+}
+layer {  name:"Node_212"
+  top : "Node_212"
+  bottom : "Node_214"
+  type : "Call_Op(divide)[kElemWise]"
+  layer_param : {
+    depth : "20"
+  }
+}
+layer {  name:"Node_211"
+  top : "Node_211"
+  bottom : "Node_212"
+  type : "Call_Op(sqrt)[kElemWise]"
+  layer_param : {
+    depth : "21"
+  }
+}
+layer {  name:"Node_210"
+  top : "Node_210"
+  bottom : "Node_211"
+  type : "Call_Op(add)[kElemWise]"
+  layer_param : {
+    depth : "22"
+  }
+}
+layer {  name:"Node_209"
+  top : "Node_209"
+  bottom : "Node_210"
+  type : "Constant[kBroadcast]"
+  layer_param : {
+    depth : "23"
+    tensor_type : "TensorType([], float32)"
+  }
+}
+layer {  name:"Node_208"
+  top : "Node_208"
+  bottom : "Node_210"
+  type : "Constant[kElemWise]"
+  layer_param : {
+    depth : "23"
+    tensor_type : "TensorType([256], float32)"
+  }
+}
+layer {  name:"Node_207"
+  top : "Node_207"
+  bottom : "Node_212"
+  type : "Constant[kBroadcast]"
+  layer_param : {
+    depth : "21"
+    tensor_type : "TensorType([], float32)"
+  }
+}
+layer {  name:"Node_206"
+  top : "Node_206"
+  bottom : "Node_216"
+  type : "Call_Op(nn.conv2d)[kElemWise]"
+  layer_param : {
+    depth : "20"
+  }
+}
+layer {  name:"Node_205"
+  top : "Node_205"
+  bottom : "Node_206"
+  type : "Constant[kOutEWiseFusable]"
+  layer_param : {
+    depth : "21"
+    tensor_type : "TensorType([256, 128, 3, 3], float32)"
+  }
+}
+layer {  name:"Node_204"
+  top : "Node_204"
+  bottom : "Node_263"
+  type : "Call_Op(nn.relu)[kOutEWiseFusable]"
+  layer_param : {
+    depth : "14"
+  }
+}
+layer {  name:"Node_203"
+  top : "Node_203"
+  bottom : "Node_204"
+  type : "Call_Op(add)[kElemWise]"
+  layer_param : {
+    depth : "15"
+  }
+}
+layer {  name:"Node_202"
+  top : "Node_202"
+  bottom : "Node_203"
+  type : "Call_Op(add)[kElemWise]"
+  layer_param : {
+    depth : "16"
+  }
+}
+layer {  name:"Node_201"
+  top : "Node_201"
+  bottom : "Node_202"
+  type : "Call_Op(expand_dims)[kBroadcast]"
+  layer_param : {
+    depth : "17"
+  }
+}
+layer {  name:"Node_200"
+  top : "Node_200"
+  bottom : "Node_201"
+  type : "Call_Op(add)[kBroadcast]"
+  layer_param : {
+    depth : "18"
+  }
+}
+layer {  name:"Node_199"
+  top : "Node_199"
+  bottom : "Node_200"
+  type : "Constant[kElemWise]"
+  layer_param : {
+    depth : "19"
+    tensor_type : "TensorType([128], float32)"
+  }
+}
+layer {  name:"Node_198"
+  top : "Node_198"
+  bottom : "Node_200"
+  type : "Call_Op(multiply)[kElemWise]"
+  layer_param : {
+    depth : "19"
+  }
+}
+layer {  name:"Node_197"
+  top : "Node_197"
+  bottom : "Node_198"
+  type : "Call_Op(negative)[kElemWise]"
+  layer_param : {
+    depth : "20"
+  }
+}
+layer {  name:"Node_196"
+  top : "Node_196"
+  bottom : "Node_197"
+  type : "Constant[kElemWise]"
+  layer_param : {
+    depth : "21"
+    tensor_type : "TensorType([128], float32)"
+  }
+}
+layer {  name:"Node_195"
+  top : "Node_195"
+  bottom : "Node_202"
+  type : "Call_Op(multiply)[kElemWise]"
+  layer_param : {
+    depth : "17"
+  }
+}
+layer {  name:"Node_194"
+  top : "Node_194"
+  bottom : "Node_195"
+  type : "Call_Op(expand_dims)[kBroadcast]"
+  layer_param : {
+    depth : "18"
+  }
+}
+layer {  name:"Node_193"
+  top : "Node_193"
+  bottom : "Node_202"
+  type : "Call_Op(multiply)[kBroadcast]"
+  layer_param : {
+    depth : "17"
+  }
+}
+layer {  name:"Node_192"
+  top : "Node_192"
+  bottom : "Node_193"
+  type : "Constant[kElemWise]"
+  layer_param : {
+    depth : "18"
+    tensor_type : "TensorType([128], float32)"
+  }
+}
+layer {  name:"Node_191"
+  top : "Node_191"
+  bottom : "Node_193"
+  type : "Call_Op(divide)[kElemWise]"
+  layer_param : {
+    depth : "18"
+  }
+}
+layer {  name:"Node_190"
+  top : "Node_190"
+  bottom : "Node_191"
+  type : "Call_Op(sqrt)[kElemWise]"
+  layer_param : {
+    depth : "19"
+  }
+}
+layer {  name:"Node_189"
+  top : "Node_189"
+  bottom : "Node_190"
+  type : "Call_Op(add)[kElemWise]"
+  layer_param : {
+    depth : "20"
+  }
+}
+layer {  name:"Node_188"
+  top : "Node_188"
+  bottom : "Node_189"
+  type : "Constant[kBroadcast]"
+  layer_param : {
+    depth : "21"
+    tensor_type : "TensorType([], float32)"
+  }
+}
+layer {  name:"Node_187"
+  top : "Node_187"
+  bottom : "Node_189"
+  type : "Constant[kElemWise]"
+  layer_param : {
+    depth : "21"
+    tensor_type : "TensorType([128], float32)"
+  }
+}
+layer {  name:"Node_186"
+  top : "Node_186"
+  bottom : "Node_191"
+  type : "Constant[kBroadcast]"
+  layer_param : {
+    depth : "19"
+    tensor_type : "TensorType([], float32)"
+  }
+}
+layer {  name:"Node_185"
+  top : "Node_185"
+  bottom : "Node_195"
+  type : "Call_Op(nn.conv2d)[kElemWise]"
+  layer_param : {
+    depth : "18"
+  }
+}
+layer {  name:"Node_184"
+  top : "Node_184"
+  bottom : "Node_185"
+  type : "Constant[kOutEWiseFusable]"
+  layer_param : {
+    depth : "19"
+    tensor_type : "TensorType([128, 128, 3, 3], float32)"
+  }
+}
+layer {  name:"Node_183"
+  top : "Node_183"
+  bottom : "Node_185"
+  type : "Call_Op(nn.relu)[kOutEWiseFusable]"
+  layer_param : {
+    depth : "19"
+  }
+}
+layer {  name:"Node_182"
+  top : "Node_182"
+  bottom : "Node_183"
+  type : "Call_Op(add)[kElemWise]"
+  layer_param : {
+    depth : "20"
+  }
+}
+layer {  name:"Node_181"
+  top : "Node_181"
+  bottom : "Node_182"
+  type : "Call_Op(expand_dims)[kBroadcast]"
+  layer_param : {
+    depth : "21"
+  }
+}
+layer {  name:"Node_180"
+  top : "Node_180"
+  bottom : "Node_181"
+  type : "Call_Op(add)[kBroadcast]"
+  layer_param : {
+    depth : "22"
+  }
+}
+layer {  name:"Node_179"
+  top : "Node_179"
+  bottom : "Node_180"
+  type : "Constant[kElemWise]"
+  layer_param : {
+    depth : "23"
+    tensor_type : "TensorType([128], float32)"
+  }
+}
+layer {  name:"Node_178"
+  top : "Node_178"
+  bottom : "Node_180"
+  type : "Call_Op(multiply)[kElemWise]"
+  layer_param : {
+    depth : "23"
+  }
+}
+layer {  name:"Node_177"
+  top : "Node_177"
+  bottom : "Node_178"
+  type : "Call_Op(negative)[kElemWise]"
+  layer_param : {
+    depth : "24"
+  }
+}
+layer {  name:"Node_176"
+  top : "Node_176"
+  bottom : "Node_177"
+  type : "Constant[kElemWise]"
+  layer_param : {
+    depth : "25"
+    tensor_type : "TensorType([128], float32)"
+  }
+}
+layer {  name:"Node_175"
+  top : "Node_175"
+  bottom : "Node_182"
+  type : "Call_Op(multiply)[kElemWise]"
+  layer_param : {
+    depth : "21"
+  }
+}
+layer {  name:"Node_174"
+  top : "Node_174"
+  bottom : "Node_175"
+  type : "Call_Op(expand_dims)[kBroadcast]"
+  layer_param : {
+    depth : "22"
+  }
+}
+layer {  name:"Node_173"
+  top : "Node_173"
+  bottom : "Node_182"
+  type : "Call_Op(multiply)[kBroadcast]"
+  layer_param : {
+    depth : "21"
+  }
+}
+layer {  name:"Node_172"
+  top : "Node_172"
+  bottom : "Node_173"
+  type : "Constant[kElemWise]"
+  layer_param : {
+    depth : "22"
+    tensor_type : "TensorType([128], float32)"
+  }
+}
+layer {  name:"Node_171"
+  top : "Node_171"
+  bottom : "Node_173"
+  type : "Call_Op(divide)[kElemWise]"
+  layer_param : {
+    depth : "22"
+  }
+}
+layer {  name:"Node_170"
+  top : "Node_170"
+  bottom : "Node_171"
+  type : "Call_Op(sqrt)[kElemWise]"
+  layer_param : {
+    depth : "23"
+  }
+}
+layer {  name:"Node_169"
+  top : "Node_169"
+  bottom : "Node_170"
+  type : "Call_Op(add)[kElemWise]"
+  layer_param : {
+    depth : "24"
+  }
+}
+layer {  name:"Node_168"
+  top : "Node_168"
+  bottom : "Node_169"
+  type : "Constant[kBroadcast]"
+  layer_param : {
+    depth : "25"
+    tensor_type : "TensorType([], float32)"
+  }
+}
+layer {  name:"Node_167"
+  top : "Node_167"
+  bottom : "Node_169"
+  type : "Constant[kElemWise]"
+  layer_param : {
+    depth : "25"
+    tensor_type : "TensorType([128], float32)"
+  }
+}
+layer {  name:"Node_166"
+  top : "Node_166"
+  bottom : "Node_171"
+  type : "Constant[kBroadcast]"
+  layer_param : {
+    depth : "23"
+    tensor_type : "TensorType([], float32)"
+  }
+}
+layer {  name:"Node_165"
+  top : "Node_165"
+  bottom : "Node_175"
+  type : "Call_Op(nn.conv2d)[kElemWise]"
+  layer_param : {
+    depth : "22"
+  }
+}
+layer {  name:"Node_164"
+  top : "Node_164"
+  bottom : "Node_165"
+  type : "Constant[kOutEWiseFusable]"
+  layer_param : {
+    depth : "23"
+    tensor_type : "TensorType([128, 128, 3, 3], float32)"
+  }
+}
+layer {  name:"Node_163"
+  top : "Node_163"
+  bottom : "Node_203"
+  type : "Call_Op(nn.relu)[kOutEWiseFusable]"
+  layer_param : {
+    depth : "16"
+  }
+}
+layer {  name:"Node_162"
+  top : "Node_162"
+  bottom : "Node_163"
+  type : "Call_Op(add)[kElemWise]"
+  layer_param : {
+    depth : "17"
+  }
+}
+layer {  name:"Node_161"
+  top : "Node_161"
+  bottom : "Node_162"
+  type : "Call_Op(add)[kElemWise]"
+  layer_param : {
+    depth : "18"
+  }
+}
+layer {  name:"Node_160"
+  top : "Node_160"
+  bottom : "Node_161"
+  type : "Call_Op(expand_dims)[kBroadcast]"
+  layer_param : {
+    depth : "19"
+  }
+}
+layer {  name:"Node_159"
+  top : "Node_159"
+  bottom : "Node_160"
+  type : "Call_Op(add)[kBroadcast]"
+  layer_param : {
+    depth : "20"
+  }
+}
+layer {  name:"Node_158"
+  top : "Node_158"
+  bottom : "Node_159"
+  type : "Constant[kElemWise]"
+  layer_param : {
+    depth : "21"
+    tensor_type : "TensorType([128], float32)"
+  }
+}
+layer {  name:"Node_157"
+  top : "Node_157"
+  bottom : "Node_159"
+  type : "Call_Op(multiply)[kElemWise]"
+  layer_param : {
+    depth : "21"
+  }
+}
+layer {  name:"Node_156"
+  top : "Node_156"
+  bottom : "Node_157"
+  type : "Call_Op(negative)[kElemWise]"
+  layer_param : {
+    depth : "22"
+  }
+}
+layer {  name:"Node_155"
+  top : "Node_155"
+  bottom : "Node_156"
+  type : "Constant[kElemWise]"
+  layer_param : {
+    depth : "23"
+    tensor_type : "TensorType([128], float32)"
+  }
+}
+layer {  name:"Node_154"
+  top : "Node_154"
+  bottom : "Node_161"
+  type : "Call_Op(multiply)[kElemWise]"
+  layer_param : {
+    depth : "19"
+  }
+}
+layer {  name:"Node_153"
+  top : "Node_153"
+  bottom : "Node_154"
+  type : "Call_Op(expand_dims)[kBroadcast]"
+  layer_param : {
+    depth : "20"
+  }
+}
+layer {  name:"Node_152"
+  top : "Node_152"
+  bottom : "Node_161"
+  type : "Call_Op(multiply)[kBroadcast]"
+  layer_param : {
+    depth : "19"
+  }
+}
+layer {  name:"Node_151"
+  top : "Node_151"
+  bottom : "Node_152"
+  type : "Constant[kElemWise]"
+  layer_param : {
+    depth : "20"
+    tensor_type : "TensorType([128], float32)"
+  }
+}
+layer {  name:"Node_150"
+  top : "Node_150"
+  bottom : "Node_152"
+  type : "Call_Op(divide)[kElemWise]"
+  layer_param : {
+    depth : "20"
+  }
+}
+layer {  name:"Node_149"
+  top : "Node_149"
+  bottom : "Node_150"
+  type : "Call_Op(sqrt)[kElemWise]"
+  layer_param : {
+    depth : "21"
+  }
+}
+layer {  name:"Node_148"
+  top : "Node_148"
+  bottom : "Node_149"
+  type : "Call_Op(add)[kElemWise]"
+  layer_param : {
+    depth : "22"
+  }
+}
+layer {  name:"Node_147"
+  top : "Node_147"
+  bottom : "Node_148"
+  type : "Constant[kBroadcast]"
+  layer_param : {
+    depth : "23"
+    tensor_type : "TensorType([], float32)"
+  }
+}
+layer {  name:"Node_146"
+  top : "Node_146"
+  bottom : "Node_148"
+  type : "Constant[kElemWise]"
+  layer_param : {
+    depth : "23"
+    tensor_type : "TensorType([128], float32)"
+  }
+}
+layer {  name:"Node_145"
+  top : "Node_145"
+  bottom : "Node_150"
+  type : "Constant[kBroadcast]"
+  layer_param : {
+    depth : "21"
+    tensor_type : "TensorType([], float32)"
+  }
+}
+layer {  name:"Node_144"
+  top : "Node_144"
+  bottom : "Node_154"
+  type : "Call_Op(nn.conv2d)[kElemWise]"
+  layer_param : {
+    depth : "20"
+  }
+}
+layer {  name:"Node_143"
+  top : "Node_143"
+  bottom : "Node_144"
+  type : "Constant[kOutEWiseFusable]"
+  layer_param : {
+    depth : "21"
+    tensor_type : "TensorType([128, 64, 1, 1], float32)"
+  }
+}
+layer {  name:"Node_142"
+  top : "Node_142"
+  bottom : "Node_162"
+  type : "Call_Op(add)[kElemWise]"
+  layer_param : {
+    depth : "18"
+  }
+}
+layer {  name:"Node_141"
+  top : "Node_141"
+  bottom : "Node_142"
+  type : "Call_Op(expand_dims)[kBroadcast]"
+  layer_param : {
+    depth : "19"
+  }
+}
+layer {  name:"Node_140"
+  top : "Node_140"
+  bottom : "Node_141"
+  type : "Call_Op(add)[kBroadcast]"
+  layer_param : {
+    depth : "20"
+  }
+}
+layer {  name:"Node_139"
+  top : "Node_139"
+  bottom : "Node_140"
+  type : "Constant[kElemWise]"
+  layer_param : {
+    depth : "21"
+    tensor_type : "TensorType([128], float32)"
+  }
+}
+layer {  name:"Node_138"
+  top : "Node_138"
+  bottom : "Node_140"
+  type : "Call_Op(multiply)[kElemWise]"
+  layer_param : {
+    depth : "21"
+  }
+}
+layer {  name:"Node_137"
+  top : "Node_137"
+  bottom : "Node_138"
+  type : "Call_Op(negative)[kElemWise]"
+  layer_param : {
+    depth : "22"
+  }
+}
+layer {  name:"Node_136"
+  top : "Node_136"
+  bottom : "Node_137"
+  type : "Constant[kElemWise]"
+  layer_param : {
+    depth : "23"
+    tensor_type : "TensorType([128], float32)"
+  }
+}
+layer {  name:"Node_135"
+  top : "Node_135"
+  bottom : "Node_142"
+  type : "Call_Op(multiply)[kElemWise]"
+  layer_param : {
+    depth : "19"
+  }
+}
+layer {  name:"Node_134"
+  top : "Node_134"
+  bottom : "Node_135"
+  type : "Call_Op(expand_dims)[kBroadcast]"
+  layer_param : {
+    depth : "20"
+  }
+}
+layer {  name:"Node_133"
+  top : "Node_133"
+  bottom : "Node_142"
+  type : "Call_Op(multiply)[kBroadcast]"
+  layer_param : {
+    depth : "19"
+  }
+}
+layer {  name:"Node_132"
+  top : "Node_132"
+  bottom : "Node_133"
+  type : "Constant[kElemWise]"
+  layer_param : {
+    depth : "20"
+    tensor_type : "TensorType([128], float32)"
+  }
+}
+layer {  name:"Node_131"
+  top : "Node_131"
+  bottom : "Node_133"
+  type : "Call_Op(divide)[kElemWise]"
+  layer_param : {
+    depth : "20"
+  }
+}
+layer {  name:"Node_130"
+  top : "Node_130"
+  bottom : "Node_131"
+  type : "Call_Op(sqrt)[kElemWise]"
+  layer_param : {
+    depth : "21"
+  }
+}
+layer {  name:"Node_129"
+  top : "Node_129"
+  bottom : "Node_130"
+  type : "Call_Op(add)[kElemWise]"
+  layer_param : {
+    depth : "22"
+  }
+}
+layer {  name:"Node_128"
+  top : "Node_128"
+  bottom : "Node_129"
+  type : "Constant[kBroadcast]"
+  layer_param : {
+    depth : "23"
+    tensor_type : "TensorType([], float32)"
+  }
+}
+layer {  name:"Node_127"
+  top : "Node_127"
+  bottom : "Node_129"
+  type : "Constant[kElemWise]"
+  layer_param : {
+    depth : "23"
+    tensor_type : "TensorType([128], float32)"
+  }
+}
+layer {  name:"Node_126"
+  top : "Node_126"
+  bottom : "Node_131"
+  type : "Constant[kBroadcast]"
+  layer_param : {
+    depth : "21"
+    tensor_type : "TensorType([], float32)"
+  }
+}
+layer {  name:"Node_125"
+  top : "Node_125"
+  bottom : "Node_135"
+  type : "Call_Op(nn.conv2d)[kElemWise]"
+  layer_param : {
+    depth : "20"
+  }
+}
+layer {  name:"Node_124"
+  top : "Node_124"
+  bottom : "Node_125"
+  type : "Constant[kOutEWiseFusable]"
+  layer_param : {
+    depth : "21"
+    tensor_type : "TensorType([128, 128, 3, 3], float32)"
+  }
+}
+layer {  name:"Node_123"
+  top : "Node_123"
+  bottom : "Node_125"
+  type : "Call_Op(nn.relu)[kOutEWiseFusable]"
+  layer_param : {
+    depth : "21"
+  }
+}
+layer {  name:"Node_122"
+  top : "Node_122"
+  bottom : "Node_123"
+  type : "Call_Op(add)[kElemWise]"
+  layer_param : {
+    depth : "22"
+  }
+}
+layer {  name:"Node_121"
+  top : "Node_121"
+  bottom : "Node_122"
+  type : "Call_Op(expand_dims)[kBroadcast]"
+  layer_param : {
+    depth : "23"
+  }
+}
+layer {  name:"Node_120"
+  top : "Node_120"
+  bottom : "Node_121"
+  type : "Call_Op(add)[kBroadcast]"
+  layer_param : {
+    depth : "24"
+  }
+}
+layer {  name:"Node_119"
+  top : "Node_119"
+  bottom : "Node_120"
+  type : "Constant[kElemWise]"
+  layer_param : {
+    depth : "25"
+    tensor_type : "TensorType([128], float32)"
+  }
+}
+layer {  name:"Node_118"
+  top : "Node_118"
+  bottom : "Node_120"
+  type : "Call_Op(multiply)[kElemWise]"
+  layer_param : {
+    depth : "25"
+  }
+}
+layer {  name:"Node_117"
+  top : "Node_117"
+  bottom : "Node_118"
+  type : "Call_Op(negative)[kElemWise]"
+  layer_param : {
+    depth : "26"
+  }
+}
+layer {  name:"Node_116"
+  top : "Node_116"
+  bottom : "Node_117"
+  type : "Constant[kElemWise]"
+  layer_param : {
+    depth : "27"
+    tensor_type : "TensorType([128], float32)"
+  }
+}
+layer {  name:"Node_115"
+  top : "Node_115"
+  bottom : "Node_122"
+  type : "Call_Op(multiply)[kElemWise]"
+  layer_param : {
+    depth : "23"
+  }
+}
+layer {  name:"Node_114"
+  top : "Node_114"
+  bottom : "Node_115"
+  type : "Call_Op(expand_dims)[kBroadcast]"
+  layer_param : {
+    depth : "24"
+  }
+}
+layer {  name:"Node_113"
+  top : "Node_113"
+  bottom : "Node_122"
+  type : "Call_Op(multiply)[kBroadcast]"
+  layer_param : {
+    depth : "23"
+  }
+}
+layer {  name:"Node_112"
+  top : "Node_112"
+  bottom : "Node_113"
+  type : "Constant[kElemWise]"
+  layer_param : {
+    depth : "24"
+    tensor_type : "TensorType([128], float32)"
+  }
+}
+layer {  name:"Node_111"
+  top : "Node_111"
+  bottom : "Node_113"
+  type : "Call_Op(divide)[kElemWise]"
+  layer_param : {
+    depth : "24"
+  }
+}
+layer {  name:"Node_110"
+  top : "Node_110"
+  bottom : "Node_111"
+  type : "Call_Op(sqrt)[kElemWise]"
+  layer_param : {
+    depth : "25"
+  }
+}
+layer {  name:"Node_109"
+  top : "Node_109"
+  bottom : "Node_110"
+  type : "Call_Op(add)[kElemWise]"
+  layer_param : {
+    depth : "26"
+  }
+}
+layer {  name:"Node_108"
+  top : "Node_108"
+  bottom : "Node_109"
+  type : "Constant[kBroadcast]"
+  layer_param : {
+    depth : "27"
+    tensor_type : "TensorType([], float32)"
+  }
+}
+layer {  name:"Node_107"
+  top : "Node_107"
+  bottom : "Node_109"
+  type : "Constant[kElemWise]"
+  layer_param : {
+    depth : "27"
+    tensor_type : "TensorType([128], float32)"
+  }
+}
+layer {  name:"Node_106"
+  top : "Node_106"
+  bottom : "Node_111"
+  type : "Constant[kBroadcast]"
+  layer_param : {
+    depth : "25"
+    tensor_type : "TensorType([], float32)"
+  }
+}
+layer {  name:"Node_105"
+  top : "Node_105"
+  bottom : "Node_115"
+  type : "Call_Op(nn.conv2d)[kElemWise]"
+  layer_param : {
+    depth : "24"
+  }
+}
+layer {  name:"Node_104"
+  top : "Node_104"
+  bottom : "Node_105"
+  type : "Constant[kOutEWiseFusable]"
+  layer_param : {
+    depth : "25"
+    tensor_type : "TensorType([128, 64, 3, 3], float32)"
+  }
+}
+layer {  name:"Node_103"
+  top : "Node_103"
+  bottom : "Node_162"
+  type : "Call_Op(nn.relu)[kOutEWiseFusable]"
+  layer_param : {
+    depth : "18"
+  }
+}
+layer {  name:"Node_102"
+  top : "Node_102"
+  bottom : "Node_103"
+  type : "Call_Op(add)[kElemWise]"
+  layer_param : {
+    depth : "19"
+  }
+}
+layer {  name:"Node_101"
+  top : "Node_101"
+  bottom : "Node_102"
+  type : "Call_Op(add)[kElemWise]"
+  layer_param : {
+    depth : "20"
+  }
+}
+layer {  name:"Node_100"
+  top : "Node_100"
+  bottom : "Node_101"
+  type : "Call_Op(expand_dims)[kBroadcast]"
+  layer_param : {
+    depth : "21"
+  }
+}
+layer {  name:"Node_99"
+  top : "Node_99"
+  bottom : "Node_100"
+  type : "Call_Op(add)[kBroadcast]"
+  layer_param : {
+    depth : "22"
+  }
+}
+layer {  name:"Node_98"
+  top : "Node_98"
+  bottom : "Node_99"
+  type : "Constant[kElemWise]"
+  layer_param : {
+    depth : "23"
+    tensor_type : "TensorType([64], float32)"
+  }
+}
+layer {  name:"Node_97"
+  top : "Node_97"
+  bottom : "Node_99"
+  type : "Call_Op(multiply)[kElemWise]"
+  layer_param : {
+    depth : "23"
+  }
+}
+layer {  name:"Node_96"
+  top : "Node_96"
+  bottom : "Node_97"
+  type : "Call_Op(negative)[kElemWise]"
+  layer_param : {
+    depth : "24"
+  }
+}
+layer {  name:"Node_95"
+  top : "Node_95"
+  bottom : "Node_96"
+  type : "Constant[kElemWise]"
+  layer_param : {
+    depth : "25"
+    tensor_type : "TensorType([64], float32)"
+  }
+}
+layer {  name:"Node_94"
+  top : "Node_94"
+  bottom : "Node_101"
+  type : "Call_Op(multiply)[kElemWise]"
+  layer_param : {
+    depth : "21"
+  }
+}
+layer {  name:"Node_93"
+  top : "Node_93"
+  bottom : "Node_94"
+  type : "Call_Op(expand_dims)[kBroadcast]"
+  layer_param : {
+    depth : "22"
+  }
+}
+layer {  name:"Node_92"
+  top : "Node_92"
+  bottom : "Node_101"
+  type : "Call_Op(multiply)[kBroadcast]"
+  layer_param : {
+    depth : "21"
+  }
+}
+layer {  name:"Node_91"
+  top : "Node_91"
+  bottom : "Node_92"
+  type : "Constant[kElemWise]"
+  layer_param : {
+    depth : "22"
+    tensor_type : "TensorType([64], float32)"
+  }
+}
+layer {  name:"Node_90"
+  top : "Node_90"
+  bottom : "Node_92"
+  type : "Call_Op(divide)[kElemWise]"
+  layer_param : {
+    depth : "22"
+  }
+}
+layer {  name:"Node_89"
+  top : "Node_89"
+  bottom : "Node_90"
+  type : "Call_Op(sqrt)[kElemWise]"
+  layer_param : {
+    depth : "23"
+  }
+}
+layer {  name:"Node_88"
+  top : "Node_88"
+  bottom : "Node_89"
+  type : "Call_Op(add)[kElemWise]"
+  layer_param : {
+    depth : "24"
+  }
+}
+layer {  name:"Node_87"
+  top : "Node_87"
+  bottom : "Node_88"
+  type : "Constant[kBroadcast]"
+  layer_param : {
+    depth : "25"
+    tensor_type : "TensorType([], float32)"
+  }
+}
+layer {  name:"Node_86"
+  top : "Node_86"
+  bottom : "Node_88"
+  type : "Constant[kElemWise]"
+  layer_param : {
+    depth : "25"
+    tensor_type : "TensorType([64], float32)"
+  }
+}
+layer {  name:"Node_85"
+  top : "Node_85"
+  bottom : "Node_90"
+  type : "Constant[kBroadcast]"
+  layer_param : {
+    depth : "23"
+    tensor_type : "TensorType([], float32)"
+  }
+}
+layer {  name:"Node_84"
+  top : "Node_84"
+  bottom : "Node_94"
+  type : "Call_Op(nn.conv2d)[kElemWise]"
+  layer_param : {
+    depth : "22"
+  }
+}
+layer {  name:"Node_83"
+  top : "Node_83"
+  bottom : "Node_84"
+  type : "Constant[kOutEWiseFusable]"
+  layer_param : {
+    depth : "23"
+    tensor_type : "TensorType([64, 64, 3, 3], float32)"
+  }
+}
+layer {  name:"Node_82"
+  top : "Node_82"
+  bottom : "Node_84"
+  type : "Call_Op(nn.relu)[kOutEWiseFusable]"
+  layer_param : {
+    depth : "23"
+  }
+}
+layer {  name:"Node_81"
+  top : "Node_81"
+  bottom : "Node_82"
+  type : "Call_Op(add)[kElemWise]"
+  layer_param : {
+    depth : "24"
+  }
+}
+layer {  name:"Node_80"
+  top : "Node_80"
+  bottom : "Node_81"
+  type : "Call_Op(expand_dims)[kBroadcast]"
+  layer_param : {
+    depth : "25"
+  }
+}
+layer {  name:"Node_79"
+  top : "Node_79"
+  bottom : "Node_80"
+  type : "Call_Op(add)[kBroadcast]"
+  layer_param : {
+    depth : "26"
+  }
+}
+layer {  name:"Node_78"
+  top : "Node_78"
+  bottom : "Node_79"
+  type : "Constant[kElemWise]"
+  layer_param : {
+    depth : "27"
+    tensor_type : "TensorType([64], float32)"
+  }
+}
+layer {  name:"Node_77"
+  top : "Node_77"
+  bottom : "Node_79"
+  type : "Call_Op(multiply)[kElemWise]"
+  layer_param : {
+    depth : "27"
+  }
+}
+layer {  name:"Node_76"
+  top : "Node_76"
+  bottom : "Node_77"
+  type : "Call_Op(negative)[kElemWise]"
+  layer_param : {
+    depth : "28"
+  }
+}
+layer {  name:"Node_75"
+  top : "Node_75"
+  bottom : "Node_76"
+  type : "Constant[kElemWise]"
+  layer_param : {
+    depth : "29"
+    tensor_type : "TensorType([64], float32)"
+  }
+}
+layer {  name:"Node_74"
+  top : "Node_74"
+  bottom : "Node_81"
+  type : "Call_Op(multiply)[kElemWise]"
+  layer_param : {
+    depth : "25"
+  }
+}
+layer {  name:"Node_73"
+  top : "Node_73"
+  bottom : "Node_74"
+  type : "Call_Op(expand_dims)[kBroadcast]"
+  layer_param : {
+    depth : "26"
+  }
+}
+layer {  name:"Node_72"
+  top : "Node_72"
+  bottom : "Node_81"
+  type : "Call_Op(multiply)[kBroadcast]"
+  layer_param : {
+    depth : "25"
+  }
+}
+layer {  name:"Node_71"
+  top : "Node_71"
+  bottom : "Node_72"
+  type : "Constant[kElemWise]"
+  layer_param : {
+    depth : "26"
+    tensor_type : "TensorType([64], float32)"
+  }
+}
+layer {  name:"Node_70"
+  top : "Node_70"
+  bottom : "Node_72"
+  type : "Call_Op(divide)[kElemWise]"
+  layer_param : {
+    depth : "26"
+  }
+}
+layer {  name:"Node_69"
+  top : "Node_69"
+  bottom : "Node_70"
+  type : "Call_Op(sqrt)[kElemWise]"
+  layer_param : {
+    depth : "27"
+  }
+}
+layer {  name:"Node_68"
+  top : "Node_68"
+  bottom : "Node_69"
+  type : "Call_Op(add)[kElemWise]"
+  layer_param : {
+    depth : "28"
+  }
+}
+layer {  name:"Node_67"
+  top : "Node_67"
+  bottom : "Node_68"
+  type : "Constant[kBroadcast]"
+  layer_param : {
+    depth : "29"
+    tensor_type : "TensorType([], float32)"
+  }
+}
+layer {  name:"Node_66"
+  top : "Node_66"
+  bottom : "Node_68"
+  type : "Constant[kElemWise]"
+  layer_param : {
+    depth : "29"
+    tensor_type : "TensorType([64], float32)"
+  }
+}
+layer {  name:"Node_65"
+  top : "Node_65"
+  bottom : "Node_70"
+  type : "Constant[kBroadcast]"
+  layer_param : {
+    depth : "27"
+    tensor_type : "TensorType([], float32)"
+  }
+}
+layer {  name:"Node_64"
+  top : "Node_64"
+  bottom : "Node_74"
+  type : "Call_Op(nn.conv2d)[kElemWise]"
+  layer_param : {
+    depth : "26"
+  }
+}
+layer {  name:"Node_63"
+  top : "Node_63"
+  bottom : "Node_64"
+  type : "Constant[kOutEWiseFusable]"
+  layer_param : {
+    depth : "27"
+    tensor_type : "TensorType([64, 64, 3, 3], float32)"
+  }
+}
+layer {  name:"Node_62"
+  top : "Node_62"
+  bottom : "Node_102"
+  type : "Call_Op(nn.relu)[kOutEWiseFusable]"
+  layer_param : {
+    depth : "20"
+  }
+}
+layer {  name:"Node_61"
+  top : "Node_61"
+  bottom : "Node_62"
+  type : "Call_Op(add)[kElemWise]"
+  layer_param : {
+    depth : "21"
+  }
+}
+layer {  name:"Node_60"
+  top : "Node_60"
+  bottom : "Node_61"
+  type : "Call_Op(add)[kElemWise]"
+  layer_param : {
+    depth : "22"
+  }
+}
+layer {  name:"Node_59"
+  top : "Node_59"
+  bottom : "Node_60"
+  type : "Call_Op(expand_dims)[kBroadcast]"
+  layer_param : {
+    depth : "23"
+  }
+}
+layer {  name:"Node_58"
+  top : "Node_58"
+  bottom : "Node_59"
+  type : "Call_Op(add)[kBroadcast]"
+  layer_param : {
+    depth : "24"
+  }
+}
+layer {  name:"Node_57"
+  top : "Node_57"
+  bottom : "Node_58"
+  type : "Constant[kElemWise]"
+  layer_param : {
+    depth : "25"
+    tensor_type : "TensorType([64], float32)"
+  }
+}
+layer {  name:"Node_56"
+  top : "Node_56"
+  bottom : "Node_58"
+  type : "Call_Op(multiply)[kElemWise]"
+  layer_param : {
+    depth : "25"
+  }
+}
+layer {  name:"Node_55"
+  top : "Node_55"
+  bottom : "Node_56"
+  type : "Call_Op(negative)[kElemWise]"
+  layer_param : {
+    depth : "26"
+  }
+}
+layer {  name:"Node_54"
+  top : "Node_54"
+  bottom : "Node_55"
+  type : "Constant[kElemWise]"
+  layer_param : {
+    depth : "27"
+    tensor_type : "TensorType([64], float32)"
+  }
+}
+layer {  name:"Node_53"
+  top : "Node_53"
+  bottom : "Node_60"
+  type : "Call_Op(multiply)[kElemWise]"
+  layer_param : {
+    depth : "23"
+  }
+}
+layer {  name:"Node_52"
+  top : "Node_52"
+  bottom : "Node_53"
+  type : "Call_Op(expand_dims)[kBroadcast]"
+  layer_param : {
+    depth : "24"
+  }
+}
+layer {  name:"Node_51"
+  top : "Node_51"
+  bottom : "Node_60"
+  type : "Call_Op(multiply)[kBroadcast]"
+  layer_param : {
+    depth : "23"
+  }
+}
+layer {  name:"Node_50"
+  top : "Node_50"
+  bottom : "Node_51"
+  type : "Constant[kElemWise]"
+  layer_param : {
+    depth : "24"
+    tensor_type : "TensorType([64], float32)"
+  }
+}
+layer {  name:"Node_49"
+  top : "Node_49"
+  bottom : "Node_51"
+  type : "Call_Op(divide)[kElemWise]"
+  layer_param : {
+    depth : "24"
+  }
+}
+layer {  name:"Node_48"
+  top : "Node_48"
+  bottom : "Node_49"
+  type : "Call_Op(sqrt)[kElemWise]"
+  layer_param : {
+    depth : "25"
+  }
+}
+layer {  name:"Node_47"
+  top : "Node_47"
+  bottom : "Node_48"
+  type : "Call_Op(add)[kElemWise]"
+  layer_param : {
+    depth : "26"
+  }
+}
+layer {  name:"Node_46"
+  top : "Node_46"
+  bottom : "Node_47"
+  type : "Constant[kBroadcast]"
+  layer_param : {
+    depth : "27"
+    tensor_type : "TensorType([], float32)"
+  }
+}
+layer {  name:"Node_45"
+  top : "Node_45"
+  bottom : "Node_47"
+  type : "Constant[kElemWise]"
+  layer_param : {
+    depth : "27"
+    tensor_type : "TensorType([64], float32)"
+  }
+}
+layer {  name:"Node_44"
+  top : "Node_44"
+  bottom : "Node_49"
+  type : "Constant[kBroadcast]"
+  layer_param : {
+    depth : "25"
+    tensor_type : "TensorType([], float32)"
+  }
+}
+layer {  name:"Node_43"
+  top : "Node_43"
+  bottom : "Node_53"
+  type : "Call_Op(nn.conv2d)[kElemWise]"
+  layer_param : {
+    depth : "24"
+  }
+}
+layer {  name:"Node_42"
+  top : "Node_42"
+  bottom : "Node_43"
+  type : "Constant[kOutEWiseFusable]"
+  layer_param : {
+    depth : "25"
+    tensor_type : "TensorType([64, 64, 3, 3], float32)"
+  }
+}
+layer {  name:"Node_41"
+  top : "Node_41"
+  bottom : "Node_43"
+  type : "Call_Op(nn.relu)[kOutEWiseFusable]"
+  layer_param : {
+    depth : "25"
+  }
+}
+layer {  name:"Node_40"
+  top : "Node_40"
+  bottom : "Node_41"
+  type : "Call_Op(add)[kElemWise]"
+  layer_param : {
+    depth : "26"
+  }
+}
+layer {  name:"Node_39"
+  top : "Node_39"
+  bottom : "Node_40"
+  type : "Call_Op(expand_dims)[kBroadcast]"
+  layer_param : {
+    depth : "27"
+  }
+}
+layer {  name:"Node_38"
+  top : "Node_38"
+  bottom : "Node_39"
+  type : "Call_Op(add)[kBroadcast]"
+  layer_param : {
+    depth : "28"
+  }
+}
+layer {  name:"Node_37"
+  top : "Node_37"
+  bottom : "Node_38"
+  type : "Constant[kElemWise]"
+  layer_param : {
+    depth : "29"
+    tensor_type : "TensorType([64], float32)"
+  }
+}
+layer {  name:"Node_36"
+  top : "Node_36"
+  bottom : "Node_38"
+  type : "Call_Op(multiply)[kElemWise]"
+  layer_param : {
+    depth : "29"
+  }
+}
+layer {  name:"Node_35"
+  top : "Node_35"
+  bottom : "Node_36"
+  type : "Call_Op(negative)[kElemWise]"
+  layer_param : {
+    depth : "30"
+  }
+}
+layer {  name:"Node_34"
+  top : "Node_34"
+  bottom : "Node_35"
+  type : "Constant[kElemWise]"
+  layer_param : {
+    depth : "31"
+    tensor_type : "TensorType([64], float32)"
+  }
+}
+layer {  name:"Node_33"
+  top : "Node_33"
+  bottom : "Node_40"
+  type : "Call_Op(multiply)[kElemWise]"
+  layer_param : {
+    depth : "27"
+  }
+}
+layer {  name:"Node_32"
+  top : "Node_32"
+  bottom : "Node_33"
+  type : "Call_Op(expand_dims)[kBroadcast]"
+  layer_param : {
+    depth : "28"
+  }
+}
+layer {  name:"Node_31"
+  top : "Node_31"
+  bottom : "Node_40"
+  type : "Call_Op(multiply)[kBroadcast]"
+  layer_param : {
+    depth : "27"
+  }
+}
+layer {  name:"Node_30"
+  top : "Node_30"
+  bottom : "Node_31"
+  type : "Constant[kElemWise]"
+  layer_param : {
+    depth : "28"
+    tensor_type : "TensorType([64], float32)"
+  }
+}
+layer {  name:"Node_29"
+  top : "Node_29"
+  bottom : "Node_31"
+  type : "Call_Op(divide)[kElemWise]"
+  layer_param : {
+    depth : "28"
+  }
+}
+layer {  name:"Node_28"
+  top : "Node_28"
+  bottom : "Node_29"
+  type : "Call_Op(sqrt)[kElemWise]"
+  layer_param : {
+    depth : "29"
+  }
+}
+layer {  name:"Node_27"
+  top : "Node_27"
+  bottom : "Node_28"
+  type : "Call_Op(add)[kElemWise]"
+  layer_param : {
+    depth : "30"
+  }
+}
+layer {  name:"Node_26"
+  top : "Node_26"
+  bottom : "Node_27"
+  type : "Constant[kBroadcast]"
+  layer_param : {
+    depth : "31"
+    tensor_type : "TensorType([], float32)"
+  }
+}
+layer {  name:"Node_25"
+  top : "Node_25"
+  bottom : "Node_27"
+  type : "Constant[kElemWise]"
+  layer_param : {
+    depth : "31"
+    tensor_type : "TensorType([64], float32)"
+  }
+}
+layer {  name:"Node_24"
+  top : "Node_24"
+  bottom : "Node_29"
+  type : "Constant[kBroadcast]"
+  layer_param : {
+    depth : "29"
+    tensor_type : "TensorType([], float32)"
+  }
+}
+layer {  name:"Node_23"
+  top : "Node_23"
+  bottom : "Node_33"
+  type : "Call_Op(nn.conv2d)[kElemWise]"
+  layer_param : {
+    depth : "28"
+  }
+}
+layer {  name:"Node_22"
+  top : "Node_22"
+  bottom : "Node_23"
+  type : "Constant[kOutEWiseFusable]"
+  layer_param : {
+    depth : "29"
+    tensor_type : "TensorType([64, 64, 3, 3], float32)"
+  }
+}
+layer {  name:"Node_21"
+  top : "Node_21"
+  bottom : "Node_61"
+  type : "Call_Op(nn.max_pool2d)[kOutEWiseFusable]"
+  layer_param : {
+    depth : "22"
+  }
+}
+layer {  name:"Node_20"
+  top : "Node_20"
+  bottom : "Node_21"
+  type : "Call_Op(nn.relu)[kOutEWiseFusable]"
+  layer_param : {
+    depth : "23"
+  }
+}
+layer {  name:"Node_19"
+  top : "Node_19"
+  bottom : "Node_20"
+  type : "Call_Op(add)[kElemWise]"
+  layer_param : {
+    depth : "24"
+  }
+}
+layer {  name:"Node_18"
+  top : "Node_18"
+  bottom : "Node_19"
+  type : "Call_Op(expand_dims)[kBroadcast]"
+  layer_param : {
+    depth : "25"
+  }
+}
+layer {  name:"Node_17"
+  top : "Node_17"
+  bottom : "Node_18"
+  type : "Call_Op(add)[kBroadcast]"
+  layer_param : {
+    depth : "26"
+  }
+}
+layer {  name:"Node_16"
+  top : "Node_16"
+  bottom : "Node_17"
+  type : "Constant[kElemWise]"
+  layer_param : {
+    depth : "27"
+    tensor_type : "TensorType([64], float32)"
+  }
+}
+layer {  name:"Node_15"
+  top : "Node_15"
+  bottom : "Node_17"
+  type : "Call_Op(multiply)[kElemWise]"
+  layer_param : {
+    depth : "27"
+  }
+}
+layer {  name:"Node_14"
+  top : "Node_14"
+  bottom : "Node_15"
+  type : "Call_Op(negative)[kElemWise]"
+  layer_param : {
+    depth : "28"
+  }
+}
+layer {  name:"Node_13"
+  top : "Node_13"
+  bottom : "Node_14"
+  type : "Constant[kElemWise]"
+  layer_param : {
+    depth : "29"
+    tensor_type : "TensorType([64], float32)"
+  }
+}
+layer {  name:"Node_12"
+  top : "Node_12"
+  bottom : "Node_19"
+  type : "Call_Op(multiply)[kElemWise]"
+  layer_param : {
+    depth : "25"
+  }
+}
+layer {  name:"Node_11"
+  top : "Node_11"
+  bottom : "Node_12"
+  type : "Call_Op(expand_dims)[kBroadcast]"
+  layer_param : {
+    depth : "26"
+  }
+}
+layer {  name:"Node_10"
+  top : "Node_10"
+  bottom : "Node_19"
+  type : "Call_Op(multiply)[kBroadcast]"
+  layer_param : {
+    depth : "25"
+  }
+}
+layer {  name:"Node_9"
+  top : "Node_9"
+  bottom : "Node_10"
+  type : "Constant[kElemWise]"
+  layer_param : {
+    depth : "26"
+    tensor_type : "TensorType([64], float32)"
+  }
+}
+layer {  name:"Node_8"
+  top : "Node_8"
+  bottom : "Node_10"
+  type : "Call_Op(divide)[kElemWise]"
+  layer_param : {
+    depth : "26"
+  }
+}
+layer {  name:"Node_7"
+  top : "Node_7"
+  bottom : "Node_8"
+  type : "Call_Op(sqrt)[kElemWise]"
+  layer_param : {
+    depth : "27"
+  }
+}
+layer {  name:"Node_6"
+  top : "Node_6"
+  bottom : "Node_7"
+  type : "Call_Op(add)[kElemWise]"
+  layer_param : {
+    depth : "28"
+  }
+}
+layer {  name:"Node_5"
+  top : "Node_5"
+  bottom : "Node_6"
+  type : "Constant[kBroadcast]"
+  layer_param : {
+    depth : "29"
+    tensor_type : "TensorType([], float32)"
+  }
+}
+layer {  name:"Node_4"
+  top : "Node_4"
+  bottom : "Node_6"
+  type : "Constant[kElemWise]"
+  layer_param : {
+    depth : "29"
+    tensor_type : "TensorType([64], float32)"
+  }
+}
+layer {  name:"Node_3"
+  top : "Node_3"
+  bottom : "Node_8"
+  type : "Constant[kBroadcast]"
+  layer_param : {
+    depth : "27"
+    tensor_type : "TensorType([], float32)"
+  }
+}
+layer {  name:"Node_2"
+  top : "Node_2"
+  bottom : "Node_12"
+  type : "Call_Op(nn.conv2d)[kElemWise]"
+  layer_param : {
+    depth : "26"
+  }
+}
+layer {  name:"Node_1"
+  top : "Node_1"
+  bottom : "Node_2"
+  type : "Constant[kOutEWiseFusable]"
+  layer_param : {
+    depth : "27"
+    tensor_type : "TensorType([64, 3, 7, 7], float32)"
+  }
+}
+layer {  name:"Node_0"
+  top : "Node_0"
+  type : "Var[kOpaque]"
+  layer_param : {
+    depth : "1"
+    name_hint : "input0"
+  }
+}
