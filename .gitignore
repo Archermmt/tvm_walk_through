@@ -3,4 +3,5 @@
 *.graffle
 *.DS_Store
 *.pkl_memoize_py3
+tmp_test.sh
 __pycache__
